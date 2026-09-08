@@ -67,3 +67,8 @@ Run Fable through the existing Claude Code subscription with `--model fable`, a
 per-run budget limit and read-only tools; do not silently substitute another model.
 Record reported model usage separately from actual billing. Reviews are evidence
 of scrutiny, not proof of cryptographic safety or approval for production funds.
+
+The [unchanged Safe 7 target baseline](TARGET_FIRMWARE_BASELINE.md) establishes
+linked heap/stack/flash regions under the official hardware test preset. Those
+regions precede runtime occupancy; they do not establish allocation or stack fit
+for the separate approval core. The paired allocator image is still pending.

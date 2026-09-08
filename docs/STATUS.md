@@ -1,6 +1,6 @@
 # Project status
 
-Updated 2026-09-08 UTC (2026-09-07 evening in California).
+Updated 2026-09-08 UTC.
 Development branch: `codex/verification-and-reuse`.
 
 ## Implemented
@@ -35,6 +35,7 @@ Development branch: `codex/verification-and-reuse`.
 | Safe 7 processor compatibility | Complete `no_std` core passed on the actual Rust MCU target; 126 registry packages match upstream |
 | Host resource characterization | 15 layouts, 75 measured runs, 43 independently verified new signatures; all teardowns returned to baseline |
 | Concrete target code generation | Actual Thumb objects; 3,180 individual frame entries; compiled optz comparison also passed; no linked/runtime fit claim |
+| Unchanged Safe 7 target firmware | Complete test-preset secmon/kernel/firmware link; 697,992-byte GC region and 32 KiB application stack; no runtime claim |
 | Current Safe 7 emulator | Nine existing transparent Zcash/v5 tests passed, no skips/failures |
 | Full upstream Lean proof build | Passed: all six default targets, warning-fatal build and unchanged upstream axiom/census gates; 3,915 jobs |
 
@@ -81,8 +82,10 @@ readability reviews checked the change and its evidence runner.
 Fable/readability reviews are complete. A traced ordinary-call path totals 33,000
 frame bytes in the opt3/noLTO experiment, above the source-defined 32 KiB stack.
 The identical-source size-optimized build changes the call structure, so no final
-stack-fit conclusion follows. The next project prepares an explicit allocator
-boundary and concrete linked/runtime experiment under firmware settings.
+stack-fit conclusion follows. The [allocator proposal](proposals/SYNTHETIC_ALLOCATOR.md)
+and its two reviews are complete. The [unchanged target firmware](TARGET_FIRMWARE_BASELINE.md)
+now supplies a concrete paired-build baseline. Parallel projects are testing the
+public-table/request ownership boundary and a compile-only linked allocator image.
 M2.1c covers trusted review/consent and M2.1d covers bounded transport/signing.
 
 The local proofs have a documented correspondence to Rust, not machine-checked
@@ -104,8 +107,8 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Six Fable review runs reported USD 14.0286585 at list prices through the
-  existing Max subscription; USD 14.07 is conservatively reserved in the ledger.
+  subscription purchased. Ten Fable review runs reported USD 18.1630585 at list prices through the
+  existing Max subscription; USD 18.23 is conservatively reserved in the ledger.
   Actual subscription billing and Codex dollar usage are not observed here.
 
 These milestones do not complete the shielded-support project or establish that

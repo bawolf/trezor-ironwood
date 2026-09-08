@@ -2517,5 +2517,87 @@
       "work/target-stack-chain/path-evidence.json": "7798ea5b84583657a7b22ad2b5eb0091b27f4cfd26297c38c7b8fb867c0153d4",
       "work/target-codegen-size/review-manifest.json": "fa6859f35e9c8ca4e64a0651cb558f079d392d1d48eec2642f7e48a4df598b32"
     }
+  },
+  {
+    "lane": "firmware-target-baseline",
+    "completed_utc": "2026-09-08T09:14:05.484743+00:00",
+    "revisions": {
+      "trezor-firmware": "7105338e3c2c1e681940e17780609881ce53126b"
+    },
+    "passed": true,
+    "model": "T3W1",
+    "target": "thumbv8m.main-none-eabihf",
+    "preset": "test",
+    "seconds": 210.055,
+    "local_report": "work/target-firmware/report.json",
+    "report_sha256": "f9b4e6d31640a1eadfe58e2d04c40382710327bd60b5120b66a1913dbf5ec6c9",
+    "memory": {
+      "heap_start": 538663288,
+      "heap_end": 539361280,
+      "gc_heap_region_bytes": 697992,
+      "gc_heap_region_note": "Linked GC region before metadata and simultaneous runtime allocations; not free memory or a dedicated Rust budget.",
+      "application_native_stack_bytes": 32768,
+      "aux1_region_bytes": 819200,
+      "aux1_nonheap_bytes_including_alignment": 121208,
+      "flash_slot_bytes": 3416064,
+      "flash_image_extent_bytes": 2369536,
+      "flash_tail_bytes": 1046528,
+      "minimum_heap_assertion_bytes": 37888,
+      "minimum_heap_assertion_met": true,
+      "sections_bytes": {
+        ".stack": 32768,
+        ".data": 512,
+        ".bss": 15252,
+        ".heap": 697992,
+        ".flash": 2366976,
+        ".buf": 72676,
+        ".tls": 0
+      }
+    },
+    "artifacts": {
+      "secmon": {
+        ".elf": {
+          "bytes": 2244636,
+          "sha256": "32fb2e2622489d0692618c2d39925cf228a4153fb8345b107ec6305409a82fed"
+        },
+        ".map": {
+          "bytes": 2612657,
+          "sha256": "621672f1afe82ce4f494d6ccbc188c404a3ddb2bbb8d28953654d795ab40c55d"
+        },
+        ".bin": {
+          "bytes": 112640,
+          "sha256": "446f93de284621ffeac1c28f7b948ec8fb2dba9dcab44b487afb10aa1c9b7c80"
+        }
+      },
+      "kernel": {
+        ".elf": {
+          "bytes": 4506260,
+          "sha256": "f7e765022effdf868cb800b4278ca71f112258051efbaf2affd2f1817ea2233b"
+        },
+        ".map": {
+          "bytes": 2943234,
+          "sha256": "9f1f1c1ed311eaa15d795697630e65688ebeda96a7c3c148a64ddb931ec16888"
+        },
+        ".bin": {
+          "bytes": 330240,
+          "sha256": "07fa17693fdd896efec68dd70873ccaa4b7708faf81fa7632f22e8d8d174f8a6"
+        }
+      },
+      "firmware": {
+        ".elf": {
+          "bytes": 15499924,
+          "sha256": "b839c482ba4da527489ce47cb9f8e8062f8ae915dfc81f6f2e59e063319f8e22"
+        },
+        ".map": {
+          "bytes": 8281157,
+          "sha256": "2592356a98047c499c977eee0338596f70aeae66d6467dab19b83d32f12a8ee5"
+        },
+        ".bin": {
+          "bytes": 2369536,
+          "sha256": "159df7000441104aae1d7d5c6d07e592060294ce3e52948a01aa3aa193f36700"
+        }
+      }
+    },
+    "limits": "Unchanged test-preset linked baseline; no core/allocator integration or execution/runtime fit."
   }
 ]

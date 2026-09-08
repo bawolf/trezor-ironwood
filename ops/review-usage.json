@@ -323,5 +323,83 @@
         "costBasis": "list"
       }
     }
+  },
+  {
+    "review": "arena-probe-fable",
+    "date_utc": "2026-09-08",
+    "model": "claude-fable-5",
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not an observed invoice",
+    "reported_total_usd": 2.0054719999999997,
+    "run_limit_usd": 5,
+    "billed_charge_observed": false,
+    "result_sha256": "ca8991993d0b2b0e87f63a9899ce16addb419f3b1a34624cfd2134ac0e8ceae6",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 20747,
+        "outputTokens": 13,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.020812,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-fable-5": {
+        "inputTokens": 2,
+        "outputTokens": 27942,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 29377,
+        "webSearchRequests": 0,
+        "costUSD": 1.9846599999999999,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "canonicalModel": "claude-fable-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    }
+  },
+  {
+    "review": "target-firmware-baseline-fable",
+    "date_utc": "2026-09-08",
+    "model": "claude-fable-5",
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not an observed invoice",
+    "reported_total_usd": 0.7580009999999999,
+    "run_limit_usd": 2,
+    "billed_charge_observed": false,
+    "result_sha256": "55151b1dda58316c1e06e32744a7ec4af7df2fd8934012f1606c7e9e5eb268cc",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 9291,
+        "outputTokens": 14,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.009361000000000001,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-fable-5": {
+        "inputTokens": 2,
+        "outputTokens": 9336,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 14091,
+        "webSearchRequests": 0,
+        "costUSD": 0.74864,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "canonicalModel": "claude-fable-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    }
   }
 ]

@@ -13,6 +13,7 @@ Trezor shielded signer, and no firmware is ready for use with funds.**
 - [Upstream findings and reuse map](docs/UPSTREAM.md)
 - [Trezor shielded PR reuse assessment](docs/TREZOR_REUSE.md)
 - [Safe 7 emulator setup and evidence](docs/FIRMWARE_BASELINE.md)
+- [Safe 7 target firmware memory baseline](docs/TARGET_FIRMWARE_BASELINE.md)
 - [Approval contract](docs/APPROVAL_CONTRACT.md) and [conformance results](docs/APPROVAL_RESULTS.md)
 - [Target code generation and stack evidence](docs/TARGET_CODEGEN_RESULTS.md)
 - [Synthetic resource measurements](docs/RESOURCE_RESULTS.md) and [Safe 7 constraints](docs/SAFE7_INTEGRATION.md)

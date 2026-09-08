@@ -42,7 +42,7 @@ Development branch: `codex/verification-and-reuse`.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260908T191733Z-project-6b3d5d29/report.json`.
+- Project: `work/runs/20260908T204424Z-project-b1cec119/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
@@ -98,15 +98,43 @@ frame subtotal, above the 32 KiB reservation; no actual overflow or executable
 input path is claimed. Its documented Opus fallback review is accepted.
 
 The next milestone is one actual synthetic PCZT verified, reviewed, approved and
-signed in the Safe 7 emulator. Parallel implementation now targets stack reduction,
-the Rust/MicroPython bridge, and trusted review screens. Startup diagnostics are a
-secondary bounded task: the new cold-start emulator image builds, but the ordinary
-Tropic launcher twice missed its unchanged ten-second readiness deadline, before
-traced startup or idle began. A lighter separate diagnostic became ready in 3.83
-seconds; that does not explain the original failure or count as emulator acceptance.
-The clarity review also found three false-pass risks in the unexecuted debugger
-harness; corrections are being prepared in a separate evidence directory.
-M2.1c covers trusted review/consent and M2.1d covers bounded transport/signing.
+signed in the Safe 7 emulator. The isolated Rust/MicroPython bridge and frozen
+review screens are implemented locally. The real-core host lifecycle passes,
+including replacement/replay/cancellation and response bounds; its signed response
+matches the independently verified oracle input. Thirteen UI orchestration tests,
+two demo error-propagation tests, actual-header C compilation and warning-fatal
+Clippy pass. These are not integrated screen, GC or emulator signing results.
+
+Two confirmed Fable5.1 reviews and independent clarity reviews examined the bridge
+and corrections. They identified demo exceptions swallowed by the scheduler; the
+launcher now propagates those errors at module scope and rejects a missing outcome.
+The latest corrections also reject invalid C snapshot kinds/counts and response
+lengths. Final runtime acceptance remains pending. Source and evidence are retained
+locally under `work/emulator-signing-bridge/` and `work/reviews/emulator-signing-bridge*/`.
+
+The first integrated emulator build reached its 1,200-second process-group limit
+without a compiler diagnostic or linked image. Compiled source inputs and resolved
+locks stayed unchanged. Its warm build directory and failure evidence are retained
+at `work/emulator-signing-build/integration-build-01/`; a second bounded build uses
+the reviewed corrections and the same official test preset, features and deadline.
+The approval core remains unchanged.
+
+The earlier cold-start image now passes a normal process run through all four
+compiled startup/shutdown gates, including a requested two-second sleep and exact
+start/end markers. The explicit pinned Python/unbuffered Tropic launcher became
+ready in 2.79 seconds under the unchanged ten-second deadline. This does not explain
+the historical shebang-launch timeout. LLDB separately stalled before emulator
+launch and is parked; no debugger counter snapshot or signing is claimed.
+Evidence: `work/emulator-arena-runtime-05/report.json`.
+
+A separate ARM compiler experiment now measures the actual begin/sign callbacks.
+An isolated two-line candidate prevents inlining of the existing verification
+function: its selected validation subtotal falls 33,688 to 30,688 bytes; selected
+signing stays 31,952 bytes. That leaves only 816 bytes before unmeasured C/VM costs
+and is not a device-fit result. The candidate is unintegrated, and the next bounded
+experiment targets redundant upstream parser staging. See local
+`work/bridge-stack-probe/REPORT.md`; the earlier rejected helper is not adopted.
+M2.1c requires actual trusted review/consent; bounded host transport remains later.
 
 The local proofs have a documented correspondence to Rust, not machine-checked
 Rust or firmware refinement. Mixed pools and general memo/address/batch support
@@ -127,12 +155,11 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Nineteen completed Claude Code review requests reported
-  USD 31.25534125 at list prices; USD 31.36 is reserved. Thirteen report Fable by
-  name, including the final allocator/link reviews and historical codegen
-  replacement (`claude-fable-5-1`). Earlier substitutions and authentication
-  failures remain recorded. The user accepts documented Opus fallbacks; actual model identities are checked
-  on every result and substitutes are never labeled Fable.
+  subscription purchased. Twenty-one completed Claude Code review requests reported
+  USD 35.655473 at list prices; USD 35.77 is reserved. Fifteen report Fable by
+  name, including both bridge reviews (`claude-fable-5-1`). Earlier substitutions
+  and authentication failures remain recorded. The user accepts documented Opus
+  fallbacks; actual model identities are checked and substitutes are never labeled Fable.
   Actual subscription billing and Codex dollar usage are not observed here.
 
 These milestones do not complete the shielded-support project or establish that

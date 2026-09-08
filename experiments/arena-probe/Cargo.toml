@@ -1,0 +1,30 @@
+[package]
+name = "ironwood-arena-probe"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[workspace]
+resolver = "3"
+
+[lib]
+crate-type = ["staticlib"]
+test = false
+doctest = false
+
+[dependencies]
+ironwood-approval = { path = "../../crates/approval", default-features = false }
+orchard = { version = "=0.15.3", default-features = false }
+rand_chacha = { version = "=0.3.1", default-features = false }
+linked_list_allocator = { version = "=0.10.6", default-features = false }
+spin = { version = "=0.9.9", default-features = false, features = ["spin_mutex"] }
+
+pasta_curves = { version = "=0.5.1", default-features = false }
+ff = { version = "=0.13.0", default-features = false }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"

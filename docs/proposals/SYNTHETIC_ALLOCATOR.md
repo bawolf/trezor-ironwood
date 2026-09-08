@@ -1,10 +1,11 @@
 # Synthetic allocator boundary
 
-Prepared 2026-09-08; source inspection/proposed experiments only.
+Prepared 2026-09-08. Original proposal followed by a measured lifetime amendment below.
 Assume the unchanged actual `ironwood-approval` core, `default-features = false`,
 synthetic regtest fixtures/public keys and fixed ChaCha20 RNG. No production entry point.
-One synchronous invocation owns Engine, input, Review and Signed. No arena-backed owner
-or reference escapes; successful output is staged outside the arena and exported after teardown.
+One synchronous invocation owns Engine, input, Review and Signed. No request-owned
+allocation or reference escapes; successful output is staged outside the arena and
+exported after teardown. The amendment below separately accounts for public constants.
 No Python callback, GC allocation, longjmp, task switch or transport call inside that invocation.
 Global Rust allocation is image-wide: audit every caller; initialize before any alloc use.
 ## Concrete choice and dependency cost
@@ -19,8 +20,9 @@ optional `spinning_top` and unstable `alloc_ref` stay disabled. Spin is already 
 at 0.9.9 in both firmware and core; this adds one registry package, not another lock crate.
 Future experiment-only manifest/lock records its checksum (saved in `work/allocator-research/candidate-provenance.json`) and feature tree;
 preserve every accepted core/upstream pin and license notice, including firmware licensing.
-0.10.6 includes the huge-layout panic fix missing from 0.10.5 [A]. Source was inspected,
-not installed or compiled; actual pinned-nightly/target compatibility remains to be tested.
+0.10.6 includes the huge-layout panic fix missing from 0.10.5 [A]. The original
+proposal inspected source only; the first arena prototype subsequently compiled
+on the pinned nightly for native and Thumb targets. Final firmware linking remains separate.
 Local firmware `static-alloc` 0.2.6 has no-op `GlobalAlloc::dealloc`; its renderer resets
 borrowed bump storage. That cannot measure reclaiming frees in repeated core lifecycles.
 `without-alloc` 0.2.2 supplies alternative containers, not the existing alloc::Vec boundary.
@@ -121,6 +123,38 @@ Passing these gates establishes only the tested synthetic boundary. The opt3/noL
 changes four of eight direct edges: do not reuse the old path for a new frame subtotal.
 It establishes no whole-stack bound or final optz+LTO+immediate-abort firmware fit.
 Arena capacity, 32 KiB stack success, MCU latency/entropy and production/funds use remain unestablished.
+## Amendment: immutable public tables live with the image
+
+The first native probe reached signing/serialization for all 15 fixtures, then
+correctly failed its empty-heap teardown. Pinned pasta_curves 0.5.1 owns five lazy
+Fp square-root table allocations: a 1,098-byte vector and arrays of 256, 256, 256
+and 129 field elements. `SqrtTables::new` derives them solely from ROOT_OF_UNITY
+and fixed hashing constants. They contain no account or transaction data and
+remain referenced by the library's static for the life of the image.
+The original source snapshot, binary and failures remain frozen; none becomes a pass.
+
+The next isolated prototype makes this lifetime explicit:
+
+- Initialize only the identified Fp tables through a fixed public field operation,
+  after Heap initialization and before keys, PCZTs or requests. Check that repeating
+  the operation allocates nothing. Do not run a transaction as a warm-up baseline.
+- Record cold initialization, the exact expected five live layouts and their
+  allocation identities. Keep those blocks resident and immutable; reject attempts
+  to free them. No manual free, heap reset, feature change or OS fallback.
+- Every request must restore that same constant set and release every later
+  allocation. A newly retained cache, including a late Fq table, fails the gate;
+  it is never absorbed into another baseline. Keep allocation/free deltas as well
+  as live requested/used/block counts.
+- Measure absolute event peaks including the resident tables. Phase counter resets
+  must preserve live occupancy. A successful large Layout is allocated and freed
+  before the request and must succeed again afterward; available capacity now
+  excludes the identified resident blocks and their fragmentation.
+
+This is a bounded change to the synthetic experiment under the user's existing
+local implementation authorization. It requires fresh Fable and independent clarity
+review of the implementation and evidence. It does not permit arbitrary retained
+owners or claim whole-program memory safety, MCU capacity or successful runtime fit.
+
 [A]: https://docs.rs/crate/linked_list_allocator/0.10.6/source/Changelog.md
 [B]: https://docs.rs/linked_list_allocator/0.10.6/struct.Heap.html
 [C]: https://doc.rust-lang.org/core/alloc/trait.GlobalAlloc.html

@@ -66,6 +66,54 @@
       "cents": 76,
       "status": "reserved",
       "note": "Conservative budget hold for reported list-price model usage; existing Max subscription, actual billed charge not observed."
+    },
+    {
+      "id": "firmware-arena-link-fable-20260908",
+      "cents": 41,
+      "status": "reserved",
+      "note": "Conservative hold for reported usage, including failed/unaccepted review requests; not an observed billed charge."
+    },
+    {
+      "id": "arena-probe-final-fable-20260908",
+      "cents": 5,
+      "status": "reserved",
+      "note": "Conservative hold for reported usage, including failed/unaccepted review requests; not an observed billed charge."
+    },
+    {
+      "id": "firmware-arena-link-fable-retry-20260908",
+      "cents": 2,
+      "status": "reserved",
+      "note": "Conservative hold for reported usage, including failed/unaccepted review requests; not an observed billed charge."
+    },
+    {
+      "id": "firmware-arena-link-fable-refreshed-20260908",
+      "cents": 83,
+      "status": "reserved",
+      "note": "Conservative hold for reported list-price usage; requested Fable, response identifies Opus. Existing Max subscription, not an observed billed charge."
+    },
+    {
+      "id": "arena-probe-fable-refreshed-20260908",
+      "cents": 448,
+      "status": "reserved",
+      "note": "Conservative hold for reported list-price Fable5.1 usage through existing Max subscription; not an observed billed charge."
+    },
+    {
+      "id": "firmware-arena-link-final-configured-20260908",
+      "cents": 319,
+      "status": "reserved",
+      "note": "Conservative hold for reported Fable5.1 list-price usage through existing Max subscription; not an observed billed charge."
+    },
+    {
+      "id": "arena-probe-v4-followup-20260908",
+      "cents": 261,
+      "status": "reserved",
+      "note": "Conservative hold for reported Fable5.1 list-price usage through existing Max subscription; not an observed billed charge."
+    },
+    {
+      "id": "target-codegen-confirmed-fable-20260908",
+      "cents": 76,
+      "status": "reserved",
+      "note": "Conservative hold for reported Fable5.1 list-price usage; historical review gap now closed, no observed invoice."
     }
   ],
   "note": "Existing Codex account usage is not dollar-metered here. Claude Code/Fable review usage is reported separately in review-usage.json; conservative holds count its reported list-price estimate, not an observed billed charge. No additional paid APIs, cloud machines, credits, or subscriptions have been purchased. Paid execution remains disabled until costs can be measured and capped. This ledger is bookkeeping, not a provider billing limit."

@@ -27,7 +27,7 @@ synthetic account and fixed ChaCha20 randomness; no device RNG is exercised.
 ## Observed results
 
 Bytes below are requested Rust allocation layouts, including the run's owned raw
-input. Peaks subtract the harness baseline recorded before that input copy;
+input. Peaks subtract the process baseline recorded before that input copy;
 they do not subtract the phase baseline, which contains earlier core allocations.
 Each row reports the largest peak and median/maximum instrumented time over five
 runs. Warm-ups and human review time are excluded. The raw report retains every
@@ -63,7 +63,7 @@ admission ceiling, and uses absent anchors/OCKs.
 
 For `outputs-8`, retained run occupancy after begin/approve is 32,053 bytes;
 signing peaks at 78,045 bytes and leaves 31,797; serialization peaks at 52,757
-and leaves 27,221. Full teardown returns to zero. The raw input and returned
+and leaves 27,221. Full teardown returns to zero above the process baseline. The raw input and returned
 Review stay alive through signing. Serialization consumes the PCZT, so its frees
 are measured in that phase rather than attributed to the later teardown.
 
@@ -80,6 +80,27 @@ or dealloc calls. Null-reallocation ownership is unit-tested through the exact
 accounting path; this does not test OS exhaustion or an embedded allocator's OOM
 handling. Session/signing entropy interruptions remain covered by the accepted
 core conformance suite, outside this measurement.
+
+## Initialization outside the measured requests
+
+The harness creates its synthetic Keys and independently parses each fixture to
+inspect its metadata before recording a request baseline (`resource-probe/src/main.rs`,
+`Keys::public_test`, `main` and `run`). The first saved warm-up in
+`measurements.json` records `process_baseline_bytes = 89,133`, before the 1,236-byte
+input copy. Subtraction excludes that process-wide live allocation. Fixture
+inspection calls `Verifier::with_ironwood` and parses curve points; the ordering
+alone does not attribute every resident byte to a particular initializer.
+The standalone arena diagnostic subsequently found five persistent Fp square-root
+table allocations: 29,802 requested bytes, derived entirely from public field
+constants. Its first strict empty-heap teardown failed on every fixture and exported
+no signatures; the original evidence is preserved in
+`work/arena-probe/verification-02/report.json`.
+
+These earlier request peaks remain valid for their stated baseline. They exclude
+that resident initialization cost and do not describe total image-wide allocation.
+The [separate arena experiment](../experiments/arena-probe/README.md) measures
+explicit public-table initialization, absolute live peaks and request teardown. Never free those global
+tables or reset their storage to make teardown appear empty.
 
 ## Device implications
 

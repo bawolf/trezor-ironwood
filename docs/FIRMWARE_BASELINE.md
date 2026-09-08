@@ -1,6 +1,6 @@
 # Safe 7 emulator baseline
 
-Status: build passed with GCC 15; Zcash tests running. No passing device-test claim yet.
+Status: build passed with GCC 15; all nine existing Zcash emulator tests passed.
 Source: `trezor/trezor-firmware` at
 `7105338e3c2c1e681940e17780609881ce53126b`, model `t3w1`.
 Worktree: `work/firmware-t3w1`, detached; baseline under `upstream/` unchanged.
@@ -136,3 +136,24 @@ Emulator SHA-256:
 `631f757850a2ff1ab64b56e35dab054800a0ff59a8a036667e6dc922eba62fda`.
 Source and submodule checks passed before and after the build.
 Evidence: `work/runs/20260908T035819Z-firmware-build-f11b9047/report.json`.
+
+## Successful Zcash test run
+
+All nine cases in `tests/device_tests/zcash/test_sign_tx.py` passed, with no skips,
+errors or failures. The pytest command took 55.39 seconds including setup and
+teardown. It exercised existing transparent Zcash/v5 flows: one-to-two outputs,
+multisig spending/sending, v4/v5 input handling, missing version-group rejection,
+replacement-transaction refusal, external presigned inputs and Unified Address
+handling. It does not implement or test an Ironwood shielded signer.
+
+The source, submodules and binary hash matched the build before and after testing.
+Evidence: `work/runs/20260908T040947Z-firmware-zcash-f4fcf912/report.json`.
+JUnit SHA-256: `a759ab2f839bb04ddcb13aab37647d25968d0a1b9daba13c9749996fb3d3284d`.
+
+The first attempt failed because the software Tropic model missed its 10-second
+startup deadline. All nine cases were setup errors; no signing test ran. The
+retry passed with the unchanged test suite and startup deadline. Per-run logs
+are now retained through `TREZOR_PYTEST_LOGS_DIR`. Warm-start effects may explain
+the difference; the exact initial startup delay was not captured, so this is not
+a claimed root-cause fix. Failure evidence:
+`work/runs/20260908T040630Z-firmware-zcash-63577907/report.json`.

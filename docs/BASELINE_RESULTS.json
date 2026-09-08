@@ -179,5 +179,689 @@
         "log_sha256": "0bae85cfb522303e5a5c4852fd255e162a4aef7979b67119314e07795f188f3e"
       }
     ]
+  },
+  {
+    "lane": "project",
+    "started_utc": "20260908T040229Z",
+    "revisions": {},
+    "commands": [
+      {
+        "command": [
+          "python3.14",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 3.73,
+        "tests_passed": 13,
+        "minimum_tests": 13,
+        "passed": true,
+        "log_sha256": "6bd22e0c10d935617b766b9100c0bcc05b85a9c1199393723aa5de9b552963e2"
+      }
+    ],
+    "passed": true,
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "finished_utc": "2026-09-08T04:02:32.954306+00:00"
+  },
+  {
+    "lane": "lean",
+    "started_utc": "20260908T032153Z",
+    "revisions": {
+      "ironwood": "ad4a6ad8f75a64368bae4186006480410a687cce"
+    },
+    "commands": [
+      {
+        "command": [
+          "lake",
+          "build",
+          "--wfail"
+        ],
+        "returncode": 124,
+        "timed_out": true,
+        "seconds": 1200.11,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": false,
+        "log_sha256": "e08e98a53fba54cca13c355eb86087e7fbb90d350deba9f402ffc533437d05ca"
+      }
+    ],
+    "passed": false,
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "finished_utc": "2026-09-08T03:41:54.218907+00:00"
+  },
+  {
+    "lane": "lean",
+    "started_utc": "20260908T034209Z",
+    "revisions": {
+      "ironwood": "ad4a6ad8f75a64368bae4186006480410a687cce"
+    },
+    "commands": [
+      {
+        "command": [
+          "lake",
+          "build",
+          "--wfail"
+        ],
+        "returncode": 124,
+        "timed_out": true,
+        "seconds": 1200.12,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": false,
+        "log_sha256": "f78c192492eda65a099ecad03f450fbd7c42596ed00ad157fde320e6ef2b1fc6"
+      }
+    ],
+    "passed": false,
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "finished_utc": "2026-09-08T04:02:09.219561+00:00"
+  },
+  {
+    "lane": "firmware-build",
+    "started_utc": "20260908T035310Z",
+    "revisions": {
+      "trezor-firmware": "7105338e3c2c1e681940e17780609881ce53126b"
+    },
+    "commands": [
+      {
+        "command": [
+          "<project>/work/toolchain-downloads/uv-0.12.10/uv-aarch64-apple-darwin/uv",
+          "sync",
+          "--locked",
+          "--python",
+          "/usr/local/bin/python3"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.26,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "744749b343d613ccbc7a1c90a13218e20671c23d20a9ea9b045a825a08809c3d"
+      },
+      {
+        "command": [
+          "rustc",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.37,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "5fdaa37c62c69e49f100165cb7a878d193d07348fe1de401a1cfbb0762be3932"
+      },
+      {
+        "command": [
+          "protoc",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.09,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "fbc791dc5a9d70a1bf186c22b306b83325eb3649892a3bd1442a2cdfdfb79a54"
+      },
+      {
+        "command": [
+          "<project>/work/firmware-t3w1/.venv/bin/python",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.09,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e55cc531440b2fc2f0cb402829c0ffd3a4729acd95a238badab9b8be261070c6"
+      },
+      {
+        "command": [
+          "/opt/homebrew/opt/llvm/bin/clang",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.38,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "36bedda8b8ae4f6ad1292c8179d4cec60ee23b61e7eec726b6e355d976f89565"
+      },
+      {
+        "command": [
+          "pkg-config",
+          "--modversion",
+          "sdl3",
+          "sdl3-image"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.04,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "b01a5bdfabc9d62f848a1532f6b9e2474fe0a80affaf55b11ff66608b4569129"
+      },
+      {
+        "command": [
+          "cargo",
+          "run",
+          "--locked",
+          "--profile",
+          "xtask",
+          "-p",
+          "xtask",
+          "--",
+          "build",
+          "firmware",
+          "--model",
+          "t3w1",
+          "--emulator",
+          "--preset",
+          "test"
+        ],
+        "returncode": 1,
+        "timed_out": false,
+        "seconds": 169.15,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": false,
+        "log_sha256": "50450eb29fdbc06f8562ce6eb97b95991cc961cdf1fb94f88f6f4315506de88b"
+      }
+    ],
+    "passed": false,
+    "toolchain": {
+      "rustc": "rustc 1.96.0-nightly (1e2183119 2026-03-15)",
+      "protoc": "libprotoc 31.1",
+      "python": "Python 3.12.8",
+      "cc": "Homebrew clang version 22.1.1",
+      "sdl": [
+        "3.4.12",
+        "3.4.4"
+      ]
+    },
+    "finished_utc": "2026-09-08T03:56:03.369820+00:00",
+    "failure_note": "Command failure; see the corresponding command result and retained local log."
+  },
+  {
+    "lane": "firmware-build",
+    "started_utc": "20260908T035819Z",
+    "revisions": {
+      "trezor-firmware": "7105338e3c2c1e681940e17780609881ce53126b"
+    },
+    "commands": [
+      {
+        "command": [
+          "<project>/work/toolchain-downloads/uv-0.12.10/uv-aarch64-apple-darwin/uv",
+          "sync",
+          "--locked",
+          "--python",
+          "/usr/local/bin/python3"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.38,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "77459d793e70d22c6b697ab3f9eac7c1a3526ee2129295c899ddd5674683881e"
+      },
+      {
+        "command": [
+          "rustc",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.55,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "5fdaa37c62c69e49f100165cb7a878d193d07348fe1de401a1cfbb0762be3932"
+      },
+      {
+        "command": [
+          "protoc",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.09,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "fbc791dc5a9d70a1bf186c22b306b83325eb3649892a3bd1442a2cdfdfb79a54"
+      },
+      {
+        "command": [
+          "<project>/work/firmware-t3w1/.venv/bin/python",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.06,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e55cc531440b2fc2f0cb402829c0ffd3a4729acd95a238badab9b8be261070c6"
+      },
+      {
+        "command": [
+          "/opt/homebrew/bin/gcc-15",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.06,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "b6f7687d32e9ad0f7b59d71376e0b2ad7c28c2f30a3107ec5781b890473aeb0f"
+      },
+      {
+        "command": [
+          "pkg-config",
+          "--modversion",
+          "sdl3",
+          "sdl3-image"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.02,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "b01a5bdfabc9d62f848a1532f6b9e2474fe0a80affaf55b11ff66608b4569129"
+      },
+      {
+        "command": [
+          "cargo",
+          "run",
+          "--locked",
+          "--profile",
+          "xtask",
+          "-p",
+          "xtask",
+          "--",
+          "build",
+          "firmware",
+          "--model",
+          "t3w1",
+          "--emulator",
+          "--preset",
+          "test"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 418.73,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "8d89b5dfc00d63740f185272a578ed6a3387d60f131a95c23a91cc3b10685865"
+      },
+      {
+        "command": [
+          "<project>/work/firmware-t3w1/core/build-xtask/artifacts/latest/firmware-emu",
+          "--emulator-properties"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 5.84,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "96a4cae9f545891999d3192cdccda71a855e9e60d7848010e2c0bea576220e95"
+      }
+    ],
+    "passed": true,
+    "toolchain": {
+      "rustc": "rustc 1.96.0-nightly (1e2183119 2026-03-15)",
+      "protoc": "libprotoc 31.1",
+      "python": "Python 3.12.8",
+      "cc": "gcc-15 (Homebrew GCC 15.2.0_1) 15.2.0",
+      "sdl": [
+        "3.4.12",
+        "3.4.4"
+      ]
+    },
+    "emulator": {
+      "sha256": "631f757850a2ff1ab64b56e35dab054800a0ff59a8a036667e6dc922eba62fda",
+      "properties": {
+        "internal_model": "T3W1",
+        "tropic": true,
+        "ble": true,
+        "version": "2.12.5.0"
+      }
+    },
+    "finished_utc": "2026-09-08T04:05:38.401664+00:00"
+  },
+  {
+    "lane": "firmware-zcash",
+    "started_utc": "20260908T040630Z",
+    "revisions": {
+      "trezor-firmware": "7105338e3c2c1e681940e17780609881ce53126b"
+    },
+    "commands": [
+      {
+        "command": [
+          "<project>/work/toolchain-downloads/uv-0.12.10/uv-aarch64-apple-darwin/uv",
+          "sync",
+          "--locked",
+          "--python",
+          "/usr/local/bin/python3"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.74,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "d9b3b1e98b778604a8bf0a978c188c6518c3c70b9cbaec4fa34e4180a7c2543f"
+      },
+      {
+        "command": [
+          "rustc",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 1.34,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "5fdaa37c62c69e49f100165cb7a878d193d07348fe1de401a1cfbb0762be3932"
+      },
+      {
+        "command": [
+          "protoc",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.09,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "fbc791dc5a9d70a1bf186c22b306b83325eb3649892a3bd1442a2cdfdfb79a54"
+      },
+      {
+        "command": [
+          "<project>/work/firmware-t3w1/.venv/bin/python",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.1,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e55cc531440b2fc2f0cb402829c0ffd3a4729acd95a238badab9b8be261070c6"
+      },
+      {
+        "command": [
+          "/opt/homebrew/bin/gcc-15",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.31,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "b6f7687d32e9ad0f7b59d71376e0b2ad7c28c2f30a3107ec5781b890473aeb0f"
+      },
+      {
+        "command": [
+          "pkg-config",
+          "--modversion",
+          "sdl3",
+          "sdl3-image"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.03,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "b01a5bdfabc9d62f848a1532f6b9e2474fe0a80affaf55b11ff66608b4569129"
+      },
+      {
+        "command": [
+          "<project>/work/firmware-t3w1/core/build-xtask/artifacts/latest/firmware-emu",
+          "--emulator-properties"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.1,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "96a4cae9f545891999d3192cdccda71a855e9e60d7848010e2c0bea576220e95"
+      },
+      {
+        "command": [
+          "<project>/work/firmware-t3w1/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/device_tests/zcash/test_sign_tx.py",
+          "--control-emulators",
+          "--model",
+          "core",
+          "--random-order-seed=0",
+          "--timeout=90",
+          "--junitxml=<project>/work/runs/20260908T040630Z-firmware-zcash-63577907/junit.xml",
+          "-q"
+        ],
+        "returncode": 1,
+        "timed_out": false,
+        "seconds": 25.24,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": false,
+        "log_sha256": "1a3098c988b68ce309f8eb8c961ee82836b22d7e51ff7436141ab9dd18e631c0"
+      }
+    ],
+    "passed": false,
+    "toolchain": {
+      "rustc": "rustc 1.96.0-nightly (1e2183119 2026-03-15)",
+      "protoc": "libprotoc 31.1",
+      "python": "Python 3.12.8",
+      "cc": "gcc-15 (Homebrew GCC 15.2.0_1) 15.2.0",
+      "sdl": [
+        "3.4.12",
+        "3.4.4"
+      ]
+    },
+    "emulator": {
+      "sha256": "631f757850a2ff1ab64b56e35dab054800a0ff59a8a036667e6dc922eba62fda",
+      "properties": {
+        "internal_model": "T3W1",
+        "tropic": true,
+        "ble": true,
+        "version": "2.12.5.0"
+      }
+    },
+    "finished_utc": "2026-09-08T04:07:03.909793+00:00",
+    "failure_note": "Command failure; see the corresponding command result and retained local log."
+  },
+  {
+    "lane": "firmware-zcash",
+    "started_utc": "20260908T040947Z",
+    "revisions": {
+      "trezor-firmware": "7105338e3c2c1e681940e17780609881ce53126b"
+    },
+    "commands": [
+      {
+        "command": [
+          "<project>/work/toolchain-downloads/uv-0.12.10/uv-aarch64-apple-darwin/uv",
+          "sync",
+          "--locked",
+          "--python",
+          "/usr/local/bin/python3"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.31,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "5cf8cb4b17c0f72a245d7f0bebd7a26d8995e775a6e2126e3a87575ec26f0c65"
+      },
+      {
+        "command": [
+          "rustc",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.51,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "5fdaa37c62c69e49f100165cb7a878d193d07348fe1de401a1cfbb0762be3932"
+      },
+      {
+        "command": [
+          "protoc",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.05,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "fbc791dc5a9d70a1bf186c22b306b83325eb3649892a3bd1442a2cdfdfb79a54"
+      },
+      {
+        "command": [
+          "<project>/work/firmware-t3w1/.venv/bin/python",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.09,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e55cc531440b2fc2f0cb402829c0ffd3a4729acd95a238badab9b8be261070c6"
+      },
+      {
+        "command": [
+          "/opt/homebrew/bin/gcc-15",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.5,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "b6f7687d32e9ad0f7b59d71376e0b2ad7c28c2f30a3107ec5781b890473aeb0f"
+      },
+      {
+        "command": [
+          "pkg-config",
+          "--modversion",
+          "sdl3",
+          "sdl3-image"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.04,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "b01a5bdfabc9d62f848a1532f6b9e2474fe0a80affaf55b11ff66608b4569129"
+      },
+      {
+        "command": [
+          "<project>/work/firmware-t3w1/core/build-xtask/artifacts/latest/firmware-emu",
+          "--emulator-properties"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.22,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "96a4cae9f545891999d3192cdccda71a855e9e60d7848010e2c0bea576220e95"
+      },
+      {
+        "command": [
+          "<project>/work/firmware-t3w1/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/device_tests/zcash/test_sign_tx.py",
+          "--control-emulators",
+          "--model",
+          "core",
+          "--random-order-seed=0",
+          "--timeout=90",
+          "--junitxml=<project>/work/runs/20260908T040947Z-firmware-zcash-f4fcf912/junit.xml",
+          "-q"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 55.39,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "a3cd021c55f168337df018daddc54605a9729aa8c7642edcb2e2ba9498520ed9"
+      }
+    ],
+    "passed": true,
+    "toolchain": {
+      "rustc": "rustc 1.96.0-nightly (1e2183119 2026-03-15)",
+      "protoc": "libprotoc 31.1",
+      "python": "Python 3.12.8",
+      "cc": "gcc-15 (Homebrew GCC 15.2.0_1) 15.2.0",
+      "sdl": [
+        "3.4.12",
+        "3.4.4"
+      ]
+    },
+    "emulator": {
+      "sha256": "631f757850a2ff1ab64b56e35dab054800a0ff59a8a036667e6dc922eba62fda",
+      "properties": {
+        "internal_model": "T3W1",
+        "tropic": true,
+        "ble": true,
+        "version": "2.12.5.0"
+      }
+    },
+    "tests": {
+      "tests_passed": 9,
+      "test_names": [
+        "test_one_two",
+        "test_spend_multisig",
+        "test_spend_v5_input",
+        "test_version_group_id_missing",
+        "test_refuse_replacement_tx",
+        "test_external_presigned",
+        "test_send_to_multisig",
+        "test_spend_v4_input",
+        "test_unified_address"
+      ]
+    },
+    "junit_sha256": "a759ab2f839bb04ddcb13aab37647d25968d0a1b9daba13c9749996fb3d3284d",
+    "finished_utc": "2026-09-08T04:10:50.102152+00:00"
   }
 ]

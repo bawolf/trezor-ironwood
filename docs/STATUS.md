@@ -31,7 +31,7 @@ Last updated: 2026-09-08 UTC (2026-09-07 evening in California).
 | Ironwood source/census/fixture scripts | All six passed; build coverage contains 480 modules, endpoint census contains 200 declarations |
 | Lean 4.30.0 and dependency cache | Installed / downloaded successfully |
 | Full Lean project proof build | Incomplete: two 20-minute runs timed out; unchanged full-target resume with a 60-minute limit in progress |
-| Current Safe 7 emulator | Build passed under GCC 15; binary reports T3W1, version 2.12.5.0; nine existing Zcash tests now running |
+| Current Safe 7 emulator | Build passed under GCC 15; T3W1 2.12.5.0; all nine existing Zcash signing tests passed, no skips/failures |
 
 Evidence reports (local, ignored):
 - `work/runs/20260908T025735Z-project-9aed3ee4/report.json`
@@ -66,18 +66,18 @@ No GitHub CI run has occurred.
 ## Remaining
 
 - Complete the full Lean proof build and remaining CI-specific evidence.
-- Finish the existing Zcash tests against the current Safe 7 emulator.
 - PCZT approval contract and an actual shielded signer integration.
 - Independent review of the threat model, cryptography and eventual firmware.
 - Maintainer acknowledgment before any librustzcash PR; no outreach has been sent.
 
-This bootstrap does not complete the overall shielded-support project. There is no
-new firmware, live-funds testing or proven Trezor integration yet.
+These baselines do not complete the overall shielded-support project. There is
+no new shielded signer, live-funds testing or proven Trezor shielded integration yet.
 
 ## Current continuation evidence
 
 Development branch: `codex/verification-and-reuse`.
-The reuse assessment is published in commit `6774cb5`.
+The reuse assessment is published in commit `6774cb5`; the emulator runner and
+initial validation map are published in `e2ee34b`.
 
 - Cold Lean run: `work/runs/20260908T032153Z-lean-ab668874/report.json`
   (timeout, exit 124; partial compilation retained; no target removed).
@@ -98,3 +98,19 @@ Both C failures reproduce in small examples. GCC 15 accepts both under the
 existing warning/error flags. The passing build changes the host compiler
 selection, not upstream source or warning gates. No additional paid service has
 been enabled, and no physical device has been accessed.
+
+Safe 7 device-test evidence:
+`work/runs/20260908T040947Z-firmware-zcash-f4fcf912/report.json`, with a JUnit
+report containing nine passing cases, no skips, errors or failures. Source,
+submodules and emulator binary remained unchanged. These are the existing
+transparent Zcash/v5 signing scenarios, not Ironwood shielded-signing tests.
+The first test attempt failed during Tropic model startup (all nine setup errors,
+no signing tests executed); the unchanged test suite passed on retry with
+per-run emulator logs enabled. The original failure is retained in
+`work/runs/20260908T040630Z-firmware-zcash-63577907/report.json`.
+
+The 60-minute Lean run launched at 04:02:33 UTC and writes its final report under
+`work/runs/20260908T040233Z-lean-7e86de00/`. Check that report/lock before starting
+another proof run; do not interpret an active process or partial module log as a
+passing result. The existing scheduled continuation can record the outcome and
+then continue M1.1. No new automation is required.

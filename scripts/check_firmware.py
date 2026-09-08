@@ -68,6 +68,7 @@ def run(root, stage):
                   'commands': [], 'passed': False}
         print('Evidence: ' + str(directory), flush=True)
         env = firmware_env(root)
+        env["TREZOR_PYTEST_LOGS_DIR"] = str(directory)
 
         def command(args, cwd, timeout=120):
             result = run_command(args, cwd, env, directory / f'{len(report["commands"]):02d}.log', timeout)

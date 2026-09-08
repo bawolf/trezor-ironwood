@@ -42,7 +42,7 @@ Development branch: `codex/verification-and-reuse`.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260908T221716Z-project-646efecb/report.json`.
+- Project: `work/runs/20260908T223627Z-project-71852949/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
@@ -114,9 +114,15 @@ destination authorization; functional results are recorded without claiming that
 review completed. Earlier build/startup/import/driver failures are preserved in the
 result document. The local model setup allowance is now documented as 30 seconds.
 
-The next bounded task is the smallest real host-input/transport integration; a
-separate worker is mapping the pinned framing limits and necessary request lifecycle. No transport handler or
-production key path exists yet. Native emulator success does not establish MCU fit.
+The pinned framing/lifecycle mapping is complete. An isolated
+[host-input bridge candidate](HOST_INPUT_RESULTS.md) now accepts bounded caller
+bytes: native failed-replacement/ownership tests and two distinct valid inputs
+pass; the independent oracle verifies three new real-spend signatures. The C
+adapter compiles against pinned headers and warning-fatal Clippy passes. The core,
+old bridge and emulator image remain unchanged. Independent clarity review found no blocker; adversarial review and
+integration remain pending. The next bounded task connects typed chunked THP input, existing
+trusted review and signed-response delivery. No transport handler or production
+key path exists yet. Native emulator success does not establish MCU fit.
 
 A separate ARM compiler experiment measures the actual begin/sign callbacks.
 An isolated two-line candidate prevents inlining of the existing verification

@@ -29,7 +29,7 @@ Development branch: `codex/verification-and-reuse`.
 | Upstream Ironwood integration tests | 4 passed |
 | Upstream firmware wire-compatibility tests | 4 passed; Keystone fixture, not Trezor |
 | Ironwood source/census/fixture scripts | All six passed; 480 modules and 200 endpoint declarations |
-| Host approval conformance | 27 passed; formatting and warning-fatal Clippy passed |
+| Host approval conformance | 28 passed; formatting and warning-fatal Clippy passed |
 | Host dependency identity | All 133 registry packages match upstream versions/checksums |
 | Local approval/accounting Lean model | 11 named theorems; both default targets, census and exact axiom guards passed |
 | Safe 7 processor compatibility | `no_std` verifier probe passed on the actual Rust MCU target |
@@ -39,7 +39,7 @@ Development branch: `codex/verification-and-reuse`.
 Latest ignored local reports:
 
 - Project: `work/runs/20260908T050651Z-project-27cd19de/report.json`.
-- Approval: `work/runs/20260908T045936Z-approval-35a41811/report.json`.
+- Approval: `work/runs/20260908T052631Z-approval-9ff95bb3/report.json`.
 - Local proofs: `work/runs/20260908T051419Z-approval-proofs-3abb0f64/report.json`.
 - Embedded probe: `work/runs/20260908T050942Z-embedded-probe-067453c0/report.json`.
 - Emulator: `work/runs/20260908T040947Z-firmware-zcash-f4fcf912/report.json`.
@@ -59,6 +59,12 @@ place; no target, warning gate or axiom policy has been weakened.
 ## Continuing
 
 M1 is complete only for the explicit synthetic-regtest, Ironwood-only profile.
+A test-only digest assembly experiment now matches the standard Signer across
+all admitted action counts and both deferred/restored anchors. The combined
+portable RNG/digest/signing-core rewrite was rejected by automatic approval review
+and remains unapplied, with a [reviewable proposal and patch](proposals/PORTABLE_APPROVAL_CORE.md)
+awaiting explicit approval. The working Engine remains unchanged.
+
 Device allocation/entropy interfaces, the complete embedded signature-digest path,
 Safe 7 integration, measured resources and authenticated device review remain M2.
 The local proofs have a documented correspondence to Rust, not machine-checked

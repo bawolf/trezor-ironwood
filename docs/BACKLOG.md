@@ -27,3 +27,10 @@ Profile 1 is synthetic regtest, Ironwood-only, bounded to eight actions with emp
 memos and single-account ownership. Its numerical limits are unmeasured prototype
 limits. M1 completion does not imply the full pool/device matrix is supported.
 See `APPROVAL_CONTRACT.md`, `APPROVAL_RESULTS.md` and `APPROVAL_PROOFS.md`.
+
+
+Portable signing-core changes are awaiting explicit approval after automatic
+review rejected the combined RNG/digest/low-level-signing rewrite. The current
+Engine is unchanged; only a test-only digest equivalence experiment was added.
+See `proposals/PORTABLE_APPROVAL_CORE.md`. Scheduled work may continue independent
+baselines, tests and proposal preparation, but must not apply this rejected change.

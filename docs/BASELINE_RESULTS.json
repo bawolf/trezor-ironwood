@@ -1212,5 +1212,95 @@
         "log_sha256": "4338f0be183456cf7fbedb3126141453377de05638ef303819ba2d8984bf4399"
       }
     ]
+  },
+  {
+    "lane": "approval",
+    "started_utc": "20260908T052631Z",
+    "revisions": {
+      "librustzcash": "5e770a91ad0d11938dbc713e7889e4aa8009266c"
+    },
+    "passed": true,
+    "local_inputs_sha256": {
+      "Cargo.toml": "28d8bb1e88c25ed8cb15cdbff890e993dadd5538bff02741fb72d68c4d69b6b4",
+      "Cargo.lock": "a4264b7befb8149e451eb7ea6547fa5f68bd7544d1fb5bc8eeb761eb96eb3c76",
+      "scripts/check_approval_dependencies.py": "8630bad3e30f035e3993fe9cc29d2e07d6ca6e1b03a4831d44b994657ae5808f",
+      "crates/approval/src/lib.rs": "dcd68951d493d32ea5ab1ddefde38bdb586a581ba49f1ec63b0d02dba49224e0",
+      "crates/approval/src/wire.rs": "87260e5b03456dd4efed57291d5188e2ef271e2fb52e8ac3c12f1b9aeeb4ebec",
+      "crates/approval/tests/common/mod.rs": "e417e8e560582faf872fdc2cf51cc7f664a27091d61a3c1d7129d8dacb3f2d3c",
+      "crates/approval/tests/conformance.rs": "6dabca2bea0a7f7817890537edbefe8bc3e4c8165bd054904fddad81a4c09c9f",
+      "crates/approval/Cargo.toml": "98bce70c4b04c4810012e0411c42cc8a8371b1685ce89d317388a6ba93cd9b08"
+    },
+    "finished_utc": "2026-09-08T05:27:43.399499+00:00",
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "scripts/check_approval_dependencies.py"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.32,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "d6eaa9010397a603bcf9caf4ccf79265e77ad0ad750732d325759cc92a609942"
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "-p",
+          "ironwood-approval",
+          "--check"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 1.47,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-p",
+          "ironwood-approval",
+          "--test",
+          "conformance"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 64.78,
+        "tests_passed": 28,
+        "minimum_tests": 28,
+        "passed": true,
+        "log_sha256": "25550e9bbe5cbe718dc7bc82f7f8defc602389406b0d9b8ffe19867a3fe9742d"
+      },
+      {
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "-p",
+          "ironwood-approval",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 5.17,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "5e5c4010cca17607410bbb95786346e0d9197f975636560a681b138b3553f8eb"
+      }
+    ]
   }
 ]

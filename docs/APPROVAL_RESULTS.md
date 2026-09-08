@@ -74,3 +74,20 @@ corrections, not newly discovered vulnerabilities in the upstream libraries.
 The [eleven structural Lean proofs](APPROVAL_PROOFS.md) are separate evidence.
 Neither these tests nor those proofs establish physical Safe 7 behavior, final
 proof/consensus validity, mainnet readiness or full implementation refinement.
+
+
+## Digest-path preparation and latest gate
+
+The subsequent test-only digest experiment constructs upstream v6 transaction data
+from the profile's Ironwood effects and compares upstream digest computation with
+the standard PCZT Signer. All 16 comparisons pass across 1–8 positive outputs and
+absent/restored anchors, after the unchanged Engine verifies each original fixture.
+The final gate `work/runs/20260908T052631Z-approval-9ff95bb3/report.json` passed
+**28 tests**, dependency identity, formatting and warning-fatal Clippy. Test log
+SHA-256: `25550e9bbe5cbe718dc7bc82f7f8defc602389406b0d9b8ffe19867a3fe9742d`.
+
+This experiment did not change the signing engine. Automatic approval review
+rejected the combined portable RNG/digest/low-level-signing rewrite, so it remains
+an unapplied [proposal and patch](proposals/PORTABLE_APPROVAL_CORE.md). The existing
+engine source SHA-256 remains
+`dcd68951d493d32ea5ab1ddefde38bdb586a581ba49f1ec63b0d02dba49224e0`.

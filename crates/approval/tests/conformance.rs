@@ -428,3 +428,52 @@ fn zero_value_output_cannot_hide_nonempty_memo() {
         Error("nonempty memo unsupported")
     );
 }
+
+/// Test-only experiment. The production reference Engine continues using the standard Signer.
+fn profile_digest_experiment(pczt: &Pczt) -> [u8; 32] {
+    use zcash_primitives::transaction::{
+        TransactionData, sighash::SignableInput, sighash_v6::v6_signature_hash, txid::TxIdDigester,
+    };
+    use zcash_protocol::{consensus::BranchId, value::ZatBalance};
+    let mut digest = None;
+    Verifier::new(pczt.clone())
+        .with_ironwood(|bundle| -> Result<(), OrchardError<()>> {
+            let tx: TransactionData<pczt::EffectsOnly> = TransactionData::from_parts_v6(
+                BranchId::try_from(*pczt.global().consensus_branch_id()).unwrap(),
+                0,
+                (*pczt.global().expiry_height()).into(),
+                None,
+                None,
+                None,
+                bundle.extract_effects::<ZatBalance>().unwrap(),
+            );
+            digest = Some(
+                v6_signature_hash(&tx, &SignableInput::Shielded, &tx.digest(TxIdDigester))
+                    .as_bytes()
+                    .try_into()
+                    .unwrap(),
+            );
+            Ok(())
+        })
+        .unwrap();
+    digest.unwrap()
+}
+
+#[test]
+fn upstream_digest_assembly_matches_standard_signer_across_action_bounds() {
+    for outputs in 1..=8 {
+        let bytes = build_actions(outputs);
+        let pczt = Pczt::parse(&bytes).unwrap();
+        assert_eq!(pczt.ironwood().actions().len(), outputs.max(2));
+        // The unchanged reference first establishes that this belongs to profile 1.
+        let review = engine().begin(&bytes).unwrap();
+        assert_eq!(review.projection().outputs.len(), outputs);
+        let standard = Signer::new(pczt.clone()).unwrap().shielded_sighash();
+        assert_eq!(&standard, review.sighash());
+        assert_eq!(profile_digest_experiment(&pczt), standard);
+        let mut value = json(&bytes);
+        value["ironwood"]["anchor"] = json!(vec![0; 32]);
+        let reanchored = Pczt::parse(&encode(value)).unwrap();
+        assert_eq!(profile_digest_experiment(&reanchored), standard);
+    }
+}

@@ -124,7 +124,7 @@ def lane_commands(root, lane):
         return [(root, [sys.executable, "scripts/check_approval_dependencies.py"], 30, 0),
                 (root, ["cargo", "fmt", "-p", "ironwood-approval", "--check"], 120, 0),
                 (root, ["cargo", "test", "--locked", "--offline", "-p", "ironwood-approval",
-                        "--test", "conformance"], 600, 27),
+                        "--test", "conformance"], 600, 28),
                 (root, ["cargo", "clippy", "--locked", "--offline", "-p", "ironwood-approval",
                         "--all-targets", "--", "-D", "warnings"], 600, 0)]
     if lane == "embedded-probe":

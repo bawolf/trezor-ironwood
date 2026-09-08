@@ -6,10 +6,11 @@ whose on-device approval is tied to independently verified transaction effects.
 
 This repository contains pinned upstream baselines, a bounded PCZT approval
 reference, hostile-host conformance tests, selected Lean proofs and a Safe 7
-emulator baseline. **It does not yet implement a
-Trezor shielded signer, and no firmware is ready for use with funds.**
+emulator baseline. A fixed synthetic PCZT now completes review and signing in the
+Safe 7 emulator. Production key handling, bounded host transport and hardware
+validation remain. **No firmware is ready for use with funds.**
 
-- [Current status](docs/STATUS.md)
+- [Current status](docs/STATUS.md) and [synthetic emulator signing](docs/EMULATOR_SIGNING_RESULTS.md)
 - [Upstream findings and reuse map](docs/UPSTREAM.md)
 - [Trezor shielded PR reuse assessment](docs/TREZOR_REUSE.md)
 - [Safe 7 emulator setup and evidence](docs/FIRMWARE_BASELINE.md)

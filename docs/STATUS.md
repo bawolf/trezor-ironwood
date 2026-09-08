@@ -42,7 +42,7 @@ Development branch: `codex/verification-and-reuse`.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260908T204424Z-project-b1cec119/report.json`.
+- Project: `work/runs/20260908T221716Z-project-646efecb/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
@@ -97,44 +97,34 @@ relocations are explained. Final Fable5.1 and clarity reviews found no blocking 
 frame subtotal, above the 32 KiB reservation; no actual overflow or executable
 input path is claimed. Its documented Opus fallback review is accepted.
 
-The next milestone is one actual synthetic PCZT verified, reviewed, approved and
-signed in the Safe 7 emulator. The isolated Rust/MicroPython bridge and frozen
-review screens are implemented locally. The real-core host lifecycle passes,
-including replacement/replay/cancellation and response bounds; its signed response
-matches the independently verified oracle input. Thirteen UI orchestration tests,
-two demo error-propagation tests, actual-header C compilation and warning-fatal
-Clippy pass. These are not integrated screen, GC or emulator signing results.
+The [first synthetic emulator signing flow now passes](EMULATOR_SIGNING_RESULTS.md):
+verified context/output/receiver/totals pages, short-press rejection, animated final
+hold, signed response and independent verification of both new real-spend signatures.
+Real menu cancellation and an injected post-validation UI failure also pass their
+exact outcome and cleanup checks. The current image is
+`82608d19eedfe07a97433c4cb3cca6eae92cad8530ce6197f7e2fce7e0843c8b`.
 
-Two confirmed Fable5.1 reviews and independent clarity reviews examined the bridge
-and corrections. They identified demo exceptions swallowed by the scheduler; the
-launcher now propagates those errors at module scope and rejects a missing outcome.
-The latest corrections also reject invalid C snapshot kinds/counts and response
-lengths. Final runtime acceptance remains pending. Source and evidence are retained
-locally under `work/emulator-signing-bridge/` and `work/reviews/emulator-signing-bridge*/`.
+The Rust bridge, C binding and frozen review screens remain isolated locally.
+Thirteen UI tests, two demo tests, the real-core host lifecycle, actual-header C
+compilation and warning-fatal Clippy pass. Two confirmed Fable5.1 reviews and
+independent clarity reviews covered the bridge and corrections. A further runtime-
+driver Fable review is blocked by automatic approval review pending exact payload/
+destination authorization; functional results are recorded without claiming that
+review completed. Earlier build/startup/import/driver failures are preserved in the
+result document. The local model setup allowance is now documented as 30 seconds.
 
-The first integrated emulator build reached its 1,200-second process-group limit
-without a compiler diagnostic or linked image. Compiled source inputs and resolved
-locks stayed unchanged. Its warm build directory and failure evidence are retained
-at `work/emulator-signing-build/integration-build-01/`; a second bounded build uses
-the reviewed corrections and the same official test preset, features and deadline.
-The approval core remains unchanged.
+The next bounded task is cancellation followed by a fresh approved signature in
+one emulator process, then bounded host input/transport. No transport handler or
+production key path exists yet. Native emulator success does not establish MCU fit.
 
-The earlier cold-start image now passes a normal process run through all four
-compiled startup/shutdown gates, including a requested two-second sleep and exact
-start/end markers. The explicit pinned Python/unbuffered Tropic launcher became
-ready in 2.79 seconds under the unchanged ten-second deadline. This does not explain
-the historical shebang-launch timeout. LLDB separately stalled before emulator
-launch and is parked; no debugger counter snapshot or signing is claimed.
-Evidence: `work/emulator-arena-runtime-05/report.json`.
-
-A separate ARM compiler experiment now measures the actual begin/sign callbacks.
+A separate ARM compiler experiment measures the actual begin/sign callbacks.
 An isolated two-line candidate prevents inlining of the existing verification
-function: its selected validation subtotal falls 33,688 to 30,688 bytes; selected
-signing stays 31,952 bytes. That leaves only 816 bytes before unmeasured C/VM costs
-and is not a device-fit result. The candidate is unintegrated, and the next bounded
-experiment targets redundant upstream parser staging. See local
-`work/bridge-stack-probe/REPORT.md`; the earlier rejected helper is not adopted.
-M2.1c requires actual trusted review/consent; bounded host transport remains later.
+function: selected validation falls 33,688 to 30,688 bytes; selected signing stays
+31,952 bytes. Only 816 bytes remain before unmeasured C/VM costs, so this is not a
+stack-fit result. A follow-up found the upstream parser already uses direct push;
+no small source cleanup justified adding another abstraction. The candidate remains
+unintegrated and the accepted core is unchanged. Local reports are under
+`work/bridge-stack-probe/`. M2.1c/M2.1d continue beyond the fixed-fixture demonstration.
 
 The local proofs have a documented correspondence to Rust, not machine-checked
 Rust or firmware refinement. Mixed pools and general memo/address/batch support
@@ -148,7 +138,7 @@ No new automation is needed. Keep the machine on and Codex running.
 ## Limits and external dependencies
 
 - No physical device accessed or flashed, no real-funds transaction, no production
-  seed loaded. The current shielded signer is a host reference, not device firmware.
+  seed loaded. A synthetic emulator signer now runs; production device support remains unimplemented.
 - Automated adversarial/readability reviews are recorded; independent specialist
   cryptographic/embedded review and eventual hardware validation remain.
 - No outreach sent. Librustzcash needs maintainer acknowledgment before a PR.

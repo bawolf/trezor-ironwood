@@ -100,8 +100,9 @@ input path is claimed. Its documented Opus fallback review is accepted.
 The [first synthetic emulator signing flow now passes](EMULATOR_SIGNING_RESULTS.md):
 verified context/output/receiver/totals pages, short-press rejection, animated final
 hold, signed response and independent verification of both new real-spend signatures.
-Real menu cancellation and an injected post-validation UI failure also pass their
-exact outcome and cleanup checks. The current image is
+Real menu cancellation, an injected post-validation UI failure, and cancellation
+followed by a second complete approval in one process pass their exact outcome and
+cleanup checks. The retry response is byte-identical to the verified oracle input. The current image is
 `82608d19eedfe07a97433c4cb3cca6eae92cad8530ce6197f7e2fce7e0843c8b`.
 
 The Rust bridge, C binding and frozen review screens remain isolated locally.
@@ -113,8 +114,8 @@ destination authorization; functional results are recorded without claiming that
 review completed. Earlier build/startup/import/driver failures are preserved in the
 result document. The local model setup allowance is now documented as 30 seconds.
 
-The next bounded task is cancellation followed by a fresh approved signature in
-one emulator process, then bounded host input/transport. No transport handler or
+The next bounded task is the smallest real host-input/transport integration; a
+separate worker is mapping the pinned framing limits and necessary request lifecycle. No transport handler or
 production key path exists yet. Native emulator success does not establish MCU fit.
 
 A separate ARM compiler experiment measures the actual begin/sign callbacks.

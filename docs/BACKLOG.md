@@ -15,8 +15,8 @@ without a change, a new failure, or a specific unresolved concern.
 | M2.1 | First fixed-fixture emulator flow passes; general receive/send integration pending | Prototype Safe 7 shielded review/sign flow | Synthetic receive/send succeeds in emulator; hostile host and cancel/retry tests pass; accurate display and bounded memory measured. |
 | M2.1a | Complete for experimental profile 1 | Compile portable approval core for Safe 7 target | Complete default-features-disabled core, upstream digest/signature equivalence, entropy interruption tests and independent adversarial/readability reviews. |
 | M2.1b | Native arena/link reviewed; actual callback stack candidate isolated, runtime pending | Measure synthetic approval resource use | Record reproducible allocation/peak-heap and latency results for 1–8 actions, identify copy/stack costs, compare against source-defined device budgets; keep host measurements distinct from MCU results. |
-| M2.1c | Fixed-fixture review/hold/cancel/error cases pass; same-process retry and final driver review pending | Implement trusted emulator review and consent | Show every payment/change/fee from the immutable projection, bind physical UI events to its token, test cancellation and replacement; no transport-triggered approval. |
-| M2.1d | Next after same-process retry | Integrate bounded emulator transport and signing | Fragmentation/size limits, disconnect/replay/failure tests and actual synthetic signed response; no production key-store or physical-device use. |
+| M2.1c | Fixed-fixture review/hold/cancel/error/retry pass; final driver review and general host entry pending | Implement trusted emulator review and consent | Show every payment/change/fee from the immutable projection, bind physical UI events to its token, test cancellation and replacement; no transport-triggered approval. |
+| M2.1d | Pinned protocol/limit mapping in progress | Integrate bounded emulator transport and signing | Fragmentation/size limits, disconnect/replay/failure tests and actual synthetic signed response; no production key-store or physical-device use. |
 | M2.2 | In progress: eleven host-model proofs pass; firmware refinement pending | Prove selected approval/accounting properties | Non-vacuous Lean statements, warning-fatal build, expected axioms only, implementation correspondence documented and reviewed. |
 | M3 | Later | Independent review, hardware and release path | Cryptographic/embedded review, device matrix, dedicated hardware tests, recovery/privacy UX and upstream acceptance. |
 
@@ -45,7 +45,8 @@ native stack, shared runtime memory, trusted UI and entropy integration remain p
 
 The first fixed synthetic PCZT now completes verified review, timed confirmation and
 signing in the Safe 7 emulator; its signatures verify independently. Keep the next
-critical path active: same-process cancellation/retry, then bounded host transport. Work in parallel on the
+critical path active: same-process cancellation/retry now passes; next is bounded
+host transport. Work in parallel on the
 linked stack concern, a minimal Rust/MicroPython bridge and review screens over
 the existing verified projection. Baseline audits are complete for their stated
 scopes. Further diagnostics should answer a concrete integration question; a

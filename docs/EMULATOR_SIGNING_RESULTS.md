@@ -22,8 +22,10 @@ The fixed Rust arena enforces the bound VM executor and sealed public-table owne
 | Independent oracle | Both new real-spend signatures verified and fields/digests preserved. The fixed oracle corpus also reused 14 earlier control responses; its total of 43 is not 43 new emulator signatures. |
 | Menu cancellation | Actual header-menu and Cancel-item touches; exactly one cancellation marker, no signed marker, exit 0. |
 | UI failure after validation | Injected ValueError from the first layout; real finally cancelled native state, the demo propagated the exception at module scope, no outcome/signature marker, exact exit 1 with traceback. |
+| Cancel then approve again | One process, two calls to the unchanged frozen review: real menu cancellation, all seven second-review pages, rejected short press, then hold and exactly one PCZT with exit 0. |
 
-All three cases use fresh synthetic profiles and the same image. The three cold
+All four cases use fresh synthetic profiles and the same image; the retry case
+keeps both review flows in one emulator process. The three cold
 startup gates and final owner-baseline gate remain compiled and enforced. Their
 normal return paths passed; no raw allocator counter dump or emulator peak-heap
 measurement is claimed. The Rust arena remains 128 KiB, response capacity 65,536
@@ -46,6 +48,13 @@ signature check, rather than treating that timeout as a successful response.
 - Firmware lock: `5106297df32444e4b001de4eed12bc6828e4bd1ac8a109b6ad8dfb94abb210c0`.
 - Signed response: `f499de162d7df2e6e1df8cfcc09f8b43bf2200bed72a408e93e6a499a9c3c9f9`.
 - Approval core remains unchanged: `3500810c65dd3550bca2efe84248b38d3e725755eccd95cc3f48b061bbb6d5c8`.
+
+The same-process retry completed in 18.536 seconds, with 129 captured PNGs. Parent
+inspection rehashed all 160 final evidence files and checked the two real awaits,
+exact page associations, outcome ordering and cleanup. Its response is byte-for-byte
+identical to the independently verified signing response above, binding the existing
+oracle result without another invocation or another unique-signature claim.
+Evidence: `work/emulator-retry-test/parent-verification.json` and adjacent reports.
 
 Local evidence remains under ignored `work/emulator-signing-runtime-07/` (sign and
 oracle), `-08/` (cancel), `-09/` (failure), and
@@ -81,8 +90,7 @@ new review usage was charged/reported. Local testing continued.
 
 The demo has no production entropy, key-store, general PCZT transport, cross-process
 replay protection or hardware validation. Mixed pools, general memos and address
-presentation remain outside this synthetic profile. Next: cancellation followed
-by a fresh approval in the same emulator process, then bounded host input/transport.
+presentation remain outside this synthetic profile. Next: bounded host input/transport, reusing the demonstrated review/sign lifecycle.
 The selected ARM stack concern remains open; the small existing-function outlining
 candidate is isolated, and a further parser-staging investigation found no simple
 source cleanup to justify another abstraction.

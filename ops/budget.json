@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "currency": "USD",
+  "authorized_cents": 30000,
+  "authorization_date": "2026-09-07",
+  "scope": "Initial total budget, not a monthly renewal.",
+  "paid_execution_enabled": false,
+  "codex_dollar_metering": "unavailable",
+  "entries": [],
+  "note": "Existing Codex account usage is not measured by this ledger. No additional paid APIs, cloud machines, credits, or subscriptions have been purchased. Paid execution remains disabled until costs can be measured and capped. This file is bookkeeping, not a provider billing limit."
+}

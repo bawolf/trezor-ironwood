@@ -1,0 +1,183 @@
+[
+  {
+    "lane": "ironwood-source",
+    "started_utc": "20260908T025917Z",
+    "revisions": {
+      "ironwood": "ad4a6ad8f75a64368bae4186006480410a687cce"
+    },
+    "passed": true,
+    "commands": [
+      {
+        "command": [
+          "bash",
+          "scripts/check_build_coverage.sh"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 1.0,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "df3b8baea2d84f03f1e25c4236b4fe1ccf193ba641d653882a6b6b9f28a3b7fb"
+      },
+      {
+        "command": [
+          "bash",
+          "scripts/check_endpoint_census.sh"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 29.85,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "b4a8e7ce372790907d7bb7f6696dbbfa68c5839797cd7b7ef1133a8dbc42e79a"
+      },
+      {
+        "command": [
+          "bash",
+          "scripts/check_csimp_census.sh"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 1.52,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "1920cbb34946987e248823b33a782ec68275b0454351770cca01b51a29c16842"
+      },
+      {
+        "command": [
+          "bash",
+          "scripts/check_costed_group_work_census.sh"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.09,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "81efe00571f9940d9b2637d3c96c5fc54ac93a8d52467cc8f94d8a5b5e8bbe01"
+      },
+      {
+        "command": [
+          "bash",
+          "scripts/check_no_umbrella_imports.sh"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.19,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "bash",
+          "scripts/check_fixture_manifest.sh"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.19,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e6f05d56c357bae766b83bb6688aa451bedf583db60d3019d381b7b5cc889148"
+      }
+    ]
+  },
+  {
+    "lane": "pczt",
+    "started_utc": "20260908T030029Z",
+    "revisions": {
+      "librustzcash": "5e770a91ad0d11938dbc713e7889e4aa8009266c"
+    },
+    "passed": true,
+    "commands": [
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "pczt",
+          "--all-features",
+          "--lib"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 4.96,
+        "tests_passed": 66,
+        "minimum_tests": 66,
+        "passed": true,
+        "log_sha256": "db5be0482b4c17892679efed61b724cc4f8a26a0d5e3382561a388e79f73610e"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "pczt",
+          "--all-features",
+          "--test",
+          "end_to_end",
+          "ironwood"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 13.65,
+        "tests_passed": 4,
+        "minimum_tests": 4,
+        "passed": true,
+        "log_sha256": "920aa2325a8a91008482a2ee0f60237aa89f85b17a56db15836283a7511ac8d9"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "pczt",
+          "--all-features",
+          "--test",
+          "firmware_compat"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 2.36,
+        "tests_passed": 4,
+        "minimum_tests": 4,
+        "passed": true,
+        "log_sha256": "1e0fd6a7a02451caa67cc6f91d6e57828408971370f5896b6ca316123a402a4c"
+      }
+    ]
+  },
+  {
+    "lane": "project",
+    "started_utc": "20260908T025735Z",
+    "revisions": {},
+    "passed": true,
+    "commands": [
+      {
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 1.94,
+        "tests_passed": 10,
+        "minimum_tests": 10,
+        "passed": true,
+        "log_sha256": "0bae85cfb522303e5a5c4852fd255e162a4aef7979b67119314e07795f188f3e"
+      }
+    ]
+  }
+]

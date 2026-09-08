@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-08",
+  "repositories": {
+    "ironwood": {"url": "https://github.com/zcash/ironwood.git", "revision": "ad4a6ad8f75a64368bae4186006480410a687cce", "checkout": true},
+    "librustzcash": {"url": "https://github.com/zcash/librustzcash.git", "revision": "5e770a91ad0d11938dbc713e7889e4aa8009266c", "checkout": true},
+    "orchard": {"url": "https://github.com/zcash/orchard.git", "revision": "be4f659467338a86e93bd3d9ae72a696bebc924b", "checkout": true},
+    "zips": {"url": "https://github.com/zcash/zips.git", "revision": "e753a6a301912cf77202db8f0d840f4796f5cca1", "checkout": true},
+    "trezor-firmware": {"url": "https://github.com/trezor/trezor-firmware.git", "revision": "7105338e3c2c1e681940e17780609881ce53126b", "checkout": true},
+    "trezor-suite": {"url": "https://github.com/trezor/trezor-suite.git", "revision": "2b86167343e377e9f3f8b223e7b95317e1338d71", "checkout": false}
+  }
+}

@@ -1,0 +1,52 @@
+# Trezor–Ironwood
+
+An engineering workspace for contributing shielded Zcash support to Trezor,
+starting with the Safe 7 and a desktop host. The goal is a receive-and-send flow
+whose on-device approval is tied to independently verified transaction effects.
+
+This repository currently contains pinned upstream sources, a reproducible checks
+runner, a threat model, and a development backlog. **It does not yet implement a
+Trezor shielded signer, and no firmware is ready for use with funds.**
+
+- [Current status](docs/STATUS.md)
+- [Upstream findings and reuse map](docs/UPSTREAM.md)
+- [Backlog and acceptance criteria](docs/BACKLOG.md)
+- [Threat model](docs/THREAT_MODEL.md)
+- [Verification boundaries](docs/VERIFICATION.md)
+- [Local setup and scheduled work](docs/OPERATIONS.md)
+
+## Checks
+
+Python 3.11+ is sufficient for the project checks. Upstream lanes additionally need
+their documented toolchains and dependencies.
+
+```sh
+python3 scripts/check.py project
+python3 scripts/bootstrap.py
+python3 scripts/check.py ironwood-source
+python3 scripts/check.py pczt
+python3 scripts/check.py lean
+```
+
+Checkouts are exact, detached revisions from `upstreams.lock.json`; bootstrap never
+updates an existing checkout. Changes to a pin need a reviewed compatibility reason.
+The standalone Orchard checkout is for research; the PCZT build uses Orchard from
+**librustzcash's own Cargo.lock**, not that checkout.
+
+Detailed logs and machine-readable reports are stored under ignored `work/runs/`.
+The runner rejects dirty/wrong-revision baseline checkouts, empty Rust test runs,
+concurrent verification runs, and timed-out subprocesses.
+
+GitHub CI is prepared as `ci/project-workflow.yml`. Enabling it requires placing
+it at `.github/workflows/project.yml` through an account with workflow permission.
+The current OAuth credential lacks that scope; local checks are operational.
+
+## Budget
+
+The initial authorized total is **USD 300**. No additional paid service is enabled.
+`ops/budget.json` records paid commitments and expenditure, but existing Codex
+account usage has no dollar telemetry here. It is not a hard cap on Codex billing.
+
+Original orchestration code in this repository is MIT licensed. Downloaded upstream
+code retains its own license; in particular Trezor firmware license requirements
+must be preserved in derivative work.

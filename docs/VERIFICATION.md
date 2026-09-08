@@ -22,6 +22,7 @@ wallet or circuit safety.
 | `project` | Failure-path tests for local lock, timeout, pin validation, test counts and budget bookkeeping | A sandbox, provider spending cap or crypto verification |
 | `pczt` | Upstream PCZT library tests, four Ironwood integration tests, four legacy firmware wire-compatibility tests | Whole librustzcash workspace, Safe 7 firmware, all v6 scenarios, consensus validation |
 | `ironwood-source` | Six upstream source/census/fixture scripts | Lean proof success, all CI checks or complete fixture regeneration |
+| `firmware build` / `firmware zcash` | Current Safe 7 emulator identity, pinned source/toolchain, nine existing Zcash signing tests | Physical-device behavior, production firmware, shielded support, full UI screenshot baselines |
 | `lean` | `lake build --wfail` with all six pinned default targets | Reproducible Rust fixture regeneration, full firmware correctness or reviewed cryptographic assumptions |
 
 The firmware compatibility fixture comes from **Keystone 3**, not Trezor. Its role

@@ -36,7 +36,11 @@ cd ../..
 python3 scripts/check.py lean
 ```
 
-Cache downloads are dependencies, not completed project proofs. A cold build may
+Cache downloads are dependencies, not completed project proofs. The Lean lane
+has a 60-minute subprocess limit. The initial 20-minute bound was too short for
+the cold dependency chain: `CompElliptic.Isogenies.VeluCertificates` alone took
+690 seconds, followed by a long `Homomorphism` elaboration. Extending the execution
+window leaves all proof targets and warning/axiom gates unchanged. A cold build may
 exceed one bounded run; retain partial compilation and resume without weakening
 the targets. The runner kills a timed-out command's subprocess group.
 Source checks run with `LC_ALL=C` for deterministic ASCII parsing; the default
@@ -44,11 +48,13 @@ locale caused the endpoint census to exceed the initial timeout on this Mac.
 
 ## Firmware
 
-Current upstream documentation supports manual macOS setup with SDL2, SDL2_image,
-pkg-config, LLVM/libclang, protoc, uv and Rust nightly. The recommended Nix route
-is another option; Nix is not currently installed. Read the pinned
-`docs/core/build/emulator.md` and Rust toolchain file before installing dependencies.
-`t3w1` is the Safe 7 build model. No hardware interaction is needed for this phase.
+The pinned manual emulator guide still lists SDL2, but current build sources
+require **SDL3 and SDL3_image**. `shell.nix` pins Rust nightly 2026-03-16 and
+protoc 31; the Python runtime is protobuf 6.33.5. Use the source requirements
+and the tested setup in [FIRMWARE_BASELINE.md](FIRMWARE_BASELINE.md).
+`t3w1` is Safe 7. Builds and tests run in `work/firmware-t3w1`, a detached
+worktree at the pinned firmware commit, with project-local Rust and Python
+installations. No hardware interaction is needed for this phase.
 
 ## Scheduled development
 

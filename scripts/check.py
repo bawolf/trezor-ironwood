@@ -111,7 +111,7 @@ def run_command(command, cwd, env, logfile, timeout, minimum_tests=0):
 def lane_commands(root, lane):
     upstream = root / "upstream"
     if lane == "project":
-        return [(root, [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"], 120, 10)]
+        return [(root, [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"], 120, 13)]
     if lane == "ironwood-source":
         return [(upstream / "ironwood", ["bash", "scripts/" + name + ".sh"], 180, 0)
                 for name in SOURCE_CHECKS]
@@ -121,7 +121,7 @@ def lane_commands(root, lane):
                 (upstream / "librustzcash", base + ["--test", "end_to_end", "ironwood"], 1200, 4),
                 (upstream / "librustzcash", base + ["--test", "firmware_compat"], 300, 4)]
     if lane == "lean":
-        return [(upstream / "ironwood", ["lake", "build", "--wfail"], 1200, 0)]
+        return [(upstream / "ironwood", ["lake", "build", "--wfail"], 3600, 0)]
     raise ValueError("Unknown lane")
 
 

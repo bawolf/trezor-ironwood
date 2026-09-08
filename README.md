@@ -10,6 +10,9 @@ Trezor shielded signer, and no firmware is ready for use with funds.**
 
 - [Current status](docs/STATUS.md)
 - [Upstream findings and reuse map](docs/UPSTREAM.md)
+- [Trezor shielded PR reuse assessment](docs/TREZOR_REUSE.md)
+- [Safe 7 emulator setup and evidence](docs/FIRMWARE_BASELINE.md)
+- [PCZT validation obligations](docs/PCZT_VALIDATION_MAP.md)
 - [Backlog and acceptance criteria](docs/BACKLOG.md)
 - [Threat model](docs/THREAT_MODEL.md)
 - [Verification boundaries](docs/VERIFICATION.md)
@@ -35,7 +38,9 @@ The standalone Orchard checkout is for research; the PCZT build uses Orchard fro
 
 Detailed logs and machine-readable reports are stored under ignored `work/runs/`.
 The runner rejects dirty/wrong-revision baseline checkouts, empty Rust test runs,
-concurrent verification runs, and timed-out subprocesses.
+concurrent runs within each verification lock, and timed-out subprocesses.
+The firmware runner has a separate lock and explicit model/nonempty-test checks;
+see its setup guide before running it.
 
 GitHub CI is prepared as `ci/project-workflow.yml`. Enabling it requires placing
 it at `.github/workflows/project.yml` through an account with workflow permission.

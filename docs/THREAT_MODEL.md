@@ -36,6 +36,7 @@ transition carries the same immutable signing context. Any change to approved
 effects invalidates approval. An explicitly separate post-signing finalization
 step may change v6 authorizing data under the protocol rules.
 
-This is a design requirement, not an implemented state machine. Before formalizing,
-spell out the projection from PCZT fields to displayed payment semantics and
-the assumptions connecting note commitments, ownership and accounting to it.
+The experimental host state machine, exact projection and assumptions are now
+specified in `APPROVAL_CONTRACT.md`, exercised with actual PCZTs and modeled in
+Lean. The device transport/UI and a machine-checked refinement remain unimplemented;
+see `APPROVAL_PROOFS.md` for the exact theorem boundaries.

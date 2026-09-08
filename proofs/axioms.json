@@ -1,0 +1,36 @@
+{
+  "sign_consumes": [],
+  "replay_rejected": [
+    "propext"
+  ],
+  "cancelled_request_cannot_sign": [
+    "propext"
+  ],
+  "failed_sign_has_no_receipt": [
+    "propext"
+  ],
+  "successful_sign_preserves_approved_context": [
+    "propext"
+  ],
+  "begin_requires_fresh_approval": [
+    "propext"
+  ],
+  "malformed_replacement_cancels": [
+    "propext"
+  ],
+  "old_token_cannot_approve_replacement": [
+    "propext",
+    "Quot.sound"
+  ],
+  "different_session_rejected": [
+    "propext"
+  ],
+  "accounting_conserves": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "overspend_rejected": [
+    "propext"
+  ]
+}

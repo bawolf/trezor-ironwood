@@ -111,7 +111,7 @@ def run_command(command, cwd, env, logfile, timeout, minimum_tests=0):
 def lane_commands(root, lane):
     upstream = root / "upstream"
     if lane == "project":
-        return [(root, [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"], 120, 13)]
+        return [(root, [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"], 120, 16)]
     if lane == "ironwood-source":
         return [(upstream / "ironwood", ["bash", "scripts/" + name + ".sh"], 180, 0)
                 for name in SOURCE_CHECKS]
@@ -120,18 +120,54 @@ def lane_commands(root, lane):
         return [(upstream / "librustzcash", base + ["--lib"], 1200, 66),
                 (upstream / "librustzcash", base + ["--test", "end_to_end", "ironwood"], 1200, 4),
                 (upstream / "librustzcash", base + ["--test", "firmware_compat"], 300, 4)]
+    if lane == "approval":
+        return [(root, [sys.executable, "scripts/check_approval_dependencies.py"], 30, 0),
+                (root, ["cargo", "fmt", "-p", "ironwood-approval", "--check"], 120, 0),
+                (root, ["cargo", "test", "--locked", "--offline", "-p", "ironwood-approval",
+                        "--test", "conformance"], 600, 27),
+                (root, ["cargo", "clippy", "--locked", "--offline", "-p", "ironwood-approval",
+                        "--all-targets", "--", "-D", "warnings"], 600, 0)]
+    if lane == "embedded-probe":
+        return [(root, ["rustc", "--version", "--verbose"], 30, 0),
+                (root, [sys.executable, "scripts/check_approval_dependencies.py",
+                        "experiments/embedded-probe/Cargo.lock"], 30, 0),
+                (root, ["cargo", "check", "--locked", "--offline", "--manifest-path",
+                        "experiments/embedded-probe/Cargo.toml", "--target",
+                        "thumbv8m.main-none-eabihf"], 900, 0)]
+    if lane == "approval-proofs":
+        return [(root, [sys.executable, "scripts/check_approval_proof_census.py"], 30, 0),
+                (root / "proofs", ["lake", "build", "--wfail"], 120, 0)]
     if lane == "lean":
         return [(upstream / "ironwood", ["lake", "build", "--wfail"], 3600, 0)]
     raise ValueError("Unknown lane")
+
+
+def local_inputs(root, lane):
+    if lane == "approval":
+        files = [root / "Cargo.toml", root / "Cargo.lock", root / "scripts/check_approval_dependencies.py"]
+        files += sorted((root / "crates/approval").rglob("*.rs"))
+        files += [root / "crates/approval/Cargo.toml"]
+    elif lane == "embedded-probe":
+        files = [root / "scripts/check_approval_dependencies.py", root / "crates/approval/src/wire.rs"]
+        files += sorted((root / "experiments/embedded-probe").rglob("*.rs"))
+        files += [root / "experiments/embedded-probe/Cargo.toml", root / "experiments/embedded-probe/Cargo.lock"]
+    elif lane == "approval-proofs":
+        files = [root / "scripts/check_approval_proof_census.py"]
+        files += sorted(p for p in (root / "proofs").iterdir() if p.is_file() and p.name != ".gitignore")
+    else:
+        return {}
+    return {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
 
 
 def run_lane(root, lane):
     manifest = json.loads((root / "upstreams.lock.json").read_text())
     budget = budget_status(json.loads((root / "ops/budget.json").read_text()))
     required = {"project": [], "ironwood-source": ["ironwood"],
-                "pczt": ["librustzcash"], "lean": ["ironwood"]}[lane]
+                "pczt": ["librustzcash"], "lean": ["ironwood"], "approval": ["librustzcash"], "approval-proofs": ["ironwood"], "embedded-probe": ["librustzcash", "trezor-firmware"]}[lane]
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    with verification_lock(root / "work/verification.lock"):
+    # Approval work can proceed independently of the long upstream proof build.
+    lock_name = "approval-verification.lock" if lane.startswith("approval") or lane == "embedded-probe" else "verification.lock"
+    with verification_lock(root / "work" / lock_name):
         directory = root / "work/runs" / (timestamp + "-" + lane + "-" + uuid.uuid4().hex[:8])
         directory.mkdir(parents=True)
         report = {"lane": lane, "started_utc": timestamp, "revisions": {},
@@ -139,11 +175,21 @@ def run_lane(root, lane):
         try:
             for name in required:
                 report["revisions"][name] = baseline(root, name, manifest["repositories"][name]["revision"])
+            report["local_inputs_sha256"] = local_inputs(root, lane)
             env = dict(os.environ)
             env.update(CARGO_HOME=str(root / "work/cargo-home"),
                        CARGO_TARGET_DIR=str(root / "work/cargo-target"), CARGO_BUILD_JOBS="4",
                        ELAN_HOME=str(root / "work/elan"), LC_ALL="C")
             env["PATH"] = str(root / "work/elan/bin") + os.pathsep + env.get("PATH", "")
+            if lane == "embedded-probe":
+                toolchain = root / "work/rustup/toolchains/nightly-2026-03-16-aarch64-apple-darwin/bin"
+                env["PATH"] = str(toolchain) + os.pathsep + env["PATH"]
+                env["RUSTUP_HOME"] = str(root / "work/rustup")
+                env["CARGO_TARGET_DIR"] = str(root / "work/embedded-target")
+                version = subprocess.check_output(["rustc", "--version"], env=env, text=True).strip()
+                if version != "rustc 1.96.0-nightly (1e2183119 2026-03-15)":
+                    raise ValueError("Embedded probe toolchain differs from firmware baseline")
+                report["toolchain"] = version
             report["environment"] = {key: env[key] for key in ("LC_ALL", "CARGO_BUILD_JOBS")}
             for index, (cwd, command, timeout, minimum_tests) in enumerate(lane_commands(root, lane)):
                 print(f"Running {lane}: {' '.join(command)}", flush=True)
@@ -157,6 +203,8 @@ def run_lane(root, lane):
                 # Detect changes made during verification, not only before it.
                 for name in required:
                     baseline(root, name, manifest["repositories"][name]["revision"])
+                if local_inputs(root, lane) != report["local_inputs_sha256"]:
+                    raise ValueError("Local verification inputs changed during execution")
                 report["passed"] = True
         except (OSError, ValueError, subprocess.SubprocessError) as error:
             report["error"] = str(error)
@@ -170,7 +218,7 @@ def run_lane(root, lane):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("lane", choices=("project", "ironwood-source", "pczt", "lean"))
+    parser.add_argument("lane", choices=("project", "ironwood-source", "pczt", "lean", "approval", "approval-proofs", "embedded-probe"))
     args = parser.parse_args()
     try:
         sys.exit(run_lane(ROOT, args.lane))

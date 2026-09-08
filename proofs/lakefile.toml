@@ -1,0 +1,12 @@
+name = "IronwoodApprovalProofs"
+version = "0.1.0"
+defaultTargets = ["Approval", "AxiomCheck"]
+
+[leanOptions]
+autoImplicit = false
+
+[[lean_lib]]
+name = "Approval"
+
+[[lean_lib]]
+name = "AxiomCheck"

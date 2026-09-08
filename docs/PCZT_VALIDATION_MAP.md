@@ -1,7 +1,9 @@
 # PCZT validation map for the device contract
 
-Preliminary source map for M1.1, recorded 2026-09-08. This is not an implemented
-validator, a complete approval contract, or a new upstream vulnerability report.
+Source map for M1.1, recorded 2026-09-08. The experimental
+[profile 1 contract](APPROVAL_CONTRACT.md), [implemented host conformance adapter](APPROVAL_RESULTS.md)
+and [structural proofs](APPROVAL_PROOFS.md) now cover a restricted Ironwood-only
+profile. This map is not a new upstream vulnerability report.
 The APIs intentionally split responsibilities between transaction construction,
 verification and application policy.
 
@@ -63,7 +65,7 @@ not itself a consensus transaction field. Branch ID, transaction version,
 version-group ID, expiry and the application's selected network cannot be
 replaced by an untrusted network label.
 
-## Remaining before M1.1 is complete
+## Scope beyond experimental profile 1
 
 - Enumerate every accepted wire field and the device-side representation, including
   the version-2 ciphertext/memo representation and all relevant optional fields.
@@ -78,6 +80,6 @@ replaced by an untrusted network label.
 - Define request/session identity, cancellation, retry, replay and partial-signature
   behavior; connect this state machine to positive and hostile-host fixtures.
 
-No new key-handling or signing implementation should be based on this preliminary
-map alone. The immediate next deliverable is the complete contract and its actual
-PCZT conformance harness.
+Key handling and signing follow the explicit profile 1 contract, not this API map
+alone. Mixed pools, compact/memo wire encoding, general memos/addresses, measured
+device bounds and batch transport require contract extensions before acceptance.

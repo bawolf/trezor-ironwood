@@ -1,0 +1,23 @@
+[package]
+name = "ironwood-resource-fixtures"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+publish = false
+
+# Keep builder and oracle features out of the separate measurement workspace.
+[workspace]
+resolver = "3"
+
+[dependencies]
+ironwood-approval = { path = "../../crates/approval" }
+pczt = { path = "../../upstream/librustzcash/pczt", features = ["signer", "io-finalizer", "zcp-builder"] }
+orchard = { version = "=0.15.3", default-features = false }
+zcash_primitives = { path = "../../upstream/librustzcash/zcash_primitives", default-features = false }
+zcash_protocol = { path = "../../upstream/librustzcash/components/zcash_protocol", features = ["local-consensus"] }
+zcash_note_encryption = { version = "=0.4.1", default-features = false }
+rand_core = "=0.6.4"
+rand_chacha = "=0.3.1"
+serde = { version = "=1.0.228", features = ["derive"] }
+serde_json = "=1.0.145"
+sha2 = "=0.10.8"

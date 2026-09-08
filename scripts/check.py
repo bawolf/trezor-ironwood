@@ -111,7 +111,7 @@ def run_command(command, cwd, env, logfile, timeout, minimum_tests=0):
 def lane_commands(root, lane):
     upstream = root / "upstream"
     if lane == "project":
-        return [(root, [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"], 120, 16)]
+        return [(root, [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"], 120, 27)]
     if lane == "ironwood-source":
         return [(upstream / "ironwood", ["bash", "scripts/" + name + ".sh"], 180, 0)
                 for name in SOURCE_CHECKS]

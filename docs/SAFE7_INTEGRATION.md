@@ -1,9 +1,10 @@
 # Safe 7 integration constraints for M2.1b
 
-Source-only preparation, inspected 2026-09-08 UTC. The next project should measure
-the **actual `ironwood-approval` core**, then decide whether a bounded firmware
-experiment fits. No available approval RAM, flash or latency budget is established
-by this document. Profile 1 remains synthetic regtest, Ironwood only.
+Source map inspected 2026-09-08 UTC. [Host characterization](RESOURCE_RESULTS.md)
+has since passed; target link/runtime and stack evidence remain pending. The plan
+below separates those evidence gates for the actual `ironwood-approval` core.
+No available approval RAM, flash or latency budget is established by this document.
+Profile 1 remains synthetic regtest, Ironwood only.
 
 ## Source identity
 

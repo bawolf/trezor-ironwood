@@ -2017,5 +2017,464 @@
         "log_sha256": "535f6bfb2fe5ed78a0a536df7835f0fa5b497505508b5eb9a7ac947b86675870"
       }
     ]
+  },
+  {
+    "lane": "resources",
+    "started_utc": "20260908T080145Z",
+    "passed": true,
+    "revisions": {
+      "librustzcash": "5e770a91ad0d11938dbc713e7889e4aa8009266c"
+    },
+    "local_inputs_sha256": {
+      "Cargo.toml": "28d8bb1e88c25ed8cb15cdbff890e993dadd5538bff02741fb72d68c4d69b6b4",
+      "scripts/resource_check.py": "7a3384b9079ee19e2fd5d929235b5eca23545073f44e05cfe75f55b813b1231e",
+      "scripts/check.py": "c92d41e32d152db64df8f9cebc6eeb2c2d0786b5cb398b51f0e419d7d0311f63",
+      "scripts/check_approval_dependencies.py": "8630bad3e30f035e3993fe9cc29d2e07d6ca6e1b03a4831d44b994657ae5808f",
+      "tests/test_resources.py": "bb17acc268c81c7c5e9573fe0ae1a934ba7fd3933c5ed647cc350b707a6c4e7f",
+      "upstreams.lock.json": "9fe6a4402fcebd7eb4908e1b9b560783caff4a69fd6eec33ed7c3f49e67f957b",
+      "crates/approval/Cargo.toml": "ea0fbb0a9913e230cb8c83bbd7bbe74869dad04957c627d4809b2a47c86447e8",
+      "crates/approval/tests/common/mod.rs": "ad225b031d9dc954a82d7046d1766bbf8ae011f5f652117e525c7909268c8c53",
+      "crates/approval/src/effects.rs": "1eed05b5b9c8831577f564d071d46d25873530a96df5890a24b3ee33e870f1ef",
+      "crates/approval/src/lib.rs": "3500810c65dd3550bca2efe84248b38d3e725755eccd95cc3f48b061bbb6d5c8",
+      "crates/approval/src/wire.rs": "5b05163b419f90d861f1ba5432c62ce0a5690bc747d53c4a9a863804b40413ce",
+      "experiments/resource-fixtures/Cargo.toml": "6a742067051c60271652ec5b416b144d8779211d4ba227a6f74264076a80a87b",
+      "experiments/resource-fixtures/Cargo.lock": "20a0ef5b6c69b3ecd7b4dab9603ee2f8382ee4f496c7b5a0995a9dbdba553385",
+      "experiments/resource-fixtures/src/main.rs": "a7a7bdbd3a8bf18cd6d4a721cb2ba96088f22873da209c02b0bc4b49af4a4ad3",
+      "experiments/resource-probe/Cargo.toml": "bc15532a013722911fe297e1e76ec2cae881e332f2cc08833d779ce817b8609f",
+      "experiments/resource-probe/Cargo.lock": "18a24b69cc4e7f82e2875e7e1bb1acfd6f5c520b92997f16e7363892f5efd894",
+      "experiments/resource-probe/src/main.rs": "48a3a0cd0706c20553f937554970510ef9c4e46a408a7c6b73df02b33c641319"
+    },
+    "environment": {
+      "CARGO_BUILD_JOBS": "4",
+      "LC_ALL": "C"
+    },
+    "binaries_sha256": {
+      "resource-fixtures": "111506554978e22291e75ab41fa7a4e6e41227eb8ec7db7ab716734006097823",
+      "resource-probe": "bef891a10217cd2fa64373abfe6d74669d63c9e9b6422ca0384e1ab9e8e45e41"
+    },
+    "measured_features": [
+      {
+        "name": "blake2b_simd",
+        "version": "1.0.2",
+        "features": []
+      },
+      {
+        "name": "ironwood-approval",
+        "version": "0.1.0",
+        "features": []
+      },
+      {
+        "name": "orchard",
+        "version": "0.15.3",
+        "features": []
+      },
+      {
+        "name": "pczt",
+        "version": "0.9.3",
+        "features": [
+          "orchard"
+        ]
+      },
+      {
+        "name": "rand_chacha",
+        "version": "0.3.1",
+        "features": []
+      },
+      {
+        "name": "rand_core",
+        "version": "0.6.4",
+        "features": []
+      },
+      {
+        "name": "sapling-crypto",
+        "version": "0.7.0",
+        "features": []
+      },
+      {
+        "name": "serde",
+        "version": "1.0.228",
+        "features": [
+          "alloc",
+          "derive",
+          "serde_derive"
+        ]
+      },
+      {
+        "name": "serde_core",
+        "version": "1.0.228",
+        "features": [
+          "alloc",
+          "result"
+        ]
+      },
+      {
+        "name": "serde_json",
+        "version": "1.0.145",
+        "features": [
+          "alloc"
+        ]
+      },
+      {
+        "name": "zcash_note_encryption",
+        "version": "0.4.1",
+        "features": [
+          "alloc",
+          "default",
+          "pre-zip-212"
+        ]
+      },
+      {
+        "name": "zcash_primitives",
+        "version": "0.30.1",
+        "features": []
+      },
+      {
+        "name": "zcash_protocol",
+        "version": "0.10.5",
+        "features": []
+      },
+      {
+        "name": "zcash_transparent",
+        "version": "0.10.0",
+        "features": []
+      }
+    ],
+    "artifacts_sha256": {
+      "fixtures/outputs-3.pczt": "b6c4540f30698ddf97431ec4a2dbec519a82d99fef16bc9f99ae92271ab9f1f1",
+      "fixtures/inputs-6.pczt": "edbb2bd85c0c5dc7e8b33620d9c5993a46e50fc75e1d9361114cefa303d7bb70",
+      "fixtures/outputs-2.pczt": "f2bf9d8e782b263191633535792e8d2a124b6b6f383acb9088334d5cdb33586a",
+      "fixtures/inputs-7.pczt": "beab9a234833f88b6977949d50804169c5e445a62c28f925cd630093e5491b35",
+      "fixtures/outputs-5.pczt": "3c387cb5845a884c780b71b08ef48aa81a5e3ca3c42915052b305e00d2c3d443",
+      "fixtures/outputs-4.pczt": "3907e3409fcb09873c2a950c37b59e9118b48e2ccb88bbab285d5e4d94f042b2",
+      "fixtures/outputs-8.pczt": "e5e7906557a95680b16709d2e923e68e343d9f572713a1ac65909eddb11ebe87",
+      "fixtures/inputs-2.pczt": "81c90aa4154e1d5c5de537d270ca64f9746ed4040663f0bc4abd02b5c630352e",
+      "fixtures/outputs-7.pczt": "179c04b826bccd8a155e5c35a1817b3ddbb6373bba7331528a13e03e1a011bec",
+      "fixtures/inputs-3.pczt": "394e25dff71858d85192dfa29fef3cdaaa1bb7624e27a8471d5a8d3e9d83b1f9",
+      "fixtures/outputs-6.pczt": "8561ebc5f7457f0c0a915f506d663bf132fbaffd5a030c9e894b9b11316bee97",
+      "fixtures/manifest.json": "c70a27a4c30f3d1a39ad7eb8559cd2e7d3f76b6f43eb9cfbc4aee6de29be4137",
+      "fixtures/inputs-4.pczt": "080fba35b05570b917f372cb0dbd743c863aee784940811788aeeb70031aff53",
+      "fixtures/outputs-1.pczt": "1f357ad54256243f4b675da10f167308bbeeb4211d42ca444318ee397fd1bd51",
+      "fixtures/inputs-8.pczt": "77b5bcc2d898c7076a67461a0814a01119e8bd9f33a583c383e8f8d1dd859193",
+      "fixtures/inputs-5.pczt": "28903d7853ac79dcbcf46cc0dd0a089f93387a5a304b9faa352f494880b63e3e",
+      "signed/outputs-3.pczt": "ad2b5309b5a4b290578dbbfe5fed036ef0a28bea05f74b42264eaf2b9aac3e70",
+      "signed/inputs-6.pczt": "c056530706ee3d92795e230106f6702765040a317cef451d367703018481638a",
+      "signed/outputs-2.pczt": "62d650ae448040782f139a1496264a5f45be27ea0dae3344346bd2df6b47bcd3",
+      "signed/inputs-7.pczt": "7979b70b47b843a6fd3938bb9ced3f8b97a4e59782b7943213afe8d8a775fa6f",
+      "signed/outputs-5.pczt": "e57811e3923069e757c2d0518bafaf0d42e8e01a0e1de7c1a43bd9bee4aaf718",
+      "signed/outputs-4.pczt": "d6622503cc16787a2aa8226b227b13255becc0eecdf6724391be626ccbf27d44",
+      "signed/outputs-8.pczt": "8c98510b30f3cb6082ff1220e5721b0eac05f6bb557180674cadf82ddca21161",
+      "signed/inputs-2.pczt": "f499de162d7df2e6e1df8cfcc09f8b43bf2200bed72a408e93e6a499a9c3c9f9",
+      "signed/outputs-7.pczt": "c5f631f5b02b9a4598aff660932593ac5cf5c445eb8a4b432df57cdfc1433e69",
+      "signed/inputs-3.pczt": "cb047d434fe86e9fd6136545904fa8e7198cf94a83a0f49514372e92da14225b",
+      "signed/outputs-6.pczt": "78028ebad87e12efb4ad2918b5af4c57d5ffe5370eab06ab265e3119d929d9f0",
+      "signed/inputs-4.pczt": "becdadb28eda87bf8015b8f7bc638899b669adcd64b3025d3601e4cd42f5c2f7",
+      "signed/outputs-1.pczt": "18fc63e48d43ff623047791fb62ddfdcc9c89297858fe4d053aed80ba45c64fb",
+      "signed/inputs-8.pczt": "8849d3a33efa3f66a13f372d82cb270e60968850346bb424d97769cfc8ac2f75",
+      "signed/inputs-5.pczt": "eee6c4142ff535b27482e341907aa1723524d50a12c67acff967656209ea6014"
+    },
+    "finished_utc": "2026-09-08T08:02:29.469885+00:00",
+    "commands": [
+      {
+        "command": [
+          "rustc",
+          "--version",
+          "--verbose"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.49,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "b61e2501db235c3110b8c1751b4fa144e7e28bfff54ba9471e9dac5f83880dab"
+      },
+      {
+        "command": [
+          "sysctl",
+          "-n",
+          "machdep.cpu.brand_string",
+          "hw.memsize"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.02,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "470ba8b6475dbd3d2c9703acfabe7cc760f8b53342ecb37f3066aee63e9d9a5e"
+      },
+      {
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "scripts/check_approval_dependencies.py",
+          "$REPO/experiments/resource-fixtures/Cargo.lock"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.31,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "d6eaa9010397a603bcf9caf4ccf79265e77ad0ad750732d325759cc92a609942"
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--manifest-path",
+          "$REPO/experiments/resource-fixtures/Cargo.toml",
+          "--check"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.68,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "--manifest-path",
+          "$REPO/experiments/resource-fixtures/Cargo.toml",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 1.53,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "d7fc6316e8c70ea9380c8f4e33060dedf7beaa40d36089af9b0511f9531f4fa3"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--release",
+          "--locked",
+          "--offline",
+          "--manifest-path",
+          "$REPO/experiments/resource-fixtures/Cargo.toml",
+          "--",
+          "--test-threads=1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 18.82,
+        "tests_passed": 3,
+        "minimum_tests": 3,
+        "passed": true,
+        "log_sha256": "257a7bc1c1783583dfb689e82b59dcdc05f1987dcefd8f0f45f687993dc15161"
+      },
+      {
+        "command": [
+          "cargo",
+          "build",
+          "--release",
+          "--locked",
+          "--offline",
+          "--manifest-path",
+          "$REPO/experiments/resource-fixtures/Cargo.toml"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.62,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "d67e6aeb314076887abbdd70052690bcef3eb992bb51ee64bfd6cddc6d1c55df"
+      },
+      {
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "scripts/check_approval_dependencies.py",
+          "$REPO/experiments/resource-probe/Cargo.lock"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.58,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "3055018f7bfed94d6fbdc7d27962b7a6d58d77fa843f29683ddb447e3b2aa842"
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--manifest-path",
+          "$REPO/experiments/resource-probe/Cargo.toml",
+          "--check"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.43,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "--manifest-path",
+          "$REPO/experiments/resource-probe/Cargo.toml",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.85,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "7b89f9d8b45896e66051e0a6a0854f36f5acdc9e450391ac977c70c47d4c66e3"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--release",
+          "--locked",
+          "--offline",
+          "--manifest-path",
+          "$REPO/experiments/resource-probe/Cargo.toml",
+          "--",
+          "--test-threads=1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.77,
+        "tests_passed": 3,
+        "minimum_tests": 3,
+        "passed": true,
+        "log_sha256": "993bd7b60f2855e9734be5191db54c8d8aa9a0effef5650673401acd188cc7f6"
+      },
+      {
+        "command": [
+          "cargo",
+          "build",
+          "--release",
+          "--locked",
+          "--offline",
+          "--manifest-path",
+          "$REPO/experiments/resource-probe/Cargo.toml"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.36,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "79ebf1c9ff5e05f48fb0c6ea52b184a87bded725e977ad03d405ba503c7f18b6"
+      },
+      {
+        "command": [
+          "cargo",
+          "metadata",
+          "--format-version=1",
+          "--locked",
+          "--offline",
+          "--manifest-path",
+          "$REPO/experiments/resource-probe/Cargo.toml"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.4,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "b5c85ed2659bfd677de42d5699cbfbae7a11fd4673b400447f462ddcf4df1a04"
+      },
+      {
+        "command": [
+          "$REPO/work/resource-target/release/ironwood-resource-fixtures",
+          "generate",
+          "$REPO/work/runs/20260908T080145Z-resources-71a70bee/fixtures"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 5.05,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "cac1e2750f483ab31ec7ba59a98bc004d307f3a165f084b2e4483587c621f66f"
+      },
+      {
+        "command": [
+          "$REPO/work/resource-target/release/resource-probe",
+          "$REPO/work/runs/20260908T080145Z-resources-71a70bee/fixtures",
+          "$REPO/work/runs/20260908T080145Z-resources-71a70bee/signed"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 9.79,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "dc573d3e8a7abf755a3fb5fd3ef81bfdeddbddda3675262df868aeeea67e1492"
+      },
+      {
+        "command": [
+          "$REPO/work/resource-target/release/ironwood-resource-fixtures",
+          "verify",
+          "$REPO/work/runs/20260908T080145Z-resources-71a70bee/fixtures",
+          "$REPO/work/runs/20260908T080145Z-resources-71a70bee/signed"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 2.68,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "fb8ac38a184aed17871d73599f4895fbb01edbcfafca6d9773f6d731db1a2ffe"
+      }
+    ],
+    "measurements_sha256": "7e27855c3363478067041ecd2baa4fd3422c3a136eb881fadd5e44623bf3b22d"
+  },
+  {
+    "lane": "project",
+    "started_utc": "20260908T080145Z",
+    "revisions": {},
+    "passed": true,
+    "local_inputs_sha256": {},
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "finished_utc": "2026-09-08T08:01:48.998360+00:00",
+    "commands": [
+      {
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 3.19,
+        "tests_passed": 27,
+        "minimum_tests": 27,
+        "passed": true,
+        "log_sha256": "16d8e0ee2c2fb51f93b1c2c820f1343b6318b65cb785162d214cc127edfe726c"
+      }
+    ]
   }
 ]

@@ -14,6 +14,7 @@ Trezor shielded signer, and no firmware is ready for use with funds.**
 - [Trezor shielded PR reuse assessment](docs/TREZOR_REUSE.md)
 - [Safe 7 emulator setup and evidence](docs/FIRMWARE_BASELINE.md)
 - [Approval contract](docs/APPROVAL_CONTRACT.md) and [conformance results](docs/APPROVAL_RESULTS.md)
+- [Synthetic resource measurements](docs/RESOURCE_RESULTS.md) and [Safe 7 constraints](docs/SAFE7_INTEGRATION.md)
 - [Approval/accounting proofs and boundaries](docs/APPROVAL_PROOFS.md)
 - [PCZT validation obligations](docs/PCZT_VALIDATION_MAP.md)
 - [Backlog and acceptance criteria](docs/BACKLOG.md)
@@ -32,6 +33,7 @@ python3 scripts/bootstrap.py
 python3 scripts/check.py ironwood-source
 python3 scripts/check.py pczt
 python3 scripts/check.py approval
+python3 scripts/resource_check.py
 python3 scripts/check.py approval-proofs
 python3 scripts/check.py lean
 ```

@@ -24,7 +24,7 @@ Development branch: `codex/verification-and-reuse`.
 
 | Check | Result |
 | --- | --- |
-| Project failure-path tests | 16 passed, including emulator and axiom-census false-success guards |
+| Project failure-path tests | 27 passed, including resource-report, emulator and axiom-census false-success guards |
 | Upstream PCZT library tests | 66 passed, none failed/ignored/filtered |
 | Upstream Ironwood integration tests | 4 passed |
 | Upstream firmware wire-compatibility tests | 4 passed; Keystone fixture, not Trezor |
@@ -33,12 +33,14 @@ Development branch: `codex/verification-and-reuse`.
 | Host dependency identity | All 133 registry packages match upstream versions/checksums |
 | Local approval/accounting Lean model | 11 named theorems; both default targets, census and exact axiom guards passed |
 | Safe 7 processor compatibility | Complete `no_std` core passed on the actual Rust MCU target; 126 registry packages match upstream |
+| Host resource characterization | 15 layouts, 75 measured runs, 43 independently verified new signatures; all teardowns returned to baseline |
 | Current Safe 7 emulator | Nine existing transparent Zcash/v5 tests passed, no skips/failures |
 | Full upstream Lean proof build | Passed: all six default targets, warning-fatal build and unchanged upstream axiom/census gates; 3,915 jobs |
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260908T064914Z-project-1920358c/report.json`.
+- Project: `work/runs/20260908T080145Z-project-b14450a0/report.json`.
+- Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
 - Local proofs: `work/runs/20260908T063118Z-approval-proofs-010aa368/report.json`.
 - Embedded probe: `work/runs/20260908T064723Z-embedded-probe-313ddb21/report.json`.
@@ -68,8 +70,15 @@ fully verified PCZT; device entropy, allocation and trusted UI are still require
 
 The [Safe 7 source map](SAFE7_INTEGRATION.md) identifies 800 KiB shared application
 RAM, a 32 KiB native stack and two 8,704-byte THP buffers. These are shared firmware
-constraints, not an approval-core allocation allowance. M2.1b is the next bounded
-project: measure 15 synthetic layouts, then determine target link/runtime fit.
+constraints, not an approval-core allocation allowance. The first M2.1b gate,
+[host resource characterization](RESOURCE_RESULTS.md), is complete: the largest
+observed attributable peak was 80,821 bytes including the raw input. Separate
+fixture/oracle and measurement agents implemented it; Fable and independent
+readability reviews checked the change and its evidence runner.
+
+The next bounded project is concrete MCU code generation and individual function
+stack-frame inspection. A separate worker owns that experiment. It cannot establish
+whole-call-chain stack safety or target link/runtime fit, which remain open.
 M2.1c covers trusted review/consent and M2.1d covers bounded transport/signing.
 
 The local proofs have a documented correspondence to Rust, not machine-checked
@@ -91,8 +100,8 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Fable reported USD 7.212187 at list prices through the
-  existing Max subscription; USD 7.22 is conservatively reserved in the ledger.
+  subscription purchased. Four Fable review runs reported USD 11.374857 at list prices through the
+  existing Max subscription; USD 11.40 is conservatively reserved in the ledger.
   Actual subscription billing and Codex dollar usage are not observed here.
 
 These milestones do not complete the shielded-support project or establish that

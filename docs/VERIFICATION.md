@@ -64,7 +64,9 @@ Freeze the reviewed source, record its hashes and the base revision, and preserv
 the review result under ignored `work/reviews/`. Save a concise finding/resolution
 record in `docs/reviews/`. Any later substantive change needs review of that delta.
 Run Fable through the existing Claude Code subscription with `--model fable`, a
-per-run budget limit and read-only tools; do not silently substitute another model.
+per-run budget limit and read-only tools. The user accepts an Opus fallback when
+Claude routes the request there: record the requested and actual model, and never
+label the substitute as Fable.
 Record reported model usage separately from actual billing. Reviews are evidence
 of scrutiny, not proof of cryptographic safety or approval for production funds.
 
@@ -72,5 +74,5 @@ The [unchanged Safe 7 target baseline](TARGET_FIRMWARE_BASELINE.md) establishes
 linked heap/stack/flash regions under the official hardware test preset. Those
 regions precede runtime occupancy; they do not establish allocation or stack fit
 for the separate approval core. The [paired allocator image](TARGET_ALLOCATOR_LINK.md) has linked with a 4 KiB
-compile-only arena. It has not executed; final matching review and runtime
-integration remain pending.
+compile-only arena. It has not executed. Final Fable5.1 and clarity reviews passed for its compile-only
+scope; runtime integration remains pending.

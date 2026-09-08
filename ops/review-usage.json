@@ -792,5 +792,53 @@
         "costBasis": "list"
       }
     }
+  },
+  {
+    "review": "linked-stack-path-fable",
+    "date_utc": "2026-09-08",
+    "requested_model": "fable[1m]",
+    "model": "claude-opus-5",
+    "reported_models": [
+      "claude-opus-5"
+    ],
+    "fable_identity_confirmed": false,
+    "review_status": "additional_opus_review_matching_fable_pending",
+    "process_note": "Response asserts a terminal warning, but tools were disabled and no such event is supported by the tool record. Only its supplied-material arithmetic review is retained; no on-disk review is claimed.",
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not an observed invoice",
+    "reported_total_usd": 0.77544575,
+    "run_limit_usd": 3,
+    "billed_charge_observed": false,
+    "result_sha256": "a41361d55e0eb4b4cae32979f43c3b45a6d6c6e096c2bca2a5561e28a0215550",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 43282,
+        "outputTokens": 17,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.043367,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-opus-5": {
+        "inputTokens": 2,
+        "outputTokens": 16103,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 52719,
+        "webSearchRequests": 0,
+        "costUSD": 0.73207875,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 14609,
+        "canonicalModel": "claude-opus-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    }
   }
 ]

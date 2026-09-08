@@ -16,7 +16,7 @@ Trezor shielded signer, and no firmware is ready for use with funds.**
 - [Safe 7 target firmware memory baseline](docs/TARGET_FIRMWARE_BASELINE.md)
 - [Compile-only allocator link](docs/TARGET_ALLOCATOR_LINK.md) and [native arena experiment](experiments/arena-probe/README.md)
 - [Approval contract](docs/APPROVAL_CONTRACT.md) and [conformance results](docs/APPROVAL_RESULTS.md)
-- [Target code generation and stack evidence](docs/TARGET_CODEGEN_RESULTS.md)
+- [Linked Safe 7 stack concern](docs/LINKED_STACK_PATH.md) and [target code generation](docs/TARGET_CODEGEN_RESULTS.md)
 - [Synthetic resource measurements](docs/RESOURCE_RESULTS.md) and [Safe 7 constraints](docs/SAFE7_INTEGRATION.md)
 - [Approval/accounting proofs and boundaries](docs/APPROVAL_PROOFS.md)
 - [PCZT validation obligations](docs/PCZT_VALIDATION_MAP.md)

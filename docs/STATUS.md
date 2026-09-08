@@ -42,7 +42,7 @@ Development branch: `codex/verification-and-reuse`.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260908T185038Z-project-f124e674/report.json`.
+- Project: `work/runs/20260908T191733Z-project-6b3d5d29/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
@@ -93,8 +93,19 @@ passes its synthetic ownership and signature gates; its [review record](reviews/
 tracks final adversarial acceptance. The [separate compile-only allocator image](TARGET_ALLOCATOR_LINK.md)
 also linked: 4,208 additional BSS bytes and 265,216 additional flash bytes. Its
 4 KiB diagnostic arena cannot run the signing lifecycle. The clarity correction produces byte-identical firmware; the secure-monitor data
-relocations are explained. Final Fable5.1 and clarity reviews found no blocking issue. Separate agents are
-building an emulator cold-start gate and tracing a linked validation stack path.
+relocations are explained. Final Fable5.1 and clarity reviews found no blocking issue. [The linked validation path](LINKED_STACK_PATH.md) has a conditional 40,776-byte
+frame subtotal, above the 32 KiB reservation; no actual overflow or executable
+input path is claimed. Its documented Opus fallback review is accepted.
+
+The next milestone is one actual synthetic PCZT verified, reviewed, approved and
+signed in the Safe 7 emulator. Parallel implementation now targets stack reduction,
+the Rust/MicroPython bridge, and trusted review screens. Startup diagnostics are a
+secondary bounded task: the new cold-start emulator image builds, but the ordinary
+Tropic launcher twice missed its unchanged ten-second readiness deadline, before
+traced startup or idle began. A lighter separate diagnostic became ready in 3.83
+seconds; that does not explain the original failure or count as emulator acceptance.
+The clarity review also found three false-pass risks in the unexecuted debugger
+harness; corrections are being prepared in a separate evidence directory.
 M2.1c covers trusted review/consent and M2.1d covers bounded transport/signing.
 
 The local proofs have a documented correspondence to Rust, not machine-checked
@@ -116,11 +127,12 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Eighteen completed Claude Code review requests reported
-  USD 30.4798955 at list prices; USD 30.58 is reserved. Thirteen report Fable by
+  subscription purchased. Nineteen completed Claude Code review requests reported
+  USD 31.25534125 at list prices; USD 31.36 is reserved. Thirteen report Fable by
   name, including the final allocator/link reviews and historical codegen
   replacement (`claude-fable-5-1`). Earlier substitutions and authentication
-  failures remain recorded. Actual model identities are checked on every result.
+  failures remain recorded. The user accepts documented Opus fallbacks; actual model identities are checked
+  on every result and substitutes are never labeled Fable.
   Actual subscription billing and Codex dollar usage are not observed here.
 
 These milestones do not complete the shielded-support project or establish that

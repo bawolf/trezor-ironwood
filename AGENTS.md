@@ -43,6 +43,8 @@ Review each proposed change twice: an adversarial correctness review using Claud
 Keep code clear, concise, and directly understandable. Prefer precise names and
 small, necessary abstractions; remove unused options, redundant helpers, and
 indirection without weakening validation. Record findings and their resolutions.
+The user accepts a documented Opus fallback when Claude routes a Fable request
+to Opus. Check the actual model in the result and record the substitution.
 Never label a substitute review as a Fable run. These local reviews do not authorize
 publishing a PR or contacting upstream maintainers.
 

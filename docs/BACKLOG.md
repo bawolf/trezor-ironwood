@@ -14,8 +14,8 @@ without a change, a new failure, or a specific unresolved concern.
 | M1.3 | Pending evidence | Prepare first upstream proposal | One small useful change, reproducible before/after evidence, appropriate destination and local issue text. Send only after authorization; satisfy maintainer acknowledgment before PR. |
 | M2.1 | In progress: allocator and linked/runtime preparation after target diagnostics | Prototype Safe 7 shielded review/sign flow | Synthetic receive/send succeeds in emulator; hostile host and cancel/retry tests pass; accurate display and bounded memory measured. |
 | M2.1a | Complete for experimental profile 1 | Compile portable approval core for Safe 7 target | Complete default-features-disabled core, upstream digest/signature equivalence, entropy interruption tests and independent adversarial/readability reviews. |
-| M2.1b | Native arena and compile-only target link passed; final reviews, runtime and whole-stack pending | Measure synthetic approval resource use | Record reproducible allocation/peak-heap and latency results for 1–8 actions, identify copy/stack costs, compare against source-defined device budgets; keep host measurements distinct from MCU results. |
-| M2.1c | Pending resource evidence | Implement trusted emulator review and consent | Show every payment/change/fee from the immutable projection, bind physical UI events to its token, test cancellation and replacement; no transport-triggered approval. |
+| M2.1b | Native arena and compile-only target link reviewed; linked stack reduction and runtime pending | Measure synthetic approval resource use | Record reproducible allocation/peak-heap and latency results for 1–8 actions, identify copy/stack costs, compare against source-defined device budgets; keep host measurements distinct from MCU results. |
+| M2.1c | Review-screen implementation in parallel; integration acceptance pending | Implement trusted emulator review and consent | Show every payment/change/fee from the immutable projection, bind physical UI events to its token, test cancellation and replacement; no transport-triggered approval. |
 | M2.1d | Pending trusted review | Integrate bounded emulator transport and signing | Fragmentation/size limits, disconnect/replay/failure tests and actual synthetic signed response; no production key-store or physical-device use. |
 | M2.2 | In progress: eleven host-model proofs pass; firmware refinement pending | Prove selected approval/accounting properties | Non-vacuous Lean statements, warning-fatal build, expected axioms only, implementation correspondence documented and reviewed. |
 | M3 | Later | Independent review, hardware and release path | Cryptographic/embedded review, device matrix, dedicated hardware tests, recovery/privacy UX and upstream acceptance. |
@@ -40,3 +40,12 @@ and the source-defined Safe 7 resource map (`SAFE7_INTEGRATION.md`).
 Claude Code with Fable provides the requested separate adversarial change review.
 Host memory/timing evidence is recorded in `RESOURCE_RESULTS.md`. Device linking,
 native stack, shared runtime memory, trusted UI and entropy integration remain pending.
+
+## Immediate development focus
+
+Keep the critical path active: one synthetic PCZT must reach verified review,
+trusted confirmation and signing in the Safe 7 emulator. Work in parallel on the
+linked stack concern, a minimal Rust/MicroPython bridge and review screens over
+the existing verified projection. Baseline audits are complete for their stated
+scopes. Further diagnostics should answer a concrete integration question; a
+passing startup check alone is not the next product milestone.

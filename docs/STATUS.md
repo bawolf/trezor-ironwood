@@ -34,6 +34,7 @@ Development branch: `codex/verification-and-reuse`.
 | Local approval/accounting Lean model | 11 named theorems; both default targets, census and exact axiom guards passed |
 | Safe 7 processor compatibility | Complete `no_std` core passed on the actual Rust MCU target; 126 registry packages match upstream |
 | Host resource characterization | 15 layouts, 75 measured runs, 43 independently verified new signatures; all teardowns returned to baseline |
+| Concrete target code generation | Actual Thumb objects; 3,180 individual frame entries; compiled optz comparison also passed; no linked/runtime fit claim |
 | Current Safe 7 emulator | Nine existing transparent Zcash/v5 tests passed, no skips/failures |
 | Full upstream Lean proof build | Passed: all six default targets, warning-fatal build and unchanged upstream axiom/census gates; 3,915 jobs |
 
@@ -76,9 +77,12 @@ observed attributable peak was 80,821 bytes including the raw input. Separate
 fixture/oracle and measurement agents implemented it; Fable and independent
 readability reviews checked the change and its evidence runner.
 
-The next bounded project is concrete MCU code generation and individual function
-stack-frame inspection. A separate worker owns that experiment. It cannot establish
-whole-call-chain stack safety or target link/runtime fit, which remain open.
+[Concrete target code generation](TARGET_CODEGEN_RESULTS.md) and its separate
+Fable/readability reviews are complete. A traced ordinary-call path totals 33,000
+frame bytes in the opt3/noLTO experiment, above the source-defined 32 KiB stack.
+The identical-source size-optimized build changes the call structure, so no final
+stack-fit conclusion follows. The next project prepares an explicit allocator
+boundary and concrete linked/runtime experiment under firmware settings.
 M2.1c covers trusted review/consent and M2.1d covers bounded transport/signing.
 
 The local proofs have a documented correspondence to Rust, not machine-checked
@@ -100,8 +104,8 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Four Fable review runs reported USD 11.374857 at list prices through the
-  existing Max subscription; USD 11.40 is conservatively reserved in the ledger.
+  subscription purchased. Six Fable review runs reported USD 14.0286585 at list prices through the
+  existing Max subscription; USD 14.07 is conservatively reserved in the ledger.
   Actual subscription billing and Codex dollar usage are not observed here.
 
 These milestones do not complete the shielded-support project or establish that

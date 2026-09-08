@@ -154,5 +154,96 @@
         "costBasis": "list"
       }
     }
+  },
+  {
+    "review": "target-codegen-fable",
+    "date_utc": "2026-09-08",
+    "model": "claude-fable-5",
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not an observed invoice",
+    "reported_total_usd": 0.9803385,
+    "run_limit_usd": 5,
+    "billed_charge_observed": false,
+    "result_sha256": "c152e011605d047394c4f734eb2e124b4129ac83b493b4c578fca4f2aaef6378",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 1339,
+        "outputTokens": 20,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.001439,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-opus-5": {
+        "inputTokens": 2,
+        "outputTokens": 367,
+        "cacheReadInputTokens": 2804,
+        "cacheCreationInputTokens": 3678,
+        "webSearchRequests": 0,
+        "costUSD": 0.03357449999999999,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "canonicalModel": "claude-opus-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-opus-4-8": {
+        "inputTokens": 6,
+        "outputTokens": 11094,
+        "cacheReadInputTokens": 38590,
+        "cacheCreationInputTokens": 64865,
+        "webSearchRequests": 0,
+        "costUSD": 0.945325,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "canonicalModel": "claude-opus-4-8",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    }
+  },
+  {
+    "review": "target-codegen-size-fable",
+    "date_utc": "2026-09-08",
+    "model": "claude-fable-5",
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not an observed invoice",
+    "reported_total_usd": 1.673463,
+    "run_limit_usd": 3,
+    "billed_charge_observed": false,
+    "result_sha256": "96ca7b343e3a8c273025ccc7a2ba5db9804ab05288a36b99a8f6769a5ef6917b",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 1209,
+        "outputTokens": 16,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.001289,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-fable-5": {
+        "inputTokens": 28,
+        "outputTokens": 10406,
+        "cacheReadInputTokens": 331074,
+        "cacheCreationInputTokens": 41026,
+        "webSearchRequests": 0,
+        "costUSD": 1.672174,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "canonicalModel": "claude-fable-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    }
   }
 ]

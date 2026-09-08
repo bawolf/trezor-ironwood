@@ -30,6 +30,18 @@
       "cents": 90,
       "status": "reserved",
       "note": "Conservative budget hold for reported list-price model usage; existing Max subscription, actual billed charge not observed."
+    },
+    {
+      "id": "fable-target-codegen-20260908",
+      "cents": 99,
+      "status": "reserved",
+      "note": "Conservative budget hold for reported list-price model usage; existing Max subscription, actual billed charge not observed."
+    },
+    {
+      "id": "fable-target-codegen-size-20260908",
+      "cents": 168,
+      "status": "reserved",
+      "note": "Conservative budget hold for reported list-price model usage; existing Max subscription, actual billed charge not observed."
     }
   ],
   "note": "Existing Codex account usage is not dollar-metered here. Claude Code/Fable review usage is reported separately in review-usage.json; conservative holds count its reported list-price estimate, not an observed billed charge. No additional paid APIs, cloud machines, credits, or subscriptions have been purchased. Paid execution remains disabled until costs can be measured and capped. This ledger is bookkeeping, not a provider billing limit."

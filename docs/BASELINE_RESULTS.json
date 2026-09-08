@@ -2476,5 +2476,46 @@
         "log_sha256": "16d8e0ee2c2fb51f93b1c2c820f1343b6318b65cb785162d214cc127edfe726c"
       }
     ]
+  },
+  {
+    "lane": "target-codegen",
+    "date_utc": "2026-09-08",
+    "passed": true,
+    "scope": "Concrete compile-only ARM code and individual-frame inventory; no linked/runtime success",
+    "revisions": {
+      "approval_core": "12c25c8eb9d9045483a2dbfebc0483a779bd0944",
+      "repository_base": "7f404ec8ed6bf7a896e21f8cbe3c74f601546cc2",
+      "librustzcash": "5e770a91ad0d11938dbc713e7889e4aa8009266c"
+    },
+    "target": "thumbv8m.main-none-eabihf",
+    "compiler": "rustc 1.96.0-nightly (1e2183119 2026-03-15)",
+    "checks": {
+      "formatting": "passed",
+      "registry_identity": "128 match",
+      "target_compilation": "passed",
+      "host_clippy_warnings_fatal": "passed",
+      "target_clippy": "unavailable; failed stable-Clippy invocation preserved"
+    },
+    "opt3": {
+      "lto": false,
+      "panic": "abort",
+      "archive_count": 98,
+      "object_count": 102,
+      "frame_entries": 3180,
+      "largest_individual_frame_bytes": 9176,
+      "traced_path_subtotal_bytes": 33000
+    },
+    "optz": {
+      "lto": false,
+      "panic": "abort",
+      "frame_entries": 10180,
+      "changed_direct_edges": 4,
+      "new_chain_bound": null
+    },
+    "evidence_sha256": {
+      "work/target-codegen/review-manifest.json": "d9c9558a49fc0a08429d395bc9467a437e562db98507e6767fb52f9f08c6178b",
+      "work/target-stack-chain/path-evidence.json": "7798ea5b84583657a7b22ad2b5eb0091b27f4cfd26297c38c7b8fb867c0153d4",
+      "work/target-codegen-size/review-manifest.json": "fa6859f35e9c8ca4e64a0651cb558f079d392d1d48eec2642f7e48a4df598b32"
+    }
   }
 ]

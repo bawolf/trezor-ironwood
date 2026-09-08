@@ -26,6 +26,7 @@ wallet or circuit safety.
 | `approval` | Pinned actual-PCZT conformance, dependency identity, exact local input hashes, formatting and warning-fatal Clippy | Device behavior, exhaustive hostile inputs or consensus validation |
 | `embedded-probe` | Actual core with default features disabled, source-pinned Safe 7 target toolchain, LLVM C tools, dependency identity and core input hashes | Concrete RNG code generation, linking, runtime signatures, heap/stack limits, firmware consent or entropy |
 | `resources` (`scripts/resource_check.py`) | 15 synthetic layouts, allocation/lifecycle accounting, instrumented host timing, independently verified signatures, manifest binding and frozen source/binary hashes | Safe 7 link/runtime fit, MCU native stack or latency, all admitted inputs, allocator OOM behavior |
+| `target-codegen` experiment | Concrete RNG instantiation, optimized ARM objects, per-function frames and a scoped nested-call trace; same-source optz comparison | Linked firmware, complete call-chain stack bound, runtime signatures, allocator/entropy/UI integration |
 | `approval-proofs` | Eleven structural theorems, exact axiom guards and theorem census | Machine-checked Rust refinement, cryptography or firmware proofs |
 | `lean` | `lake build --wfail` with all six pinned default targets | Reproducible Rust fixture regeneration, full firmware correctness or reviewed cryptographic assumptions |
 

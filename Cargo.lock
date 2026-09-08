@@ -534,10 +534,12 @@ dependencies = [
  "pczt",
  "rand_chacha",
  "rand_core",
+ "sapling-crypto",
  "serde_json",
  "zcash_note_encryption",
  "zcash_primitives",
  "zcash_protocol",
+ "zcash_transparent",
 ]
 
 [[package]]

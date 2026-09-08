@@ -6,6 +6,7 @@ use zcash_protocol::value::MAX_MONEY;
 pub const MAX_PCZT_BYTES: usize = 65_536;
 pub const MAX_ACTIONS: usize = 8;
 
+#[derive(Clone, Copy)]
 pub(crate) struct Header {
     pub version: u32,
     pub group: u32,
@@ -78,31 +79,35 @@ impl<'a> Reader<'a> {
     }
     fn action(&mut self) -> Result<()> {
         self.required(32)?; // cv_net
+
         self.required(32)?; // spend.nullifier
         self.required(32)?; // spend.rk
-        self.optional(64)?; // spend_auth_sig; semantics checked against value and sighash
-        self.required(43)?; // recipient
-        self.value()?;
-        self.required(32)?; // rho
-        self.required(32)?; // rseed
-        self.required(96)?; // fvk
-        self.absent()?; // witness
-        self.required(32)?; // alpha
-        self.absent()?; // ZIP32 derivation
-        self.absent()?; // dummy_sk
-        self.empty_map()?;
+        self.optional(64)?; // spend.spend_auth_sig; checked against value and sighash
+        self.required(43)?; // spend.recipient
+        self.value()?; // spend.value
+        self.required(32)?; // spend.rho
+        self.required(32)?; // spend.rseed
+        self.required(96)?; // spend.fvk
+        self.absent()?; // spend.witness
+        self.required(32)?; // spend.alpha
+        self.absent()?; // spend.zip32_derivation
+        self.absent()?; // spend.dummy_sk
+        self.empty_map()?; // spend.proprietary
+
         self.required(32)?; // output.cmx
-        self.take(32)?; // ephemeral_key
+        self.take(32)?; // output.ephemeral_key
+        // output.enc_ciphertext variant: encrypted only
         ensure(self.varint()? == 0, "plaintext memo encoding unsupported")?;
-        self.bytes(ENC_CIPHERTEXT_SIZE)?;
-        self.bytes(OUT_CIPHERTEXT_SIZE)?;
-        self.required(43)?; // recipient
-        self.value()?;
-        self.required(32)?; // rseed
-        self.optional(32)?; // ock
-        self.absent()?; // ZIP32 derivation
-        self.absent()?; // user_address
-        self.empty_map()?;
+        self.bytes(ENC_CIPHERTEXT_SIZE)?; // output.enc_ciphertext bytes
+        self.bytes(OUT_CIPHERTEXT_SIZE)?; // output.out_ciphertext
+        self.required(43)?; // output.recipient
+        self.value()?; // output.value
+        self.required(32)?; // output.rseed
+        self.optional(32)?; // output.ock
+        self.absent()?; // output.zip32_derivation
+        self.absent()?; // output.user_address
+        self.empty_map()?; // output.proprietary
+
         self.required(32)?; // rcv
         Ok(())
     }

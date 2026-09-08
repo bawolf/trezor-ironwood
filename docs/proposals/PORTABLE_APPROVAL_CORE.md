@@ -1,9 +1,10 @@
 # Proposal: portable approval core with trusted device randomness
 
-Status: **not applied; explicit approval required after automatic review rejection**.
-The working engine remains the passing OS-backed host reference. No firmware,
-physical device, wallet, production key or real transaction is touched by this
-proposal. The proposal is limited to synthetic-regtest profile 1.
+Status: **explicitly approved by the user; implemented and reviewed**.
+The user approved “Approve isolated refactor” for this exact proposal after the
+automatic review rejection. Work remains limited to synthetic-regtest profile 1.
+No firmware release, physical device, wallet, production key or real transaction
+is included in this approval.
 
 ## Concrete change under review
 
@@ -25,10 +26,11 @@ proposal. The proposal is limited to synthetic-regtest profile 1.
    FVK metadata through upstream's positional restoration checks. Do not change
    input order, action count, values, addresses, modification flags or display data.
 
-The [companion patch](portable-approval-core.patch) is an **unapplied review artifact**. It must be
-compiled and validated before acceptance; its existence is not evidence that the
-portable implementation works. Do not apply it from an automation without the
-user's explicit approval for this rejected change.
+The [companion patch](portable-approval-core.patch) records the original change
+that the user reviewed. It has now been applied; subsequent clarity changes and
+regression tests are recorded in the implementation diff. Do not apply this
+historical patch again. Acceptance results are in [APPROVAL_RESULTS.md](../APPROVAL_RESULTS.md); independent
+review findings and resolutions are in [the review record](../reviews/PORTABLE_APPROVAL_CORE.md).
 
 ## Evidence already completed
 
@@ -45,7 +47,7 @@ user's explicit approval for this rejected change.
   comparisons and runs the unchanged Engine's full validation for every original
   transaction. No new signing path was exercised or installed by this experiment.
 
-## Acceptance after approval
+## Acceptance criteria
 
 - All previous tests continue passing; add device-RNG session failure and
   deterministic synthetic signature checks, cross-session replay and wrong-key
@@ -65,12 +67,12 @@ trusted UI consent, entropy quality or hardware security. Those remain separate
 Safe 7 integration tasks. No hardware flashing or real-funds authorization is
 requested here.
 
-## Why approval is required
+## Approval history
 
 Automatic approval review rejected the combined RNG, digest and low-level signing
 rewrite as a broad security-critical change whose correctness and scope of impact
 were not yet bounded. It requested explicit approval rather than inferring that
 exact change from general project continuation. The rejection was honored: the
 engine stayed unchanged, and only the independent read-only digest experiment
-proceeded. Approval here would authorize applying and testing this isolated
-synthetic-data refactor; it would not authorize firmware release or real funds.
+proceeded. The user then explicitly authorized applying and testing this isolated
+synthetic-data refactor. Firmware release and real funds remain outside scope.

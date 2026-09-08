@@ -86,8 +86,59 @@ The final gate `work/runs/20260908T052631Z-approval-9ff95bb3/report.json` passed
 **28 tests**, dependency identity, formatting and warning-fatal Clippy. Test log
 SHA-256: `25550e9bbe5cbe718dc7bc82f7f8defc602389406b0d9b8ffe19867a3fe9742d`.
 
-This experiment did not change the signing engine. Automatic approval review
-rejected the combined portable RNG/digest/low-level-signing rewrite, so it remains
-an unapplied [proposal and patch](proposals/PORTABLE_APPROVAL_CORE.md). The existing
-engine source SHA-256 remains
-`dcd68951d493d32ea5ab1ddefde38bdb586a581ba49f1ec63b0d02dba49224e0`.
+That preparatory experiment left the engine unchanged. The user subsequently
+explicitly approved the isolated portable refactor, which is now implemented.
+The old source hash belongs only to that historical host reference.
+
+## Portable-core acceptance
+
+The current core uses `no_std` plus `alloc`, a trusted engine-owned RNG, upstream
+v6 effect/digest APIs and a private low-level signer over the exact fully verified
+owned PCZT. Its admitted profile and validation rules remain unchanged.
+
+The expanded suite has **36 test functions**. In addition to prior hostile cases:
+
+- Exact 1–8 action counts use upstream unpadded fixtures; 16 validation/digest
+  comparisons cover absent/restored anchors against the standard Signer.
+- A 32-case full signing matrix combines 1–8 actions, both anchor states and
+  absent/present valid OCKs. Upstream verifies the returned signatures and all
+  commitments; full before/after PCZT comparison permits only new real signatures.
+- Two and eight positive inputs return exactly their verified signatures. Valid
+  individual notes whose sum exceeds MAX_MONEY are rejected on accumulation.
+- Independent deterministic session seeds reject each other's tokens. Identical
+  public synthetic seeds reproduce signatures while preserving metadata.
+- Missing session entropy prevents construction. A panic during the second
+  signature leaves consent consumed and returns no partial response. This host
+  unwind test does not establish firmware reset behavior.
+- None/Some(0) lock-time encodings have equal consensus digests but different
+  contexts; replacement still requires fresh consent.
+
+The 35-test gate passed in `20260908T063318Z-approval-8a01f420`. The first
+36-test gate passed in `20260908T064412Z-approval-08079f9b` (163.02 seconds
+including Cargo; test log `0fbfa594dd633b97540d8dd5b9a9d687fe0f110f4943beaee46bc94878c0f876`).
+Both also passed dependency identity, formatting and warning-fatal Clippy.
+The final replacement test directly attempts the new token before the stale one;
+its final gate is recorded below. These durations are host checks, not device timing.
+
+The complete core also passed the independent Safe 7 target lane:
+`20260908T064723Z-embedded-probe-313ddb21`. All 126 target-workspace registry
+packages match upstream, all core source hashes are recorded, and default OS
+features are disabled. This generic target check does not link a concrete RNG,
+allocator or firmware image. See the experiment README and
+[Safe 7 source constraints](SAFE7_INTEGRATION.md).
+
+[Separate Fable and readability reviews](reviews/PORTABLE_APPROVAL_CORE.md)
+completed, with no blocking defect found and four Fable advisories resolved.
+The first full portable gate stopped at formatting (`20260908T063245Z-approval-1d170c35`);
+rustfmt corrected the new digest module before acceptance. Initial development
+compile attempts also caught test-only borrow/serialization/private-getter mistakes,
+all corrected without changing pinned upstream sources. Failed and superseded
+reports remain in the local evidence directory.
+
+Final gate: `work/runs/20260908T064909Z-approval-748cc20f/report.json` —
+**36 passed, none failed/ignored/filtered**, 150.25 seconds including Cargo;
+dependency identity, formatting, warning-fatal Clippy and unchanged input hashes
+passed. Test log SHA-256:
+`c7622bb5a3cd061c9232687111be57d3cc97cf6c492769be4ab009eef6202a2c`.
+The final project guard suite also passed all 16 tests in
+`20260908T064914Z-project-1920358c`.

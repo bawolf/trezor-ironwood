@@ -6,6 +6,19 @@
   "scope": "Initial total budget, not a monthly renewal.",
   "paid_execution_enabled": false,
   "codex_dollar_metering": "unavailable",
-  "entries": [],
-  "note": "Existing Codex account usage is not measured by this ledger. No additional paid APIs, cloud machines, credits, or subscriptions have been purchased. Paid execution remains disabled until costs can be measured and capped. This file is bookkeeping, not a provider billing limit."
+  "entries": [
+    {
+      "id": "fable-portable-core-20260908",
+      "cents": 680,
+      "status": "reserved",
+      "note": "Conservative budget hold for reported list-price model usage; existing Max subscription, actual billed charge not observed."
+    },
+    {
+      "id": "fable-portable-core-followup-20260908",
+      "cents": 42,
+      "status": "reserved",
+      "note": "Conservative budget hold for reported list-price model usage; existing Max subscription, actual billed charge not observed."
+    }
+  ],
+  "note": "Existing Codex account usage is not dollar-metered here. Claude Code/Fable review usage is reported separately in review-usage.json; conservative holds count its reported list-price estimate, not an observed billed charge. No additional paid APIs, cloud machines, credits, or subscriptions have been purchased. Paid execution remains disabled until costs can be measured and capped. This ledger is bookkeeping, not a provider billing limit."
 }

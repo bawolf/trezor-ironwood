@@ -64,8 +64,10 @@ notifies on useful progress, a failure or a decision requiring the user.
 The machine must remain on and Codex must remain running for local scheduled work.
 Do not disable sleep settings automatically.
 
-The same task is the coordinator; do not start overlapping workers. The checks
-runner has its own process lock. Agent time limits are instructions, not a
+The same task is the coordinator. Use bounded parallel agents with disjoint write
+scopes and explicit acceptance criteria. Integrate their changes before freezing
+inputs for checks. Adversarial Fable and separate readability reviews follow
+[VERIFICATION.md](VERIFICATION.md). The checks runner has its own process lock. Agent time limits are instructions, not a
 hard watchdog. Shell checks have actual subprocess timeouts. Neither mechanism
 is a billing cap or an independently protected security boundary.
 

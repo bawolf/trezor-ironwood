@@ -124,11 +124,14 @@ def lane_commands(root, lane):
         return [(root, [sys.executable, "scripts/check_approval_dependencies.py"], 30, 0),
                 (root, ["cargo", "fmt", "-p", "ironwood-approval", "--check"], 120, 0),
                 (root, ["cargo", "test", "--locked", "--offline", "-p", "ironwood-approval",
-                        "--test", "conformance"], 600, 28),
+                        "--test", "conformance"], 600, 36),
                 (root, ["cargo", "clippy", "--locked", "--offline", "-p", "ironwood-approval",
                         "--all-targets", "--", "-D", "warnings"], 600, 0)]
     if lane == "embedded-probe":
         return [(root, ["rustc", "--version", "--verbose"], 30, 0),
+                (root, ["/opt/homebrew/opt/llvm/bin/clang", "--version"], 30, 0),
+                (root, ["/opt/homebrew/opt/llvm/bin/llvm-ar", "--version"], 30, 0),
+                (root, ["cargo", "fmt", "--manifest-path", "experiments/embedded-probe/Cargo.toml", "--check"], 120, 0),
                 (root, [sys.executable, "scripts/check_approval_dependencies.py",
                         "experiments/embedded-probe/Cargo.lock"], 30, 0),
                 (root, ["cargo", "check", "--locked", "--offline", "--manifest-path",
@@ -148,7 +151,8 @@ def local_inputs(root, lane):
         files += sorted((root / "crates/approval").rglob("*.rs"))
         files += [root / "crates/approval/Cargo.toml"]
     elif lane == "embedded-probe":
-        files = [root / "scripts/check_approval_dependencies.py", root / "crates/approval/src/wire.rs"]
+        files = [root / "scripts/check_approval_dependencies.py", root / "crates/approval/Cargo.toml"]
+        files += sorted((root / "crates/approval/src").rglob("*.rs"))
         files += sorted((root / "experiments/embedded-probe").rglob("*.rs"))
         files += [root / "experiments/embedded-probe/Cargo.toml", root / "experiments/embedded-probe/Cargo.lock"]
     elif lane == "approval-proofs":
@@ -186,11 +190,15 @@ def run_lane(root, lane):
                 env["PATH"] = str(toolchain) + os.pathsep + env["PATH"]
                 env["RUSTUP_HOME"] = str(root / "work/rustup")
                 env["CARGO_TARGET_DIR"] = str(root / "work/embedded-target")
+                env["TARGET_CC"] = "/opt/homebrew/opt/llvm/bin/clang"
+                env["TARGET_AR"] = "/opt/homebrew/opt/llvm/bin/llvm-ar"
                 version = subprocess.check_output(["rustc", "--version"], env=env, text=True).strip()
                 if version != "rustc 1.96.0-nightly (1e2183119 2026-03-15)":
                     raise ValueError("Embedded probe toolchain differs from firmware baseline")
                 report["toolchain"] = version
             report["environment"] = {key: env[key] for key in ("LC_ALL", "CARGO_BUILD_JOBS")}
+            if lane == "embedded-probe":
+                report["environment"].update({key: env[key] for key in ("TARGET_CC", "TARGET_AR")})
             for index, (cwd, command, timeout, minimum_tests) in enumerate(lane_commands(root, lane)):
                 print(f"Running {lane}: {' '.join(command)}", flush=True)
                 result = run_command(command, cwd, env, directory / f"{index:02d}.log", timeout, minimum_tests)

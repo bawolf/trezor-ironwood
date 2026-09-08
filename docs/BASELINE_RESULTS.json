@@ -1302,5 +1302,720 @@
         "log_sha256": "5e5c4010cca17607410bbb95786346e0d9197f975636560a681b138b3553f8eb"
       }
     ]
+  },
+  {
+    "lane": "lean",
+    "started_utc": "20260908T050844Z",
+    "revisions": {
+      "ironwood": "ad4a6ad8f75a64368bae4186006480410a687cce"
+    },
+    "passed": true,
+    "commands": [
+      {
+        "command": [
+          "lake",
+          "build",
+          "--wfail"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 2506.0,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "0e9bcba442280d641de6c8dfff2de5bcf99dc711593ee4a7d1e6ad256b11a9df"
+      }
+    ],
+    "finished_utc": "2026-09-08T06:17:01.672634+00:00"
+  },
+  {
+    "lane": "project",
+    "started_utc": "20260908T062813Z",
+    "revisions": {},
+    "passed": true,
+    "local_inputs_sha256": {},
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 4.06,
+        "tests_passed": 16,
+        "minimum_tests": 16,
+        "passed": true,
+        "log_sha256": "d089da8d592e0fa632678b360eec0588aa7f5e245c47ebd66ad7b175d4a510dc"
+      }
+    ]
+  },
+  {
+    "lane": "approval-proofs",
+    "started_utc": "20260908T063118Z",
+    "revisions": {
+      "ironwood": "ad4a6ad8f75a64368bae4186006480410a687cce"
+    },
+    "passed": true,
+    "local_inputs_sha256": {
+      "scripts/check_approval_proof_census.py": "8995157c21b5f364d6b7e66204d6ad630932223466e9f6d8f41f917530836b69",
+      "proofs/Approval.lean": "1a6e2e5cc08aba915d7b58fbdfe4da2965f3763d9ad41ca58a60ba9a2763814d",
+      "proofs/AxiomCheck.lean": "9bd1ddd4bbe8f37314794e5ab1c16454b2e8dfc03f55f8cbe013bd371b4420de",
+      "proofs/axioms.json": "8126f20c746e28857cdb4f5eccdcc9bcfd3b06be9b7518fe7707ffda3188f7bd",
+      "proofs/lake-manifest.json": "ef28b11aa5086539842e4e88f20b8a91c1db685a3c4ecb35b75464efb9a28947",
+      "proofs/lakefile.toml": "b2c351b61f2275fe1ff49eea1e6703cb15d06ea4e68e82bf4b66e71f62763d37",
+      "proofs/lean-toolchain": "54727eec5cba149c18842e6deb5c41b369d66455c93ce135d7d5347c782b2325"
+    },
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "scripts/check_approval_proof_census.py"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.71,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "f4d28ae3820d2145ced96e5b138c7e1320c9728eb45e88293e1f7cfef28007c3"
+      },
+      {
+        "command": [
+          "lake",
+          "build",
+          "--wfail"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 3.26,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "b85945e1c1d9430164575c7d01e44a0c37beab1d169a9a9f2329d607d79eaab1"
+      }
+    ]
+  },
+  {
+    "lane": "approval",
+    "started_utc": "20260908T063245Z",
+    "revisions": {
+      "librustzcash": "5e770a91ad0d11938dbc713e7889e4aa8009266c"
+    },
+    "passed": false,
+    "local_inputs_sha256": {
+      "Cargo.toml": "28d8bb1e88c25ed8cb15cdbff890e993dadd5538bff02741fb72d68c4d69b6b4",
+      "Cargo.lock": "56d39e1f4ccec7ac6ee6486e7fb27352278210f3f7ba82b697d998f84ee6de9d",
+      "scripts/check_approval_dependencies.py": "8630bad3e30f035e3993fe9cc29d2e07d6ca6e1b03a4831d44b994657ae5808f",
+      "crates/approval/src/effects.rs": "af7f3cdf1b3be0ddd2ede118edfdac996822ff5c7b99f351efa2d90e6d21e11c",
+      "crates/approval/src/lib.rs": "9757a70baebf4e4c2763be502df90c97fc9debff360244b3b81add7a7a1f120b",
+      "crates/approval/src/wire.rs": "5b05163b419f90d861f1ba5432c62ce0a5690bc747d53c4a9a863804b40413ce",
+      "crates/approval/tests/action_bounds/mod.rs": "3f66e3782b65bc842f7bf530e13d0a21d0137b4791e57e62db385cb62eaccf0f",
+      "crates/approval/tests/common/mod.rs": "ad225b031d9dc954a82d7046d1766bbf8ae011f5f652117e525c7909268c8c53",
+      "crates/approval/tests/conformance.rs": "4a5c21832fb539dc98f5d1ee20e10549f5df62ee5e6b195258fd03156dc5dcf9",
+      "crates/approval/tests/randomness/mod.rs": "7f7daa86cb188ac001fd0136a511aba3f2590698b6f33a0ef68abe9af3ce9e58",
+      "crates/approval/Cargo.toml": "ea0fbb0a9913e230cb8c83bbd7bbe74869dad04957c627d4809b2a47c86447e8"
+    },
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "scripts/check_approval_dependencies.py"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.63,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "d6eaa9010397a603bcf9caf4ccf79265e77ad0ad750732d325759cc92a609942"
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "-p",
+          "ironwood-approval",
+          "--check"
+        ],
+        "returncode": 1,
+        "timed_out": false,
+        "seconds": 0.49,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": false,
+        "log_sha256": "0959f0c1b2a0442e8f53cba941f023424c55cf44ccefbe8375a87a2a0bfc0a1e"
+      }
+    ]
+  },
+  {
+    "lane": "approval",
+    "started_utc": "20260908T063318Z",
+    "revisions": {
+      "librustzcash": "5e770a91ad0d11938dbc713e7889e4aa8009266c"
+    },
+    "passed": true,
+    "local_inputs_sha256": {
+      "Cargo.toml": "28d8bb1e88c25ed8cb15cdbff890e993dadd5538bff02741fb72d68c4d69b6b4",
+      "Cargo.lock": "56d39e1f4ccec7ac6ee6486e7fb27352278210f3f7ba82b697d998f84ee6de9d",
+      "scripts/check_approval_dependencies.py": "8630bad3e30f035e3993fe9cc29d2e07d6ca6e1b03a4831d44b994657ae5808f",
+      "crates/approval/src/effects.rs": "1eed05b5b9c8831577f564d071d46d25873530a96df5890a24b3ee33e870f1ef",
+      "crates/approval/src/lib.rs": "9757a70baebf4e4c2763be502df90c97fc9debff360244b3b81add7a7a1f120b",
+      "crates/approval/src/wire.rs": "5b05163b419f90d861f1ba5432c62ce0a5690bc747d53c4a9a863804b40413ce",
+      "crates/approval/tests/action_bounds/mod.rs": "3f66e3782b65bc842f7bf530e13d0a21d0137b4791e57e62db385cb62eaccf0f",
+      "crates/approval/tests/common/mod.rs": "ad225b031d9dc954a82d7046d1766bbf8ae011f5f652117e525c7909268c8c53",
+      "crates/approval/tests/conformance.rs": "4a5c21832fb539dc98f5d1ee20e10549f5df62ee5e6b195258fd03156dc5dcf9",
+      "crates/approval/tests/randomness/mod.rs": "7f7daa86cb188ac001fd0136a511aba3f2590698b6f33a0ef68abe9af3ce9e58",
+      "crates/approval/Cargo.toml": "ea0fbb0a9913e230cb8c83bbd7bbe74869dad04957c627d4809b2a47c86447e8"
+    },
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "scripts/check_approval_dependencies.py"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 1.0,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "d6eaa9010397a603bcf9caf4ccf79265e77ad0ad750732d325759cc92a609942"
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "-p",
+          "ironwood-approval",
+          "--check"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 1.65,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-p",
+          "ironwood-approval",
+          "--test",
+          "conformance"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 398.65,
+        "tests_passed": 35,
+        "minimum_tests": 35,
+        "passed": true,
+        "log_sha256": "dd2c9250d5f89352abd1e3e7fe01765ad85b1b4b8c2359253f33dfd8fa7baa8d"
+      },
+      {
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "-p",
+          "ironwood-approval",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 75.39,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "766628cccd279f4b057cffd6cb4d9a9741c08181bbc70e00149b397ba0dd4a4e"
+      }
+    ]
+  },
+  {
+    "lane": "embedded-probe",
+    "started_utc": "20260908T064204Z",
+    "revisions": {
+      "librustzcash": "5e770a91ad0d11938dbc713e7889e4aa8009266c",
+      "trezor-firmware": "7105338e3c2c1e681940e17780609881ce53126b"
+    },
+    "passed": true,
+    "local_inputs_sha256": {
+      "scripts/check_approval_dependencies.py": "8630bad3e30f035e3993fe9cc29d2e07d6ca6e1b03a4831d44b994657ae5808f",
+      "crates/approval/Cargo.toml": "ea0fbb0a9913e230cb8c83bbd7bbe74869dad04957c627d4809b2a47c86447e8",
+      "crates/approval/src/effects.rs": "1eed05b5b9c8831577f564d071d46d25873530a96df5890a24b3ee33e870f1ef",
+      "crates/approval/src/lib.rs": "9757a70baebf4e4c2763be502df90c97fc9debff360244b3b81add7a7a1f120b",
+      "crates/approval/src/wire.rs": "5b05163b419f90d861f1ba5432c62ce0a5690bc747d53c4a9a863804b40413ce",
+      "experiments/embedded-probe/src/lib.rs": "120e9c7dd45eef9edb88ace1b06a62ad5ba3dae1a0c0d0fd02a6ad53ac83a083",
+      "experiments/embedded-probe/Cargo.toml": "78b2c775b1eee3415751727aaff82eda46609fff6cc08912deb39c4fac3f0b18",
+      "experiments/embedded-probe/Cargo.lock": "a8a1155d8795b7085668a7dd87dd5b247c3bcd1c50f86c7219a67bca5835b88e"
+    },
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4",
+      "TARGET_CC": "/opt/homebrew/opt/llvm/bin/clang",
+      "TARGET_AR": "/opt/homebrew/opt/llvm/bin/llvm-ar"
+    },
+    "commands": [
+      {
+        "command": [
+          "rustc",
+          "--version",
+          "--verbose"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.12,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "d0e112fca5d3d549bb6f5dbd012e86e270fdd1363108f658fd4fa212e5eccc2c"
+      },
+      {
+        "command": [
+          "/opt/homebrew/opt/llvm/bin/clang",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.67,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "36bedda8b8ae4f6ad1292c8179d4cec60ee23b61e7eec726b6e355d976f89565"
+      },
+      {
+        "command": [
+          "/opt/homebrew/opt/llvm/bin/llvm-ar",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.09,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "c4cac2181584c610eea4735d1238c5b022cbca1119569a3570aaa2e20ef43522"
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--manifest-path",
+          "experiments/embedded-probe/Cargo.toml",
+          "--check"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.5,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/check_approval_dependencies.py",
+          "experiments/embedded-probe/Cargo.lock"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.32,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "6fd6bf1e88567dc5adf9adaab35d812692e1c52f9bcd10c2ba62ae6727fbf573"
+      },
+      {
+        "command": [
+          "cargo",
+          "check",
+          "--locked",
+          "--offline",
+          "--manifest-path",
+          "experiments/embedded-probe/Cargo.toml",
+          "--target",
+          "thumbv8m.main-none-eabihf"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 3.46,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "90c38c13dd2032f76546611014981adfa371b4845313323a8edc3874c9f8c31a"
+      }
+    ],
+    "toolchain": "rustc 1.96.0-nightly (1e2183119 2026-03-15)"
+  },
+  {
+    "lane": "approval",
+    "started_utc": "20260908T064412Z",
+    "revisions": {
+      "librustzcash": "5e770a91ad0d11938dbc713e7889e4aa8009266c"
+    },
+    "passed": true,
+    "local_inputs_sha256": {
+      "Cargo.toml": "28d8bb1e88c25ed8cb15cdbff890e993dadd5538bff02741fb72d68c4d69b6b4",
+      "Cargo.lock": "56d39e1f4ccec7ac6ee6486e7fb27352278210f3f7ba82b697d998f84ee6de9d",
+      "scripts/check_approval_dependencies.py": "8630bad3e30f035e3993fe9cc29d2e07d6ca6e1b03a4831d44b994657ae5808f",
+      "crates/approval/src/effects.rs": "1eed05b5b9c8831577f564d071d46d25873530a96df5890a24b3ee33e870f1ef",
+      "crates/approval/src/lib.rs": "3500810c65dd3550bca2efe84248b38d3e725755eccd95cc3f48b061bbb6d5c8",
+      "crates/approval/src/wire.rs": "5b05163b419f90d861f1ba5432c62ce0a5690bc747d53c4a9a863804b40413ce",
+      "crates/approval/tests/action_bounds/mod.rs": "3f66e3782b65bc842f7bf530e13d0a21d0137b4791e57e62db385cb62eaccf0f",
+      "crates/approval/tests/common/mod.rs": "ad225b031d9dc954a82d7046d1766bbf8ae011f5f652117e525c7909268c8c53",
+      "crates/approval/tests/conformance.rs": "e44fc8e8dc7c063f5e3f272c6a979533ef5c01e1c3018c5f4ddb6c737ca9bc33",
+      "crates/approval/tests/randomness/mod.rs": "7f7daa86cb188ac001fd0136a511aba3f2590698b6f33a0ef68abe9af3ce9e58",
+      "crates/approval/Cargo.toml": "ea0fbb0a9913e230cb8c83bbd7bbe74869dad04957c627d4809b2a47c86447e8"
+    },
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "scripts/check_approval_dependencies.py"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.2,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "d6eaa9010397a603bcf9caf4ccf79265e77ad0ad750732d325759cc92a609942"
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "-p",
+          "ironwood-approval",
+          "--check"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.19,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-p",
+          "ironwood-approval",
+          "--test",
+          "conformance"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 163.02,
+        "tests_passed": 36,
+        "minimum_tests": 36,
+        "passed": true,
+        "log_sha256": "0fbfa594dd633b97540d8dd5b9a9d687fe0f110f4943beaee46bc94878c0f876"
+      },
+      {
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "-p",
+          "ironwood-approval",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 2.66,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "8830be03329884501075b106303f37ece9e3d6fcc1d0ff2cc2402dad5de97adb"
+      }
+    ]
+  },
+  {
+    "lane": "embedded-probe",
+    "started_utc": "20260908T064723Z",
+    "revisions": {
+      "librustzcash": "5e770a91ad0d11938dbc713e7889e4aa8009266c",
+      "trezor-firmware": "7105338e3c2c1e681940e17780609881ce53126b"
+    },
+    "passed": true,
+    "local_inputs_sha256": {
+      "scripts/check_approval_dependencies.py": "8630bad3e30f035e3993fe9cc29d2e07d6ca6e1b03a4831d44b994657ae5808f",
+      "crates/approval/Cargo.toml": "ea0fbb0a9913e230cb8c83bbd7bbe74869dad04957c627d4809b2a47c86447e8",
+      "crates/approval/src/effects.rs": "1eed05b5b9c8831577f564d071d46d25873530a96df5890a24b3ee33e870f1ef",
+      "crates/approval/src/lib.rs": "3500810c65dd3550bca2efe84248b38d3e725755eccd95cc3f48b061bbb6d5c8",
+      "crates/approval/src/wire.rs": "5b05163b419f90d861f1ba5432c62ce0a5690bc747d53c4a9a863804b40413ce",
+      "experiments/embedded-probe/src/lib.rs": "120e9c7dd45eef9edb88ace1b06a62ad5ba3dae1a0c0d0fd02a6ad53ac83a083",
+      "experiments/embedded-probe/Cargo.toml": "78b2c775b1eee3415751727aaff82eda46609fff6cc08912deb39c4fac3f0b18",
+      "experiments/embedded-probe/Cargo.lock": "a8a1155d8795b7085668a7dd87dd5b247c3bcd1c50f86c7219a67bca5835b88e"
+    },
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4",
+      "TARGET_CC": "/opt/homebrew/opt/llvm/bin/clang",
+      "TARGET_AR": "/opt/homebrew/opt/llvm/bin/llvm-ar"
+    },
+    "toolchain": "rustc 1.96.0-nightly (1e2183119 2026-03-15)",
+    "commands": [
+      {
+        "command": [
+          "rustc",
+          "--version",
+          "--verbose"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.09,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "d0e112fca5d3d549bb6f5dbd012e86e270fdd1363108f658fd4fa212e5eccc2c"
+      },
+      {
+        "command": [
+          "/opt/homebrew/opt/llvm/bin/clang",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.37,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "36bedda8b8ae4f6ad1292c8179d4cec60ee23b61e7eec726b6e355d976f89565"
+      },
+      {
+        "command": [
+          "/opt/homebrew/opt/llvm/bin/llvm-ar",
+          "--version"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.04,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "c4cac2181584c610eea4735d1238c5b022cbca1119569a3570aaa2e20ef43522"
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--manifest-path",
+          "experiments/embedded-probe/Cargo.toml",
+          "--check"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.26,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/check_approval_dependencies.py",
+          "experiments/embedded-probe/Cargo.lock"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.25,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "6fd6bf1e88567dc5adf9adaab35d812692e1c52f9bcd10c2ba62ae6727fbf573"
+      },
+      {
+        "command": [
+          "cargo",
+          "check",
+          "--locked",
+          "--offline",
+          "--manifest-path",
+          "experiments/embedded-probe/Cargo.toml",
+          "--target",
+          "thumbv8m.main-none-eabihf"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 1.31,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "f747c57ff5c156c20f5f5ab3602c422136151ee4eebdab2a4af015dbae1904a6"
+      }
+    ]
+  },
+  {
+    "lane": "approval",
+    "started_utc": "20260908T064909Z",
+    "revisions": {
+      "librustzcash": "5e770a91ad0d11938dbc713e7889e4aa8009266c"
+    },
+    "passed": true,
+    "local_inputs_sha256": {
+      "Cargo.toml": "28d8bb1e88c25ed8cb15cdbff890e993dadd5538bff02741fb72d68c4d69b6b4",
+      "Cargo.lock": "56d39e1f4ccec7ac6ee6486e7fb27352278210f3f7ba82b697d998f84ee6de9d",
+      "scripts/check_approval_dependencies.py": "8630bad3e30f035e3993fe9cc29d2e07d6ca6e1b03a4831d44b994657ae5808f",
+      "crates/approval/src/effects.rs": "1eed05b5b9c8831577f564d071d46d25873530a96df5890a24b3ee33e870f1ef",
+      "crates/approval/src/lib.rs": "3500810c65dd3550bca2efe84248b38d3e725755eccd95cc3f48b061bbb6d5c8",
+      "crates/approval/src/wire.rs": "5b05163b419f90d861f1ba5432c62ce0a5690bc747d53c4a9a863804b40413ce",
+      "crates/approval/tests/action_bounds/mod.rs": "3f66e3782b65bc842f7bf530e13d0a21d0137b4791e57e62db385cb62eaccf0f",
+      "crates/approval/tests/common/mod.rs": "ad225b031d9dc954a82d7046d1766bbf8ae011f5f652117e525c7909268c8c53",
+      "crates/approval/tests/conformance.rs": "3992da7f3852f158c573c12ab3e0454a257a811da61cfb99e335e56f6d467f34",
+      "crates/approval/tests/randomness/mod.rs": "7f7daa86cb188ac001fd0136a511aba3f2590698b6f33a0ef68abe9af3ce9e58",
+      "crates/approval/Cargo.toml": "ea0fbb0a9913e230cb8c83bbd7bbe74869dad04957c627d4809b2a47c86447e8"
+    },
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "scripts/check_approval_dependencies.py"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.26,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "d6eaa9010397a603bcf9caf4ccf79265e77ad0ad750732d325759cc92a609942"
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "-p",
+          "ironwood-approval",
+          "--check"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.59,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-p",
+          "ironwood-approval",
+          "--test",
+          "conformance"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 150.25,
+        "tests_passed": 36,
+        "minimum_tests": 36,
+        "passed": true,
+        "log_sha256": "c7622bb5a3cd061c9232687111be57d3cc97cf6c492769be4ab009eef6202a2c"
+      },
+      {
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "-p",
+          "ironwood-approval",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 2.29,
+        "tests_passed": 0,
+        "minimum_tests": 0,
+        "passed": true,
+        "log_sha256": "bca03a40f728e1611293891f698af99fcec16f515dfaed79a48cefe00e1d643f"
+      }
+    ]
+  },
+  {
+    "lane": "project",
+    "started_utc": "20260908T064914Z",
+    "revisions": {},
+    "passed": true,
+    "local_inputs_sha256": {},
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 2.53,
+        "tests_passed": 16,
+        "minimum_tests": 16,
+        "passed": true,
+        "log_sha256": "535f6bfb2fe5ed78a0a536df7835f0fa5b497505508b5eb9a7ac947b86675870"
+      }
+    ]
   }
 ]

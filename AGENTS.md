@@ -34,9 +34,17 @@ are authorized. Preserve user changes. Use branches for implementation work.
   model usage is not dollar-metered here. Do not claim the ledger caps that usage.
 - Continue one bounded backlog task per scheduled turn. Run `python3 scripts/check.py
   project` first. Save progress and command evidence before ending; notify only for
-  a meaningful result, failure, or required user decision. Avoid parallel coding
-  workers until explicitly requested. Do not change security or spending gates to
-  remove a blocker.
+  a meaningful result, failure, or required user decision. Use bounded parallel
+  agent assignments with disjoint write scopes; one coordinator integrates and
+  verifies their work. Do not change security or spending gates to remove a blocker.
+
+Review each proposed change twice: an adversarial correctness review using Claude Code with Fable
+(`claude --model fable`), and an independent readability review.
+Keep code clear, concise, and directly understandable. Prefer precise names and
+small, necessary abstractions; remove unused options, redundant helpers, and
+indirection without weakening validation. Record findings and their resolutions.
+Never label a substitute review as a Fable run. These local reviews do not authorize
+publishing a PR or contacting upstream maintainers.
 
 The checks runner locks its verification process and times out subprocess groups.
 These controls do not sandbox the coding agent or guarantee a model spending cap.

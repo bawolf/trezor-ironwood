@@ -22,7 +22,7 @@ The census checks coverage and guard text; Lean checks the actual dependencies.
 | `begin_requires_fresh_approval` | `begin` installs a new pending object with `approved = false` | Cryptographic validation and UI correctness are separate boundaries |
 | `malformed_replacement_cancels` | `begin` cancels before validating any replacement bytes | The old request cannot survive parse failure |
 | `old_token_cannot_approve_replacement` | New request counter is greater than every earlier counter in a session | Rust uses checked u64; exhaustion rejects after clearing state, whereas model Nat is unbounded |
-| `different_session_rejected` | Token includes a locally generated session ID | Entropy and session-ID uniqueness are not proved |
+| `different_session_rejected` | Token includes a session ID from the engine-owned trusted RNG | Entropy, independent seeding and session-ID uniqueness are not proved |
 | `accounting_conserves` | Checked totals, ordered subtraction, fee cap and exact payment/change partition | Nat model starts with totals; Rust's bounded per-action accumulation and crypto ownership checks are exercised by tests, not formally refined |
 | `overspend_rejected` | `checked_sub` rejects output totals above inputs | No statement about chain membership, proofs or spendability |
 
@@ -39,7 +39,13 @@ This is a reviewed-by-author correspondence table, **not a machine-checked
 refinement of Rust**. PCZT deserialization, note/value commitments, encryption,
 FVK ownership, digest construction, random signatures, key secrecy, display
 rendering, compiler correctness and device behavior remain outside this model.
-The test suite uses the actual pinned primitives to exercise these boundaries.
+The portable core's private low-level signer recomputes the digest of the retained
+fully verified PCZT; the model does not prove that digest construction or upstream
+metadata restoration. Its signing-success boolean abstracts completion of every
+signature. A signing RNG panic interrupts execution rather than returning a modeled
+error: host unwind tests establish that consumed consent and no partial response
+survive that interruption, without proving firmware reset behavior. The test suite
+uses the actual pinned primitives to exercise these boundaries.
 A future device adapter must also bind authenticated UI events to the exact
 projection and cover transport framing, interruption and memory constraints.
 

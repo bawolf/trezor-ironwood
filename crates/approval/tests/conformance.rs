@@ -1,4 +1,6 @@
+mod action_bounds;
 mod common;
+mod randomness;
 use common::*;
 use ironwood_approval::{
     Engine, Error, OutputKind, Policy,
@@ -429,51 +431,115 @@ fn zero_value_output_cannot_hide_nonempty_memo() {
     );
 }
 
-/// Test-only experiment. The production reference Engine continues using the standard Signer.
-fn profile_digest_experiment(pczt: &Pczt) -> [u8; 32] {
-    use zcash_primitives::transaction::{
-        TransactionData, sighash::SignableInput, sighash_v6::v6_signature_hash, txid::TxIdDigester,
-    };
-    use zcash_protocol::{consensus::BranchId, value::ZatBalance};
-    let mut digest = None;
-    Verifier::new(pczt.clone())
-        .with_ironwood(|bundle| -> Result<(), OrchardError<()>> {
-            let tx: TransactionData<pczt::EffectsOnly> = TransactionData::from_parts_v6(
-                BranchId::try_from(*pczt.global().consensus_branch_id()).unwrap(),
-                0,
-                (*pczt.global().expiry_height()).into(),
-                None,
-                None,
-                None,
-                bundle.extract_effects::<ZatBalance>().unwrap(),
-            );
-            digest = Some(
-                v6_signature_hash(&tx, &SignableInput::Shielded, &tx.digest(TxIdDigester))
-                    .as_bytes()
-                    .try_into()
-                    .unwrap(),
-            );
-            Ok(())
-        })
-        .unwrap();
-    digest.unwrap()
-}
-
 #[test]
 fn upstream_digest_assembly_matches_standard_signer_across_action_bounds() {
     for outputs in 1..=8 {
         let bytes = build_actions(outputs);
         let pczt = Pczt::parse(&bytes).unwrap();
-        assert_eq!(pczt.ironwood().actions().len(), outputs.max(2));
-        // The unchanged reference first establishes that this belongs to profile 1.
+        assert_eq!(pczt.ironwood().actions().len(), outputs);
+        // Full validation establishes that this transaction belongs to profile 1.
         let review = engine().begin(&bytes).unwrap();
         assert_eq!(review.projection().outputs.len(), outputs);
-        let standard = Signer::new(pczt.clone()).unwrap().shielded_sighash();
+        let standard = Signer::new(pczt).unwrap().shielded_sighash();
         assert_eq!(&standard, review.sighash());
-        assert_eq!(profile_digest_experiment(&pczt), standard);
+
         let mut value = json(&bytes);
         value["ironwood"]["anchor"] = json!(vec![0; 32]);
-        let reanchored = Pczt::parse(&encode(value)).unwrap();
-        assert_eq!(profile_digest_experiment(&reanchored), standard);
+        let reanchored = encode(value);
+        let reanchored_review = engine().begin(&reanchored).unwrap();
+        let reanchored_standard = Signer::new(Pczt::parse(&reanchored).unwrap())
+            .unwrap()
+            .shielded_sighash();
+        assert_eq!(&reanchored_standard, reanchored_review.sighash());
+        assert_eq!(reanchored_standard, standard);
     }
+}
+
+#[test]
+fn multiple_owned_inputs_produce_all_and_only_verified_signatures() {
+    for inputs in [2, 8] {
+        let bytes = build_inputs(&vec![100_000; inputs]);
+        let mut e = engine();
+        let review = e.begin(&bytes).unwrap();
+        assert_eq!(review.projection().total_input, inputs as u64 * 100_000);
+        assert_eq!(review.projection().fee, inputs as u64 * 5_000);
+        e.approve(review.token()).unwrap();
+        let signed = e.sign(review.token(), &keys().1).unwrap();
+        assert_eq!(signed.signatures.len(), inputs);
+        for (i, signature) in signed.signatures.iter().enumerate() {
+            assert_eq!(signature.action_index(), i);
+            assert_eq!(signature.value_pool(), orchard::ValuePool::Ironwood);
+        }
+        let mut receiver = Signer::new(Pczt::parse(&bytes).unwrap()).unwrap();
+        for signature in signed.signatures {
+            let signature = pczt::roles::signer::SpendAuthSignature::from_parts(
+                signature.value_pool(),
+                signature.action_index(),
+                *signature.signature(),
+            );
+            receiver
+                .apply_orchard_spend_auth_signature(&signature)
+                .unwrap();
+        }
+        assert_eq!(receiver.shielded_sighash(), signed.sighash);
+        assert!(e.sign(review.token(), &keys().1).is_err());
+    }
+}
+
+#[test]
+fn valid_individual_notes_cannot_overflow_total_input_policy() {
+    let maximum = zcash_protocol::value::MAX_MONEY;
+    let bytes = build_inputs(&[maximum / 2, maximum / 2 + 1]);
+    // These note values, encodings and net balance are individually representable.
+    preflight(&bytes).unwrap();
+    Signer::new(Pczt::parse(&bytes).unwrap()).unwrap();
+    assert_eq!(
+        engine().begin(&bytes).unwrap_err(),
+        Error("accounting overflow")
+    );
+}
+
+#[test]
+fn equivalent_zero_lock_times_keep_digest_but_require_new_consent() {
+    let mut value = json(&fixture());
+    value["global"]["fallback_lock_time"] = Value::Null;
+    let absent = encode(value.clone());
+    value["global"]["fallback_lock_time"] = json!(0);
+    let explicit = encode(value);
+    assert_ne!(absent, explicit);
+    let digest = Signer::new(Pczt::parse(&absent).unwrap())
+        .unwrap()
+        .shielded_sighash();
+    assert_eq!(
+        Signer::new(Pczt::parse(&explicit).unwrap())
+            .unwrap()
+            .shielded_sighash(),
+        digest
+    );
+    let mut e = engine();
+    let old = e.begin(&absent).unwrap();
+    assert_eq!(*old.sighash(), digest);
+    e.approve(old.token()).unwrap();
+    let new = e.begin(&explicit).unwrap();
+    assert_eq!(*new.sighash(), digest);
+    assert_ne!(old.token().context(), new.token().context());
+    // Test the new token first: the replacement itself must not inherit consent.
+    assert!(e.sign(new.token(), &keys().1).is_err());
+    assert!(e.sign(old.token(), &keys().1).is_err());
+    let approved = e.begin(&explicit).unwrap();
+    e.approve(approved.token()).unwrap();
+    let signed = e.sign(approved.token(), &keys().1).unwrap();
+    let mut oracle = Signer::new(Pczt::parse(&explicit).unwrap()).unwrap();
+    for signature in signed.signatures {
+        oracle
+            .apply_orchard_spend_auth_signature(
+                &pczt::roles::signer::SpendAuthSignature::from_parts(
+                    signature.value_pool(),
+                    signature.action_index(),
+                    *signature.signature(),
+                ),
+            )
+            .unwrap();
+    }
+    assert_eq!(signed.sighash, digest);
 }

@@ -1,5 +1,9 @@
+#![no_std]
 //! Experimental host reference for docs/APPROVAL_CONTRACT.md. Synthetic regtest only.
 //! This is not a firmware integration or a security boundary within the host process.
+extern crate alloc;
+use alloc::vec::Vec;
+mod effects;
 pub mod wire;
 
 use orchard::{
@@ -12,11 +16,13 @@ use orchard::{
 use pczt::{
     Pczt,
     roles::{
-        signer::{Signer, SpendAuthSignature, extract_orchard_spend_auth_signatures},
+        low_level_signer::{OrchardParseError, Signer as LowLevelSigner},
         verifier::{OrchardError, Verifier},
     },
 };
-use rand_core::{OsRng, RngCore};
+#[cfg(feature = "std")]
+use rand_core::OsRng;
+use rand_core::{CryptoRng, RngCore};
 use zcash_note_encryption::{
     Domain, try_output_recovery_with_ock, try_output_recovery_with_ovk,
     try_output_recovery_with_pkd_esk,
@@ -30,7 +36,7 @@ use zcash_protocol::{
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct Error(pub &'static str);
-pub type Result<T> = std::result::Result<T, Error>;
+pub type Result<T> = core::result::Result<T, Error>;
 fn ensure(ok: bool, message: &'static str) -> Result<()> {
     if ok { Ok(()) } else { Err(Error(message)) }
 }
@@ -114,9 +120,34 @@ impl Review {
 struct Pending {
     review: Review,
     pczt: Pczt,
-    indices: Vec<usize>,
+    signing_indices: Vec<usize>,
     approved: bool,
+    header: wire::Header,
 }
+/// One new Ironwood spend signature; profile 1 has no other value pool.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct SpendAuthSignature {
+    action_index: usize,
+    signature: [u8; 64],
+}
+impl SpendAuthSignature {
+    pub fn value_pool(&self) -> ValuePool {
+        ValuePool::Ironwood
+    }
+    pub fn action_index(&self) -> usize {
+        self.action_index
+    }
+    pub fn signature(&self) -> &[u8; 64] {
+        &self.signature
+    }
+}
+impl From<OrchardParseError> for Error {
+    fn from(_: OrchardParseError) -> Self {
+        // Upstream covers both parsing and positional action-restoration checks.
+        Error("preverified signing failed")
+    }
+}
+
 pub struct Signed {
     pub token: Token,
     pub sighash: [u8; 32],
@@ -125,22 +156,33 @@ pub struct Signed {
 }
 
 /// Owned state; approval must be invoked only by the future trusted UI, never by transport.
-pub struct Engine {
+pub struct Engine<R> {
+    rng: R,
     policy: Policy,
     fvk: FullViewingKey,
     session: [u8; 32],
     counter: u64,
     pending: Option<Pending>,
 }
-impl Engine {
+#[cfg(feature = "std")]
+impl Engine<OsRng> {
     pub fn new(policy: Policy, fvk: FullViewingKey) -> Result<Self> {
+        Self::with_rng(policy, fvk, OsRng)
+    }
+}
+impl<R: RngCore + CryptoRng> Engine<R> {
+    /// Owns the trusted RNG used for session IDs and signature randomness.
+    /// Supply independently seeded CSPRNG state from trusted integration, never
+    /// untrusted host-provided seeds or RNGs. `CryptoRng` does not enforce this provenance.
+    /// Fixed or reused seeds are for deterministic synthetic tests only.
+    pub fn with_rng(policy: Policy, fvk: FullViewingKey, mut rng: R) -> Result<Self> {
         let mut session = [0; 32];
-        OsRng
-            .try_fill_bytes(&mut session)
+        rng.try_fill_bytes(&mut session)
             .map_err(|_| Error("session entropy unavailable"))?;
         Ok(Self {
             policy,
             fvk,
+            rng,
             session,
             counter: 0,
             pending: None,
@@ -155,7 +197,13 @@ impl Engine {
             .counter
             .checked_add(1)
             .ok_or(Error("session exhausted"))?;
-        let (pczt, projection, indices, sighash) = validate(bytes, &self.policy, &self.fvk)?;
+        let Validated {
+            pczt,
+            projection,
+            signing_indices,
+            sighash,
+            header,
+        } = validate(bytes, &self.policy, &self.fvk)?;
         let mut h = blake2b_simd::Params::new()
             .hash_length(32)
             .personal(b"IWApprovalV1")
@@ -184,8 +232,9 @@ impl Engine {
         self.pending = Some(Pending {
             review: review.clone(),
             pczt,
-            indices,
+            signing_indices,
             approved: false,
+            header,
         });
         Ok(review)
     }
@@ -202,34 +251,55 @@ impl Engine {
         Ok(())
     }
     /// Consumes consent even on failure. There is deliberately no replacement-PCZT parameter.
+    ///
+    /// Upstream signatures use the trusted RNG's infallible `RngCore::fill_bytes`.
+    /// Entropy failure must stop signing (panic, abort, or reset), never substitute bytes.
+    /// Such failures are not returned as this method's ordinary `Error`.
     pub fn sign(&mut self, token: &Token, ask: &SpendAuthorizingKey) -> Result<Signed> {
         let pending = self.pending.take().ok_or(Error("no approved request"))?;
         ensure(
             pending.approved && pending.review.token == *token,
             "signing token mismatch",
         )?;
-        let mut signer =
-            Signer::new(pending.pczt).map_err(|_| Error("signer construction failed"))?;
-        ensure(
-            signer.shielded_sighash() == pending.review.sighash,
-            "signing digest changed",
+        // Full Verifier checks covered this identical retained PCZT before consent.
+        // This low-level path skips FVK validation and relies on those earlier checks.
+        // No untrusted signing callback is exposed.
+        let signer = LowLevelSigner::new(pending.pczt).sign_ironwood_with(
+            |_, bundle, modifiable| -> Result<()> {
+                ensure(*modifiable == 0, "signing flags changed")?;
+                // The retained header supplies globals; this rechecks Ironwood effects.
+                ensure(
+                    effects::sighash(bundle, &pending.header)? == pending.review.sighash,
+                    "signing digest changed",
+                )?;
+                for index in &pending.signing_indices {
+                    bundle
+                        .actions_mut()
+                        .get_mut(*index)
+                        .ok_or(Error("signing index changed"))?
+                        .sign(pending.review.sighash, ask, &mut self.rng)
+                        .map_err(|_| Error("signing failed"))?;
+                }
+                Ok(())
+            },
         )?;
-        for index in &pending.indices {
-            signer
-                .sign_ironwood(*index, ask)
-                .map_err(|_| Error("signing failed"))?;
-        }
         let pczt = signer.finish();
-        let signatures: Vec<_> = extract_orchard_spend_auth_signatures(&pczt)
-            .into_iter()
-            .filter(|s| {
-                s.value_pool() == ValuePool::Ironwood && pending.indices.contains(&s.action_index())
+        let signatures = pending
+            .signing_indices
+            .iter()
+            .map(|index| {
+                let signature = pczt
+                    .ironwood()
+                    .actions()
+                    .get(*index)
+                    .and_then(|action| *action.spend().spend_auth_sig())
+                    .ok_or(Error("missing signature"))?;
+                Ok(SpendAuthSignature {
+                    action_index: *index,
+                    signature,
+                })
             })
-            .collect();
-        ensure(
-            signatures.len() == pending.indices.len(),
-            "signature cardinality mismatch",
-        )?;
+            .collect::<Result<Vec<_>>>()?;
         Ok(Signed {
             token: pending.review.token,
             sighash: pending.review.sighash,
@@ -246,7 +316,14 @@ fn add(total: u64, value: u64) -> Result<u64> {
         .ok_or(Error("accounting overflow"))
 }
 
-type Validated = (Pczt, Projection, Vec<usize>, [u8; 32]);
+struct Validated {
+    pczt: Pczt,
+    projection: Projection,
+    /// Action indices of verified positive inputs to sign, in action order.
+    signing_indices: Vec<usize>,
+    sighash: [u8; 32],
+    header: wire::Header,
+}
 fn validate(bytes: &[u8], policy: &Policy, fvk: &FullViewingKey) -> Result<Validated> {
     let header = wire::scan(bytes)?;
     ensure(
@@ -263,10 +340,7 @@ fn validate(bytes: &[u8], policy: &Policy, fvk: &FullViewingKey) -> Result<Valid
         "expiry outside trusted window",
     )?;
     let pczt = Pczt::parse(bytes).map_err(|_| Error("upstream PCZT parse failed"))?;
-    // Compute effects without signing; this is not the validation decision.
-    let sighash = Signer::new(pczt.clone())
-        .map_err(|_| Error("effect extraction failed"))?
-        .shielded_sighash();
+    let mut sighash = None;
     let mut projection = Projection {
         network: "regtest (synthetic)",
         pool: "Ironwood",
@@ -279,18 +353,34 @@ fn validate(bytes: &[u8], policy: &Policy, fvk: &FullViewingKey) -> Result<Valid
         padding_outputs: 0,
         outputs: Vec::new(),
     };
-    let mut indices = Vec::new();
+    let mut signing_indices = Vec::new();
     Verifier::new(pczt.clone())
-        .with_ironwood(|bundle| -> std::result::Result<(), OrchardError<Error>> {
-            verify_bundle(bundle, fvk, policy, &sighash, &mut projection, &mut indices)
-                .map_err(OrchardError::Custom)
+        .with_ironwood(|bundle| -> core::result::Result<(), OrchardError<Error>> {
+            let digest = effects::sighash(bundle, &header).map_err(OrchardError::Custom)?;
+            verify_bundle(
+                bundle,
+                fvk,
+                policy,
+                &digest,
+                &mut projection,
+                &mut signing_indices,
+            )
+            .map_err(OrchardError::Custom)?;
+            sighash = Some(digest);
+            Ok(())
         })
         .map_err(|e| match e {
             OrchardError::Custom(e) => e,
             _ => Error("upstream bundle parse failed"),
         })?;
     // Retain the exact original parsed object, not a reserialized replacement from Verifier.
-    Ok((pczt, projection, indices, sighash))
+    Ok(Validated {
+        pczt,
+        projection,
+        signing_indices,
+        sighash: sighash.ok_or(Error("missing digest"))?,
+        header,
+    })
 }
 
 fn verify_bundle(
@@ -299,7 +389,7 @@ fn verify_bundle(
     policy: &Policy,
     sighash: &[u8; 32],
     p: &mut Projection,
-    indices: &mut Vec<usize>,
+    signing_indices: &mut Vec<usize>,
 ) -> Result<()> {
     let version = BundleVersion::ironwood_v3();
     ensure(
@@ -351,7 +441,7 @@ fn verify_bundle(
                 spend.spend_auth_sig().is_none(),
                 "real spend already signed",
             )?;
-            indices.push(index);
+            signing_indices.push(index);
         }
         verify_encryption(action, fvk)?;
         if output_value == 0 {
@@ -374,7 +464,7 @@ fn verify_bundle(
         });
     }
     ensure(
-        !indices.is_empty() && !p.outputs.is_empty(),
+        !signing_indices.is_empty() && !p.outputs.is_empty(),
         "no real spend or output",
     )?;
     p.fee = p

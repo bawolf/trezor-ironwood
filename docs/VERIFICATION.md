@@ -24,6 +24,7 @@ wallet or circuit safety.
 | `ironwood-source` | Six upstream source/census/fixture scripts | Lean proof success, all CI checks or complete fixture regeneration |
 | `firmware build` / `firmware zcash` | Current Safe 7 emulator identity, pinned source/toolchain, nine existing Zcash signing tests | Physical-device behavior, production firmware, shielded support, full UI screenshot baselines |
 | `approval` | Pinned actual-PCZT conformance, dependency identity, exact local input hashes, formatting and warning-fatal Clippy | Device behavior, exhaustive hostile inputs or consensus validation |
+| `embedded-probe` | Actual core with default features disabled, source-pinned Safe 7 target toolchain, LLVM C tools, dependency identity and core input hashes | Concrete RNG code generation, linking, runtime signatures, heap/stack limits, firmware consent or entropy |
 | `approval-proofs` | Eleven structural theorems, exact axiom guards and theorem census | Machine-checked Rust refinement, cryptography or firmware proofs |
 | `lean` | `lake build --wfail` with all six pinned default targets | Reproducible Rust fixture regeneration, full firmware correctness or reviewed cryptographic assumptions |
 
@@ -46,3 +47,21 @@ correctness. Avoid vacuous proofs where the desired property is simply assumed.
 Retain upstream axiom whitelists and dependency census checks. No accepted `sorry`
 or unexplained axiom additions. Keep adversarial proof-checker tests separate from
 the production theorem dependency graph as upstream already does.
+
+## Independent change reviews
+
+Use two distinct reviews before accepting a proposed change. Claude Code with
+Fable reviews adversarial correctness: what hostile input or state transition
+breaks the claimed behavior, whether upstream APIs provide the assumed guarantees,
+and which concrete regressions are missing. A separate agent reviews clarity,
+conciseness, names and necessary abstractions. One coordinator resolves findings
+and runs the relevant acceptance lanes after integration. Reviewers do not publish
+comments or PRs; those actions still require their separate authorization.
+
+Freeze the reviewed source, record its hashes and the base revision, and preserve
+the review result under ignored `work/reviews/`. Save a concise finding/resolution
+record in `docs/reviews/`. Any later substantive change needs review of that delta.
+Run Fable through the existing Claude Code subscription with `--model fable`, a
+per-run budget limit and read-only tools; do not silently substitute another model.
+Record reported model usage separately from actual billing. Reviews are evidence
+of scrutiny, not proof of cryptographic safety or approval for production funds.

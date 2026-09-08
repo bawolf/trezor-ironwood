@@ -1,6 +1,7 @@
 # Experimental Ironwood approval contract, profile 1
 
-This contract governs the host reference adapter, not production firmware. It uses
+This contract governs the portable experimental core and its host harness, not
+production firmware. It uses
 librustzcash `5e770a91ad0d11938dbc713e7889e4aa8009266c` and the Orchard 0.15.3
 crate selected by its Cargo.lock. See [validation API map](PCZT_VALIDATION_MAP.md).
 All keys and transactions exercised here are synthetic. The adapter must not be
@@ -123,7 +124,11 @@ private transactions in a future device integration.
 returns an immutable review snapshot and token. A trusted UI may then approve that
 exact token; the host must never invoke this transition over transport. `sign`
 consumes the approved state **before** attempting signing and accepts no replacement
-PCZT. It invokes upstream `Signer::sign_ironwood` only for owned positive inputs.
+PCZT. A private `LowLevelSigner` closure recomputes the upstream v6 digest from
+the retained header and bundle effects, checks it against the approved digest,
+and invokes upstream `Action::sign` only for verified positive inputs. Full FVK,
+commitment, ciphertext and policy verification already covered that identical
+owned PCZT. The low-level signer and its closure are never exposed to callers.
 It returns signatures only after every requested signature succeeds, with pool,
 action index, request context and digest. The reference adapter may also return
 the signed PCZT for tests; errors never return a partially signed object.
@@ -136,6 +141,19 @@ The Rust ownership API prevents accidental external mutation, but it is not an
 isolation boundary against hostile code in the same process. Dropping state is
 not a claim of memory zeroization. Production key lifecycle, entropy, side-channel
 and anti-exfiltration work remain separate obligations.
+
+The core uses `no_std` with `alloc`. `Engine::with_rng` owns a trusted
+`RngCore + CryptoRng` for both session identity and signing. The default `std`
+feature provides `Engine::new` with `OsRng` for host tests. The trait bound does
+not authenticate entropy or prevent repeated seeds; independently seeded trusted
+randomness remains an integration requirement. Session entropy failure returns
+an error. Upstream RedDSA requests signature randomness through infallible
+`fill_bytes`: entropy loss must stop execution, never substitute predictable
+bytes. A panic/reset during signing produces no response and leaves consent
+consumed; the host unwind regression tests this after one internal signature.
+This is not a recoverable signing-entropy error or a tested device reset path.
+Allocator failure, RNG implementation, reset behavior, key lifetime, stack/heap
+limits and firmware linking remain separate integration requirements.
 
 Post-signing v6 anchor/witness/proof/binding-signature finalization is a separate
 host operation. It must preserve the effect digest and pass final consensus/proof

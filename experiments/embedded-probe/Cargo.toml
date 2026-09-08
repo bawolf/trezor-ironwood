@@ -9,7 +9,6 @@ publish = false
 resolver = "3"
 
 [dependencies]
-pczt = { path = "../../upstream/librustzcash/pczt", default-features = false, features = ["orchard"] }
+ironwood-approval = { path = "../../crates/approval", default-features = false }
 orchard = { version = "=0.15.3", default-features = false }
-zcash_protocol = { path = "../../upstream/librustzcash/components/zcash_protocol", default-features = false }
-zcash_note_encryption = { version = "=0.4.1", default-features = false }
+rand_core = { version = "0.6", default-features = false }

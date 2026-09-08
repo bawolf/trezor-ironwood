@@ -17,7 +17,7 @@ Development branch: `codex/verification-and-reuse`.
 - [Conformance suite](APPROVAL_RESULTS.md), dependency identity and local input
   hashes; [eleven Lean structural proofs](APPROVAL_PROOFS.md) with exact axiom guards.
 - [Embedded compatibility probe](../experiments/embedded-probe/README.md): the
-  shared scanner and upstream verifier APIs compile without an OS for Safe 7's
+  complete approval core compiles without OS features for Safe 7's
   `thumbv8m.main-none-eabihf` target. This is not a linked firmware image.
 
 ## Validation
@@ -29,44 +29,49 @@ Development branch: `codex/verification-and-reuse`.
 | Upstream Ironwood integration tests | 4 passed |
 | Upstream firmware wire-compatibility tests | 4 passed; Keystone fixture, not Trezor |
 | Ironwood source/census/fixture scripts | All six passed; 480 modules and 200 endpoint declarations |
-| Host approval conformance | 28 passed; formatting and warning-fatal Clippy passed |
+| Portable approval conformance | 36 passed; formatting and warning-fatal Clippy passed |
 | Host dependency identity | All 133 registry packages match upstream versions/checksums |
 | Local approval/accounting Lean model | 11 named theorems; both default targets, census and exact axiom guards passed |
-| Safe 7 processor compatibility | `no_std` verifier probe passed on the actual Rust MCU target |
+| Safe 7 processor compatibility | Complete `no_std` core passed on the actual Rust MCU target; 126 registry packages match upstream |
 | Current Safe 7 emulator | Nine existing transparent Zcash/v5 tests passed, no skips/failures |
-| Full upstream Lean proof build | Incomplete: two 20-minute timeouts and one 60-minute timeout; unchanged full-target resume running |
+| Full upstream Lean proof build | Passed: all six default targets, warning-fatal build and unchanged upstream axiom/census gates; 3,915 jobs |
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260908T050651Z-project-27cd19de/report.json`.
-- Approval: `work/runs/20260908T052631Z-approval-9ff95bb3/report.json`.
-- Local proofs: `work/runs/20260908T051419Z-approval-proofs-3abb0f64/report.json`.
-- Embedded probe: `work/runs/20260908T050942Z-embedded-probe-067453c0/report.json`.
+- Project: `work/runs/20260908T064914Z-project-1920358c/report.json`.
+- Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
+- Local proofs: `work/runs/20260908T063118Z-approval-proofs-010aa368/report.json`.
+- Embedded probe: `work/runs/20260908T064723Z-embedded-probe-313ddb21/report.json`.
 - Emulator: `work/runs/20260908T040947Z-firmware-zcash-f4fcf912/report.json`.
 
 Portable result summaries and hashes are in `BASELINE_RESULTS.json`. Raw logs,
 synthetic PCZTs and toolchain caches remain ignored. Earlier failed/partial runs
 are retained; see the firmware and approval evidence documents for diagnoses.
 
-The 60-minute upstream Lean run ended at 05:02:34 UTC with exit 124. Its log
-reached 3,833/3,915 jobs without reporting a proof error; it is **not a passing
-result**. Seventy-five local source modules still lacked compiled artifacts when
-inspected. The unchanged resume launched at 05:08:44 UTC and writes to
-`work/runs/20260908T050844Z-lean-f2a9f49d/`. Check its report/lock before launching
-another run. All six default targets and upstream axiom/census checks remain in
-place; no target, warning gate or axiom policy has been weakened.
+The full upstream Lean resume passed at 06:17:01 UTC, reporting 3,915 completed
+jobs. `work/runs/20260908T050844Z-lean-f2a9f49d/report.json` records exit zero,
+no timeout and command duration 2,506 seconds. Log SHA-256:
+`0e9bcba442280d641de6c8dfff2de5bcf99dc711593ee4a7d1e6ad256b11a9df`.
+All six default targets and upstream axiom/census checks remained in place.
+Earlier partial runs are retained, including the 60-minute timeout at 3,833 jobs.
+This is the source-pinned Lean build baseline; it does not claim every separate
+upstream CI workflow, fixture regeneration or documentation check was run.
 
 ## Continuing
 
 M1 is complete only for the explicit synthetic-regtest, Ironwood-only profile.
-A test-only digest assembly experiment now matches the standard Signer across
-all admitted action counts and both deferred/restored anchors. The combined
-portable RNG/digest/signing-core rewrite was rejected by automatic approval review
-and remains unapplied, with a [reviewable proposal and patch](proposals/PORTABLE_APPROVAL_CORE.md)
-awaiting explicit approval. The working Engine remains unchanged.
+The user-approved [portable core refactor](proposals/PORTABLE_APPROVAL_CORE.md)
+is implemented and accepted for this experimental profile. Complete host
+conformance, exact target compilation and separate [Fable/readability reviews](reviews/PORTABLE_APPROVAL_CORE.md)
+passed their stated scopes. The low-level signer remains private over an owned,
+fully verified PCZT; device entropy, allocation and trusted UI are still required.
 
-Device allocation/entropy interfaces, the complete embedded signature-digest path,
-Safe 7 integration, measured resources and authenticated device review remain M2.
+The [Safe 7 source map](SAFE7_INTEGRATION.md) identifies 800 KiB shared application
+RAM, a 32 KiB native stack and two 8,704-byte THP buffers. These are shared firmware
+constraints, not an approval-core allocation allowance. M2.1b is the next bounded
+project: measure 15 synthetic layouts, then determine target link/runtime fit.
+M2.1c covers trusted review/consent and M2.1d covers bounded transport/signing.
+
 The local proofs have a documented correspondence to Rust, not machine-checked
 Rust or firmware refinement. Mixed pools and general memo/address/batch support
 require contract extensions before acceptance.
@@ -80,12 +85,15 @@ No new automation is needed. Keep the machine on and Codex running.
 
 - No physical device accessed or flashed, no real-funds transaction, no production
   seed loaded. The current shielded signer is a host reference, not device firmware.
-- Independent cryptographic/embedded review and eventual hardware validation remain.
+- Automated adversarial/readability reviews are recorded; independent specialist
+  cryptographic/embedded review and eventual hardware validation remain.
 - No outreach sent. Librustzcash needs maintainer acknowledgment before a PR.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased; existing Codex account usage is not dollar-metered here.
+  subscription purchased. Fable reported USD 7.212187 at list prices through the
+  existing Max subscription; USD 7.22 is conservatively reserved in the ledger.
+  Actual subscription billing and Codex dollar usage are not observed here.
 
 These milestones do not complete the shielded-support project or establish that
 the wallet, circuit or eventual firmware is ready for funds.

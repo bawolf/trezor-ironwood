@@ -23,7 +23,7 @@ pub fn keys() -> (FullViewingKey, SpendAuthorizingKey) {
     let sk = SpendingKey::from_bytes([0; 32]).unwrap(); // PUBLIC TEST SEED ONLY
     (FullViewingKey::from(&sk), SpendAuthorizingKey::from(&sk))
 }
-pub fn engine() -> Engine {
+pub fn engine() -> Engine<rand_core::OsRng> {
     Engine::new(Policy::regtest(HEIGHT, 100_000).unwrap(), keys().0).unwrap()
 }
 pub fn fixture() -> Vec<u8> {
@@ -165,6 +165,7 @@ pub fn build_actions(outputs: usize) -> Vec<u8> {
     let mut rng = ChaCha20Rng::from_seed([outputs as u8; 32]);
     let (fvk, _) = keys();
     let other = FullViewingKey::from(&SpendingKey::from_bytes([1; 32]).unwrap());
+    // ZIP 317 retains its two-action minimum fee even for one unpadded action.
     let input = (1..=outputs as u64).sum::<u64>() * 100_000 + outputs.max(2) as u64 * 5_000;
     let version = BundleVersion::ironwood_v3();
     let recipient = fvk.address_at(0u32, Scope::External);
@@ -207,7 +208,7 @@ pub fn build_actions(outputs: usize) -> Vec<u8> {
         network,
         HEIGHT.into(),
         BundlePadding::DEFAULT,
-        BundlePadding::DEFAULT,
+        BundlePadding::UNPADDED,
     )
     .unwrap();
     builder
@@ -228,6 +229,88 @@ pub fn build_actions(outputs: usize) -> Vec<u8> {
             )
             .unwrap();
     }
+    let result = builder
+        .build_for_pczt(&mut rng, &zip317::FeeRule::standard())
+        .unwrap();
+    let pczt = IoFinalizer::new(Creator::build_from_parts(result.pczt_parts).unwrap())
+        .finalize_io()
+        .unwrap();
+    Redactor::new(pczt)
+        .redact_sapling_with(|mut s| {
+            s.clear_bsk();
+            s.clear_anchor();
+        })
+        .redact_ironwood_with(|mut i| {
+            i.clear_bsk();
+            i.redact_actions(|mut a| a.clear_spend_witness());
+        })
+        .finish()
+        .serialize()
+        .unwrap()
+}
+
+pub fn build_inputs(values: &[u64]) -> Vec<u8> {
+    let mut rng = ChaCha20Rng::from_seed([88; 32]);
+    let (fvk, _) = keys();
+    let other = FullViewingKey::from(&SpendingKey::from_bytes([1; 32]).unwrap());
+    let network = LocalNetwork {
+        overwinter: Some(1.into()),
+        sapling: Some(2.into()),
+        blossom: Some(3.into()),
+        heartwood: Some(4.into()),
+        canopy: Some(5.into()),
+        nu5: Some(6.into()),
+        nu6: Some(7.into()),
+        nu6_1: Some(8.into()),
+        nu6_2: Some(9.into()),
+        nu6_3: Some(10.into()),
+    };
+    let mut builder = DeferredPcztBuilder::new::<zip317::FeeError>(
+        network,
+        HEIGHT.into(),
+        BundlePadding::DEFAULT,
+        BundlePadding::DEFAULT,
+    )
+    .unwrap();
+    let version = BundleVersion::ironwood_v3();
+    for (i, value) in values.iter().enumerate() {
+        let mut funding = orchard::builder::Builder::new(
+            orchard::builder::BundleType::DEFAULT,
+            version,
+            version.default_flags(),
+            orchard::Anchor::empty_tree(),
+        )
+        .unwrap();
+        funding
+            .add_output(
+                None,
+                fvk.address_at(i as u32, Scope::External),
+                NoteValue::from_raw(*value),
+                MemoBytes::empty().into_bytes(),
+            )
+            .unwrap();
+        let (bundle, meta) = funding.build_for_pczt(&mut rng).unwrap();
+        let action = &bundle.actions()[meta.output_action_index(0).unwrap()];
+        let (note, _, _) = try_note_decryption(
+            &IronwoodDomain::for_pczt_action(action),
+            &fvk.to_ivk(Scope::External).prepare(),
+            action,
+        )
+        .unwrap();
+        builder
+            .add_ironwood_spend::<zip317::FeeError>(fvk.clone(), note)
+            .unwrap();
+    }
+    let fee = values.len().max(2) as u64 * 5_000;
+    let payment = values.iter().sum::<u64>() - fee;
+    builder
+        .add_ironwood_output::<zip317::FeeError>(
+            Some(fvk.to_ovk(Scope::External)),
+            other.address_at(0u32, Scope::External),
+            Zatoshis::from_u64(payment).unwrap(),
+            MemoBytes::empty(),
+        )
+        .unwrap();
     let result = builder
         .build_for_pczt(&mut rng, &zip317::FeeRule::standard())
         .unwrap();

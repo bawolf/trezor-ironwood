@@ -1,0 +1,885 @@
+{
+  "captured_utc": "2026-09-08",
+  "current_firmware_revision": "7105338e3c2c1e681940e17780609881ce53126b",
+  "pull_requests": [
+    {
+      "number": 2472,
+      "url": "https://github.com/trezor/trezor-firmware/pull/2472",
+      "head": "d562254c2195d688ca59296f048ed905047317fe",
+      "base_at_capture": "6311675119e9b6f22c49ad8aa6f38c9bf9617aa4",
+      "base_branch": "zcash-rust-primitives",
+      "draft": true,
+      "state": "open",
+      "changed_files": 67,
+      "review_threads_total": 73,
+      "review_threads_unresolved": 8,
+      "unresolved_threads": [
+        {
+          "path": "core/src/apps/zcash/unified.py",
+          "outdated": false,
+          "comment_urls": [
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1021670159",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1024818985"
+          ]
+        },
+        {
+          "path": "core/src/apps/zcash/get_address.py",
+          "outdated": false,
+          "comment_urls": [
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1022773470",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1027271912",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1027272067",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1027273866",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1027957807",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1051315359",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1051319133",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1051326515"
+          ]
+        },
+        {
+          "path": "core/src/apps/zcash/layout.py",
+          "outdated": false,
+          "comment_urls": [
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1022800029",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1026205886"
+          ]
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/accumulator.py",
+          "outdated": false,
+          "comment_urls": [
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1023842949",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1026472407"
+          ]
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/accumulator.py",
+          "outdated": false,
+          "comment_urls": [
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1023843381"
+          ]
+        },
+        {
+          "path": "core/src/apps/zcash/get_address.py",
+          "outdated": false,
+          "comment_urls": [
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1027967370",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1051386781"
+          ]
+        },
+        {
+          "path": "core/src/apps/zcash/get_viewing_key.py",
+          "outdated": false,
+          "comment_urls": [
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1027973694",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1051387046"
+          ]
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/signer.py",
+          "outdated": false,
+          "comment_urls": [
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1027990866",
+            "https://github.com/trezor/trezor-firmware/pull/2472#discussion_r1051393372"
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "common/protob/messages-bitcoin.proto",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "62a0d31ce31dc0855789070ab41cb8b3e844cad77c63271efc637ba29dd75755",
+          "current_file_sha256": "7ceb31ce8b277cc2ab5fbacc3ad85a4136973c6b5f8113d0d71cfa164707d80a"
+        },
+        {
+          "path": "common/protob/messages-zcash.proto",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "c9577c24151f2fc8a8125498b7ef183bae60d1f55946d2711a09cd404a0d1d41",
+          "current_file_sha256": null
+        },
+        {
+          "path": "common/protob/messages.proto",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "49b6d2e0715d716ec4b02b544ff508c70eeaee7665895a576d781ea3e1d08cf4",
+          "current_file_sha256": "b7ad04d4a1f74258b53297769745fd41375338487413ca9ca220b077e698f3f6"
+        },
+        {
+          "path": "core/.changelog.d/2472.added",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "6a1b455eba6bd2bb9a825ca203cafd9da084a7ff7abee7d6e593b52453dc6acd",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/SConscript.firmware",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "2ec88f020ae441e1b4c532de148e11e73cd62332dbd98d10549053ca791693a7",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/SConscript.unix",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "7360bb209ac536032a51ae3307d46906c00433afc604ea4274351716006e6210",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/Cargo.lock",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "5ec76043425214e382e01966a91fbe1c301099150bc6bb23baa492f702c511dd",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/Cargo.toml",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "3869666379d81caed426cd9c66e9f5bf3ada681bfc11a0755ce171a5eaf5a17a",
+          "current_file_sha256": "da6b99cf2ec01706f390269a32d6500dd414db965c36216f532ca1c62a8e721a"
+        },
+        {
+          "path": "core/embed/rust/librust_qstr.h",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "fa0d162462ef1d9020551f04016372cc77a3ab9e22104fc007969b73d6fb9424",
+          "current_file_sha256": "f6f06b98985352a22e704358357a02a3bc29a1859dfb40e6a1ba0477443a61fd"
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/pallas/generators.rs",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "d48fd241b72b8e6b8b519d9dfdb28480444969040145dd53da6997f96ad8e9c2",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/pallas/mod.rs",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "691a02ade514599218df6e334c22c918698f380260cb990b93eb8d06b9a48bc7",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/pallas/scalar.rs",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "e4ba9ee1671f06c86f8b6d42db3c145f14ca87913a19f7b45b82ac27e63ebf7b",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/mocks/generated/trezorpallas.pyi",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "f96a98b5980cee3955df46c60800f3f7d63f6638cd603856ddcdfc15d38b870d",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/site_scons/site_tools/micropython/__init__.py",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "f9388706e73f421901e7faab7772a6a122b2ef2d6e8cfc187224990908afecda",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/all_modules.py",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "7a6e980403c65d9334265756355ebc953ced0b85699d63c969c471caeaea56d5",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/bitcoin/sign_tx/approvers.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "94df750d5018640cdf7026e2e8919f718c837a8c740e1c59e2f7f30b7e9ac24d",
+          "current_file_sha256": "456b7917e180eb8df49b6b09d9f8d88e8f6b2c023e3f03ebf30ac287bad9575c"
+        },
+        {
+          "path": "core/src/apps/bitcoin/sign_tx/helpers.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "86e6b05152a137d97379bace6e322ec7602014851fb6558abfa4dc9dd3ef401b",
+          "current_file_sha256": "2b4292237c0e83d7a1c4127f348e5d6e03d5d0c94eba9b224a72072e3697ef0e"
+        },
+        {
+          "path": "core/src/apps/bitcoin/sign_tx/progress.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "c8747a868f9ec79dad141d101bc339dfead8da3c30ec5af521572402597e0d09",
+          "current_file_sha256": "94c83359875153ed4e5996da2371e1f49357b7841fab99a75729dd9213b59ab6"
+        },
+        {
+          "path": "core/src/apps/workflow_handlers.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "a7ff49115d8cfaba0c5c2f3b44d276e1c10624494c08c9dd9db08edb45dfce4c",
+          "current_file_sha256": "6ca3dfb0fe29c4597e612348a5f9fb29f2174b9e6ae82c1f77c6e012ad1efd20"
+        },
+        {
+          "path": "core/src/apps/zcash/approver.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "24cdc6fa1b05e274bf8a16334fb7ae0c93ab55ab76cac5de5871fe5e3a4da177",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/get_address.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "2ad0a434a9c73bfde1cb4c42d9a81c5e261333b8d70c12c765fd7579e79361cd",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/get_viewing_key.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "414fd8a44583e055683472ca3617107789dfbe8f6b271d9aecaed6db30b66680",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/hasher.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "90c20f61412569d3c8d83b9918dc259f179ad66aacc903060fbe9d8b7aa2c441",
+          "current_file_sha256": "808ad4d97f343d497063023a5eb5af0fc1d92f140c6f681ebd6e17b78801d104"
+        },
+        {
+          "path": "core/src/apps/zcash/layout.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "1dc8b565dc19f1728db2fc5c08a570159f9257522ff353554f6f5eead2280595",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/__init__.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/accumulator.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "cfe50b7888a41090bc586321cdf5d7abca0560a66281526d4878bb90d49aa58a",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/crypto/__init__.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/crypto/address.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "ddca0993b7343893680bedcab11a4e4cf7299b4a3dfe2c692a842328f4d2d1bc",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/crypto/builder.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "b448d1d32a5970c3f7526fe1601846b425818b4af77d23bcd62c9aae1e21655c",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/crypto/ff1.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "9d0112791a8101720d589fd2f0717fcc6d1c11aa5127d9aee2e88872fce61b88",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/crypto/keys.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "e57fa44881428a171c9ab20ecca90dfff151c7c887682f7f92f900c9c642665d",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/crypto/note.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "85371bc1b562e50ea4f6e646a8e335e110d96410bcd8c66c02cfa13aacf49054",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/crypto/note_encryption.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "bd1783d8f56a7a2669dbb1a030956850e7405b4ced083667f9b96c63d8130d4c",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/crypto/redpallas.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "8c4bee0e6e404f2ee607ad8a00ea399dea2cbaa499eabc0c6838c92725ceef93",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/crypto/sinsemilla.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "9a738cf56b7a98f9d8dbda58735d315995f5a5c967e41862fb057ff814075d86",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/crypto/utils.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "87ca20de11137fcd6473a118e583e6e122c9e235b99986690844a68d1f73c961",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/debug.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "8b495c32d6f745ed99eb22f63f1a9f4d78d0f29fa6ea3994cd411ae50b4bf147",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/keychain.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "f9f2a6c63c6528f2ec63af66540726d9fe46536d328154c04a20e6ba46cff789",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/random.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "3ee1ae57c123200686d4108d22956b349199f3dc7479f8b0ac3bd3bcc4a30d13",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/orchard/signer.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "8363741a9e63cbcbdb2a2af37a8109d8979480b76f0eeb6f6da3ad4c5f5ce58c",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/apps/zcash/signer.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "870d2343148715e1ab1cbf51fd6e3fd67ce4dea52ab0da6780021dc21229904c",
+          "current_file_sha256": "fad1e4b8e61d6966f28896f5fbe065e3032e60776c9e46ace730df8d4232ebac"
+        },
+        {
+          "path": "core/src/apps/zcash/unified.py",
+          "pr_change": "renamed",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "d0ee57d7c127824cfb9ef15e66b8c409b40ccdee7d7cfbcc1cfa0cc313c98e99",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/trezor/crypto/pallas.py",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "816cf2f58b4f858b8a16fa9c5c2db3804b1734ec8b73444baec01ca314cdcd93",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/trezor/enums/MessageType.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "933537e93a35c8a08220ca84d1fea2d144849781134c6697e043774d6bb4b4fb",
+          "current_file_sha256": "dc85a65afe7e0c61e94319c2917179e594d73b1e3dfc67e3d89f19cabc2c8fba"
+        },
+        {
+          "path": "core/src/trezor/enums/RequestType.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "df36c5209247a9a5f8982f63bbdc81279be3c300686d4b3233670599ecfcb358",
+          "current_file_sha256": "6df7187737ab829fa35e38b4fba558fb8a1efc9b78f56c185af6d2de7d101772"
+        },
+        {
+          "path": "core/src/trezor/enums/ZcashSignatureType.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "e6d5a9b0a9cfb63a5378ed3d7f78a8723de3edf6b7c2d4339c0efbf035798093",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/trezor/enums/__init__.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "afd4060482206df64f96f9e4103cf262ab45909b943cdc099ae2dc58cbef6b61",
+          "current_file_sha256": "864897a07e5f0366203ee46420b7cea88d1ec1203d4a6b13ef925f53b61cf8e2"
+        },
+        {
+          "path": "core/src/trezor/messages.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "4137d85d31ce497e94f39e30ca90d7ff98fb3cc1ba698c0dac8aa4f25262c2ea",
+          "current_file_sha256": "ee5341ea64bbdd05e1e956733f9aad2480be058be57d996adf41797d889c3f08"
+        },
+        {
+          "path": "core/tests/common.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "66b371d180f0943d3818743bee99bd71d46b110d196cac00979233f92b697730",
+          "current_file_sha256": "45d4f935ee9b3e50d27dd8bd60dd46d01e823f8d0cc801000d84032f2ec2c7f4"
+        },
+        {
+          "path": "core/tests/test_apps.zcash.f4jumble.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "7f2c58aeda0e81cf9ff1e8b6b5040c7667558ff541349c9873116650a614ca60",
+          "current_file_sha256": "363b8101460739422048a4b3cdecff9ff404d70fb7e923b2d5590c70323e373d"
+        },
+        {
+          "path": "core/tests/test_apps.zcash.orchard.crypto.ff1.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "cb230521459a1ae2c11ccf5af02e76b0c23284e1afdcee2df8071a1a7568f5a3",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/tests/test_apps.zcash.orchard.crypto.generators.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "374514a09980861b675d05cfe4b0c57f44e931fa83b51f553255f4cb1796f507",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/tests/test_apps.zcash.orchard.crypto.keys.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "48735ebc234ae8eb8797729297895e8e824dc72b4b60bbd197d672757780e14d",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/tests/test_apps.zcash.orchard.crypto.note_encryption.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "40bb4fad0c87a09b32920bb5de77c054321202b5c4591bb5942ad1bb901d57ed",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/tests/test_apps.zcash.orchard.crypto.redpallas.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "c172714c8aa4a880ea2300f181dba271104094a72d76f247dd18cb33825c4117",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/tests/test_apps.zcash.orchard.crypto.sinsemilla.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "f21764229bc552b28eec8a8512abfeca63dbdb040aeffd6bd55cdb9386936c5d",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/tests/test_apps.zcash.orchard.random.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "9a038f90155b518cfaefe388f880b3462bb8d72afcce59b865da7d4d0ead60c8",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/tests/test_apps.zcash.unified_addresses.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "3fe11d96e3b8b9bcb5654bdfc93558c506dadd6d2234d6054dc7704a730d9939",
+          "current_file_sha256": "41d91db25e43746d0717d607ea61a0ff840f1064447a0c30a31682eb810ab315"
+        },
+        {
+          "path": "core/tests/test_apps.zcash.zip244.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "7858b536bc62770ddff1f5c0e84ffeb1da29fe72e8a948d8c056eeecddda8162",
+          "current_file_sha256": "d346815c7c2d1a4fa345b477a95bd406b27e1ac7f29fe79e7dc88d5f8916b8e6"
+        },
+        {
+          "path": "python/.changelog.d/2472.added",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "6a1b455eba6bd2bb9a825ca203cafd9da084a7ff7abee7d6e593b52453dc6acd",
+          "current_file_sha256": null
+        },
+        {
+          "path": "python/src/trezorlib/cli/trezorctl.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "f0d1b8a6647a4761cd2b31ebc631e24b322d75a0248050e53c412c61007b6f25",
+          "current_file_sha256": "58d12d6faeee905981539e49beeeeb50b2dae5354da63685e0ea6e695afdb0cf"
+        },
+        {
+          "path": "python/src/trezorlib/cli/zcash.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "304af66963d35b391cc2cb9e1efd0530266b64446daaf2a58c13e820d9df4b41",
+          "current_file_sha256": null
+        },
+        {
+          "path": "python/src/trezorlib/messages.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "b1bedabdcb72b64ccccc6df8a962fd69eae8a6c779b82de7a82ba484f8c524dc",
+          "current_file_sha256": "48af949e420fb66db1344247a6653c9e4962900529d571f2c787b5226812c30b"
+        },
+        {
+          "path": "python/src/trezorlib/zcash.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "d92311ec5072b9855675abf4dc89c2fa6e04d76f4338cce08a34990488f65aea",
+          "current_file_sha256": null
+        },
+        {
+          "path": "tests/device_tests/zcash/test_get_address.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "e083b896c3d0f3fd7ed5ba3e5d89aa36af5938f124dae0830d8ecf15c4650ce1",
+          "current_file_sha256": null
+        },
+        {
+          "path": "tests/device_tests/zcash/test_get_viewing_key.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "42fed1901e57ed52ea1a7345a72c9786e890377ee2365ec35004ba9f6a613148",
+          "current_file_sha256": null
+        },
+        {
+          "path": "tests/device_tests/zcash/test_sign_shielded_tx.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "8587846a267c8203ebd300d2ffa721bbaeec1574315424f3e9d170d1e5ee2165",
+          "current_file_sha256": null
+        }
+      ]
+    },
+    {
+      "number": 2510,
+      "url": "https://github.com/trezor/trezor-firmware/pull/2510",
+      "head": "6311675119e9b6f22c49ad8aa6f38c9bf9617aa4",
+      "base_at_capture": "41096b5ffdabe8ddbf5cf6c5f29fba3db851ab0b",
+      "base_branch": "main",
+      "draft": false,
+      "state": "open",
+      "changed_files": 43,
+      "review_threads_total": 13,
+      "review_threads_unresolved": 1,
+      "unresolved_threads": [
+        {
+          "path": "core/embed/rust/src/micropython/obj.rs",
+          "outdated": false,
+          "comment_urls": [
+            "https://github.com/trezor/trezor-firmware/pull/2510#discussion_r1020164920",
+            "https://github.com/trezor/trezor-firmware/pull/2510#discussion_r1023579627"
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "core/.changelog.d/2510.added",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "1d87bc16955478ccb468f508c9081e84a68976deeffe263071218efd3c9d7824",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/SConscript.firmware",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "b6c53fa05debb3588080f2862015024b8690599f655eae30037c452cae20aa55",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/SConscript.unix",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "87a1c47b0c6a33d227ae9ed658cb90c9464648eff9c415a9091729d1dded7849",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/extmod/modtrezorutils/modtrezorutils.c",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "6f0be8949204428f593f821a75928e509b073f556d2a0ccc6418a32e2c72d8b9",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/extmod/rustmods/modtrezorzcashprimitives.c",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "ab039a0348fe09406787604f75128cc8ca01ef696c3f45f68438a398e7dbf455",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/firmware/mpconfigport.h",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "23e43751e028dc27af9a7a248f61b87645bb335f1987934dd907e55828b3ceda",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/Cargo.lock",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "c56479408a35b97c27d7edc26b832112b7cf42b0753797ce39f923fb09666a37",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/Cargo.toml",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "7eaef0572f12922f0fac39db95354f55c199d5b17893024a295d213f9578a759",
+          "current_file_sha256": "da6b99cf2ec01706f390269a32d6500dd414db965c36216f532ca1c62a8e721a"
+        },
+        {
+          "path": "core/embed/rust/blake2b_hal/Cargo.lock",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "6175077ec9b4d89c9a7bd9e5c376765d9feba9a612ca4f0390e9df7c3ec546b4",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/blake2b_hal/Cargo.toml",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "66dcfec7ece115c36790a93a41da09f0142b1528a9f34fcc0deeca125cd9a20f",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/blake2b_hal/src/ffi.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "55b07fd8bf8e64abaface18669dcf7fa7f3e1c5aec32f2623156657b2c508066",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/blake2b_hal/src/lib.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "824297f22792e6112f1ddecbe520287c7f8e92361691ba05cdac3acb2c5156d3",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/librust.h",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "2961abd80cc3d289d40414550ec563ae7d6cb943093a538c04411d6d9776b979",
+          "current_file_sha256": "6102f1ae4b52fdee3b39f575a7910ec0bbf21fd7d48e6826e6f279147c80746e"
+        },
+        {
+          "path": "core/embed/rust/librust_qstr.h",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "434d8f47d2f62bf99a96b1c0cf6590d6566e5967d068a1d7059c3b5382ca3340",
+          "current_file_sha256": "f6f06b98985352a22e704358357a02a3bc29a1859dfb40e6a1ba0477443a61fd"
+        },
+        {
+          "path": "core/embed/rust/src/error.rs",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "892dce9c083beae4cc8e74ef0eebe2504ae0bcd2c047c10c72367920ba745ac8",
+          "current_file_sha256": "82d598f27a8787c7b6a28cdc879581ee6c2dfa11d87c602dac8c4cc25826191f"
+        },
+        {
+          "path": "core/embed/rust/src/lib.rs",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "43ad70fe99c529481caf1057ac3d178cd0af488babcfc5c2b09d444d6e2c30af",
+          "current_file_sha256": "5517cf32abde7c640a7c8e9beff9692232496b2b571c0fb56a025a03715c8834"
+        },
+        {
+          "path": "core/embed/rust/src/micropython/macros.rs",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "8cce5586dadf0e7c4b3b366f68002f908d1b4709310a77ed41e1b8184093e449",
+          "current_file_sha256": "dd2f09eb193012647c91b272802d477510f9a07a80f25a4769c887d5a1af9537"
+        },
+        {
+          "path": "core/embed/rust/src/micropython/mod.rs",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "5b783755db7d51e5c94505afaad190f9dd5ae29478637bda648e98bc4b3ae426",
+          "current_file_sha256": "2ba534653dca5a887d491bfa27640df06432d496f206b1f882dc0baf0be13067"
+        },
+        {
+          "path": "core/embed/rust/src/micropython/obj.rs",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "930769ab0fdc3908ad978ce49fa5644a360889e7707ce2b18a0954da30a6ef9a",
+          "current_file_sha256": "2c2082c360f2d575172ad76808167ee167f21f9907146c266027944ed21d2917"
+        },
+        {
+          "path": "core/embed/rust/src/micropython/typ.rs",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "c61f6310ed312338e7aa97b9ea4ba8b132b028928386bd4be52950ae92bbab86",
+          "current_file_sha256": "7be3ee09e43d29101921b9edaf14dda67d64b20f9b45e9cfe668d81bb586b211"
+        },
+        {
+          "path": "core/embed/rust/src/micropython/wrap.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "e148c5a80f77713c767909c61b97c945f989aef154caead64c203d408bd4fd47",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/trezorhal/blake2b_tests.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "923084b0ffd940dd119427a00f388c439eeecae0fcc0a49a21486c5d2b03f6db",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/trezorhal/mod.rs",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "420594847cbcd10bd9ca9316566013a9ee984d336c1ba03a8b0cd6eaab107913",
+          "current_file_sha256": "19427c98ac8c59f1c54f3af1697ee04dd074e281f4bfeb4a064391b157003587"
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/mod.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "58e2d81a28c63b727e711bdc9947cc610b9c112e02513b061edb4aa5d3ab95fb",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/pallas/common.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "ca1d22e7df560368dd3808c53d949860921fc6b1b2104f5a5b33d0dfaedeedd2",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/pallas/fp.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "3b2959392b94a8bbd8e88a78f4983ccd582284d318585ead62dbd8fef8044bef",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/pallas/generators.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "6ffc5593c7d32d2ea4938d259f8cbc87917f3f99337f0d17736446c078275114",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/pallas/mod.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "cddfa41bd2f12e1d9ea3b5feb9d1bc1c05e781d6c12c9ff528f5715ebf352470",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/pallas/point.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "c065457aa59380f99e3cc5d8cdcebe21188b2b228680ecc269b8d7602a26bb2e",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/pallas/scalar.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "7b54c078fe2fb4fe36726e44a2f6d248f284c1a367b1857bdb6c69eaf25c864a",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/poseidon/constants.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "36a6d2aa3632ba45c1b7a7426a9b30d585cad4499aa548934c46308f7e26899f",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/poseidon/constants_gen.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "471399f01a1d304b903d3fc9f4ea3148c72d5d4141e97a63077e2547ead555fa",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/poseidon/mod.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "1b19e7ed8b459a942e074f1584a1e676ae9f569160624743f168a167214d3b0d",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/rust/src/zcash_primitives/poseidon/tests.rs",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "738a0fbffe102d34a48b2681cd043a34d97b04e51bd996e4bc35fac9513a3361",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/embed/unix/mpconfigport.h",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "1c182d3a128742ea7b5d1890e43fba4e7a4b388bb0d6edffa312d02c324be13d",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/mocks/generated/trezorpallas.pyi",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "02470d6db2045c0555901de7525349f6eeb140d2536f7eacd77ccc91a151931b",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/mocks/generated/trezorposeidon.pyi",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "a426481ee8438c28803fbef3cd6ebc51412989c29a6ff728a9015cb2854b8650",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/mocks/generated/trezorutils.pyi",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "e1423a9ef5eac88a6a8b6a257a42599baf00dd66cbbd39ac1d8e9c4422fd2eba",
+          "current_file_sha256": "e925936b92cd7805625718c199f86a82722b2988766f02c6f61dfdf6c073eb76"
+        },
+        {
+          "path": "core/site_scons/site_tools/micropython/__init__.py",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "c2f7cd77678048f3081b1a618b23fd11540f851cc4cdce84baeac5b41363687d",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/all_modules.py",
+          "pr_change": "modified",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "880b690d1c96c9ff91326a9cfc6864a250ba0d5bc06dd1c84e3155badd7fd08e",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/trezor/crypto/hashlib.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "f4765ba4d90384639e7f521b679fc16520bba2ba96211a1edfdfed6916694633",
+          "current_file_sha256": "1a6b9f8f239d5837fdf798cadf0d6fb41b03a06bd4f3d6fbc43988a6b1857d76"
+        },
+        {
+          "path": "core/src/trezor/crypto/pallas.py",
+          "pr_change": "added",
+          "current_comparison": "absent_at_same_path",
+          "pr_file_sha256": "bf4e1f969ace7f949b0b23868717fa46b7d5056eed3c80009f6a2992214d54f2",
+          "current_file_sha256": null
+        },
+        {
+          "path": "core/src/trezor/utils.py",
+          "pr_change": "modified",
+          "current_comparison": "different",
+          "pr_file_sha256": "cd2c7767b7dff4f22116e620051686f32b8bad0b72e6aa59810f268ec8cb93b2",
+          "current_file_sha256": "03dc25d4a8cc7343873e4b1f2ca4c35a79a4c146982ff6548a12ab21aa875ee8"
+        }
+      ]
+    }
+  ]
+}

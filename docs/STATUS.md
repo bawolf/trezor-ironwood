@@ -35,13 +35,15 @@ Development branch: `codex/verification-and-reuse`.
 | Safe 7 processor compatibility | Complete `no_std` core passed on the actual Rust MCU target; 126 registry packages match upstream |
 | Host resource characterization | 15 layouts, 75 measured runs, 43 independently verified new signatures; all teardowns returned to baseline |
 | Concrete target code generation | Actual Thumb objects; 3,180 individual frame entries; compiled optz comparison also passed; no linked/runtime fit claim |
+| Fixed-arena synthetic signing | Final native binary passed 35 process cases and 12 evidence-runner tests; Fable5.1 and independent clarity reviews complete for the synthetic scope |
 | Unchanged Safe 7 target firmware | Complete test-preset secmon/kernel/firmware link; 697,992-byte GC region and 32 KiB application stack; no runtime claim |
 | Current Safe 7 emulator | Nine existing transparent Zcash/v5 tests passed, no skips/failures |
 | Full upstream Lean proof build | Passed: all six default targets, warning-fatal build and unchanged upstream axiom/census gates; 3,915 jobs |
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260908T080145Z-project-b14450a0/report.json`.
+- Project: `work/runs/20260908T185038Z-project-f124e674/report.json`.
+- Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
 - Local proofs: `work/runs/20260908T063118Z-approval-proofs-010aa368/report.json`.
@@ -78,14 +80,21 @@ observed attributable peak was 80,821 bytes including the raw input. Separate
 fixture/oracle and measurement agents implemented it; Fable and independent
 readability reviews checked the change and its evidence runner.
 
-[Concrete target code generation](TARGET_CODEGEN_RESULTS.md) and its separate
-Fable/readability reviews are complete. A traced ordinary-call path totals 33,000
+[Concrete target code generation](TARGET_CODEGEN_RESULTS.md), its size-comparison
+Fable review and separate readability reviews are complete. The initial codegen
+review reported Opus despite requesting Fable; a confirmed Fable5.1 replacement
+now closes that attribution gap. A traced ordinary-call path totals 33,000
 frame bytes in the opt3/noLTO experiment, above the source-defined 32 KiB stack.
 The identical-source size-optimized build changes the call structure, so no final
 stack-fit conclusion follows. The [allocator proposal](proposals/SYNTHETIC_ALLOCATOR.md)
 and its two reviews are complete. The [unchanged target firmware](TARGET_FIRMWARE_BASELINE.md)
-now supplies a concrete paired-build baseline. Parallel projects are testing the
-public-table/request ownership boundary and a compile-only linked allocator image.
+now supplies a concrete paired-build baseline. The [native arena experiment](../experiments/arena-probe/README.md)
+passes its synthetic ownership and signature gates; its [review record](reviews/ARENA_PROBE.md)
+tracks final adversarial acceptance. The [separate compile-only allocator image](TARGET_ALLOCATOR_LINK.md)
+also linked: 4,208 additional BSS bytes and 265,216 additional flash bytes. Its
+4 KiB diagnostic arena cannot run the signing lifecycle. The clarity correction produces byte-identical firmware; the secure-monitor data
+relocations are explained. Final Fable5.1 and clarity reviews found no blocking issue. Separate agents are
+building an emulator cold-start gate and tracing a linked validation stack path.
 M2.1c covers trusted review/consent and M2.1d covers bounded transport/signing.
 
 The local proofs have a documented correspondence to Rust, not machine-checked
@@ -107,8 +116,11 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Ten Fable review runs reported USD 18.1630585 at list prices through the
-  existing Max subscription; USD 18.23 is conservatively reserved in the ledger.
+  subscription purchased. Eighteen completed Claude Code review requests reported
+  USD 30.4798955 at list prices; USD 30.58 is reserved. Thirteen report Fable by
+  name, including the final allocator/link reviews and historical codegen
+  replacement (`claude-fable-5-1`). Earlier substitutions and authentication
+  failures remain recorded. Actual model identities are checked on every result.
   Actual subscription billing and Codex dollar usage are not observed here.
 
 These milestones do not complete the shielded-support project or establish that

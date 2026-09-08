@@ -71,4 +71,6 @@ of scrutiny, not proof of cryptographic safety or approval for production funds.
 The [unchanged Safe 7 target baseline](TARGET_FIRMWARE_BASELINE.md) establishes
 linked heap/stack/flash regions under the official hardware test preset. Those
 regions precede runtime occupancy; they do not establish allocation or stack fit
-for the separate approval core. The paired allocator image is still pending.
+for the separate approval core. The [paired allocator image](TARGET_ALLOCATOR_LINK.md) has linked with a 4 KiB
+compile-only arena. It has not executed; final matching review and runtime
+integration remain pending.

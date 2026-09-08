@@ -1,0 +1,1792 @@
+diff --git a/core/embed/Cargo.lock b/core/embed/Cargo.lock
+index 98cc68c..357a8fd 100644
+--- a/core/embed/Cargo.lock
++++ b/core/embed/Cargo.lock
+@@ -17,6 +17,27 @@ version = "2.0.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "320119579fcad9c21884f5c4861d16174d0e06250625266f50fe6898340abefa"
+ 
++[[package]]
++name = "aead"
++version = "0.5.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d122413f284cf2d62fb1b7db97e02edb8cda96d769b16e443a4f6195e35662b0"
++dependencies = [
++ "crypto-common 0.1.6",
++ "generic-array",
++]
++
++[[package]]
++name = "aes"
++version = "0.8.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "b169f7a6d4742236a0a00c541b845991d0ac43e546831af1249753ab4c3aa3a0"
++dependencies = [
++ "cfg-if",
++ "cipher",
++ "cpufeatures",
++]
++
+ [[package]]
+ name = "aho-corasick"
+ version = "1.1.4"
+@@ -44,6 +65,18 @@ version = "1.0.104"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "330a5ed07fa54e4702c9d6c4174f74427fc0ef6e214bbd677ae50a5099946470"
+ 
++[[package]]
++name = "arrayref"
++version = "0.3.7"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "6b4930d2cb77ce62f89ee5d5289b4ac049559b1c45539271f5ed4fdc7db34545"
++
++[[package]]
++name = "arrayvec"
++version = "0.7.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "96d30a06541fbafbc7f82ed10c06164cfbd2c401138f6addd8404629c4b16711"
++
+ [[package]]
+ name = "autocfg"
+ version = "1.5.0"
+@@ -65,6 +98,18 @@ dependencies = [
+  "windows-link",
+ ]
+ 
++[[package]]
++name = "base64"
++version = "0.22.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
++
++[[package]]
++name = "bech32"
++version = "0.11.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d965446196e3b7decd44aa7ee49e31d630118f90ef12f97900f262eb915c951d"
++
+ [[package]]
+ name = "bindgen"
+ version = "0.72.1"
+@@ -83,12 +128,92 @@ dependencies = [
+  "syn 2.0.117",
+ ]
+ 
++[[package]]
++name = "bip32"
++version = "0.6.0-pre.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "143f5327f23168716be068f8e1014ba2ea16a6c91e8777bc8927da7b51e1df1f"
++dependencies = [
++ "bs58",
++ "hmac",
++ "rand_core 0.6.4",
++ "ripemd 0.2.0-pre.4",
++ "secp256k1",
++ "sha2 0.11.0-pre.4",
++ "subtle",
++ "zeroize",
++]
++
+ [[package]]
+ name = "bitflags"
+ version = "2.11.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "843867be96c8daad0d758b57df9392b6d8d271134fce549de6ce169ff98a92af"
+ 
++[[package]]
++name = "bitvec"
++version = "1.0.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "1bc2832c24239b0141d5674bb9174f9d68a8b5b3f2753311927c172ca46f7e9c"
++dependencies = [
++ "funty",
++ "radium",
++ "tap",
++ "wyz",
++]
++
++[[package]]
++name = "blake2b_simd"
++version = "1.0.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "23285ad32269793932e830392f2fe2f83e26488fd3ec778883a93c8323735780"
++dependencies = [
++ "arrayref",
++ "arrayvec",
++ "constant_time_eq",
++]
++
++[[package]]
++name = "blake2s_simd"
++version = "1.0.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "94230421e395b9920d23df13ea5d77a20e1725331f90fbbf6df6040b33f756ae"
++dependencies = [
++ "arrayref",
++ "arrayvec",
++ "constant_time_eq",
++]
++
++[[package]]
++name = "block-buffer"
++version = "0.10.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "3078c7629b62d3f0439517fa394996acacc5cbc91c5a20d8c658e77abd503a71"
++dependencies = [
++ "generic-array",
++]
++
++[[package]]
++name = "block-buffer"
++version = "0.11.0-rc.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "3fd016a0ddc7cb13661bf5576073ce07330a693f8608a1320b4e20561cc12cdc"
++dependencies = [
++ "hybrid-array",
++]
++
++[[package]]
++name = "bls12_381"
++version = "0.8.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d7bc6d6292be3a19e6379786dac800f551e5865a5bb51ebbe3064ab80433f403"
++dependencies = [
++ "ff",
++ "group",
++ "rand_core 0.6.4",
++ "subtle",
++]
++
+ [[package]]
+ name = "boardloader"
+ version = "0.0.0"
+@@ -132,6 +257,25 @@ dependencies = [
+  "xbuild",
+ ]
+ 
++[[package]]
++name = "bounded-vec"
++version = "0.9.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "09dc0086e469182132244e9b8d313a0742e1132da43a08c24b9dd3c18e0faf3a"
++dependencies = [
++ "thiserror",
++]
++
++[[package]]
++name = "bs58"
++version = "0.5.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "bf88ba1141d185c399bee5288d850d63b8369520c1eafc32a0430b5b6c287bf4"
++dependencies = [
++ "sha2 0.10.8",
++ "tinyvec",
++]
++
+ [[package]]
+ name = "bstr"
+ version = "1.12.1"
+@@ -181,6 +325,15 @@ dependencies = [
+  "thiserror",
+ ]
+ 
++[[package]]
++name = "cbc"
++version = "0.1.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "26b52a9543ae338f279b96b0b9fed9c8093744685043739079ce85cd58f289a6"
++dependencies = [
++ "cipher",
++]
++
+ [[package]]
+ name = "cc"
+ version = "1.2.56"
+@@ -206,6 +359,51 @@ version = "1.0.4"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
+ 
++[[package]]
++name = "chacha20"
++version = "0.9.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "c3613f74bd2eac03dad61bd53dbe620703d4371614fe0bc3b9f04dd36fe4e818"
++dependencies = [
++ "cfg-if",
++ "cipher",
++ "cpufeatures",
++]
++
++[[package]]
++name = "chacha20poly1305"
++version = "0.10.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "10cd79432192d1c0f4e1a0fef9527696cc039165d729fb41b3f4f4f354c2dc35"
++dependencies = [
++ "aead",
++ "chacha20",
++ "cipher",
++ "poly1305",
++ "zeroize",
++]
++
++[[package]]
++name = "chrono"
++version = "0.4.38"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "a21f936df1771bf62b77f047b726c4625ff2e8aa607c01ec06e5a05bd8463401"
++dependencies = [
++ "num-traits",
++ "serde",
++]
++
++[[package]]
++name = "cipher"
++version = "0.4.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "773f3b9af64447d2ce9850330c473515014aa235e6a783b02db81ff39e4a3dad"
++dependencies = [
++ "crypto-common 0.1.6",
++ "inout",
++ "zeroize",
++]
++
+ [[package]]
+ name = "clang-sys"
+ version = "1.8.1"
+@@ -256,6 +454,12 @@ version = "1.1.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "c8d4a3bb8b1e0c1050499d1815f5ab16d04f0959b233085fb31653fbfc9d98f9"
+ 
++[[package]]
++name = "cobs"
++version = "0.2.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "67ba02a97a2bd10f4b59b25c7973101c79642302776489e030cd13cdab09ed15"
++
+ [[package]]
+ name = "color-eyre"
+ version = "0.6.5"
+@@ -269,6 +473,27 @@ dependencies = [
+  "owo-colors",
+ ]
+ 
++[[package]]
++name = "constant_time_eq"
++version = "0.3.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "f7144d30dcf0fafbce74250a3963025d8d52177934239851c917d29f1df280c2"
++
++[[package]]
++name = "corez"
++version = "0.1.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "4df6f98652d30167eaeea34d77b730e07c8caba6df17bd4551842b9b8da01deb"
++
++[[package]]
++name = "cpufeatures"
++version = "0.2.12"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "53fe5e26ff1b7aef8bca9c6080520cfb8d9333c7568e1829cef191a9723e5504"
++dependencies = [
++ "libc",
++]
++
+ [[package]]
+ name = "crypto"
+ version = "0.0.0"
+@@ -281,19 +506,100 @@ dependencies = [
+  "heapless",
+  "hex",
+  "models",
+- "rand",
++ "rand 0.10.1",
+  "rtl",
+  "trezor-thp",
+  "xbuild",
+  "zeroize",
+ ]
+ 
++[[package]]
++name = "crypto-common"
++version = "0.1.6"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "1bfb12502f3fc46cca1bb51ac28df9d618d813cdc3d2f25b9fe775a34af26bb3"
++dependencies = [
++ "generic-array",
++ "typenum",
++]
++
++[[package]]
++name = "crypto-common"
++version = "0.2.0-rc.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "b0b8ce8218c97789f16356e7896b3714f26c2ee1079b79c0b7ae7064bb9089fa"
++dependencies = [
++ "hybrid-array",
++]
++
+ [[package]]
+ name = "cty"
+ version = "0.2.2"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "b365fabc795046672053e29c954733ec3b05e4be654ab130fe8f1f94d7051f35"
+ 
++[[package]]
++name = "darling"
++version = "0.21.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "9cdf337090841a411e2a7f3deb9187445851f91b309c0c0a29e05f74a00a48c0"
++dependencies = [
++ "darling_core",
++ "darling_macro",
++]
++
++[[package]]
++name = "darling_core"
++version = "0.21.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "1247195ecd7e3c85f83c8d2a366e4210d588e802133e1e355180a9870b517ea4"
++dependencies = [
++ "fnv",
++ "ident_case",
++ "proc-macro2",
++ "quote",
++ "strsim",
++ "syn 2.0.117",
++]
++
++[[package]]
++name = "darling_macro"
++version = "0.21.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d38308df82d1080de0afee5d069fa14b0326a88c14f15c5ccda35b4a6c414c81"
++dependencies = [
++ "darling_core",
++ "quote",
++ "syn 2.0.117",
++]
++
++[[package]]
++name = "deranged"
++version = "0.5.8"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "7cd812cc2bc1d69d4764bd80df88b4317eaef9e773c75226407d9bc0876b211c"
++
++[[package]]
++name = "digest"
++version = "0.10.7"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "9ed9a281f7bc9b7576e61468ba615a66a5c8cfdff42420a70aa82701a3b1e292"
++dependencies = [
++ "block-buffer 0.10.4",
++ "crypto-common 0.1.6",
++]
++
++[[package]]
++name = "digest"
++version = "0.11.0-pre.9"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "cf2e3d6615d99707295a9673e889bf363a04b2a466bd320c65a72536f7577379"
++dependencies = [
++ "block-buffer 0.11.0-rc.3",
++ "crypto-common 0.2.0-rc.1",
++ "subtle",
++]
++
+ [[package]]
+ name = "easer"
+ version = "0.3.0"
+@@ -309,6 +615,26 @@ version = "1.15.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "48c757948c5ede0e46177b7add2e67155f70e33c07fea8284df6576da70b3719"
+ 
++[[package]]
++name = "embedded-io"
++version = "0.4.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "ef1a6892d9eef45c8fa6b9e0086428a2cca8491aca8f787c534a3d6d0bcb3ced"
++
++[[package]]
++name = "embedded-io"
++version = "0.6.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "edd0f118536f44f5ccd48bcb8b111bdc3de888b58c74639dfb034a357d0f206d"
++
++[[package]]
++name = "equihash"
++version = "0.3.0"
++dependencies = [
++ "blake2b_simd",
++ "corez",
++]
++
+ [[package]]
+ name = "equivalent"
+ version = "1.0.2"
+@@ -335,12 +661,30 @@ dependencies = [
+  "once_cell",
+ ]
+ 
++[[package]]
++name = "f4jumble"
++version = "0.1.1"
++dependencies = [
++ "blake2b_simd",
++]
++
+ [[package]]
+ name = "fastrand"
+ version = "2.4.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "9f1f227452a390804cdb637b74a86990f2a7d7ba4b7d5693aac9b4dd6defd8d6"
+ 
++[[package]]
++name = "ff"
++version = "0.13.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "ded41244b729663b1e574f1b4fb731469f69f79c17667b5d776b16cda0479449"
++dependencies = [
++ "bitvec",
++ "rand_core 0.6.4",
++ "subtle",
++]
++
+ [[package]]
+ name = "find-msvc-tools"
+ version = "0.1.9"
+@@ -354,15 +698,68 @@ dependencies = [
+  "color-eyre",
+  "crypto",
+  "io",
++ "ironwood-approval",
++ "linked_list_allocator",
+  "models",
++ "orchard",
++ "rand_chacha",
+  "rtl",
+  "sec",
++ "spin",
+  "sys",
+  "trezor_lib",
+  "upymod",
+  "xbuild",
+ ]
+ 
++[[package]]
++name = "fnv"
++version = "1.0.7"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "3f9eec918d3f24069decb9af1554cad7c880e2da24a9afd88aca000531ab82c1"
++
++[[package]]
++name = "fpe"
++version = "0.6.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "26c4b37de5ae15812a764c958297cfc50f5c010438f60c6ce75d11b802abd404"
++dependencies = [
++ "cbc",
++ "cipher",
++ "libm",
++ "num-bigint",
++ "num-integer",
++ "num-traits",
++]
++
++[[package]]
++name = "funty"
++version = "2.0.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "e6d5a32815ae3f33302d95fdcb2ce17862f8c65363dcfd29360480ba1001fc9c"
++
++[[package]]
++name = "generic-array"
++version = "0.14.7"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "85649ca51fd72272d7821adaf274ad91c288277713d9c18820d8499a7ff69e9a"
++dependencies = [
++ "typenum",
++ "version_check",
++]
++
++[[package]]
++name = "getset"
++version = "0.1.6"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "9cf0fc11e47561d47397154977bc219f4cf809b2974facc3ccb3b89e2436f912"
++dependencies = [
++ "proc-macro-error2",
++ "proc-macro2",
++ "quote",
++ "syn 2.0.117",
++]
++
+ [[package]]
+ name = "gimli"
+ version = "0.32.3"
+@@ -388,6 +785,29 @@ dependencies = [
+  "regex-syntax",
+ ]
+ 
++[[package]]
++name = "group"
++version = "0.13.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "f0f9ef7462f7c099f518d754361858f86d8a07af53ba9af0fe635bbccb151a63"
++dependencies = [
++ "ff",
++ "rand_core 0.6.4",
++ "subtle",
++]
++
++[[package]]
++name = "halo2_poseidon"
++version = "0.1.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "0fa3da60b81f02f9b33ebc6252d766f843291fb4d2247a07ae73d20b791fc56f"
++dependencies = [
++ "bitvec",
++ "ff",
++ "group",
++ "pasta_curves",
++]
++
+ [[package]]
+ name = "hash32"
+ version = "0.3.1"
+@@ -428,6 +848,39 @@ version = "0.4.3"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
+ 
++[[package]]
++name = "hmac"
++version = "0.13.0-pre.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "e4b1fb14e4df79f9406b434b60acef9f45c26c50062cccf1346c6103b8c47d58"
++dependencies = [
++ "digest 0.11.0-pre.9",
++]
++
++[[package]]
++name = "hybrid-array"
++version = "0.2.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "f2d35805454dc9f8662a98d6d61886ffe26bd465f5960e0e55345c70d5c0d2a9"
++dependencies = [
++ "typenum",
++]
++
++[[package]]
++name = "ident_case"
++version = "1.0.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "b9e0384b61958566e926dc50660321d12159025e767c18e043daf26b70104c39"
++
++[[package]]
++name = "incrementalmerkletree"
++version = "0.8.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "30821f91f0fa8660edca547918dc59812893b497d07c1144f326f07fdd94aba9"
++dependencies = [
++ "either",
++]
++
+ [[package]]
+ name = "indenter"
+ version = "0.3.4"
+@@ -444,6 +897,15 @@ dependencies = [
+  "hashbrown",
+ ]
+ 
++[[package]]
++name = "inout"
++version = "0.1.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "a0c10553d664a4d0bcff9f4215d0aac67a639cc68ef660840afe309b807bc9f5"
++dependencies = [
++ "generic-array",
++]
++
+ [[package]]
+ name = "io"
+ version = "0.0.0"
+@@ -459,6 +921,21 @@ dependencies = [
+  "xbuild",
+ ]
+ 
++[[package]]
++name = "ironwood-approval"
++version = "0.1.0"
++dependencies = [
++ "blake2b_simd",
++ "orchard",
++ "pczt",
++ "rand_core 0.6.4",
++ "sapling-crypto",
++ "zcash_note_encryption",
++ "zcash_primitives",
++ "zcash_protocol",
++ "zcash_transparent",
++]
++
+ [[package]]
+ name = "itertools"
+ version = "0.13.0"
+@@ -474,6 +951,20 @@ version = "1.0.17"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "92ecc6618181def0457392ccd0ee51198e065e016d1d527a7ac1b6dc7c1f09d2"
+ 
++[[package]]
++name = "jubjub"
++version = "0.10.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "8499f7a74008aafbecb2a2e608a3e13e4dd3e84df198b604451efe93f2de6e61"
++dependencies = [
++ "bitvec",
++ "bls12_381",
++ "ff",
++ "group",
++ "rand_core 0.6.4",
++ "subtle",
++]
++
+ [[package]]
+ name = "kernel"
+ version = "0.0.0"
+@@ -488,6 +979,15 @@ dependencies = [
+  "xbuild",
+ ]
+ 
++[[package]]
++name = "lazy_static"
++version = "1.5.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
++dependencies = [
++ "spin",
++]
++
+ [[package]]
+ name = "libc"
+ version = "0.2.177"
+@@ -510,6 +1010,12 @@ version = "0.2.16"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981"
+ 
++[[package]]
++name = "linked_list_allocator"
++version = "0.10.6"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "2b23ac50abb8261cb38c6e2a7192d3302e0836dac1628f6a93b82b4fad185897"
++
+ [[package]]
+ name = "linux-raw-sys"
+ version = "0.11.0"
+@@ -528,6 +1034,12 @@ version = "2.8.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "f8ca58f447f06ed17d5fc4043ce1b10dd205e060fb3ce5b979b8ed8e59ff3f79"
+ 
++[[package]]
++name = "memuse"
++version = "0.2.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "3d97bbf43eb4f088f8ca469930cde17fa036207c9a5e02ccc5107c4e8b17c964"
++
+ [[package]]
+ name = "minicbor"
+ version = "1.1.0"
+@@ -568,6 +1080,28 @@ dependencies = [
+  "minimal-lexical",
+ ]
+ 
++[[package]]
++name = "nonempty"
++version = "0.11.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "549e471b99ccaf2f89101bec68f4d244457d5a95a9c3d0672e9564124397741d"
++
++[[package]]
++name = "num-bigint"
++version = "0.4.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "c165a9ab64cf766f73521c0dd2cfdff64f488b8f0b3e621face3462d3db536d7"
++dependencies = [
++ "num-integer",
++ "num-traits",
++]
++
++[[package]]
++name = "num-conv"
++version = "0.2.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "521739c6d2bac4aa25192232afe6841231376b2b26d4d9fae5ecf8ca5772e441"
++
+ [[package]]
+ name = "num-derive"
+ version = "0.4.2"
+@@ -580,55 +1114,198 @@ dependencies = [
+ ]
+ 
+ [[package]]
+-name = "num-traits"
+-version = "0.2.19"
++name = "num-integer"
++version = "0.1.46"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "7969661fd2958a5cb096e56c8e1ad0444ac2bbcd0061bd28660485a44879858f"
++dependencies = [
++ "num-traits",
++]
++
++[[package]]
++name = "num-traits"
++version = "0.2.19"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841"
++dependencies = [
++ "autocfg",
++ "libm",
++]
++
++[[package]]
++name = "object"
++version = "0.37.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "ff76201f031d8863c38aa7f905eca4f53abbfa15f609db4277d44cd8938f33fe"
++dependencies = [
++ "memchr",
++]
++
++[[package]]
++name = "once_cell"
++version = "1.21.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
++
++[[package]]
++name = "opaque-debug"
++version = "0.3.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "c08d65885ee38876c4f86fa503fb49d7b507c2b62552df7c70b2fce627e06381"
++
++[[package]]
++name = "orchard"
++version = "0.15.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "e8b67beade27dbebdbfee0819e23170b0b263dc7b4f558ee936151716baf6e1f"
++dependencies = [
++ "aes",
++ "bitvec",
++ "blake2b_simd",
++ "corez",
++ "ff",
++ "fpe",
++ "getset",
++ "group",
++ "halo2_poseidon",
++ "hex",
++ "incrementalmerkletree",
++ "lazy_static",
++ "memuse",
++ "nonempty",
++ "pasta_curves",
++ "rand 0.8.5",
++ "rand_core 0.6.4",
++ "reddsa",
++ "serde",
++ "sinsemilla",
++ "subtle",
++ "tracing",
++ "visibility",
++ "zcash_note_encryption",
++ "zcash_spec",
++ "zip32",
++]
++
++[[package]]
++name = "owo-colors"
++version = "4.3.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d211803b9b6b570f68772237e415a029d5a50c65d382910b879fb19d3271f94d"
++
++[[package]]
++name = "pareen"
++version = "0.3.3"
++dependencies = [
++ "easer",
++ "num-traits",
++]
++
++[[package]]
++name = "pasta_curves"
++version = "0.5.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d3e57598f73cc7e1b2ac63c79c517b31a0877cd7c402cdcaa311b5208de7a095"
++dependencies = [
++ "blake2b_simd",
++ "ff",
++ "group",
++ "lazy_static",
++ "rand 0.8.5",
++ "static_assertions",
++ "subtle",
++]
++
++[[package]]
++name = "pathdiff"
++version = "0.2.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "df94ce210e5bc13cb6651479fa48d14f601d9858cfe0467f43ae157023b938d3"
++
++[[package]]
++name = "pczt"
++version = "0.9.3"
++dependencies = [
++ "ff",
++ "getset",
++ "nonempty",
++ "orchard",
++ "pasta_curves",
++ "postcard",
++ "serde",
++ "serde_with",
++ "zcash_note_encryption",
++ "zcash_protocol",
++]
++
++[[package]]
++name = "pin-project-lite"
++version = "0.2.14"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "bda66fc9667c18cb2758a2ac84d1167245054bcf85d5d1aaa6923f45801bdd02"
++
++[[package]]
++name = "pkg-config"
++version = "0.3.32"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841"
++checksum = "7edddbd0b52d732b21ad9a5fab5c704c14cd949e5e9a1ec5929a24fded1b904c"
++
++[[package]]
++name = "poly1305"
++version = "0.8.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "8159bd90725d2df49889a078b54f4f79e87f1f8a8444194cdca81d38f5393abf"
+ dependencies = [
+- "autocfg",
+- "libm",
++ "cpufeatures",
++ "opaque-debug",
++ "universal-hash",
+ ]
+ 
+ [[package]]
+-name = "object"
+-version = "0.37.3"
++name = "postcard"
++version = "1.1.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "ff76201f031d8863c38aa7f905eca4f53abbfa15f609db4277d44cd8938f33fe"
++checksum = "170a2601f67cc9dba8edd8c4870b15f71a6a2dc196daec8c83f72b59dff628a8"
+ dependencies = [
+- "memchr",
++ "cobs",
++ "embedded-io 0.4.0",
++ "embedded-io 0.6.1",
++ "serde",
+ ]
+ 
+ [[package]]
+-name = "once_cell"
+-version = "1.21.4"
++name = "powerfmt"
++version = "0.2.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
++checksum = "439ee305def115ba05938db6eb1644ff94165c5ab5e9420d1c1bcedbba909391"
+ 
+ [[package]]
+-name = "owo-colors"
+-version = "4.3.0"
++name = "ppv-lite86"
++version = "0.2.17"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "d211803b9b6b570f68772237e415a029d5a50c65d382910b879fb19d3271f94d"
++checksum = "5b40af805b3121feab8a3c29f04d8ad262fa8e0561883e7653e024ae4479e6de"
+ 
+ [[package]]
+-name = "pareen"
+-version = "0.3.3"
++name = "proc-macro-error-attr2"
++version = "2.0.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "96de42df36bb9bba5542fe9f1a054b8cc87e172759a1868aa05c1f3acc89dfc5"
+ dependencies = [
+- "easer",
+- "num-traits",
++ "proc-macro2",
++ "quote",
+ ]
+ 
+ [[package]]
+-name = "pathdiff"
+-version = "0.2.3"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "df94ce210e5bc13cb6651479fa48d14f601d9858cfe0467f43ae157023b938d3"
+-
+-[[package]]
+-name = "pkg-config"
+-version = "0.3.32"
++name = "proc-macro-error2"
++version = "2.0.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "7edddbd0b52d732b21ad9a5fab5c704c14cd949e5e9a1ec5929a24fded1b904c"
++checksum = "11ec05c52be0a07b08061f7dd003e7d7092e0472bc731b4af7bb1ef876109802"
++dependencies = [
++ "proc-macro-error-attr2",
++ "proc-macro2",
++ "quote",
++ "syn 2.0.117",
++]
+ 
+ [[package]]
+ name = "proc-macro2"
+@@ -666,21 +1343,78 @@ dependencies = [
+  "proc-macro2",
+ ]
+ 
++[[package]]
++name = "radium"
++version = "0.7.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "dc33ff2d4973d518d823d61aa239014831e521c75da58e3df4840d3f47749d09"
++
++[[package]]
++name = "rand"
++version = "0.8.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "34af8d1a0e25924bc5b7c43c079c942339d8f0a8b57c39049bef581b46327404"
++dependencies = [
++ "rand_core 0.6.4",
++]
++
+ [[package]]
+ name = "rand"
+ version = "0.10.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "d2e8e8bcc7961af1fdac401278c6a831614941f6164ee3bf4ce61b7edb162207"
+ dependencies = [
+- "rand_core",
++ "rand_core 0.10.0",
++]
++
++[[package]]
++name = "rand_chacha"
++version = "0.3.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "e6c10a63a0fa32252be49d21e7709d4d4baf8d231c2dbce1eaa8141b9b127d88"
++dependencies = [
++ "ppv-lite86",
++ "rand_core 0.6.4",
+ ]
+ 
++[[package]]
++name = "rand_core"
++version = "0.6.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "ec0be4795e2f6a28069bec0b5ff3e2ac9bafc99e6a9a7dc3547996c5c816922c"
++
+ [[package]]
+ name = "rand_core"
+ version = "0.10.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "0c8d0fd677905edcbeedbf2edb6494d676f0e98d54d5cf9bda0b061cb8fb8aba"
+ 
++[[package]]
++name = "reddsa"
++version = "0.5.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "78a5191930e84973293aa5f532b513404460cd2216c1cfb76d08748c15b40b02"
++dependencies = [
++ "blake2b_simd",
++ "byteorder",
++ "group",
++ "hex",
++ "jubjub",
++ "pasta_curves",
++ "rand_core 0.6.4",
++]
++
++[[package]]
++name = "redjubjub"
++version = "0.8.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "89b0ac1bc6bb3696d2c6f52cff8fba57238b81da8c0214ee6cd146eb8fde364e"
++dependencies = [
++ "rand_core 0.6.4",
++ "reddsa",
++ "zeroize",
++]
++
+ [[package]]
+ name = "regex"
+ version = "1.12.3"
+@@ -710,6 +1444,24 @@ version = "0.8.10"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "dc897dd8d9e8bd1ed8cdad82b5966c3e0ecae09fb1907d58efaa013543185d0a"
+ 
++[[package]]
++name = "ripemd"
++version = "0.1.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "bd124222d17ad93a644ed9d011a40f4fb64aa54275c08cc216524a9ea82fb09f"
++dependencies = [
++ "digest 0.10.7",
++]
++
++[[package]]
++name = "ripemd"
++version = "0.2.0-pre.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "e48cf93482ea998ad1302c42739bc73ab3adc574890c373ec89710e219357579"
++dependencies = [
++ "digest 0.11.0-pre.9",
++]
++
+ [[package]]
+ name = "rtl"
+ version = "0.0.0"
+@@ -753,6 +1505,37 @@ version = "1.0.23"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "9774ba4a74de5f7b1c1451ed6cd5285a32eddb5cccb8cc655a4e50009e06477f"
+ 
++[[package]]
++name = "sapling-crypto"
++version = "0.7.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "2d70756ede56b5e4dd417979777bd87ddb83dfcbd0815dbf8175a9920537f8a0"
++dependencies = [
++ "aes",
++ "bitvec",
++ "blake2b_simd",
++ "blake2s_simd",
++ "bls12_381",
++ "corez",
++ "ff",
++ "fpe",
++ "getset",
++ "group",
++ "hex",
++ "incrementalmerkletree",
++ "jubjub",
++ "lazy_static",
++ "memuse",
++ "rand 0.8.5",
++ "rand_core 0.6.4",
++ "redjubjub",
++ "subtle",
++ "tracing",
++ "zcash_note_encryption",
++ "zcash_spec",
++ "zip32",
++]
++
+ [[package]]
+ name = "sec"
+ version = "0.0.0"
+@@ -778,6 +1561,24 @@ dependencies = [
+  "xbuild",
+ ]
+ 
++[[package]]
++name = "secp256k1"
++version = "0.29.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "9465315bc9d4566e1724f0fffcbcc446268cb522e60f9a27bcded6b19c108113"
++dependencies = [
++ "secp256k1-sys",
++]
++
++[[package]]
++name = "secp256k1-sys"
++version = "0.10.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d4387882333d3aa8cb20530a17c69a3752e97837832f34f6dccc760e715001d9"
++dependencies = [
++ "cc",
++]
++
+ [[package]]
+ name = "semver"
+ version = "1.0.27"
+@@ -840,12 +1641,83 @@ dependencies = [
+  "serde",
+ ]
+ 
++[[package]]
++name = "serde_with"
++version = "3.16.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "10574371d41b0d9b2cff89418eda27da52bcaff2cc8741db26382a77c29131f1"
++dependencies = [
++ "base64",
++ "chrono",
++ "hex",
++ "serde_core",
++ "serde_json",
++ "serde_with_macros",
++ "time",
++]
++
++[[package]]
++name = "serde_with_macros"
++version = "3.16.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "08a72d8216842fdd57820dc78d840bef99248e35fb2554ff923319e60f2d686b"
++dependencies = [
++ "darling",
++ "proc-macro2",
++ "quote",
++ "syn 2.0.117",
++]
++
++[[package]]
++name = "sha1"
++version = "0.10.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "f04293dc80c3993519f2d7f6f511707ee7094fe0c6d3406feb330cdb3540eba3"
++dependencies = [
++ "cfg-if",
++ "cpufeatures",
++ "digest 0.10.7",
++]
++
++[[package]]
++name = "sha2"
++version = "0.10.8"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "793db75ad2bcafc3ffa7c68b215fee268f537982cd901d132f89c6343f3a3dc8"
++dependencies = [
++ "cfg-if",
++ "cpufeatures",
++ "digest 0.10.7",
++]
++
++[[package]]
++name = "sha2"
++version = "0.11.0-pre.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "540c0893cce56cdbcfebcec191ec8e0f470dd1889b6e7a0b503e310a94a168f5"
++dependencies = [
++ "cfg-if",
++ "cpufeatures",
++ "digest 0.11.0-pre.9",
++]
++
+ [[package]]
+ name = "shlex"
+ version = "1.3.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
+ 
++[[package]]
++name = "sinsemilla"
++version = "0.1.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "3d268ae0ea06faafe1662e9967cd4f9022014f5eeb798e0c302c876df8b7af9c"
++dependencies = [
++ "group",
++ "pasta_curves",
++ "subtle",
++]
++
+ [[package]]
+ name = "spin"
+ version = "0.9.9"
+@@ -867,12 +1739,24 @@ dependencies = [
+  "alloc-traits",
+ ]
+ 
++[[package]]
++name = "static_assertions"
++version = "1.1.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
++
+ [[package]]
+ name = "strsim"
+ version = "0.11.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f"
+ 
++[[package]]
++name = "subtle"
++version = "2.6.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
++
+ [[package]]
+ name = "syn"
+ version = "1.0.109"
+@@ -909,6 +1793,12 @@ dependencies = [
+  "xbuild",
+ ]
+ 
++[[package]]
++name = "tap"
++version = "1.0.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "55937e1799185b12863d447f42597ed69d9928686b8d88a1df17376a097d8369"
++
+ [[package]]
+ name = "tempfile"
+ version = "3.25.0"
+@@ -941,6 +1831,40 @@ dependencies = [
+  "syn 2.0.117",
+ ]
+ 
++[[package]]
++name = "time"
++version = "0.3.53"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "18dfaaeddcb932337b5e7866ee7d0ce9b76d2fd092997146f187ec09b4558a50"
++dependencies = [
++ "deranged",
++ "num-conv",
++ "powerfmt",
++ "serde_core",
++ "time-core",
++]
++
++[[package]]
++name = "time-core"
++version = "0.1.9"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "9e1c906769ad99c88eaa54e728060edef082f8e358ff32030cb7c7d315e81109"
++
++[[package]]
++name = "tinyvec"
++version = "1.8.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "445e881f4f6d382d5f27c034e25eb92edd7c784ceab92a0937db7f2e9471b938"
++dependencies = [
++ "tinyvec_macros",
++]
++
++[[package]]
++name = "tinyvec_macros"
++version = "0.1.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
++
+ [[package]]
+ name = "toml"
+ version = "0.8.23"
+@@ -982,6 +1906,22 @@ version = "0.1.2"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "5d99f8c9a7727884afe522e9bd5edbfc91a3312b36a77b5fb8926e4c31a41801"
+ 
++[[package]]
++name = "tracing"
++version = "0.1.41"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "784e0ac535deb450455cbfa28a6f0df145ea1bb7ae51b821cf5e7927fdcfbdd0"
++dependencies = [
++ "pin-project-lite",
++ "tracing-core",
++]
++
++[[package]]
++name = "tracing-core"
++version = "0.1.34"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "b9d12581f227e93f094d3af2ae690a574abb8a2b9b7a96e7cfe9647b2b617678"
++
+ [[package]]
+ name = "trezor-noise-protocol"
+ version = "0.2.1"
+@@ -1039,6 +1979,12 @@ dependencies = [
+  "zeroize",
+ ]
+ 
++[[package]]
++name = "typenum"
++version = "1.17.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "42ff0bf0c66b8238c6f3b578df37d0b7848e55df8577b3f74f92a69acceeb825"
++
+ [[package]]
+ name = "ufmt"
+ version = "0.2.0"
+@@ -1072,6 +2018,16 @@ version = "1.0.24"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
+ 
++[[package]]
++name = "universal-hash"
++version = "0.5.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "fc1de2c688dc15305988b563c3854064043356019f97a4b46276fe734c4f07ea"
++dependencies = [
++ "crypto-common 0.1.6",
++ "subtle",
++]
++
+ [[package]]
+ name = "unix"
+ version = "0.0.0"
+@@ -1111,6 +2067,23 @@ dependencies = [
+  "xbuild",
+ ]
+ 
++[[package]]
++name = "version_check"
++version = "0.9.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
++
++[[package]]
++name = "visibility"
++version = "0.1.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d674d135b4a8c1d7e813e2f8d1c9a58308aee4a680323066025e53132218bd91"
++dependencies = [
++ "proc-macro2",
++ "quote",
++ "syn 2.0.117",
++]
++
+ [[package]]
+ name = "windows-link"
+ version = "0.2.1"
+@@ -1145,6 +2118,15 @@ dependencies = [
+  "unsize",
+ ]
+ 
++[[package]]
++name = "wyz"
++version = "0.5.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "05f360fc0b24296329c78fda852a1e9ae82de9cf7b27dae4b7f62f118f77b9ed"
++dependencies = [
++ "tap",
++]
++
+ [[package]]
+ name = "xbuild"
+ version = "0.1.0"
+@@ -1173,6 +2155,125 @@ dependencies = [
+  "toml",
+ ]
+ 
++[[package]]
++name = "zcash_address"
++version = "0.13.0"
++dependencies = [
++ "bech32",
++ "bs58",
++ "corez",
++ "f4jumble",
++ "zcash_encoding",
++ "zcash_protocol",
++]
++
++[[package]]
++name = "zcash_encoding"
++version = "0.4.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "1440921903cdb86133fb9e2fe800be488015db2939a30bedb413078a1acb0306"
++dependencies = [
++ "corez",
++ "hex",
++ "nonempty",
++]
++
++[[package]]
++name = "zcash_note_encryption"
++version = "0.4.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "77efec759c3798b6e4d829fcc762070d9b229b0f13338c40bf993b7b609c2272"
++dependencies = [
++ "chacha20",
++ "chacha20poly1305",
++ "cipher",
++ "rand_core 0.6.4",
++ "subtle",
++]
++
++[[package]]
++name = "zcash_primitives"
++version = "0.30.1"
++dependencies = [
++ "blake2b_simd",
++ "block-buffer 0.11.0-rc.3",
++ "corez",
++ "crypto-common 0.2.0-rc.1",
++ "equihash",
++ "ff",
++ "hex",
++ "incrementalmerkletree",
++ "jubjub",
++ "memuse",
++ "nonempty",
++ "orchard",
++ "rand_core 0.6.4",
++ "redjubjub",
++ "sapling-crypto",
++ "sha2 0.10.8",
++ "zcash_encoding",
++ "zcash_note_encryption",
++ "zcash_protocol",
++ "zcash_script",
++ "zcash_transparent",
++]
++
++[[package]]
++name = "zcash_protocol"
++version = "0.10.5"
++dependencies = [
++ "corez",
++ "hex",
++ "zcash_encoding",
++]
++
++[[package]]
++name = "zcash_script"
++version = "0.4.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "c6ef9d04e0434a80b62ad06c5a610557be358ef60a98afa5dbc8ecaf19ad72e7"
++dependencies = [
++ "bip32",
++ "bitflags",
++ "bounded-vec",
++ "hex",
++ "ripemd 0.1.3",
++ "secp256k1",
++ "sha1",
++ "sha2 0.10.8",
++ "thiserror",
++]
++
++[[package]]
++name = "zcash_spec"
++version = "0.2.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "ded3f58b93486aa79b85acba1001f5298f27a46489859934954d262533ee2915"
++dependencies = [
++ "blake2b_simd",
++]
++
++[[package]]
++name = "zcash_transparent"
++version = "0.10.0"
++dependencies = [
++ "bip32",
++ "bs58",
++ "corez",
++ "getset",
++ "hex",
++ "nonempty",
++ "ripemd 0.1.3",
++ "sha2 0.10.8",
++ "subtle",
++ "zcash_address",
++ "zcash_encoding",
++ "zcash_protocol",
++ "zcash_script",
++ "zcash_spec",
++ "zip32",
++]
++
+ [[package]]
+ name = "zeroize"
+ version = "1.8.2"
+@@ -1193,6 +2294,18 @@ dependencies = [
+  "syn 2.0.117",
+ ]
+ 
++[[package]]
++name = "zip32"
++version = "0.2.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "13ff9ea444cdbce820211f91e6aa3d3a56bde7202d3c0961b7c38f793abf5637"
++dependencies = [
++ "blake2b_simd",
++ "memuse",
++ "subtle",
++ "zcash_spec",
++]
++
+ [[package]]
+ name = "zlib-rs"
+ version = "0.6.3"
+diff --git a/core/embed/projects/firmware/Cargo.toml b/core/embed/projects/firmware/Cargo.toml
+index 96f3ce2..af34390 100644
+--- a/core/embed/projects/firmware/Cargo.toml
++++ b/core/embed/projects/firmware/Cargo.toml
+@@ -9,6 +9,11 @@ color-eyre.workspace = true
+ xbuild.workspace = true
+ 
+ [dependencies]
++ironwood-approval = { path = "../../../../../../crates/approval", default-features = false }
++orchard = { version = "=0.15.3", default-features = false }
++rand_chacha = { version = "=0.3.1", default-features = false }
++linked_list_allocator = { version = "=0.10.6", default-features = false }
++spin = { version = "=0.9.9", default-features = false, features = ["spin_mutex"] }
+ crypto.workspace = true
+ io.workspace = true
+ models.workspace = true
+diff --git a/core/embed/projects/firmware/main.c b/core/embed/projects/firmware/main.c
+index 827b5d5..d901895 100644
+--- a/core/embed/projects/firmware/main.c
++++ b/core/embed/projects/firmware/main.c
+@@ -64,6 +64,10 @@ extern const void nrf_app_size;
+ 
+ #endif
+ 
++// Compile/link-only synthetic diagnostic. Never flash or execute this derivative.
++// This parameterless hook has no transport, key-store, or host-call interface.
++extern void ironwood_synthetic_boot(void);
++
+ LOG_DECLARE(coreapp_main)
+ 
+ int main_func(uint32_t cmd, void *arg) {
+@@ -195,6 +199,10 @@ __attribute((no_stack_protector)) void reset_handler(uint32_t cmd, void *arg,
+   // Now everything is perfectly initialized and we can do anything
+   // in C code
+ 
++  // First Rust call, after BSS/data and stack protector initialization.
++  // Initializes the independent Rust arena before ANY Rust allocation.
++  ironwood_synthetic_boot();
++
+   int main_result = main_func(cmd, arg);
+ 
+   system_exit(main_result);
+diff --git a/core/embed/projects/firmware/src/main.rs b/core/embed/projects/firmware/src/main.rs
+index f7cef45..7cc98f2 100644
+--- a/core/embed/projects/firmware/src/main.rs
++++ b/core/embed/projects/firmware/src/main.rs
+@@ -1,5 +1,9 @@
+ #![no_std]
+ #![no_main]
++#![feature(alloc_error_handler)]
++
++mod arena;
++mod synthetic_approval;
+ 
+ // force pull in Rust generated symbols (incl. the panic handler)
+ use sys as _;
+diff --git a/core/embed/xtask/src/features.rs b/core/embed/xtask/src/features.rs
+index 2007ea2..a2444c7 100644
+--- a/core/embed/xtask/src/features.rs
++++ b/core/embed/xtask/src/features.rs
+@@ -201,7 +201,12 @@ pub fn configure_cargo(args: &ResolvedBuildArgs, cmd: &mut process::Command) ->
+     }
+ 
+     if rebuild_std {
+-        cmd.arg("-Zbuild-std=core");
++        // Synthetic firmware derivative uses alloc with the same panic strategy.
++        if args.project.package_name(args.emulator) == "firmware" {
++            cmd.arg("-Zbuild-std=core,alloc");
++        } else {
++            cmd.arg("-Zbuild-std=core");
++        }
+     }
+ 
+     forward_color_choice(cmd);
+diff --git a/core/embed/projects/firmware/src/arena.rs b/core/embed/projects/firmware/src/arena.rs
+new file mode 100644
+index 0000000..f860af0
+--- /dev/null
++++ b/core/embed/projects/firmware/src/arena.rs
+@@ -0,0 +1,93 @@
++//! Compile/link diagnostic, derived from frozen/experiment/src/arena.rs in
++//! work/arena-probe (SHA-256 recorded in protected-source-before.json).
++//! Removed native driver, tests and counters. No GC/system allocator fallback.
++use core::alloc::{GlobalAlloc, Layout};
++use core::mem::{MaybeUninit, size_of};
++use core::ptr::{self, NonNull};
++
++use linked_list_allocator::Heap;
++use spin::mutex::{SpinMutex, SpinMutexGuard};
++
++const CAPACITY: usize = 4096;
++// The upstream documented maximum minimum is three machine words, including
++// start alignment. This seed must never become a runtime allocation budget.
++const _: () = assert!(CAPACITY >= 3 * size_of::<usize>());
++
++#[repr(C, align(16))]
++struct Storage([MaybeUninit<u8>; CAPACITY]);
++
++#[unsafe(no_mangle)]
++static mut IRONWOOD_DIAGNOSTIC_ARENA: Storage = Storage([MaybeUninit::new(0); CAPACITY]);
++
++struct Arena(SpinMutex<Heap>);
++
++#[global_allocator]
++static ALLOCATOR: Arena = Arena(SpinMutex::new(Heap::empty()));
++
++#[cold]
++#[inline(never)]
++#[unsafe(no_mangle)]
++fn ironwood_arena_fail_stop() -> ! {
++    // Immediate ARM undefined-instruction trap; no formatter, callback or GC.
++    // No recovery/reuse contract, and never executed by this compile-only task.
++    unsafe { core::arch::asm!("udf #0", options(noreturn, nomem, nostack)) }
++}
++
++impl Arena {
++    fn lock(&self) -> SpinMutexGuard<'_, Heap> {
++        self.0
++            .try_lock()
++            .unwrap_or_else(|| ironwood_arena_fail_stop())
++    }
++
++    fn lock_initialized_heap(&self) -> SpinMutexGuard<'_, Heap> {
++        let heap = self.lock();
++        if heap.bottom().is_null() {
++            ironwood_arena_fail_stop();
++        }
++        heap
++    }
++}
++
++pub fn init() {
++    let mut heap = ALLOCATOR.lock();
++    // The ONLY initialization state; check before making the unique slice.
++    if !heap.bottom().is_null() {
++        ironwood_arena_fail_stop();
++    }
++    // SAFETY: the first boot call owns this BSS storage exclusively. Under the
++    // same lock, bottom proves no previous slice exists. Never reset or extend.
++    unsafe {
++        let bytes = ptr::addr_of_mut!(IRONWOOD_DIAGNOSTIC_ARENA).cast::<MaybeUninit<u8>>();
++        heap.init_from_slice(core::slice::from_raw_parts_mut(bytes, CAPACITY));
++    }
++}
++
++unsafe impl GlobalAlloc for Arena {
++    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
++        // GlobalAlloc callers supply a valid, nonzero Layout.
++        // Obscures the fixed request from optimization; verify validation/signing
++        // reachability in the final ELF.
++        let layout = core::hint::black_box(layout);
++        self.lock_initialized_heap()
++            .allocate_first_fit(layout)
++            .map_or(ptr::null_mut(), NonNull::as_ptr)
++    }
++
++    unsafe fn dealloc(&self, pointer: *mut u8, layout: Layout) {
++        // SAFETY: GlobalAlloc requires an owned, nonnull live pointer and its
++        // exact current Layout. No foreign/GC pointers enter this allocator.
++        unsafe {
++            self.lock_initialized_heap()
++                .deallocate(NonNull::new_unchecked(pointer), layout);
++        }
++    }
++    // Inherit alloc_zeroed/realloc: no lock is held across their zero/copy work.
++}
++
++#[alloc_error_handler]
++fn allocation_error(_: Layout) -> ! {
++    // The pinned nightly's immediate-abort handle_alloc_error normally traps
++    // directly, bypassing this shim. Verify actual retained paths in the ELF.
++    ironwood_arena_fail_stop()
++}
+diff --git a/core/embed/projects/firmware/src/outputs-1.pczt b/core/embed/projects/firmware/src/outputs-1.pczt
+new file mode 100644
+index 0000000000000000000000000000000000000000..bd4b7493eb80631be188f77532d51dc59a034a18
+GIT binary patch
+literal 1236
+zcmV;_1S|VcLt0b<00006nC+6p4cn}gy#oONsIB4z0RR91000320lfVkZYuWbnz0Ph
+z7`H43fhFU&qyqZK6WEWPU{fRb76H&1+l%S(_M5ST({t@9dfx(Mq09Wc#K0%6>TvP8
+zKOzBa)~K>~2b^fe`dc*B<Ovx|{@HN{!~;ruct(!ixHFUh0n9dF8CfAaYYf|#r(74q
+zrf8{u4Qh;B;bf&4>YJ&h4yRF({e~M4@eX3J0kGQ!0oYuJ^_rv6=E-e1jFx+Ew?pui
+zBgbt;L65EWtX3Dt5COit8CYlg7^2MVcThO6F7gvTyo6v=qbjP%x;Owxk7WUecj6Tg
+z9rRkHXuA-y`9J;$qW7M^@Rh3TbaTgXG?pQ|$`vg8`GFW2%wj||(Ia(t!8irXJ?%tJ
+zby{n9`pp)Mr~A4lM-S=?5Yr8^b7t&i1PpSZn%F{Ei0>xxz<ECa0eVL<gJld&EN@Rz
+zFSRLlZw<?r4v?$h7JAE|#h9GuDF6Tf0Y2Pmh>a7JhJ&Q>r8w2L==B-FRqV@qpzlop
+ztv^s%H^a3y`D78_3UUK3_B5<M2%&O;Y@nWLcVFiZ5CPOZC;-F+6!9k~qE_umB%P>#
+zpfOH4OR}(IVJHgKZ>xI&cakp1F6=9YoK_&j<b8`FY(f4fv+~-_H>-m)?2{t36Dh6(
+zwqyhH58_^1WVRU+H3`+Kz!39|3;SsaqhWE4ZDjOc%_CE+d|kkc+bdV!r?N8Zw|qW9
+zS=LK)+BxZ_Ds+P3K&s~mP#b>>euzM9&{p8}WAHIt5<Iz{^rT&5dxu7<u|4V56QI>N
+z)tw!}Ch)@8e@=nH?h%S}gpeV46=wlSfvg{$d~W>)@Xx;Zg4^5FHMXX8FISW#J~59?
+zS?^b=D(g+GeSU-um}t_Mv6XjnY48}O(R{f~8X5^v?QWa$1Q7+FajJu7;zNqNA!Wo1
+z&|_VgmyJzzPF8u*gFs0*&3|5-K733&cb<V+9&=KeXa^QDWA7^WYNe$46ay=-EG|&R
+zv)qs#YxLd;<H$Iv;tyN*bf~L;qoXQVy1cB@ez2ENxrTHL!f?Sb+yac~1~G0Ntj3?A
+zU_O+kx3XYQ`f@sTYz~sCZ=&1j2ZzeKnh)Cezl}6n@5gACDAB^<1%}sdc*5_Zi|m)6
+z(~&vyx&bBq^Ed#zK0UI6<>Q(V<2?E}0c;^LOUa9AZMD0L?3}6)YsEHCA}-Lc`<%oo
+zKY_J?*;eC2vv&?=0c|}R#X}BfVW5v}gOB0&1ddC%sGWAB^#jJCBTVSsz`YB;QpGM5
+zk^=eDxYU^QlEWm*|IV>W3UjtP?YO2-ME>irgu}@6qqT4b$W8&@IpDZ#P(Z41P`8wI
+zdo`$~Vk&MT?t>)dg{>#BER>^~y-zpT0~yT;qQE!ZaowyM{)TM%55Eyy&ep&~e98A2
+zj@DL^y*{Z}v@9c`G>@jq)B41!tpr8wJOL9TDM$X1%SlXdmOy9+K5|4NS7taQszyI6
+z_J6fgbZ3$+f&%vm2*wM7ECHa61_8$|x6Kj&gi>h@s>234cbU98tT<sfYlSi~=vL0!
+yI&c600004;#hl4MT0ZP5=@VL;L4;Bwo5VwV+_e+F4N@6s3Bf!EkWK&q0RR9DQcREl
+
+literal 0
+HcmV?d00001
+
+diff --git a/core/embed/projects/firmware/src/synthetic_approval.rs b/core/embed/projects/firmware/src/synthetic_approval.rs
+new file mode 100644
+index 0000000..3915e88
+--- /dev/null
++++ b/core/embed/projects/firmware/src/synthetic_approval.rs
+@@ -0,0 +1,57 @@
++//! NEVER EXECUTE/FLASH: fixed public-data, automatically approved boot
++//! diagnostic. The 4 KiB seed cannot hold the lifecycle or image-lifetime
++//! public lazy Fp tables. This module makes no cleanup, runtime capacity or
++//! device-safety claim.
++use core::hint::black_box;
++use core::ptr;
++
++use ironwood_approval::{Engine, Error, Policy, Result};
++use orchard::keys::{FullViewingKey, SpendAuthorizingKey, SpendingKey};
++use rand_chacha::ChaCha20Rng;
++use rand_chacha::rand_core::SeedableRng;
++
++static FIXTURE: &[u8] = include_bytes!("outputs-1.pczt");
++#[unsafe(no_mangle)]
++static mut IRONWOOD_DIAGNOSTIC_RESULT: usize = 0;
++
++// Parameterless and reachable only from reset_handler; never a generic host
++// API.
++#[unsafe(no_mangle)]
++#[inline(never)]
++pub extern "C" fn ironwood_synthetic_boot() {
++    crate::arena::init();
++    let result = synthetic_approval();
++    let consumed = match black_box(result) {
++        Ok(length) => length,
++        Err(_) => usize::MAX,
++    };
++    unsafe { ptr::addr_of_mut!(IRONWOOD_DIAGNOSTIC_RESULT).write_volatile(consumed) };
++}
++
++#[inline(never)]
++fn synthetic_approval() -> Result<usize> {
++    let spending = SpendingKey::from_bytes(black_box([0; 32])).unwrap();
++    let ask = SpendAuthorizingKey::from(&spending);
++    let mut engine = Engine::with_rng(
++        Policy::regtest(black_box(10_000_000), black_box(100_000))?,
++        FullViewingKey::from(&spending),
++        ChaCha20Rng::from_seed(black_box([42; 32])),
++    )?;
++    let review = black_box(&mut engine).begin(black_box(FIXTURE))?;
++    // ONLY this synthetic compile-only boot diagnostic auto-approves.
++    black_box(&mut engine).approve(black_box(review.token()))?;
++    let signed = black_box(&mut engine).sign(black_box(review.token()), black_box(&ask))?;
++    let serialized = black_box(signed.pczt)
++        .serialize()
++        .map_err(|_| Error("synthetic serialization"))?;
++    // Consume the complete signed bytes before dropping local owners; no export.
++    black_box((
++        &review,
++        &engine,
++        &signed.token,
++        &signed.sighash,
++        &signed.signatures,
++        serialized.as_slice(),
++    ));
++    Ok(black_box(serialized.len()))
++}

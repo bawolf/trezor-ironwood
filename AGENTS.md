@@ -53,6 +53,16 @@ reviews; use a $15 allowance for substantive reviews while respecting the $300 t
 Never label a substitute review as a Fable run. These local reviews do not authorize
 publishing a PR or contacting upstream maintainers.
 
+Prepare the work for eventual Trezor review and maintenance. Follow
+`docs/TREZOR_HANDOFF.md`: small upstream-shaped changes, exact source/dependency
+provenance, clean-checkout reproduction, standard generation/tests/changelog,
+and explicit model support. Keep the portable approval semantics shared; reuse
+existing platform APIs and add abstractions only for concrete implementations.
+Synthetic keys/RNG, debug commands, auto-approval and machine-local harnesses stay
+in tests/experiments, outside production paths. No component is handoff-ready
+while required source or fixtures exist only in ignored local directories.
+This requirement does not authorize upstream communication or hardware flashing.
+
 The checks runner locks its verification process and times out subprocess groups.
 These controls do not sandbox the coding agent or guarantee a model spending cap.
 

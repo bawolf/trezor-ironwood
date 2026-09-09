@@ -175,6 +175,16 @@ core and current stack reservation unchanged. A separate worker investigates the
 emulator shutdown assertion. No target firmware build or hardware run from that
 new integration is claimed yet.
 
+The [model portability assessment](MODEL_PORTABILITY.md) identifies Safe 5 as the
+closest follow-on and newer Safe 3 as a plausible button-UI port. Model T and
+older Safe 3 require a different resource plan; Model One cannot fit the current
+arena integration unchanged. These are source findings, not new device builds.
+The [Trezor handoff requirements](TREZOR_HANDOFF.md) are now part of the standing
+project instructions: focused upstream changes, standard integration, complete
+provenance, explicit test/product boundaries and clean-checkout reproduction.
+A fresh clone passes all 27 Python project checks; the complete emulator prototype
+still needs portable source/fixture export. Safe 7 integration remains primary.
+
 The local proofs have a documented correspondence to Rust, not machine-checked
 Rust or firmware refinement. Mixed pools and general memo/address/batch support
 require contract extensions before acceptance.

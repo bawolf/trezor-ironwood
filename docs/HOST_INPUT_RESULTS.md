@@ -47,5 +47,7 @@ The confirmed Fable 5.1 transport packet includes this native Rust/C candidate.
 Independent clarity review and the [finding dispositions](reviews/TRANSPORT.md)
 explain remaining runtime obligations. The original exact-payload approval blocker
 is resolved; both approved review packets completed. A new packet covering the
-later THP driver and one-line descriptor correction is now running after approval.
+later THP driver and one-line descriptor correction received a documented Opus 5
+fallback after two failed Fable attempts. Source disposition of its acceptance-driver findings is complete;
+the resulting harness changes remain separate from full transport acceptance.
 Candidate hashes remain in `work/emulator-host-input/verification.json`.

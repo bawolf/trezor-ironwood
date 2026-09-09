@@ -15,8 +15,8 @@ without a change, a new failure, or a specific unresolved concern.
 | M2.1 | Actual typed THP upload/review/sign passes; hostile recovery and receive flow pending | Prototype Safe 7 shielded review/sign flow | Synthetic receive/send succeeds in emulator; hostile host and cancel/retry tests pass; accurate display and bounded memory measured. |
 | M2.1a | Complete for experimental profile 1 | Compile portable approval core for Safe 7 target | Complete default-features-disabled core, upstream digest/signature equivalence, entropy interruption tests and independent adversarial/readability reviews. |
 | M2.1b | Native arena/link reviewed; actual callback stack candidate isolated, runtime pending | Measure synthetic approval resource use | Record reproducible allocation/peak-heap and latency results for 1–8 actions, identify copy/stack costs, compare against source-defined device budgets; keep host measurements distinct from MCU results. |
-| M2.1c | Typed THP review/hold and host Cancel/fresh retry pass; new driver follow-up pending | Implement trusted emulator review and consent | Show every payment/change/fee from the immutable projection, bind physical UI events to its token, test cancellation and replacement; no transport-triggered approval. |
-| M2.1d | Actual signing and ordinary timeout recovery pass; late chunk causes channel authentication error under diagnosis | Integrate bounded emulator transport and signing | Fragmentation/size limits, disconnect/replay/failure tests and actual synthetic signed response; no production key-store or physical-device use. |
+| M2.1c | Typed THP review/hold and host Cancel/fresh retry pass; Opus follow-up delivered, small acceptance-driver fixes being prepared | Implement trusted emulator review and consent | Show every payment/change/fee from the immutable projection, bind physical UI events to its token, test cancellation and replacement; no transport-triggered approval. |
+| M2.1d | Actual signing and ordinary timeout recovery pass; late chunk defect characterized; reconnect unproven | Integrate bounded emulator transport and signing | Fragmentation/size limits, disconnect/replay/failure tests and actual synthetic signed response; no production key-store or physical-device use. |
 | M2.2 | In progress: eleven host-model proofs pass; firmware refinement pending | Prove selected approval/accounting properties | Non-vacuous Lean statements, warning-fatal build, expected axioms only, implementation correspondence documented and reviewed. |
 | M3 | Later | Independent review, hardware and release path | Cryptographic/embedded review, device matrix, dedicated hardware tests, recovery/privacy UX and upstream acceptance. |
 
@@ -43,13 +43,15 @@ native stack, shared runtime memory, trusted UI and entropy integration remain p
 
 ## Immediate development focus
 
-The first fixed synthetic PCZT now completes verified review, timed confirmation and
-signing in the Safe 7 emulator; its signatures verify independently. Keep the next
-critical path active: same-process cancellation/retry now passes; next is bounded
-host transport. Protocol limits are mapped and an isolated caller-input bridge
-passes native ownership/signature checks. Connect typed chunks and the existing
-review flow in one workflow, then exercise hostile transport and cleanup. Keep
-independent clarity and adversarial reviews separate. The bounded stack experiments
-are recorded; reopen them only with a concrete candidate or new evidence. Baseline
-audits are complete for their stated scopes; a passing startup check alone is not
-the next product milestone.
+The desktop-to-emulator upload, review, hold and signing path now passes, as do
+host Cancel/fresh approval and ordinary timeout recovery. The critical device
+bottleneck is stack fit. The two outlining changes compose on the selected
+measured paths; next determine the full firmware memory budget and integrated
+execution costs that Rust capsules cannot establish. Accepted source remains
+unchanged; the combined candidate still needs functional and review acceptance.
+In parallel, close concrete runtime-review findings and document the crossed
+response defect without expanding into a general THP rewrite. Fresh-channel
+recovery remains untested after an automated safety filter blocked that assignment.
+Receive-address confirmation and production entropy/key storage follow the
+resource gate. Baseline audits are complete for their stated scopes; repeat
+checks only for a changed artifact, new failure or specific unresolved concern.

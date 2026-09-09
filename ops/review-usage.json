@@ -1028,5 +1028,198 @@
       }
     },
     "note": "No high-severity consent break in supplied packet; lifecycle/bounds findings and runtime obligations under disposition. Native is_type_of correction is a later delta not in this packet."
+  },
+  {
+    "review": "emulator-transport-followup",
+    "date_utc": "2026-09-09",
+    "requested_model": "fable[1m]",
+    "model": "claude-fable-5-1",
+    "reported_models": [
+      "claude-fable-5-1"
+    ],
+    "fable_identity_confirmed": true,
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not observed invoice",
+    "reported_total_usd": 3.0247667500000004,
+    "run_limit_usd": 3,
+    "billed_charge_observed": false,
+    "result_sha256": "5ef71fc8078162d5d7bfe3e62ab5009ddb8d448a0dcb1f56f92f46955be0eacf",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 11244,
+        "outputTokens": 16,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.011324,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-fable-5-1": {
+        "inputTokens": 2,
+        "outputTokens": 54377,
+        "cacheReadInputTokens": 3251,
+        "cacheCreationInputTokens": 14688,
+        "webSearchRequests": 0,
+        "costUSD": 3.0134427500000003,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 51882,
+        "canonicalModel": "claude-fable-5-1",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "review_success": false,
+    "terminal_reason": "budget_exhausted",
+    "note": "No review delivered. Configured $3 limit exhausted after one model turn, reporting $3.02476675; guard is not an exact spending cap. Same frozen packet gets one $5-limit retry under user standing approval."
+  },
+  {
+    "review": "emulator-transport-followup-retry",
+    "date_utc": "2026-09-09",
+    "requested_model": "fable[1m]",
+    "model": "claude-fable-5-1",
+    "reported_models": [
+      "claude-fable-5-1"
+    ],
+    "fable_identity_confirmed": true,
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not observed invoice",
+    "reported_total_usd": 0.057044,
+    "run_limit_usd": 5,
+    "billed_charge_observed": false,
+    "result_sha256": "3f1475285fd1dae6c9de53a7a107c990d822dd91523601048fd74cd2daae5f7f",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 11244,
+        "outputTokens": 17,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.011329,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-fable-5-1": {
+        "inputTokens": 20,
+        "outputTokens": 20,
+        "cacheReadInputTokens": 178060,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.045715,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-fable-5-1",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "review_success": false,
+    "note": "Provider Request timed out after284.48s; external900-second watchdog did not fire. No review text. Two current-packet Fable attempts failed; next review uses user-accepted documented Opus fallback."
+  },
+  {
+    "review": "emulator-transport-opus-fallback",
+    "date_utc": "2026-09-09",
+    "requested_model": "opus",
+    "model": "claude-opus-5",
+    "reported_models": [
+      "claude-opus-5"
+    ],
+    "fable_identity_confirmed": false,
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not an observed invoice",
+    "reported_total_usd": 1.590259,
+    "run_limit_usd": 5,
+    "billed_charge_observed": false,
+    "result_sha256": "1b172370f063de4e10666f8741c80b9dec51f0412b5398c63b66d5511f993675",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 11244,
+        "outputTokens": 16,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.011324,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-opus-5": {
+        "inputTokens": 2,
+        "outputTokens": 56391,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 16915,
+        "webSearchRequests": 0,
+        "costUSD": 1.578935,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 50012,
+        "canonicalModel": "claude-opus-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "review_success": true,
+    "note": "Review delivered; findings under source disposition. Model identity does not mean change acceptance."
+  },
+  {
+    "review": "thp-crossed-response",
+    "date_utc": "2026-09-09",
+    "requested_model": "fable[1m]",
+    "model": "claude-fable-5-1",
+    "reported_models": [
+      "claude-fable-5-1"
+    ],
+    "fable_identity_confirmed": true,
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not an observed invoice",
+    "reported_total_usd": 0.941786,
+    "run_limit_usd": 15,
+    "billed_charge_observed": false,
+    "result_sha256": "dc0fd34d2dfdb86418578d614b43d923a5ac47c8005dc0bf9b2264450edb31d6",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 5176,
+        "outputTokens": 18,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.005266,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-fable-5-1": {
+        "inputTokens": 2,
+        "outputTokens": 14848,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 9705,
+        "webSearchRequests": 0,
+        "costUSD": 0.93652,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 12556,
+        "canonicalModel": "claude-fable-5-1",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "review_success": true,
+    "note": "Review delivered; findings under source disposition. Model identity does not mean change acceptance."
   }
 ]

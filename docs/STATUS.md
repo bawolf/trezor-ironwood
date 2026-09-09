@@ -42,7 +42,7 @@ Development branch: `codex/verification-and-reuse`.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260909T001907Z-project-51ec04f7/report.json`.
+- Project: `work/runs/20260909T200935Z-project-3bb44e33/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
@@ -120,16 +120,24 @@ twelve actual-scheduler lifecycle cases, and eleven retained UI plus two relocat
 validation cases pass their stated scopes. Both approved source packets completed
 on confirmed Fable 5.1; [independent dispositions](reviews/TRANSPORT.md) reject
 unsafe/redundant cleanup or accounting changes and identify concrete remaining
-runtime cases. The newer driver and descriptor correction have a frozen $3-cap
-follow-up packet now running after explicit approval cleared the automatic review
-block. The user also authorized scoped Fable source reviews as needed through the
-existing account, within the project budget.
+runtime cases. Two follow-up Fable requests failed (budget exhaustion, then a
+provider timeout); the user-approved Opus 5 fallback delivered a review of the
+current driver and descriptor correction. It supports the firmware design but
+identifies acceptance-driver gaps. Source disposition is complete; a separate
+driver candidate is being prepared to close the concrete gaps. Scoped source
+reviews are authorized through the existing account; substantive reviews now use
+a $15 allowance within the total project budget.
 
 Actual host Cancel at final hold followed by a fresh complete approval/signature
 passes in the same emulator/session/channel. Ordinary upload timeout followed by
 GetFeatures also passes. A deliberately late chunk instead triggers a
 NoiseInvalidMessage authentication error before the expected timeout read; that
-failed recovery is preserved and under diagnosis. Admission-bound rejection,
+failed recovery is preserved. Source/packet analysis and a small real-cipher
+component test identify a discarded response in the pinned desktop channel. A
+[local proposal](proposals/THP_CROSSED_RESPONSE.md) records the mechanism, Fable
+findings and the limits of that evidence. A reconnect-test agent was blocked by
+an automated safety filter before execution; recovery remains unproven.
+Admission-bound rejection,
 response ACK loss, final-hold deadline and reachable channel preemption remain.
 Hardware is available; MCU stack fit and production keys remain gates.
 
@@ -140,7 +148,13 @@ function: selected validation falls 33,688 to 30,688 bytes; selected signing sta
 stack-fit result. A follow-up found the upstream parser already uses direct push;
 no small source cleanup justified adding another abstraction. The candidate remains
 unintegrated and the accepted core is unchanged. Local reports are under
-`work/bridge-stack-probe/`. M2.1c/M2.1d continue beyond the fixed-fixture demonstration.
+`work/bridge-stack-probe/`. A [second stack experiment](STACK_PROGRESS.md) outlines
+the existing serializer: selected signing parsing drops to 26,648 bytes, while
+the selected serialization path is 18,360 bytes. The full maximum is unknown.
+The single combined experiment reproduces both measured gains: begin 30,688,
+signing parse 26,648 and serialization 18,360 bytes. No integration or hardware-fit
+claim follows. The next investigation is the full shared-RAM and execution budget,
+including whether the stack reservation is a platform limit or a firmware choice. M2.1c/M2.1d continue beyond the fixed-fixture demonstration.
 
 The local proofs have a documented correspondence to Rust, not machine-checked
 Rust or firmware refinement. Mixed pools and general memo/address/batch support
@@ -161,10 +175,10 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Twenty-three completed Claude Code review requests reported
-  USD 39.711079 at list prices; USD 39.84 is reserved for completed usage, plus
-  USD 3 for the running follow-up. Seventeen report Fable by name, including both
-  newly approved runtime/transport packets (`claude-fable-5-1`). Earlier substitutions
+  subscription purchased. Twenty-seven completed Claude Code review requests reported
+  USD 45.32493475 at list prices; USD 45.48 is reserved for that reported usage.
+  Twenty requests identify Fable; that count includes failed requests and is not
+  a count of accepted reviews. Earlier substitutions, budget/provider failures
   and authentication failures remain recorded. The user accepts documented Opus
   fallbacks; actual model identities are checked and substitutes are never labeled Fable.
   Actual subscription billing and Codex dollar usage are not observed here.

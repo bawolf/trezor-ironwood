@@ -147,9 +147,27 @@
     },
     {
       "id": "emulator-transport-followup-20260909",
-      "cents": 300,
+      "cents": 303,
       "status": "reserved",
-      "note": "User approved this packet and standing scoped Fable source reviews as needed; full $3 cap reserved while running through existing Claude account."
+      "note": "Completed failed review request: budget_exhausted, no review text. Reported $3.02476675 with configured $3 limit; rounded hold, not observed charge."
+    },
+    {
+      "id": "emulator-transport-followup-retry-20260909",
+      "cents": 6,
+      "status": "reserved",
+      "note": "Failed Fable retry, provider Request timed out; reported $0.057044, rounded hold, not observed charge."
+    },
+    {
+      "id": "emulator-transport-opus-fallback-20260909",
+      "cents": 160,
+      "status": "reserved",
+      "note": "Completed source review; rounded hold for reported list-price usage, not an observed subscription charge."
+    },
+    {
+      "id": "thp-crossed-response-20260909",
+      "cents": 95,
+      "status": "reserved",
+      "note": "Completed source review; rounded hold for reported list-price usage, not an observed subscription charge."
     }
   ],
   "note": "Existing Codex account usage is not dollar-metered here. Claude Code/Fable review usage is reported separately in review-usage.json; conservative holds count its reported list-price estimate, not an observed billed charge. No additional paid APIs, cloud machines, credits, or subscriptions have been purchased. Paid execution remains disabled until costs can be measured and capped. This ledger is bookkeeping, not a provider billing limit."

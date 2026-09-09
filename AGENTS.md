@@ -47,7 +47,9 @@ The user accepts a documented Opus fallback when Claude routes a Fable request
 to Opus. Check the actual model in the result and record the substitution.
 The user also authorizes scoped synthetic project-source reviews through the existing
 Claude Code/Fable account as needed within the project budget. Record actual models
-and reported usage, use bounded per-run caps, and exclude credentials/production data.
+and reported usage, use bounded per-run limits, and exclude credentials/production data.
+The user prefers ample Fable review budgets over small limits that interrupt useful
+reviews; use a $15 allowance for substantive reviews while respecting the $300 total.
 Never label a substitute review as a Fable run. These local reviews do not authorize
 publishing a PR or contacting upstream maintainers.
 

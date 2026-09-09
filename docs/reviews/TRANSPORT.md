@@ -80,14 +80,34 @@ correction, native descriptor predicate and arena guard source. SHA-256:
 `1203fb252c801db1362cb8969710005d96e930d58dbbbd6e128988787e4a39cd`.
 Automatic approval review rejected its external transmission because the user's
 exact-payload approval covered the two earlier packets. The user then approved this packet and scoped Fable reviews as needed through
-the existing account. Transmission is now authorized and the follow-up is running
-with a $3 reported-usage cap.
+the existing account. Transmission is authorized. The $3-limit request ended with
+budget exhaustion ($3.02476675 reported) and no review text. A $5 retry returned
+a provider timeout ($0.057044), also without a review. Neither is acceptance.
+The documented Opus 5 fallback then delivered the review, reporting $1.590259.
+It supports the descriptor correction and guarded cleanup, while identifying
+positive-control, artifact-binding and supervisor-reporting gaps in the driver.
+All nineteen findings have source dispositions in
+`work/emulator-transport/clarity/OPUS_FOLLOWUP_DISPOSITION.md`. The saved oracle
+already binds the returned PCZT fields and signatures to the input, and the host
+registry enforces message identity. Future runs will make the positive control,
+fixture pin, screenshot freshness and fatal cleanup classification explicit and
+preserve supervisor reports on cleanup errors. A separate driver candidate is
+being prepared. No firmware/core correction follows from these findings. This is explicitly an Opus review, not Fable.
 
 Later real runs now establish host Cancel at final hold/fresh retry and ordinary
 upload timeout/GetFeatures recovery. A deliberately late chunk raises a channel
 authentication error, so late-ACK recovery remains unresolved. The new test-driver
-deltas have local parent review; they are outside the running Fable packet.
+deltas have local parent review; they are outside the completed fallback packet.
 Remaining cases include malformed/oversize/nine-action admission, final-hold
 deadline, response ACK loss and reachable channel preemption.
+A separate Fable 5.1 review of the small crossed-response diagnostic/proposal
+reported $0.941786. It confirmed the receive-state mechanism but found missing
+trace fidelity and overly prescriptive acceptance text. A revised local test
+passes the exact duplicate/buffered-response sequence and a non-piggyback case;
+its scope remains component characterization. No protocol fix or upstream report
+has been submitted. Independent clarity review accepts the revised local
+evidence; Fable reviewed its predecessor, not the revised test. The original
+packets and findings remain immutable.
+
 Native and scheduler tests support these boundaries but do not substitute for
 those real transport cases. None of this establishes MCU fit or production safety.

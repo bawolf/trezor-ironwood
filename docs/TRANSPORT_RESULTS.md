@@ -101,7 +101,8 @@ The separate timeout experiment has a mixed result:
   `NoiseInvalidMessage('Failed authentication of message')` on the next read.
   No second GetFeatures was reached. This does not establish the reviewer's
   hypothesized pair of stale Failure replies; the observed result is an
-  authenticated-channel error that needs diagnosis and explicit recovery.
+  authenticated-channel error. The later source/packet diagnosis identifies
+  discarded ciphertext in the desktop channel; explicit recovery remains unproven.
 
 No signing approval was given in either timeout case. The failed run took 25.46
 seconds; its supervisor reported failure with cleanup complete and no surviving
@@ -111,6 +112,22 @@ in `recovery/attempt-02/`. An earlier harness-only failure blocked pairing becau
 it disabled the known setup interaction; its incomplete cleanup-check report and
 independent post-run checks remain in `recovery/` and `recovery/attempt-01/`.
 The corrected setup did not alter firmware or timeout predicates.
+
+## Crossed-response diagnosis
+
+The pinned desktop channel advances its receive sequence before the ACK reader
+decides to discard a crossed response. That response never reaches Noise
+decryption; the next distinct ciphertext uses a later peer nonce and fails
+authentication. The [local proposal](proposals/THP_CROSSED_RESPONSE.md) records
+the actual trace and component-test boundaries. The revised component test passes
+three cases, including the observed timeout/duplicate/buffered-response sequence.
+It uses real ciphers with scripted receive I/O and injected channel/workflow state;
+it is neither a complete THP test nor a fix. Fable confirmed the mechanism and
+identified gaps addressed in the revised local evidence. Ordinary client API
+reachability and intended crossed-message semantics remain unresolved.
+
+A separate fresh-channel recovery assignment was blocked by an automated safety
+filter before execution. No successful reconnect is claimed.
 
 ## Identity and remaining work
 
@@ -127,9 +144,11 @@ emulator and accepted approval core remain unchanged.
 
 The fixed Rust arena remains 128 KiB; firmware GC and native-stack settings were
 not enlarged. No new arena peak, complete MCU stack bound or hardware fit is
-claimed. [The stack constraint](LINKED_STACK_PATH.md) remains a device blocker:
-the best isolated callback experiment leaves only 816 bytes before unmeasured
-C/VM costs. Hardware is available, but no physical device has been accessed or
+claimed. [The stack constraint](STACK_PROGRESS.md) remains a device blocker. The first
+verification candidate leaves only 816 bytes before unmeasured C/VM costs; a
+separate serializer candidate reduces the selected signing parse path by 5,304
+bytes. The combined experiment reproduces both gains on selected paths; the
+complete maximum and integrated firmware overhead remain unproven. Hardware is available, but no physical device has been accessed or
 flashed. Production key derivation, entropy, receive-address confirmation,
 broader transaction support and independent specialist review remain.
 

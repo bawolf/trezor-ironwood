@@ -2642,5 +2642,37 @@
       "without_late_ack": "passed",
       "with_late_ack": "NoiseInvalidMessage; no GetFeatures reached; failed recovery preserved"
     }
+  },
+  {
+    "lane": "project",
+    "started_utc": "20260909T200935Z",
+    "revisions": {},
+    "commands": [
+      {
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 1.78,
+        "tests_passed": 27,
+        "minimum_tests": 27,
+        "passed": true,
+        "log_sha256": "82420c111393a60cd4d9f7a6cc47e0f02d0832539bab5997eabe6b274df62fc9"
+      }
+    ],
+    "passed": true,
+    "local_inputs_sha256": {},
+    "environment": {
+      "LC_ALL": "C",
+      "CARGO_BUILD_JOBS": "4"
+    },
+    "finished_utc": "2026-09-09T20:09:37.457559+00:00"
   }
 ]

@@ -124,7 +124,8 @@ runtime cases. Two follow-up Fable requests failed (budget exhaustion, then a
 provider timeout); the user-approved Opus 5 fallback delivered a review of the
 current driver and descriptor correction. It supports the firmware design but
 identifies acceptance-driver gaps. Source disposition is complete; a separate
-driver candidate is being prepared to close the concrete gaps. Scoped source
+driver rerun closed several concrete gaps but exposed an abnormal native
+shutdown, described below. Scoped source
 reviews are authorized through the existing account; substantive reviews now use
 a $15 allowance within the total project budget.
 
@@ -141,6 +142,15 @@ Admission-bound rejection,
 response ACK loss, final-hold deadline and reachable channel preemption remain.
 Hardware is available; MCU stack fit and production keys remain gates.
 
+A stricter acceptance rerun completed all seven pages, rejected the short press,
+returned the same independently verified bytes and passed the explicit three-chunk
+positive control. During cleanup the emulator logged `Fatal: Assert at vm.c:327`
+and exited with SIGBUS. Its harness incorrectly reported success; the parent
+acceptance record explicitly rejects the overall result. Processes were reaped.
+A separate unrun harness correction rejects abnormal exits, with a small
+failure-classification regression passing; shutdown cause remains under diagnosis.
+The earlier passing image/core was unchanged.
+
 A separate ARM compiler experiment measures the actual begin/sign callbacks.
 An isolated two-line candidate prevents inlining of the existing verification
 function: selected validation falls 33,688 to 30,688 bytes; selected signing stays
@@ -153,8 +163,17 @@ the existing serializer: selected signing parsing drops to 26,648 bytes, while
 the selected serialization path is 18,360 bytes. The full maximum is unknown.
 The single combined experiment reproduces both measured gains: begin 30,688,
 signing parse 26,648 and serialization 18,360 bytes. No integration or hardware-fit
-claim follows. The next investigation is the full shared-RAM and execution budget,
-including whether the stack reservation is a platform limit or a firmware choice. M2.1c/M2.1d continue beyond the fixed-fixture demonstration.
+claim follows. Source inspection now establishes that the stack reservation is a firmware
+choice inside fixed shared application RAM. An illustrative 64 KiB stack would
+cost 32 KiB of GC space while retaining existing stack-limit enforcement. No
+limits were changed; integrated target maps and concurrent heap/stack measurements
+now drive the next decision, rather than assuming an immutable 32 KiB ceiling. M2.1c/M2.1d continue beyond the fixed-fixture demonstration.
+
+Active bounded implementation work is staging the real tracked arena/native bridge
+for target integration under `work/target-native-integration/`, keeping the accepted
+core and current stack reservation unchanged. A separate worker investigates the
+emulator shutdown assertion. No target firmware build or hardware run from that
+new integration is claimed yet.
 
 The local proofs have a documented correspondence to Rust, not machine-checked
 Rust or firmware refinement. Mixed pools and general memo/address/batch support
@@ -175,9 +194,9 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Twenty-seven completed Claude Code review requests reported
-  USD 45.32493475 at list prices; USD 45.48 is reserved for that reported usage.
-  Twenty requests identify Fable; that count includes failed requests and is not
+  subscription purchased. Twenty-eight completed Claude Code review requests reported
+  USD 46.2890135 at list prices; USD 46.45 is reserved for that reported usage.
+  Twenty-one requests identify Fable; that count includes failed requests and is not
   a count of accepted reviews. Earlier substitutions, budget/provider failures
   and authentication failures remain recorded. The user accepts documented Opus
   fallbacks; actual model identities are checked and substitutes are never labeled Fable.

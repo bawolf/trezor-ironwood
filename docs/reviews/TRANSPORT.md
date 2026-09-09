@@ -91,8 +91,12 @@ All nineteen findings have source dispositions in
 already binds the returned PCZT fields and signatures to the input, and the host
 registry enforces message identity. Future runs will make the positive control,
 fixture pin, screenshot freshness and fatal cleanup classification explicit and
-preserve supervisor reports on cleanup errors. A separate driver candidate is
-being prepared. No firmware/core correction follows from these findings. This is explicitly an Opus review, not Fable.
+preserve supervisor reports on cleanup errors. A separate driver candidate
+was prepared and run. The exchange checks passed, but SIGBUS after a VM assertion
+exposed an incomplete abnormal-exit check. Parent acceptance rejects that run;
+the separate v3 harness correction passes an isolated exit-classification test.
+No native fix or final review acceptance is claimed. No firmware/core correction
+follows from the source findings alone. This is explicitly an Opus review, not Fable.
 
 Later real runs now establish host Cancel at final hold/fresh retry and ordinary
 upload timeout/GetFeatures recovery. A deliberately late chunk raises a channel

@@ -113,6 +113,26 @@ it disabled the known setup interaction; its incomplete cleanup-check report and
 independent post-run checks remain in `recovery/` and `recovery/attempt-01/`.
 The corrected setup did not alter firmware or timeout predicates.
 
+## Stricter rerun: exchange verified, overall acceptance rejected
+
+The separate `acceptance-v2/attempt-01/` rerun completed seven pages, short-press
+rejection, hold, three same-class signed chunks whose concatenation equals the
+returned PCZT, fresh captures on changed pages and final Success. Its output is
+byte-identical to the previously verified oracle input; no new oracle execution
+is claimed. Source and image hashes remained unchanged.
+
+The emulator then logged `Fatal: Assert at vm.c:327` and exited with macOS SIGBUS
+(code -10) during cleanup. Although no process groups survived, this is **not a
+clean native shutdown**. The driver and supervisor incorrectly reported passed;
+`parent-acceptance.json` explicitly rejects that overall result and binds both
+frozen reports. The cause is under separate source/crash diagnosis.
+
+An unrun `acceptance-v3/` candidate rejects unexpected shutdown exits and emulator
+exit before requested cleanup. A small isolated-function regression reproduces
+v2's false acceptance of SIGBUS/SIGSEGV and verifies v3 rejects them. It uses fake
+process/signals, not another emulator run. The underlying native failure remains
+unfixed. Earlier successful evidence and all failed evidence remain preserved.
+
 ## Crossed-response diagnosis
 
 The pinned desktop channel advances its receive sequence before the ACK reader

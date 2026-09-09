@@ -8,7 +8,8 @@ MicroPython, C adapters, executor and interrupt costs must also fit.
 ## Small changes under measurement
 
 Both candidates prevent inlining at existing function boundaries. They do not
-change cryptographic calculations, validation, transaction semantics or APIs.
+change source-level cryptographic calculations, validation, transaction semantics
+or APIs; emitted machine code does change.
 The accepted core and passing emulator image remain unchanged.
 
 | Conditional selected path, bytes | Baseline | `verify_bundle` only | `Pczt::serialize` only | Combined |
@@ -29,9 +30,51 @@ The combined paired compile passed in 29.002 seconds under
 208.6-second preparation/inspection window. The same pinned compiler, dependencies
 and LTO settings were used on both sides. The observed gains compose, as shown
 above; 116 original inputs, 451 cached files and five tools remained unchanged.
-Removing the two attributes and existing explanatory comment reproduces the two
+Each combined table cell was measured from the combined objects, not inferred
+by adding separate experiments. Removing the two attributes and one added comment
+reproduces the two
 baseline source files exactly. No conformance or signature tests ran on this
 combined source, and it is not accepted into the implementation.
+
+## Shared memory changes the decision
+
+Source inspection of the actual pinned target linker, application header,
+scheduler and MPU configuration establishes that **32 KiB is a firmware
+reservation, not a fixed hardware capacity**. The stack lives within the existing
+819,200-byte application RAM allocation. The scheduler derives its hardware stack
+limit from the linked header; a larger reservation would preserve that protection
+and reduce GC space. No stack or protection setting has been changed.
+
+Using the retained target maps as a reference, replacing the 4 KiB diagnostic
+arena with a separate 128 KiB arena gives these conditional GC extents:
+
+| Stack reservation | Projected GC extent before additional integration statics |
+| --- | ---: |
+| 32 KiB | 566,808 bytes minus unknown additional static/alignment delta |
+| 64 KiB | 534,040 bytes minus the same delta |
+
+The 64 KiB option costs exactly 32,768 additional GC bytes under this layout.
+These are arithmetic projections, not a linked integrated image or runtime fit.
+GC metadata, live objects, transient copies and fragmentation still consume that
+space. Two 8,704-byte THP buffers allocate inside GC; they must not also be counted
+as additional static reservations. The native arena remains separate from GC.
+
+The hardware limit also reserves 256 bytes within the stack, and MicroPython's
+check leaves a 1,024-byte recovery margin. These margins overlap; they are not
+separate RAM allocations. Selected Rust frame sums cannot consume the entire
+nominal reservation. Exception/FPU saves on the application stack and C/VM callers
+remain to be included, with kernel-stack costs accounted separately.
+
+The source/map report is `work/stack-budget-options/REPORT.md`. It covers the
+retained hardware **test preset**, not a production-security configuration.
+The next decision gate is an integrated target map and concurrent GC/arena/full
+execution-stack measurements. Further parser optimization is conditional on that
+budget, rather than an assumed immutable 32 KiB ceiling. The combined outlining
+candidate has independent clarity and confirmed Fable 5.1 source reviews.
+Fable found no functional source defect and requested bounded functional checks,
+clearer comments and fuller branch/call-site evidence before acceptance. Its
+reported usage was $0.96407875 against a $15 allowance. Functional and firmware
+acceptance remain open.
 
 ## Evidence and limits
 
@@ -41,14 +84,13 @@ callback and nested frame measurements come from actual emitted objects with
 instruction-level checks. Its 4 KiB allocator capsule is deliberately compile-only
 and was never executed. It is not the 128 KiB arena in the working emulator.
 
-Read-only analysis initially failed because its loader omitted `__file__`.
-A separate analysis of the existing objects completed the selected serialization
-path without rebuilding. It also corrected an overly broad SP claim: a field
-multiplication temporarily saves LR, then restores SP before its nested call.
-The selected parser subtotal is unchanged. Failed and corrected evidence remains
-under `work/bridge-stack-next/`; `ANALYSIS_RESULTS.md` records the exact limits.
-Final evidence sealing exceeded the ten-minute analysis bound by 15.4 seconds;
-no further analysis was launched in that assignment.
+Earlier read-only analysis failures and the corrected SP accounting are retained
+under `work/bridge-stack-next/`; `ANALYSIS_RESULTS.md` records their timing,
+corrections and limits. The combined witness already uses the corrected accounting.
+The selected serialization path is the v2 clone/allocation/error path, not the
+v1 conversion skipped by this V6-only profile. Selected parser branches are
+identified in `work/bridge-stack-combined/analysis/selected-results.json`; no
+claim that they are the deepest among all admitted branches is made.
 
 Indirect calls, unresolved tail edges and missing C helper frames prevent a true
 maximum claim. Neither candidate passed the earlier explicit condition requiring

@@ -168,6 +168,12 @@
       "cents": 95,
       "status": "reserved",
       "note": "Completed source review; rounded hold for reported list-price usage, not an observed subscription charge."
+    },
+    {
+      "id": "combined-stack-20260909",
+      "cents": 97,
+      "status": "reserved",
+      "note": "Completed Fable source review; rounded hold for reported list-price usage, not observed subscription charge."
     }
   ],
   "note": "Existing Codex account usage is not dollar-metered here. Claude Code/Fable review usage is reported separately in review-usage.json; conservative holds count its reported list-price estimate, not an observed billed charge. No additional paid APIs, cloud machines, credits, or subscriptions have been purchased. Paid execution remains disabled until costs can be measured and capped. This ledger is bookkeeping, not a provider billing limit."

@@ -45,6 +45,9 @@ small, necessary abstractions; remove unused options, redundant helpers, and
 indirection without weakening validation. Record findings and their resolutions.
 The user accepts a documented Opus fallback when Claude routes a Fable request
 to Opus. Check the actual model in the result and record the substitution.
+The user also authorizes scoped synthetic project-source reviews through the existing
+Claude Code/Fable account as needed within the project budget. Record actual models
+and reported usage, use bounded per-run caps, and exclude credentials/production data.
 Never label a substitute review as a Fable run. These local reviews do not authorize
 publishing a PR or contacting upstream maintainers.
 

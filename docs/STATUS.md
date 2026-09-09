@@ -1,6 +1,6 @@
 # Project status
 
-Updated 2026-09-08 UTC.
+Updated 2026-09-09 UTC.
 Development branch: `codex/verification-and-reuse`.
 
 ## Implemented
@@ -42,7 +42,7 @@ Development branch: `codex/verification-and-reuse`.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260908T223627Z-project-71852949/report.json`.
+- Project: `work/runs/20260909T001907Z-project-51ec04f7/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
@@ -102,27 +102,36 @@ verified context/output/receiver/totals pages, short-press rejection, animated f
 hold, signed response and independent verification of both new real-spend signatures.
 Real menu cancellation, an injected post-validation UI failure, and cancellation
 followed by a second complete approval in one process pass their exact outcome and
-cleanup checks. The retry response is byte-identical to the verified oracle input. The current image is
+cleanup checks. The retry response is byte-identical to the verified oracle input. The retained fixed-fixture image is
 `82608d19eedfe07a97433c4cb3cca6eae92cad8530ce6197f7e2fce7e0843c8b`.
 
-The Rust bridge, C binding and frozen review screens remain isolated locally.
-Thirteen UI tests, two demo tests, the real-core host lifecycle, actual-header C
-compilation and warning-fatal Clippy pass. Two confirmed Fable5.1 reviews and
-independent clarity reviews covered the bridge and corrections. A further runtime-
-driver Fable review is blocked by automatic approval review pending exact payload/
-destination authorization; functional results are recorded without claiming that
-review completed. Earlier build/startup/import/driver failures are preserved in the
-result document. The local model setup allowance is now documented as 30 seconds.
+The [desktop-to-emulator THP flow now passes](TRANSPORT_RESULTS.md): bounded
+caller upload, native validation, all seven trusted review pages, rejected short
+press, final hold and complete signed response. An independent oracle verifies
+both returned real-spend signatures. The isolated image is
+`36237692d909d9d4274d231cf924946b76a57eb7a14f2c7c0f63c53a3780d241`.
+Its first runtime caught an incorrect Python type check on native protobuf
+definitions. A one-line native-API correction, regression with firmware-shaped
+message doubles, rebuild and actual rerun pass; all failed evidence is preserved.
 
-The pinned framing/lifecycle mapping is complete. An isolated
-[host-input bridge candidate](HOST_INPUT_RESULTS.md) now accepts bounded caller
-bytes: native failed-replacement/ownership tests and two distinct valid inputs
-pass; the independent oracle verifies three new real-spend signatures. The C
-adapter compiles against pinned headers and warning-fatal Clippy passes. The core,
-old bridge and emulator image remain unchanged. Independent clarity review found no blocker; adversarial review and
-integration remain pending. The next bounded task connects typed chunked THP input, existing
-trusted review and signed-response delivery. No transport handler or production
-key path exists yet. Native emulator success does not establish MCU fit.
+The [native caller-input bridge](HOST_INPUT_RESULTS.md), typed protocol and host
+client retain the accepted core and existing memory limits. Twelve host tests,
+twelve actual-scheduler lifecycle cases, and eleven retained UI plus two relocated
+validation cases pass their stated scopes. Both approved source packets completed
+on confirmed Fable 5.1; [independent dispositions](reviews/TRANSPORT.md) reject
+unsafe/redundant cleanup or accounting changes and identify concrete remaining
+runtime cases. The newer driver and descriptor correction have a frozen $3-cap
+follow-up packet now running after explicit approval cleared the automatic review
+block. The user also authorized scoped Fable source reviews as needed through the
+existing account, within the project budget.
+
+Actual host Cancel at final hold followed by a fresh complete approval/signature
+passes in the same emulator/session/channel. Ordinary upload timeout followed by
+GetFeatures also passes. A deliberately late chunk instead triggers a
+NoiseInvalidMessage authentication error before the expected timeout read; that
+failed recovery is preserved and under diagnosis. Admission-bound rejection,
+response ACK loss, final-hold deadline and reachable channel preemption remain.
+Hardware is available; MCU stack fit and production keys remain gates.
 
 A separate ARM compiler experiment measures the actual begin/sign callbacks.
 An isolated two-line candidate prevents inlining of the existing verification
@@ -152,12 +161,15 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Twenty-one completed Claude Code review requests reported
-  USD 35.655473 at list prices; USD 35.77 is reserved. Fifteen report Fable by
-  name, including both bridge reviews (`claude-fable-5-1`). Earlier substitutions
+  subscription purchased. Twenty-three completed Claude Code review requests reported
+  USD 39.711079 at list prices; USD 39.84 is reserved for completed usage, plus
+  USD 3 for the running follow-up. Seventeen report Fable by name, including both
+  newly approved runtime/transport packets (`claude-fable-5-1`). Earlier substitutions
   and authentication failures remain recorded. The user accepts documented Opus
   fallbacks; actual model identities are checked and substitutes are never labeled Fable.
   Actual subscription billing and Codex dollar usage are not observed here.
+  One user-authorized existing Codex reset credit was redeemed at 98% usage;
+  two credits remain. No further reset has been authorized.
 
 These milestones do not complete the shielded-support project or establish that
 the wallet, circuit or eventual firmware is ready for funds.

@@ -38,5 +38,6 @@ step may change v6 authorizing data under the protocol rules.
 
 The experimental host state machine, exact projection and assumptions are now
 specified in `APPROVAL_CONTRACT.md`, exercised with actual PCZTs and modeled in
-Lean. The device transport/UI and a machine-checked refinement remain unimplemented;
-see `APPROVAL_PROOFS.md` for the exact theorem boundaries.
+Lean. A synthetic emulator now executes typed THP transport and trusted UI; hostile
+transport acceptance and machine-checked firmware refinement remain. See
+`TRANSPORT_RESULTS.md` and `APPROVAL_PROOFS.md` for the exact boundaries.

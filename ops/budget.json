@@ -132,6 +132,24 @@
       "cents": 119,
       "status": "reserved",
       "note": "Conservative hold for reported Fable5.1 list-price usage through existing Max subscription; no invoice observed."
+    },
+    {
+      "id": "emulator-runtime-driver-20260908",
+      "cents": 111,
+      "status": "reserved",
+      "note": "Completed approved source-packet review; conservative rounded hold for reported list-price usage, not observed subscription charge."
+    },
+    {
+      "id": "emulator-host-transport-20260908",
+      "cents": 296,
+      "status": "reserved",
+      "note": "Completed approved source-packet review; conservative rounded hold for reported list-price usage, not observed subscription charge."
+    },
+    {
+      "id": "emulator-transport-followup-20260909",
+      "cents": 300,
+      "status": "reserved",
+      "note": "User approved this packet and standing scoped Fable source reviews as needed; full $3 cap reserved while running through existing Claude account."
     }
   ],
   "note": "Existing Codex account usage is not dollar-metered here. Claude Code/Fable review usage is reported separately in review-usage.json; conservative holds count its reported list-price estimate, not an observed billed charge. No additional paid APIs, cloud machines, credits, or subscriptions have been purchased. Paid execution remains disabled until costs can be measured and capped. This ledger is bookkeeping, not a provider billing limit."

@@ -2599,5 +2599,48 @@
       }
     },
     "limits": "Unchanged test-preset linked baseline; no core/allocator integration or execution/runtime fit."
+  },
+  {
+    "lane": "emulator-thp-signing",
+    "date_utc": "2026-09-09",
+    "passed": true,
+    "scope": "One real synthetic seedless THP upload/review/hold/sign/response; not hostile-transport completion or MCU fit.",
+    "revisions": {
+      "trezor-firmware": "7105338e3c2c1e681940e17780609881ce53126b"
+    },
+    "image_sha256": "36237692d909d9d4274d231cf924946b76a57eb7a14f2c7c0f63c53a3780d241",
+    "response_sha256": "f499de162d7df2e6e1df8cfcc09f8b43bf2200bed72a408e93e6a499a9c3c9f9",
+    "seconds": 14.063765208004043,
+    "response_bytes": 2557,
+    "review_pages": 7,
+    "new_real_spend_signatures": 2,
+    "reused_oracle_controls": 14,
+    "evidence_sha256": {
+      "work/emulator-transport/build-attestation-02.json": "18f5a5062f02c57cf5e0ae0edaffef09a33af3572b2fde6338b2c19b109a2bfc",
+      "work/emulator-transport/host/verification.json": "9f62c685b0ac4b82dec624988e41a0aa0001cb623a1e065b57eb612330b10361",
+      "work/emulator-transport/clarity/evidence/test-results.json": "8cd65271b0a6a0961c6519153e2a182f733328cf267ce2c8b16a8693f063d03c",
+      "work/emulator-transport/message-type-regression/report.json": "269eb19e0c467fcd969be9a33fcf1e5ec764a6ea7a45b7a24f9b4e6bb0c515ed",
+      "work/emulator-transport/runtime/attempt-01/report.json": "455690bfd304462e696108d624e4903e7b3ed4da3d0fafcf2a14651f21025d07",
+      "work/emulator-transport/runtime/attempt-02/report.json": "c17b6910f6865744a748ffa0bfe9c46c4c686bb9408a5c23db8c0aa6ebc9de8a",
+      "work/emulator-transport/runtime/attempt-02/supervisor-report.json": "3d57fb58eeec834eb1a7e4bfa71cb2726d9e979d3c907e637a88d3f4856d3b42",
+      "work/emulator-transport/runtime/attempt-02/oracle/report.json": "c0ea845735f9ddb0564e769eba321f4da2181024e75c942e483107a99d685a19",
+      "work/emulator-transport/cancel-retry/attempt-01/report.json": "5d4217cc8c079901a56e41132d67abfc87fd5659c1114be51ce2c56c111dcca6",
+      "work/emulator-transport/cancel-retry/attempt-01/supervisor-report.json": "cb7be3ca7d537afd5fc9e6d5bbb49502bc44b994829a3df6147681bd0a6a5f8c",
+      "work/emulator-transport/cancel-retry/attempt-01/parent-verification.json": "f8c2c943a99d16789d53502d847e15fee427c9e358ec009484be44e3fe0fff57",
+      "work/emulator-transport/recovery/attempt-02/report.json": "f9b316f9bc066362b3df5ebc69c44b4b6ad82020be2b4154597de96a612c675a",
+      "work/emulator-transport/recovery/attempt-02/supervisor-report.json": "f87bc5095a4f9d68c033f4047f9e23644d300c8013340188ef2a0466ded95786"
+    },
+    "failed_attempt_preserved": "work/emulator-transport/runtime/attempt-01",
+    "review_scope": "Both initial Fable packets complete; current-driver/descriptor follow-up running after explicit authorization.",
+    "host_cancel_retry": {
+      "passed": true,
+      "seconds": 22.714311707997695,
+      "same_emulator_session_channel": true,
+      "response_verified_by_exact_byte_equality": true
+    },
+    "upload_timeout_recovery": {
+      "without_late_ack": "passed",
+      "with_late_ack": "NoiseInvalidMessage; no GetFeatures reached; failed recovery preserved"
+    }
   }
 ]

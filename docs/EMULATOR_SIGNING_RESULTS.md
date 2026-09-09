@@ -83,14 +83,17 @@ contention as a concern, not a proved explanation of every historical failure.
 
 Two confirmed Fable5.1 bridge reviews and independent clarity reviews preceded the
 runtime work. Runtime exposed integration issues that those source/mock reviews
-missed. An additional narrowed runtime-driver review is awaiting explicit approval:
-automatic approval review rejected external transmission of that exact unpublished
-source payload despite the standing Fable authorization. No blocked call ran and no
-new review usage was charged/reported. Local testing continued.
+missed. The additional narrowed runtime-driver packet subsequently completed on
+confirmed Fable 5.1 after exact-payload approval. Its historical findings and the
+current driver's corrections are recorded in [the transport review](reviews/TRANSPORT.md).
+The newer THP driver has a separate approved follow-up running; earlier rejected
+transmission attempts made no model call. Local testing continued throughout.
 
 The demo has no production entropy, key-store, general PCZT transport, cross-process
 replay protection or hardware validation. Mixed pools, general memos and address
-presentation remain outside this synthetic profile. Next: bounded host input/transport, reusing the demonstrated review/sign lifecycle.
+presentation remain outside this synthetic profile. A separate
+[bounded THP upload/signing flow](TRANSPORT_RESULTS.md) now reuses this lifecycle;
+real hostile-transport acceptance continues.
 The selected ARM stack concern remains open; the small existing-function outlining
 candidate is isolated, and a further parser-staging investigation found no simple
 source cleanup to justify another abstraction.

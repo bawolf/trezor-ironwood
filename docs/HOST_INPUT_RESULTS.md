@@ -3,8 +3,10 @@
 The isolated native bridge now validates caller-supplied PCZT bytes instead of a
 compiled fixture. The first host run passes failed-replacement, ownership and
 signing checks, including a second distinct valid transaction. This is a local
-candidate under `work/emulator-host-input/`; it has not been accepted or integrated
-into the passing emulator image. No transport handler or protobuf messages exist yet.
+candidate under `work/emulator-host-input/`. It is now integrated into a separate
+[passing THP emulator](TRANSPORT_RESULTS.md); the earlier fixed-fixture image
+remains unchanged. Hostile transport acceptance and current-source follow-up review
+remain separate.
 
 ## Behavior and checks
 
@@ -33,27 +35,17 @@ The native responses contain 2,557 and 10,101 bytes respectively. Their SHA-256s
 - Two-input response: `19442ea37fd2e4ae7b0120ae79d1e2ccbab67b643594b8ac70c3f4497e7aa532`.
 - Eight-output response: `5863e3e6d29c4c663d164c9e467ce5c15ed8758208210056ab93560712c5f9b4`.
 
-## Remaining integration
+## Integration status
 
-The pinned protocol mapping is complete under `work/host-transport-plan/`:
-THP's current receive buffer admits 8,681 protobuf bytes, below the larger valid
-fixture and the core's 65,536-byte input cap. The proposed next slice uses existing
-THP framing and 1,024-byte application chunks in both directions, retaining fixed
-buffers. Its message names/IDs are local prototypes, not assigned upstream values.
+The [typed THP upload and signed response now pass](TRANSPORT_RESULTS.md) in a
+separate derivative with 1024-byte chunks, existing trusted review and cleanup.
+That result executes the real native bridge with the fixed 128 KiB arena; the
+host-native measurements above continue to use a host allocator. Neither result
+establishes a new arena peak, MCU stack fit or production key integration.
 
-The next implementation must connect upload, native validation, existing trusted
-review and signed-response delivery in one owned workflow. It must release upload
-storage before review awaits, cancel on all exits, reject stale continuations and
-test real cancel/disconnect/retry. The existing zero-argument frozen demo/UI is not
-compatible with this candidate API; change callers together in the isolated build.
-
-Host tests use a host allocator. C compilation does not execute MicroPython
-conversions. No new emulator, arena peak, MCU stack, hardware or transport result is
-claimed. The accepted core, dependency lock, old bridge and image remain unchanged.
-Independent clarity/local boundary review found no blocking issue in the frozen
-Rust/test and narrow C input delta. Its optional unsafe-contract wording refinement
-is deferred to the final firmware caller contract. Adversarial review and firmware
-integration remain pending; hashes are in `work/emulator-host-input/verification.json`.
-The earlier runtime-driver Fable packet still awaits exact-payload approval after
-automatic approval review rejected its external transmission. No review was sent
-for this candidate and no additional model charge is recorded.
+The confirmed Fable 5.1 transport packet includes this native Rust/C candidate.
+Independent clarity review and the [finding dispositions](reviews/TRANSPORT.md)
+explain remaining runtime obligations. The original exact-payload approval blocker
+is resolved; both approved review packets completed. A new packet covering the
+later THP driver and one-line descriptor correction is now running after approval.
+Candidate hashes remain in `work/emulator-host-input/verification.json`.

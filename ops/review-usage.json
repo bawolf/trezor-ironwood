@@ -1269,5 +1269,53 @@
     },
     "review_success": true,
     "note": "No source functional defect found; comments/documentation and missing functional/full-resource evidence remain. Candidate not accepted."
+  },
+  {
+    "review": "target-native-integration",
+    "date_utc": "2026-09-09",
+    "requested_model": "fable[1m]",
+    "model": "claude-fable-5-1",
+    "reported_models": [
+      "claude-fable-5-1"
+    ],
+    "fable_identity_confirmed": true,
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not an observed invoice",
+    "reported_total_usd": 4.044588750000001,
+    "run_limit_usd": 15,
+    "billed_charge_observed": false,
+    "result_sha256": "94623198a8b6609af294096df8ba013ee143a95b97ecfe2c2c73bf75f55be164",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 65791,
+        "outputTokens": 21,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.065896,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-fable-5-1": {
+        "inputTokens": 2,
+        "outputTokens": 44986,
+        "cacheReadInputTokens": 3251,
+        "cacheCreationInputTokens": 86428,
+        "webSearchRequests": 0,
+        "costUSD": 3.9786927500000004,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 42156,
+        "canonicalModel": "claude-fable-5-1",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "review_success": true,
+    "note": "Source review delivered. Parent disposition resolves source concerns and retains integrated allocator, fault-path and runtime gates."
   }
 ]

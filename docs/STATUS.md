@@ -42,7 +42,7 @@ Development branch: `codex/verification-and-reuse`.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260909T200935Z-project-3bb44e33/report.json`.
+- Project: `work/runs/20260909T204659Z-project-efe3d148/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
@@ -169,11 +169,15 @@ cost 32 KiB of GC space while retaining existing stack-limit enforcement. No
 limits were changed; integrated target maps and concurrent heap/stack measurements
 now drive the next decision, rather than assuming an immutable 32 KiB ceiling. M2.1c/M2.1d continue beyond the fixed-fixture demonstration.
 
-Active bounded implementation work is staging the real tracked arena/native bridge
-for target integration under `work/target-native-integration/`, keeping the accepted
-core and current stack reservation unchanged. A separate worker investigates the
-emulator shutdown assertion. No target firmware build or hardware run from that
-new integration is claimed yet.
+The [target-native integration](TARGET_NATIVE_INTEGRATION.md) now has a reviewed
+CPU-context/lifetime adapter, a real ARM object, seven negative configuration
+checks, and isolated frozen dependencies. Fable5.1 and independent clarity reviews
+are dispositioned. The small standalone adapter and compiler recipe are tracked.
+A full application link remains next, with global allocator callers, failure paths
+and complete memory placement as explicit acceptance checks. No new firmware or
+hardware execution occurred. The shutdown source diagnosis identifies a VM frame
+tracking assertion; asynchronous interrupt/context interaction is a hypothesis,
+not an established root cause or a native fix.
 
 The [model portability assessment](MODEL_PORTABILITY.md) identifies Safe 5 as the
 closest follow-on and newer Safe 3 as a plausible button-UI port. Model T and

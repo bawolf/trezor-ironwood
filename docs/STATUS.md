@@ -173,8 +173,13 @@ The [target-native integration](TARGET_NATIVE_INTEGRATION.md) now has a reviewed
 CPU-context/lifetime adapter, a real ARM object, seven negative configuration
 checks, and isolated frozen dependencies. Fable5.1 and independent clarity reviews
 are dispositioned. The small standalone adapter and compiler recipe are tracked.
-A full application link remains next, with global allocator callers, failure paths
-and complete memory placement as explicit acceptance checks. No new firmware or
+The isolated application now links with the unchanged source, 32 KiB stack and
+128 KiB arena. The map assigns 565,052 bytes to GC and 2,639,360 bytes to the full
+flash load extent; caller/failure-path inspection and runtime fit remain separate
+acceptance checks. A candidate linked path has 32,912 bytes of local frames,
+above the reservation; simultaneous stack/control-flow analysis remains pending.
+The first attempt failed because core was rebuilt without alloc;
+the command-only correction matches the prior allocator build. No firmware or
 hardware execution occurred. The shutdown source diagnosis identifies a VM frame
 tracking assertion; asynchronous interrupt/context interaction is a hypothesis,
 not an established root cause or a native fix.
@@ -187,7 +192,12 @@ The [Trezor handoff requirements](TREZOR_HANDOFF.md) are now part of the standin
 project instructions: focused upstream changes, standard integration, complete
 provenance, explicit test/product boundaries and clean-checkout reproduction.
 A fresh clone passes all 27 Python project checks; the complete emulator prototype
-still needs portable source/fixture export. Safe 7 integration remains primary.
+still needs portable source/fixture export. The user has now confirmed an unopened
+Safe 5 dedicated to testing. Finish the Safe 7 artifact inspection and prepare an
+isolated Safe 5 baseline, then its native, Delizia UI and older-wire integration.
+The [hardware session plan](HARDWARE_SESSION.md) groups physical actions; no Safe 5
+Ironwood image is ready. The missing host libusb dependency is installed and the
+offline host-input check passes without device enumeration or access.
 
 The local proofs have a documented correspondence to Rust, not machine-checked
 Rust or firmware refinement. Mixed pools and general memo/address/batch support
@@ -204,13 +214,14 @@ No new automation is needed. Keep the machine on and Codex running.
   seed loaded. A synthetic emulator signer now runs; production device support remains unimplemented.
 - Automated adversarial/readability reviews are recorded; independent specialist
   cryptographic/embedded review and eventual hardware validation remain.
-- No outreach sent. Librustzcash needs maintainer acknowledgment before a PR.
+- No upstream maintainers have been contacted. A PR to librustzcash would require
+  their prior acknowledgment; using the libraries and local prototyping can continue.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Twenty-eight completed Claude Code review requests reported
-  USD 46.2890135 at list prices; USD 46.45 is reserved for that reported usage.
-  Twenty-one requests identify Fable; that count includes failed requests and is not
+  subscription purchased. Thirty completed Claude Code review requests reported
+  USD 51.03919725 at list prices; USD 51.21 is reserved for that reported usage.
+  Twenty-three requests identify Fable; that count includes failed requests and is not
   a count of accepted reviews. Earlier substitutions, budget/provider failures
   and authentication failures remain recorded. The user accepts documented Opus
   fallbacks; actual model identities are checked and substitutes are never labeled Fable.

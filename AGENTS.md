@@ -4,9 +4,13 @@ Read `README.md`, `docs/STATUS.md`, `docs/BACKLOG.md`, `docs/THREAT_MODEL.md`,
 `docs/VERIFICATION.md`, and `ops/budget.json` before choosing work.
 
 The user authorized this machine, this repository, and an initial total budget of
-USD 300. Work toward upstreamable shielded Zcash support, Safe 7 and desktop first.
-Local implementation, source downloads, builds, tests, and commits in this project
-are authorized. Preserve user changes. Use branches for implementation work.
+USD 300. Work toward upstreamable shielded Zcash support; retain the Safe 7 and
+desktop prototype as the existing reference.
+The first available physical test device is now an unopened Safe 5 (T3T1),
+dedicated to testing. Retain the Safe 7 work and complete its artifact inspection;
+prioritize Safe 5 baseline, port and session preparation before requesting hands-on
+time. Local implementation, source downloads, builds, tests, and commits in this
+project are authorized. Preserve user changes. Use branches for implementation work.
 
 - The public repository contains research, harnesses, and reviewable experiments;
   it is not approved firmware or a wallet. Do not imply otherwise.

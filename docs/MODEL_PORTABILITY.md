@@ -4,7 +4,9 @@ Initial feasibility can be assessed with a source comparison and a few targeted
 builds, before undertaking a complete port. The source comparison is complete;
 no additional model has been compiled, linked or run by this assessment.
 **Safe 5 is the closest follow-on; newer Safe 3 is the next distinct UI case.**
-Safe 7 native integration remains the primary task.
+The available first physical test device is an unopened Safe 5. Finish inspecting
+the Safe 7 native link, then establish an isolated Safe 5 baseline and integration.
+No Safe 7 firmware image is suitable for installation on this unit.
 
 This assessment uses firmware revision
 `7105338e3c2c1e681940e17780609881ce53126b`. Model names/revisions also match the
@@ -72,7 +74,7 @@ are [model definitions](https://github.com/trezor/trezor-firmware/tree/7105338e3
 [layout implementations](https://github.com/trezor/trezor-firmware/tree/7105338e3c2c1e681940e17780609881ce53126b/core/src/trezor/ui/layouts)
 and [wire selection](https://github.com/trezor/trezor-firmware/blob/7105338e3c2c1e681940e17780609881ce53126b/core/src/trezor/wire/__init__.py).
 
-Proceed one follow-on model at a time after the Safe 7 integration budget becomes
-concrete. Declare support by exact model/revision and ship the evidence through
+Proceed with Safe 5 as the first hardware target, using its own baseline and
+integration evidence; the Safe 7 map now gives a measured comparison. Declare support by exact model/revision and ship the evidence through
 the [Trezor handoff package](TREZOR_HANDOFF.md). Keep unsupported models explicitly
 unsupported; portability must not weaken the approval contract.

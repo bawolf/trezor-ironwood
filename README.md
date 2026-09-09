@@ -13,6 +13,7 @@ and hardware validation remain. **No firmware is ready for use with funds.**
 - [Current status](docs/STATUS.md), [THP upload and signing](docs/TRANSPORT_RESULTS.md), and [earlier fixed-fixture results](docs/EMULATOR_SIGNING_RESULTS.md)
 - [Trezor handoff plan and delivery requirements](docs/TREZOR_HANDOFF.md)
 - [Portability to other Trezor models](docs/MODEL_PORTABILITY.md)
+- [First hardware session: dedicated Safe 5](docs/HARDWARE_SESSION.md)
 - [Upstream findings and reuse map](docs/UPSTREAM.md)
 - [Trezor shielded PR reuse assessment](docs/TREZOR_REUSE.md)
 - [Safe 7 emulator setup and evidence](docs/FIRMWARE_BASELINE.md)

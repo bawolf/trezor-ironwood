@@ -186,6 +186,18 @@
       "cents": 71,
       "status": "reserved",
       "note": "Completed Fable5.1 preparation review; rounded hold for reported list-price usage, not an observed invoice."
+    },
+    {
+      "id": "safe5-baseline-preparation-20260909",
+      "cents": 23,
+      "status": "reserved",
+      "note": "Empty-result review attempt; rounded reported usage hold, no accepted review or invoice."
+    },
+    {
+      "id": "safe5-baseline-preparation-retry-20260909",
+      "cents": 65,
+      "status": "reserved",
+      "note": "Delivered Opus fallback review; rounded reported usage hold, not an observed invoice."
     }
   ],
   "note": "Existing Codex account usage is not dollar-metered here. Claude Code/Fable review usage is reported separately in review-usage.json; conservative holds count its reported list-price estimate, not an observed billed charge. No additional paid APIs, cloud machines, credits, or subscriptions have been purchased. Paid execution remains disabled until costs can be measured and capped. This ledger is bookkeeping, not a provider billing limit."

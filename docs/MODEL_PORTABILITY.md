@@ -2,10 +2,13 @@
 
 Initial feasibility can be assessed with a source comparison and a few targeted
 builds, before undertaking a complete port. The source comparison is complete;
-no additional model has been compiled, linked or run by this assessment.
+the [unchanged Safe 5 baseline](SAFE5_BASELINE.md) now also compiles and links.
+No additional model has run, and no Safe 5 native signing port is accepted.
 **Safe 5 is the closest follow-on; newer Safe 3 is the next distinct UI case.**
 The available first physical test device is an unopened Safe 5. Finish inspecting
-the Safe 7 native link, then establish an isolated Safe 5 baseline and integration.
+the Safe 7 native link and resolve Safe 5 resource placement and flash cost.
+The Safe 5 baseline has only 43,668 bytes of AUX1 tail and 115,200 bytes of flash
+tail; the existing arena cannot transfer to AUX1 unchanged.
 No Safe 7 firmware image is suitable for installation on this unit.
 
 This assessment uses firmware revision

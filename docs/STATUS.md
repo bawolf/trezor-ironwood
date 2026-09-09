@@ -42,7 +42,7 @@ Development branch: `codex/verification-and-reuse`.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260909T204659Z-project-efe3d148/report.json`.
+- Project: `work/runs/20260909T233616Z-project-7aa38baf/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
@@ -193,8 +193,12 @@ project instructions: focused upstream changes, standard integration, complete
 provenance, explicit test/product boundaries and clean-checkout reproduction.
 A fresh clone passes all 27 Python project checks; the complete emulator prototype
 still needs portable source/fixture export. The user has now confirmed an unopened
-Safe 5 dedicated to testing. Finish the Safe 7 artifact inspection and prepare an
-isolated Safe 5 baseline, then its native, Delizia UI and older-wire integration.
+Safe 5 dedicated to testing. Its [unchanged baseline now builds](SAFE5_BASELINE.md):
+AUX1 has only 43,668 bytes unoccupied, GC has 240,368 bytes, and flash has
+115,200 bytes remaining. The current 131,104-byte guarded arena cannot fit in
+AUX1. An existing AUX2 section offers a prospective placement, leaving 109,264
+bytes for GC; no native link or runtime fit is accepted. Resource placement and
+actual native flash cost now precede the adapter, Delizia UI and older-wire port.
 The [hardware session plan](HARDWARE_SESSION.md) groups physical actions; no Safe 5
 Ironwood image is ready. The missing host libusb dependency is installed and the
 offline host-input check passes without device enumeration or access.
@@ -219,8 +223,8 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Thirty completed Claude Code review requests reported
-  USD 51.03919725 at list prices; USD 51.21 is reserved for that reported usage.
+  subscription purchased. Thirty-two completed Claude Code review requests reported
+  USD 51.90125825 at list prices; USD 52.09 is reserved for that reported usage.
   Twenty-three requests identify Fable; that count includes failed requests and is not
   a count of accepted reviews. Earlier substitutions, budget/provider failures
   and authentication failures remain recorded. The user accepts documented Opus

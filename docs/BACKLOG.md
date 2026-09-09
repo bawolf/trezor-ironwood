@@ -18,7 +18,7 @@ without a change, a new failure, or a specific unresolved concern.
 | M2.1c | Typed THP review/hold and host Cancel/fresh retry pass; Opus follow-up delivered, stricter run exposed shutdown SIGBUS; overall acceptance rejected | Implement trusted emulator review and consent | Show every payment/change/fee from the immutable projection, bind physical UI events to its token, test cancellation and replacement; no transport-triggered approval. |
 | M2.1d | Actual signing and ordinary timeout recovery pass; late chunk defect characterized; reconnect unproven | Integrate bounded emulator transport and signing | Fragmentation/size limits, disconnect/replay/failure tests and actual synthetic signed response; no production key-store or physical-device use. |
 | M2.2 | In progress: eleven host-model proofs pass; firmware refinement pending | Prove selected approval/accounting properties | Non-vacuous Lean statements, warning-fatal build, expected axioms only, implementation correspondence documented and reviewed. |
-| M2.3 | Safe 5 selected for first hardware; isolated baseline and port preparation underway | Assess other Trezor models | Compare actual model layouts and runtime interfaces; use cheap target/link gates before UI porting; prioritize the available Safe 5 for first hardware testing. |
+| M2.3 | Safe 5 baseline passed; current AUX1 arena does not fit, flash and alternate placement need a native measurement | Assess other Trezor models | Compare actual model layouts and runtime interfaces; use cheap target/link gates before UI porting; prioritize the available Safe 5 for first hardware testing. |
 | M3 | Later | Independent review, hardware and release path | Cryptographic/embedded review, device matrix, dedicated hardware tests, recovery/privacy UX and upstream acceptance. |
 | M4 | Delivery requirements established; prototype export incomplete | Prepare maintainable Trezor handoff | Focused upstream patch series, dependency/licenses and reviewed boundaries; clean-checkout reproduction without hidden local inputs; upstream tests/generation/changelog/CI and explicit model evidence. |
 
@@ -47,12 +47,16 @@ native stack, shared runtime memory, trusted UI and entropy integration remain p
 
 The desktop-to-emulator upload, review, hold and signing path now passes, as do
 host Cancel/fresh approval and ordinary timeout recovery. The critical device
-bottleneck is stack fit. The two outlining changes compose on the selected
+bottleneck is resource fit: Safe 7 stack depth and Safe 5 RAM/flash capacity. The two outlining changes compose on the selected
 measured paths; the reviewed native application now links with a 565,052-byte GC region at the
 unchanged stack/arena sizes. Finish image-wide caller/failure-path inspection and
 measure integrated execution costs that a link cannot establish. The user has an
-unopened Safe 5 dedicated to testing: establish its own unchanged baseline and
-native/Delizia/older-wire port before the first attended hardware session. Source inspection confirms
+unopened Safe 5 dedicated to testing. Its unchanged baseline now passes, but
+AUX1 has only 43,668 bytes of tail and flash only 115,200. Review the minimal
+existing-AUX2-section arena placement and T3T1 execution contract, then measure
+one full native link with the same universal module inventory and protections.
+The prospective arena placement leaves 109,264 bytes of GC; runtime fit is open.
+Do this resource gate before the Delizia/older-wire port or attended hardware session. Source inspection confirms
 32 KiB is a configurable reservation with hardware enforcement; a 64 KiB option
 costs 32 KiB of GC space and has not been built or accepted. Accepted source remains
 unchanged; the combined candidate still needs functional and review acceptance.

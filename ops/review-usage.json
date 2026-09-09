@@ -1365,5 +1365,102 @@
     },
     "review_success": true,
     "note": "Scoped preparation review delivered; wording and result-label corrections dispositioned. No hardware or production acceptance."
+  },
+  {
+    "review": "safe5-baseline-preparation",
+    "date_utc": "2026-09-09",
+    "requested_model": "fable[1m]",
+    "model": "claude-opus-5",
+    "reported_models": [
+      "claude-opus-5"
+    ],
+    "fable_identity_confirmed": false,
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not an observed invoice",
+    "reported_total_usd": 0.22188525,
+    "run_limit_usd": 15,
+    "billed_charge_observed": false,
+    "result_sha256": "50fe58dc419911b974cf6ef8fc4e6b8814b6d6d221a709b4f800f3d7ffd836ee",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 19031,
+        "outputTokens": 24,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.019150999999999998,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-opus-5": {
+        "inputTokens": 408,
+        "outputTokens": 1867,
+        "cacheReadInputTokens": 3251,
+        "cacheCreationInputTokens": 24383,
+        "webSearchRequests": 0,
+        "costUSD": 0.20273425,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-opus-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "review_success": false,
+    "note": "CLI exit zero and is_error false, but result text empty; no delivered review or acceptance. Opus routing observed, not Fable."
+  },
+  {
+    "review": "safe5-baseline-preparation-retry",
+    "date_utc": "2026-09-09",
+    "requested_model": "fable[1m]",
+    "model": "claude-opus-5",
+    "assistant_text_model": "claude-opus-4-8",
+    "reported_models": [
+      "claude-opus-5"
+    ],
+    "fable_identity_confirmed": false,
+    "account": "existing Claude Max subscription",
+    "reported_cost_basis": "list-price model usage, not an observed invoice",
+    "reported_total_usd": 0.64017575,
+    "run_limit_usd": 15,
+    "billed_charge_observed": false,
+    "result_sha256": "995e880689026137e9ad75937dcd0b7ca10fcbcf9fa502476404d9540a47711b",
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 19031,
+        "outputTokens": 18,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.019121,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-opus-5": {
+        "inputTokens": 2,
+        "outputTokens": 19428,
+        "cacheReadInputTokens": 6502,
+        "cacheCreationInputTokens": 21135,
+        "webSearchRequests": 0,
+        "costUSD": 0.6210547500000001,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 17317,
+        "canonicalModel": "claude-opus-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "review_success": true,
+    "note": "Delivered review accepted as documented Opus fallback; assistant text and usage model labels differ and are retained. Scoped preparation review, not native integration or runtime acceptance."
   }
 ]

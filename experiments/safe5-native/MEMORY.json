@@ -681,5 +681,18 @@
     ],
     "margin_is_not_verified_sufficient": true,
     "definite_feasible_overflow_established": false
-  }
+  },
+  "experimental_candidates": [
+    {
+      "name": "private parser boundary",
+      "elf_sha256": "0481ef96c34419a3538c1420d016f3292ba03d35d3dd0570d203f56a8e8066b0",
+      "state": "compiled; not adopted into settled snapshot",
+      "semantic_path_bytes": 31504,
+      "decode_path_bytes": 32408,
+      "whole_stack_maximum_bytes": null,
+      "native_executed": false,
+      "comparison_sha256": "a5c3eba39957cdb59b8d569bff50a4607ab06d3e90e0b93487498455ac4197d6",
+      "caveat": "Selected source-feasible subtotals only; crate relocation and version-header differences prevent helper-only causal isolation."
+    }
+  ]
 }

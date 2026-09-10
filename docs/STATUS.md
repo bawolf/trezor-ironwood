@@ -18,10 +18,22 @@ builds offline; all 31,076 copied inputs retain their hashes except the reviewed
 one-file model/transport guard. Standard protobuf generation leaves the copied
 generated files unchanged. Emulator SHA256:
 `b028f7002a402ffc5c8f1a816ac5f1512b611a3d7d8eb27751512bc97332c44b`.
-No Safe5 emulator workflow or physical device has run. Distinct receiver-menu and
-final-hold cancellation drivers are prepared. Fable5.1 identified trace,
-pagination and evidence gaps; isolated corrections are in progress before
-execution. Native runtime integration remains separate from this host emulator.
+Two fresh cancellation explorations received ActionCancelled and returned home:
+receiver-menu confirmation, and host Cancel from the final approval screen after
+a short press produced no response. Both overall runs remain failed because the
+requested interrupt shutdown produced KeyboardInterrupt/exit 1. Neither left a
+process-group survivor. The first navigation failure and all raw evidence remain
+preserved. No physical-device tests have run; native runtime integration remains
+separate from this host emulator.
+
+A reviewed isolated parser-boundary candidate also compiles for T3T1. Its selected
+semantic and decoding paths total 31,504 and 32,408 frame bytes. Full maxima and
+native execution remain unverified before adoption; the settled memory snapshot
+stays unchanged. A separate source proof proposes a 16 KiB response allocation
+under the existing eight-action profile. Its Fable submission is blocked pending
+exact-packet approval; serializer tests are drafted and the allocation change
+remains unapplied. See the
+[follow-up evidence](../experiments/safe5-native/FOLLOWUP_RESULTS.json).
 
 ## Implemented
 
@@ -62,7 +74,7 @@ execution. Native runtime integration remains separate from this host emulator.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260910T064018Z-project-8a338598/report.json`.
+- Project: `work/runs/20260910T074155Z-project-9e5a78f1/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
@@ -256,8 +268,10 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Forty-one completed Claude Code review requests report
-  USD 74.41098575 at list prices, held conservatively as USD 74.64. Actual model identities,
+  subscription purchased. 43 completed Claude Code review requests report
+  USD 78.60532375 at list prices, held conservatively as USD 78.84. One response-allocation source review
+  has a USD 15 allowance reserved but did not start: automatic approval review
+  requires approval for its exact frozen packet and Fable destination. Actual model identities,
   substitutions and failed requests remain recorded separately; completed requests
   are not a count of accepted reviews. The user accepts documented Opus fallbacks.
   Actual subscription billing and Codex dollar usage are not observed here.

@@ -252,6 +252,24 @@
       "status": "reserved",
       "cents": 530,
       "note": "Delivered Fable5.1 review found test-driver blockers; corrections pending. Rounded reported list-price hold, not an observed invoice."
+    },
+    {
+      "id": "safe5-parse-boundary-20260910",
+      "cents": 50,
+      "status": "reserved",
+      "note": "Delivered Fable5.1 source review; rounded reported list-price hold, not an observed invoice."
+    },
+    {
+      "id": "safe5-cancellation-followup-20260910",
+      "cents": 370,
+      "status": "reserved",
+      "note": "Delivered Fable5.1 source review; rounded reported list-price hold, not an observed invoice."
+    },
+    {
+      "id": "safe5-response-capacity-20260910",
+      "status": "reserved",
+      "cents": 1500,
+      "note": "Review did not start: automatic approval review requires exact-packet/destination authorization. $15 allowance remains reserved; no new model usage observed."
     }
   ],
   "note": "Existing Codex account usage is not dollar-metered here. Claude Code/Fable review usage is reported separately in review-usage.json; conservative holds count its reported list-price estimate, not an observed billed charge. No additional paid APIs, cloud machines, credits, or subscriptions have been purchased. Paid execution remains disabled until costs can be measured and capped. This ledger is bookkeeping, not a provider billing limit."

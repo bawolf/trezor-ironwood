@@ -1,0 +1,199 @@
+{
+  "date_utc": "2026-09-10",
+  "settled_native_elf_sha256": "ab110d7e1709c4e3b28f6042226c489a738b1d5819f42ad546ee9b59d1452c12",
+  "parser_boundary": {
+    "state": "isolated compile succeeded; not adopted",
+    "elf_sha256": "0481ef96c34419a3538c1420d016f3292ba03d35d3dd0570d203f56a8e8066b0",
+    "flash_occupied_bytes": 1675776,
+    "flash_slot_bytes": 1703936,
+    "bridge_frame_bytes": 5408,
+    "parse_helper_frame_bytes": 11488,
+    "standalone_engine_symbol": false,
+    "full_stack_maximum_bytes": null,
+    "native_executed": false,
+    "controls_caveat": "Fresh source-only clone changed generated version-header identity and crate paths; no matched fresh control attributes the flash delta solely to the helper.",
+    "evidence": [
+      {
+        "coordinator_relative_path": "work/safe5-parse-boundary/build-prep/isolated-run-01/RESULT.md",
+        "sha256": "71f5fdb43870971b4ab2dada11c22050a4553a498602d9cc025738373acf7118",
+        "bytes": 4485
+      },
+      {
+        "coordinator_relative_path": "work/safe5-parse-boundary/build-prep/isolated-run-01/build.json",
+        "sha256": "8781c2a49cd12d4017cf7aecfbd184e5cc01c74e720ddc626394e3f023e8c07d",
+        "bytes": 4513
+      },
+      {
+        "coordinator_relative_path": "work/safe5-parse-boundary/build-prep/isolated-run-01/build.stderr",
+        "sha256": "5f70f39b3eb570cc3f842317e039826525e1095d3bbfc2e2f9dd283ac996ba9a",
+        "bytes": 16856
+      },
+      {
+        "coordinator_relative_path": "work/safe5-parse-boundary/build-prep/isolated-run-01/build-final.json",
+        "sha256": "d3abee8c7f77e1cf260bf19787b51160e06a64661b37246e9323e24ddd69caba",
+        "bytes": 5034
+      },
+      {
+        "coordinator_relative_path": "work/safe5-parse-boundary/build-prep/isolated-run-01/cheap-inspection.json",
+        "sha256": "41a1b358c4d73bb3d4f0094c00efa404c6838bdc3e0a44d1067e163073aabf16",
+        "bytes": 3620
+      },
+      {
+        "coordinator_relative_path": "work/safe5-parse-boundary/build-prep/isolated-run-01/generated-evidence.json",
+        "sha256": "280f06512d8af7464f011e1a891351f6557692e4b3b099437713b21bda13bd01",
+        "bytes": 978
+      },
+      {
+        "coordinator_relative_path": "work/safe5-parse-boundary/stack-comparison/REPORT.md",
+        "sha256": "6fb81f571c9cae003e497f2f2e46c8e5399d46332544ff71d78a5a2b4d6851f1"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-parse-boundary/stack-comparison/comparison.json",
+        "sha256": "a5c3eba39957cdb59b8d569bff50a4607ab06d3e90e0b93487498455ac4197d6"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-parse-boundary/stack-comparison/selected-disassembly.txt",
+        "sha256": "26d1ba116f1f97385de13f995638e9b1e87e79d47364f5b35b3fa49e116cf3ef"
+      }
+    ],
+    "review": {
+      "requested": "fable[1m]",
+      "actual": "claude-fable-5-1",
+      "scope": "compile experiment only",
+      "independent_clarity_review": true
+    },
+    "selected_stack_paths": {
+      "semantic_baseline_bytes": 42016,
+      "semantic_candidate_bytes": 31504,
+      "decode_baseline_bytes": 31432,
+      "decode_candidate_bytes": 32408,
+      "scope": "source-feasible selected subtotals; not whole maxima or executed witnesses",
+      "helper_returns_before_semantic_parse": true
+    }
+  },
+  "receiver_menu_exploration": {
+    "state": "failed; incomplete cancellation exploration",
+    "binary_sha256": "b028f7002a402ffc5c8f1a816ac5f1512b611a3d7d8eb27751512bc97332c44b",
+    "observed": [
+      "synthetic context",
+      "payment output",
+      "complete raw receiver",
+      "Cancel menu"
+    ],
+    "confirm_cancel_observed": false,
+    "action_cancelled_observed": false,
+    "signed_response_observed": false,
+    "driver_exit": 1,
+    "emulator_exit": 1,
+    "supervisor_group_survived": false,
+    "seconds": 16.8153254580684,
+    "native_cleanup_proven": false,
+    "evidence": [
+      {
+        "coordinator_relative_path": "work/safe5-runtime-driver/receiver-menu-cancel/report.json",
+        "sha256": "948b60c755c3d31d40b053c721e35002884fa706f8fe161ef2f109fb869b3447",
+        "bytes": 1030
+      },
+      {
+        "coordinator_relative_path": "work/safe5-runtime-driver/receiver-menu-cancel/supervisor-report.json",
+        "sha256": "c924dfaba152d0afa9903ccba66935ebd69246d4fe3bc1a2017616a79a9acd29",
+        "bytes": 314
+      },
+      {
+        "coordinator_relative_path": "work/safe5-runtime-driver/receiver-menu-cancel/events.jsonl",
+        "sha256": "de2e47d99803cd1ef2aab8f41d3179f357cbc94b2c2107e7d901d22ee0e6188c",
+        "bytes": 79824
+      },
+      {
+        "coordinator_relative_path": "work/safe5-runtime-driver/receiver-menu-cancel/coverage.json",
+        "sha256": "3972c2bd52a3e868a8d9b67c15d8cd569e849bc78759fb8a99ad4bcc762f6d09",
+        "bytes": 1169
+      },
+      {
+        "coordinator_relative_path": "work/safe5-runtime-driver/receiver-menu-cancel/screenshots-final.json",
+        "sha256": "ff1e50d1ba86f781817b38d5b9bf090c08f0d4e50957befc36f4738b51e1ddb2",
+        "bytes": 22559
+      },
+      {
+        "coordinator_relative_path": "work/safe5-runtime-driver/receiver-menu-cancel/emulator.log",
+        "sha256": "b2c94de920ee85f602493a1db7db5feeb388bfeb96e4f3476f990c243f582cb3",
+        "bytes": 62813
+      }
+    ]
+  },
+  "evidence_location_note": "Raw evidence is retained in the coordinator workspace and is not yet a portable clean-checkout reproduction package.",
+  "further_cancellation_explorations": [
+    {
+      "case": "receiver-menu-cancel",
+      "overall_status": "failed",
+      "cancellation_outcome": "complete",
+      "action_cancelled": true,
+      "returned_home": true,
+      "short_press_no_response_observed": null,
+      "emulator_exit": 1,
+      "shutdown_log": "KeyboardInterrupt after requested SIGINT",
+      "group_survived": false,
+      "seconds": 7.525078708073124,
+      "native_sign_entry_instrumented": false,
+      "allocator_cleanup_measured": false,
+      "evidence": [
+        {
+          "coordinator_relative_path": "work/safe5-runtime-driver-menu-settle-01/receiver-menu-cancel/report.json",
+          "sha256": "ab14540ce43fe19b037cb6e65511d9a2f588ca622de92baa19e43551cae0e277"
+        },
+        {
+          "coordinator_relative_path": "work/safe5-runtime-driver-menu-settle-01/receiver-menu-cancel/supervisor-report.json",
+          "sha256": "12c6ffbd1ba9dbfbb1b75629c898cc774fa9b897cbc5ba4456af781551765165"
+        },
+        {
+          "coordinator_relative_path": "work/safe5-runtime-driver-menu-settle-01/receiver-menu-cancel/events.jsonl",
+          "sha256": "7935a90d78e1e97d3c7cdc6004093eb8815a5ab738885bf608c22a851128d5c2"
+        },
+        {
+          "coordinator_relative_path": "work/safe5-runtime-driver-menu-settle-01/receiver-menu-cancel/screenshots-final.json",
+          "sha256": "7e85b2203fcfe05c13a07100c96bfcd929851fe9233200ffef1464b54c7f982a"
+        },
+        {
+          "coordinator_relative_path": "work/safe5-runtime-driver-menu-settle-01/receiver-menu-cancel/emulator.log",
+          "sha256": "7e70f67b993f536683cafcefc691e39a56734c603ab15b7ff1e5dda09d1cb80a"
+        }
+      ]
+    },
+    {
+      "case": "final-hold-cancel",
+      "overall_status": "failed",
+      "cancellation_outcome": "complete",
+      "action_cancelled": true,
+      "returned_home": true,
+      "short_press_no_response_observed": true,
+      "emulator_exit": 1,
+      "shutdown_log": "KeyboardInterrupt after requested SIGINT",
+      "group_survived": false,
+      "seconds": 12.359636125154793,
+      "native_sign_entry_instrumented": false,
+      "allocator_cleanup_measured": false,
+      "evidence": [
+        {
+          "coordinator_relative_path": "work/safe5-runtime-driver-menu-settle-01/final-hold-cancel/report.json",
+          "sha256": "4f3b367fcf8a1ef0cd242fc360872336dab543a94cf51f30a2bb47ba88eeef55"
+        },
+        {
+          "coordinator_relative_path": "work/safe5-runtime-driver-menu-settle-01/final-hold-cancel/supervisor-report.json",
+          "sha256": "649e4ead44cb78248931362b68b1cebe95127db990c59ac111b77cab4835f5f9"
+        },
+        {
+          "coordinator_relative_path": "work/safe5-runtime-driver-menu-settle-01/final-hold-cancel/events.jsonl",
+          "sha256": "c1aeb9f0ea58ac8159273b7f9716a1cd08a50562a81c99abc3a8034c77a31dc5"
+        },
+        {
+          "coordinator_relative_path": "work/safe5-runtime-driver-menu-settle-01/final-hold-cancel/screenshots-final.json",
+          "sha256": "249572042e77654799f2b9383c03dce66047ae4e6051bab614688488908b07d6"
+        },
+        {
+          "coordinator_relative_path": "work/safe5-runtime-driver-menu-settle-01/final-hold-cancel/emulator.log",
+          "sha256": "c56d060fef811810b9e66f87effc84262a9f381a2b2cd64fbeae2938757ee0af"
+        }
+      ]
+    }
+  ]
+}

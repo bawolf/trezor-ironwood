@@ -130,3 +130,21 @@ firmware execution or cloud service is required. Each future meaningful memory
 change should retain the preceding snapshot and compare flash, both raw heaps,
 stack reservation, actual peaks, largest free block and target latency. Unknown
 runtime values must remain unknown until measured.
+
+## Latest experiment, separate from the settled snapshot
+
+A newly compiled private parser boundary reduces the examined semantic stack
+path from 42,016 to 31,504 bytes. A separately examined decoding path grows from
+31,432 to 32,408 bytes. The larger candidate subtotal is therefore 9,608 bytes
+below the previous semantic subtotal. This is promising evidence about temporary
+lifetimes, not a complete stack bound or an executed hardware result. The helper
+returns before semantic verification. Other callers/branches remain unresolved;
+relocated crate identities and a generated version-header difference also limit
+causal comparison. Candidate ELF: `0481ef96c34419a3538c1420d016f3292ba03d35d3dd0570d203f56a8e8066b0`.
+The visualization and component totals continue to identify the settled image.
+
+A second proposal would reduce the C response reservation from 64 KiB to 16 KiB,
+based on a conservative 10,500-byte envelope for the unchanged eight-action
+profile. This would remove a 48 KiB allocation request; it is not measured free
+RAM. The proposal remains unapplied pending adversarial review and meaningful
+serializer/signing tests.

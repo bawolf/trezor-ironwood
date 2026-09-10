@@ -234,3 +234,59 @@ or sufficient margin is established. Cold table initialization, sighash and
 verify_bundle are sequential paths and are not added to this subtotal. Frozen
 source conditions, call addresses and frame metadata are retained in the owned
 `work/safe5-stack-current/` report. No native execution occurred.
+
+## Isolated parser boundary and first rendered exploration
+
+The seven-line private parser-boundary experiment passed Fable5.1 and independent
+clarity review for compile-only testing. The isolated image now links as
+`0481ef96c34419a3538c1420d016f3292ba03d35d3dd0570d203f56a8e8066b0`.
+Its bridge has a 5,408-byte frame and directly calls the separate 11,488-byte
+decoder helper; Engine::begin no longer has a standalone symbol. This does not
+mean Engine uses zero stack. Both complete live paths remain under examination.
+The image occupies 1,675,776 flash bytes. A generated version-header difference
+and relocated crate paths prevent attributing its 1,024-byte reduction solely
+to the helper. This candidate is not adopted into the settled snapshot.
+
+The first cold attempt failed after 703.64 seconds because protoc could not open
+/dev/stdout in the host sandbox. An approved retry reused only the isolated partial
+cache and succeeded in 155.90 seconds, within the original deadline. Source and
+checked donor hashes remained unchanged. No firmware execution occurred.
+
+The separate host emulator completed its first bounded receiver-menu exploration
+in 16.82 seconds. Actual traces showed the synthetic context, payment amount,
+complete 86-character raw receiver and Cancel menu. The menu touch did not reach
+the confirmation screen before the five-second bound. No ActionCancelled or
+signed response was observed. The driver recorded incomplete exploration and a
+nonzero emulator exit; its log ends with KeyboardInterrupt. Supervisor cleanup
+left no process-group survivor. These are preserved failures, not a cancellation
+or clean-runtime pass. Final-hold exploration has not run.
+
+Both driver source reviews and the independent parent readability dispositions
+preceded this exploratory run. Corrections addressed transitions, receiver
+pagination, evidence preservation and excessive screenshot hashing. Actual source
+inspection corrected a shared reviewer misconception: DebugLink's constructor
+already opens its transport; the added redundant open was removed. Fable did not
+review the final corrected hash as a product-acceptance candidate.
+
+[Follow-up result identities](../experiments/safe5-native/FOLLOWUP_RESULTS.json)
+bind these claims to retained raw evidence. The coordinator's local harness and
+logs are not yet a portable reproduction package. Physical hardware is untouched.
+
+The subsequent selected-path comparison finds 31,504 semantic frame bytes and
+32,408 decoding frame bytes in the candidate, versus 42,016 and 31,432 in the
+baseline. The helper returns before the semantic call. The larger of those two
+new subtotals is 9,608 bytes below the old semantic subtotal. Whole-program and
+decoder maximum, runtime execution and a matched fresh control remain absent.
+
+The menu's actual touch rectangle includes the original coordinate. Source and
+timer evidence instead indicated a likely touch during the 350 ms attach lockout.
+A fresh owned driver copy added one 400 ms wait after observing the menu; 13
+offline preflight checks passed. The fresh receiver-menu run then displayed
+"Cancel sign", received ActionCancelled after the confirming tap, and returned
+home. A separate final-screen run observed no response to a 300 ms press through
+the subsequent 2.3-second wait, then received ActionCancelled after host Cancel
+and returned home. Durations were 7.53 and 12.36 seconds. Neither produced a
+signed response. Both overall results remain failed because requested SIGINT
+shutdown produced KeyboardInterrupt/exit 1. There were no process-group survivors.
+Native sign-entry instrumentation and measured allocator cleanup remain missing.
+The first failed attempt remains in its original directory, unmodified.

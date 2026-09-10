@@ -70,11 +70,14 @@ accumulating compiler switches or changing transaction semantics.
 
 The Safe 5 legacy-wire/Delizia emulator delta has both source reviews and now
 builds in an independent offline copy of the retained overlay. Source/API checks
-pass with their recorded Python 3.14 interpreter; actual trusted-screen, cancel,
-signing and clean-shutdown tests remain. The cancellation exploration driver is
-being corrected against Fable5.1 findings before execution. Finish these and
-native memory/latency
-preparation before requesting an attended installation session. The unopened
+pass with their recorded Python 3.14 interpreter. The first rendered exploration
+reached context, output, full receiver and Cancel menu, then failed to open the
+confirmation screen. Preserve that incomplete run. Actual geometry showed the original coordinate
+was valid; waiting past the attach animation enabled cancellation in a fresh run.
+Both menu and final-screen cancellation now return ActionCancelled and home;
+shutdown still exits 1 after SIGINT, so complete runtime acceptance remains. In parallel, resolve remaining stack paths beyond the candidate
+31,504/32,408-byte subtotals and review/test the proposed smaller response allocation.
+Finish native memory/latency preparation before requesting an attended installation session. The unopened
 device remains untouched, and flashing requires a concrete separate decision.
 
 Keep the Safe 7 reference and every failed Safe 5 artifact. Safe 7's stricter

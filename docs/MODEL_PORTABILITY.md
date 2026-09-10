@@ -4,7 +4,9 @@ Initial feasibility can be assessed with a source comparison and a few targeted
 builds, before undertaking a complete port. The source comparison is complete;
 the [Safe 5 native experiment](SAFE5_NATIVE.md) also links with the real signing
 core, 27,136 bytes of flash headroom, 48 KiB stack and two static GC regions.
-No Safe 5 firmware has run, and no native signing port is accepted.
+No Safe 5 native firmware has run on hardware, and no native signing port is
+accepted. The separate host emulator has exercised synthetic review/cancellation;
+complete runtime acceptance remains open.
 **Safe 5 is the closest follow-on; newer Safe 3 is the next distinct UI case.**
 The available first physical test device is an unopened Safe 5. Finish inspecting
 the Safe 7 reference while testing Safe 5 stack/heap lifetimes, MCU latency and

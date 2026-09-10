@@ -1,0 +1,21 @@
+--- a/build-inputs/crates/approval/src/lib.rs
++++ b/build-inputs/crates/approval/src/lib.rs
+@@ -383,6 +383,8 @@
+     })
+ }
+
++// Keep later verification temporaries out of callers during bundle parsing.
++#[inline(never)]
+ fn verify_bundle(
+     bundle: &orchard::pczt::Bundle,
+     fvk: &FullViewingKey,
+--- a/build-inputs/upstream/librustzcash/pczt/src/lib.rs
++++ b/build-inputs/upstream/librustzcash/pczt/src/lib.rs
+@@ -462,6 +462,7 @@
+     ///
+     /// To force a specific PCZT version, use [`v1::Pczt`] or [`v2::Pczt`]
+     /// directly.
++    #[inline(never)]
+     pub fn serialize(self) -> Result<Vec<u8>, EncodingError> {
+         // Fast pre-checks for the conditions that most commonly rule out the
+         // v1 encoding, avoiding the speculative clone below.

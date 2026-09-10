@@ -1,0 +1,62 @@
+{
+  "firmware_revision": "7105338e3c2c1e681940e17780609881ce53126b",
+  "librustzcash_revision": "5e770a91ad0d11938dbc713e7889e4aa8009266c",
+  "firmware_source_files": [
+    {
+      "path": "core/embed/projects/firmware/src/arena.rs",
+      "sha256": "575db6fd9bd371ef29baac9e8d65777f56c472648cfeb76af0f241f90b792845"
+    },
+    {
+      "path": "core/embed/projects/firmware/src/public_table.rs",
+      "sha256": "05c06fdcddaa7f41905de0bbf1a255720ef4be86a3ab4c935eaeb1128fd6f755"
+    },
+    {
+      "path": "core/embed/projects/firmware/src/arena_startup.rs",
+      "sha256": "65378d262692deff593c5b7ff44c69e279711f6804543a0df1f7479a1331792f"
+    },
+    {
+      "path": "core/embed/projects/firmware/src/main.rs",
+      "sha256": "a1f205af58323d95e5cfc9789532c20a72a4cf0de8477ed379a59525885004ec"
+    },
+    {
+      "path": "core/embed/projects/firmware/Cargo.toml",
+      "sha256": "07223d511dbbb40535c2551df27dae4476f7a6c2edb9921871e2d2da45414bca"
+    },
+    {
+      "path": "core/embed/projects/firmware/build.rs",
+      "sha256": "db71ff5ca3f95c9003848dbb652fd8debaf6c5f2585bb335091c12282d9d0179"
+    },
+    {
+      "path": "core/embed/projects/firmware/main.c",
+      "sha256": "22853bc35e522a8443689533592a8c8e45a29015732b80c60ba7dbc056dc64ee"
+    },
+    {
+      "path": "core/embed/upymod/Cargo.toml",
+      "sha256": "d4171f8b1cd1956218bae2aa1705079f1c98a5caf2cab60f2311a7eae5d11ddd"
+    },
+    {
+      "path": "core/embed/upymod/build.rs",
+      "sha256": "9dd82b48f037c356e62edb971867134cbf6f1a6cb3c81e4cf0d743da3b374572"
+    },
+    {
+      "path": "core/embed/upymod/modironwood_test/ironwood_test.h",
+      "sha256": "c0a08c43303f0354085399bde3f3ef7eb220ebc00a6abb022ed1ab71ea57f87b"
+    },
+    {
+      "path": "core/embed/upymod/modironwood_test/modironwood_test.c",
+      "sha256": "432a72d8f27208a821f238924bb101a576147af6f8c4c95208858cd66cad343c"
+    },
+    {
+      "path": "core/embed/upymod/modironwood_test/executor.c",
+      "sha256": "0b0f4fb0f95c7d780fdb477cc29c99aaf61f9dbe318e92aeed9924d0e552942e"
+    },
+    {
+      "path": "core/embed/Cargo.lock",
+      "sha256": "8e738d88069e34816781dca1821ab37f4a82531d2533d8dc54bd499bf4d81da4"
+    }
+  ],
+  "applied_lock": "core/embed/Cargo.lock in firmware.patch",
+  "link_elf_sha256": "0e3504b2c6beebc6509d88db887ac893730b8cab8640c744d7843f914f1c0667",
+  "hardware_ready": false,
+  "claim": "Frozen experimental sources for review; not an upstream-ready product or complete portable harness"
+}

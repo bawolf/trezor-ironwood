@@ -1,6 +1,6 @@
 # Project status
 
-Updated 2026-09-09 UTC.
+Updated 2026-09-10 UTC.
 Development branch: `codex/verification-and-reuse`.
 
 ## Implemented
@@ -196,9 +196,16 @@ still needs portable source/fixture export. The user has now confirmed an unopen
 Safe 5 dedicated to testing. Its [unchanged baseline now builds](SAFE5_BASELINE.md):
 AUX1 has only 43,668 bytes unoccupied, GC has 240,368 bytes, and flash has
 115,200 bytes remaining. The current 131,104-byte guarded arena cannot fit in
-AUX1. An existing AUX2 section offers a prospective placement, leaving 109,264
-bytes for GC; no native link or runtime fit is accepted. Resource placement and
-actual native flash cost now precede the adapter, Delizia UI and older-wire port.
+AUX1. The [Safe 5 native experiment](SAFE5_NATIVE.md) now links with its guarded
+arena in AUX2 and 109,264 bytes of GC capacity. Separate optimized/test configuration
+and computed Sinsemilla generators leave 7,168 bytes of flash headroom. Host
+baseline/candidate comparison passes 8,056 public-output checks, but the computed
+hash is about 16 times slower at the largest host sample. A selected native
+validation call chain still exceeds the 32 KiB stack. These results establish
+capacity and bounded host equivalence, not runtime/device support. The complete
+native patch and synthetic bridge/fixtures are now exported for review; portable
+build/runtime reproduction and trusted Delizia/legacy-wire integration remain.
+Stack/GC layout and faster flash-saving alternatives precede hardware use.
 The [hardware session plan](HARDWARE_SESSION.md) groups physical actions; no Safe 5
 Ironwood image is ready. The missing host libusb dependency is installed and the
 offline host-input check passes without device enumeration or access.

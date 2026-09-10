@@ -1,0 +1,19 @@
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -150,13 +150,13 @@
+     #[allow(non_snake_case)]
+     fn hash_to_point_inner(&self, msg: impl Iterator<Item = bool>) -> IncompletePoint {
+         let padded: Vec<_> = Pad::new(msg).collect();
++        let hasher = pallas::Point::hash_to_curve(S_PERSONALIZATION);
+
+         padded
+             .chunks(K)
+             .fold(IncompletePoint::from(self.Q), |acc, chunk| {
+-                let (S_x, S_y) =
+-                    SINSEMILLA_S[lebs2ip_k(chunk.try_into().expect("correct length")) as usize];
+-                let S_chunk = pallas::Affine::from_xy(S_x, S_y).unwrap();
++                let index = lebs2ip_k(chunk.try_into().expect("correct length"));
++                let S_chunk = hasher(&index.to_le_bytes()).to_affine();
+                 (acc + S_chunk) + acc
+             })
+     }

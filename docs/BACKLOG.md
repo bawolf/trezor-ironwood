@@ -18,7 +18,7 @@ without a change, a new failure, or a specific unresolved concern.
 | M2.1c | Typed THP review/hold and host Cancel/fresh retry pass; Opus follow-up delivered, stricter run exposed shutdown SIGBUS; overall acceptance rejected | Implement trusted emulator review and consent | Show every payment/change/fee from the immutable projection, bind physical UI events to its token, test cancellation and replacement; no transport-triggered approval. |
 | M2.1d | Actual signing and ordinary timeout recovery pass; late chunk defect characterized; reconnect unproven | Integrate bounded emulator transport and signing | Fragmentation/size limits, disconnect/replay/failure tests and actual synthetic signed response; no production key-store or physical-device use. |
 | M2.2 | In progress: eleven host-model proofs pass; firmware refinement pending | Prove selected approval/accounting properties | Non-vacuous Lean statements, warning-fatal build, expected axioms only, implementation correspondence documented and reviewed. |
-| M2.3 | Safe 5 baseline passed; current AUX1 arena does not fit, flash and alternate placement need a native measurement | Assess other Trezor models | Compare actual model layouts and runtime interfaces; use cheap target/link gates before UI porting; prioritize the available Safe 5 for first hardware testing. |
+| M2.3 | Safe 5 native image fits with 7,168 B flash margin; stack/GC, latency and runtime remain open | Assess other Trezor models | Compare actual model layouts and runtime interfaces; use cheap target/link gates before UI porting; prioritize the available Safe 5 for first hardware testing. |
 | M3 | Later | Independent review, hardware and release path | Cryptographic/embedded review, device matrix, dedicated hardware tests, recovery/privacy UX and upstream acceptance. |
 | M4 | Delivery requirements established; prototype export incomplete | Prepare maintainable Trezor handoff | Focused upstream patch series, dependency/licenses and reviewed boundaries; clean-checkout reproduction without hidden local inputs; upstream tests/generation/changelog/CI and explicit model evidence. |
 
@@ -45,25 +45,37 @@ native stack, shared runtime memory, trusted UI and entropy integration remain p
 
 ## Immediate development focus
 
-The desktop-to-emulator upload, review, hold and signing path now passes, as do
-host Cancel/fresh approval and ordinary timeout recovery. The critical device
-bottleneck is resource fit: Safe 7 stack depth and Safe 5 RAM/flash capacity. The two outlining changes compose on the selected
-measured paths; the reviewed native application now links with a 565,052-byte GC region at the
-unchanged stack/arena sizes. Finish image-wide caller/failure-path inspection and
-measure integrated execution costs that a link cannot establish. The user has an
-unopened Safe 5 dedicated to testing. Its unchanged baseline now passes, but
-AUX1 has only 43,668 bytes of tail and flash only 115,200. Review the minimal
-existing-AUX2-section arena placement and T3T1 execution contract, then measure
-one full native link with the same universal module inventory and protections.
-The prospective arena placement leaves 109,264 bytes of GC; runtime fit is open.
-Do this resource gate before the Delizia/older-wire port or attended hardware session. Source inspection confirms
-32 KiB is a configurable reservation with hardware enforcement; a 64 KiB option
-costs 32 KiB of GC space and has not been built or accepted. Accepted source remains
-unchanged; the combined candidate still needs functional and review acceptance.
-In parallel, diagnose the newly observed emulator shutdown SIGBUS, keep its
-false-pass correction separate from a native fix, and document the crossed
-response defect without expanding into a general THP rewrite. Fresh-channel
-recovery remains untested after an automated safety filter blocked that assignment.
-Receive-address confirmation and production entropy/key storage follow the
-resource gate. Baseline audits are complete for their stated scopes; repeat
-checks only for a changed artifact, new failure or specific unresolved concern.
+Safe 5 is the first physical target. The complete synthetic native image now
+links with 7,168 bytes of flash margin in the explicitly changed configuration
+documented in [SAFE5_NATIVE.md](SAFE5_NATIVE.md). Host approval, bridge lifecycle
+and independent signature checks pass with the smaller dependencies. Do not repeat
+the completed baseline/fit tests without a change or call this hardware-ready.
+
+The next bottleneck is a credible stack and shared-memory layout. A selected
+37,184-byte ordinary-call chain exceeds the current 32 KiB stack reservation.
+The arena leaves 109,264 bytes for MicroPython GC; maximum input/response and UI
+lifetimes must fit together. Prepare a native-only 48 KiB stack with the existing
+MicroPython static split-heap API using unused AUX1 space, then review and measure
+the actual image, state layout and runtime behavior. Preserve stack enforcement,
+transaction limits, ownership checks and all existing buffers.
+
+In parallel, review and measure the pinned secp256k1 2 KiB comb configuration to
+recover flash margin. Its actual upstream host suites pass in both table sizes.
+Computed Sinsemilla is about 16 times slower in the measured host hash operation;
+a compressed-table alternative has passed host comparisons but has no accepted
+native image. Use target timing to decide the next optimization, rather than
+accumulating compiler switches or changing transaction semantics.
+
+The Safe 5 legacy-wire/Delizia emulator delta is staged and source/API-tested.
+It needs the separate adversarial/readability reviews and actual trusted-screen,
+cancel, signing and clean-shutdown tests. Finish these and native memory/latency
+preparation before requesting an attended installation session. The unopened
+device remains untouched, and flashing requires a concrete separate decision.
+
+Keep the Safe 7 reference and every failed Safe 5 artifact. Safe 7's stricter
+runtime harness exposed shutdown SIGBUS; its earlier false pass is rejected.
+Fresh-channel recovery remains untested after an automated safety filter blocked
+that assignment. Do not silently retry that blocked action. Production key/entropy
+integration, receive-address consent and the wider model matrix follow these
+resource/runtime gates. The tracked native source package is a review checkpoint;
+full clean-checkout reproduction and upstream adoption requirements remain open.

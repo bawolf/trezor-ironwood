@@ -1,0 +1,101 @@
+{
+  "state": "unadopted synthetic native caller candidate; never executed",
+  "base": "retained experiments/safe5-native/firmware.patch applied to firmware 7105338e3c2c1e681940e17780609881ce53126b",
+  "patch_sha256": "6d25f40523a495e994093d04c2699cb1cb36c1371cf45a318207ce38c1e635ec",
+  "files": [
+    {
+      "path": "common/protob/messages-ironwood.proto",
+      "before_sha256": null,
+      "after_sha256": "1eb3028b9896ee6a2342e1e32654bc78aa8e0b0f8e9d96adf483c34528755b6b",
+      "bytes": 1145
+    },
+    {
+      "path": "common/protob/messages.proto",
+      "before_sha256": "b7ad04d4a1f74258b53297769745fd41375338487413ca9ca220b077e698f3f6",
+      "after_sha256": "5262909c2dfbe88885326b38ab264179fa0d22430b1985c4b3e14b31343c1108",
+      "bytes": 24964
+    },
+    {
+      "path": "core/embed/projects/firmware/Cargo.toml",
+      "before_sha256": "07223d511dbbb40535c2551df27dae4476f7a6c2edb9921871e2d2da45414bca",
+      "after_sha256": "26b3729a5c39c0c89c7955d92e3c40fab6cfcb7057a885f815a48f86d38336e5",
+      "bytes": 7194
+    },
+    {
+      "path": "core/embed/upymod/Cargo.toml",
+      "before_sha256": "d4171f8b1cd1956218bae2aa1705079f1c98a5caf2cab60f2311a7eae5d11ddd",
+      "after_sha256": "447a8da86bf540a658c7626c79a7db3aa4dc9f831d127da88aad4fd900124ebf",
+      "bytes": 2197
+    },
+    {
+      "path": "core/embed/upymod/build.rs",
+      "before_sha256": "493d3dd92511fc529de06a4f1dd6e20f40269ec78c48246bf3b154a38a2f91e5",
+      "after_sha256": "8e408bd8974b034610933af779732d1ddb54ce39a50580f4f94323857e3d83b0",
+      "bytes": 47979
+    },
+    {
+      "path": "core/embed/upymod/modironwood_test/modironwood_test.c",
+      "before_sha256": "432a72d8f27208a821f238924bb101a576147af6f8c4c95208858cd66cad343c",
+      "after_sha256": "c307a96afac04cc15bfd1760b62d188ffccdae69e8802ef5db57ba8a22b8ab15",
+      "bytes": 5883
+    },
+    {
+      "path": "core/embed/upymod/modtrezorutils/modtrezorutils.c",
+      "before_sha256": "ccb146f5f7b945368005a200a61ffbabb25e5a7c1630ae7faee3cddba68428c4",
+      "after_sha256": "0fdebbb6a47cb2fb02ebed8461807e719095df5a1a56cdb28d1c9b5a71d0d674",
+      "bytes": 40053
+    },
+    {
+      "path": "core/src/apps/workflow_handlers.py",
+      "before_sha256": "6ca3dfb0fe29c4597e612348a5f9fb29f2174b9e6ae82c1f77c6e012ad1efd20",
+      "after_sha256": "0961a92adc0943b8a93d65a5643ba245085637c94b396d483ce7821ba1aad470",
+      "bytes": 10685
+    },
+    {
+      "path": "core/src/apps/zcash/ironwood_review.py",
+      "before_sha256": null,
+      "after_sha256": "7c1077ec719016c31e0bb1fb34c8bf02ffeeff4635ef7b73d425b8b5dccd54f9",
+      "bytes": 3311
+    },
+    {
+      "path": "core/src/apps/zcash/sign_pczt.py",
+      "before_sha256": null,
+      "after_sha256": "bcac0ee1a869b131c310140df49ed0f3424a8b33780e456ed05c80f578a776d5",
+      "bytes": 4493
+    },
+    {
+      "path": "core/src/trezor/enums/MessageType.py",
+      "before_sha256": "dc85a65afe7e0c61e94319c2917179e594d73b1e3dfc67e3d89f19cabc2c8fba",
+      "after_sha256": "7425752577f378460603ff0a4f166a157158db62dd4cde197b3cde97a352352e",
+      "bytes": 8566
+    },
+    {
+      "path": "core/src/trezor/messages.py",
+      "before_sha256": "ee5341ea64bbdd05e1e956733f9aad2480be058be57d996adf41797d889c3f08",
+      "after_sha256": "1f602db89ac87442ef90906f8fbbe50689f73dd3794d39a1fb754e2ea00e790f",
+      "bytes": 241691
+    },
+    {
+      "path": "core/src/trezor/utils.py",
+      "before_sha256": "03dc25d4a8cc7343873e4b1f2ca4c35a79a4c146982ff6548a12ab21aa875ee8",
+      "after_sha256": "04a74b7db7efd7bda8fa24607241b12bc15ed07926bacff84dadfe70cac380e6",
+      "bytes": 12126
+    },
+    {
+      "path": "python/src/trezorlib/messages.py",
+      "before_sha256": "48af949e420fb66db1344247a6653c9e4962900529d571f2c787b5226812c30b",
+      "after_sha256": "93b78763fec7a67b4618872e950e6c267c1ff15709bc3fb898737ff8a3519aad",
+      "bytes": 359845
+    }
+  ],
+  "patch_check": {
+    "git_apply_check_passed": true,
+    "git_apply_to_copied_sources_passed": true,
+    "all_result_hashes_match": true,
+    "raw_manifest_sha256": "4549c9aae77d3249db59b4d5fae8f12d46ae92c78ce259cb0d0eaf305e59725c"
+  },
+  "portable_tests": {
+    "run_tests.py": "cfff249ec4b240c8401d989d482fecc6d5e400422bd3dc9bae3c5b8b7eb76899",
+    "test_caller_cleanup.py": "7551ebf75d89bbba8bad24326b5149f9b99c56b062bc1e88df95ed8a637fdf13"
+  }
+}

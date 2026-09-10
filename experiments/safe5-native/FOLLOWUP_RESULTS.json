@@ -787,5 +787,30 @@
         "runner_failure_record_limit": "Exceptional setup/signal cleanup errors can leave incomplete failure records; the observed successful run is complete."
       }
     }
+  },
+  "native_caller": {
+    "name": "synthetic native trusted caller",
+    "state": "compiled; not adopted; Fable pending exact-packet approval",
+    "elf_sha256": "962755b3e7f094856b4fbd1f7cbdf872c86ab53bffae8f624b654ce5c18d55fe",
+    "flash_bytes": 1679872,
+    "flash_capacity_bytes": 1703936,
+    "flash_remaining_bytes": 24064,
+    "net_flash_increase_bytes": 3072,
+    "application_ram_reserved_bytes": 526848,
+    "stack_reserved_bytes": 49152,
+    "gc_raw_regions_bytes": [
+      92880,
+      41696
+    ],
+    "ram_reservations_unchanged": true,
+    "runtime_heap_peak_bytes": null,
+    "whole_stack_maximum_bytes": null,
+    "native_executed": false,
+    "source_proposal_accepted": false,
+    "caller_tests_passed": 10,
+    "caller_subtests_passed": 216,
+    "test_scope": "Actual Python caller/review with C/Rust, scheduler, wire, UI and capability stubs; no native GC, cryptography or device execution.",
+    "results": "native-caller/RESULTS.json",
+    "results_sha256": "fe8a723cb5c89229b4c008545b0b3837f25d1b719098a3e79ea8b7b8a1db00be"
   }
 }

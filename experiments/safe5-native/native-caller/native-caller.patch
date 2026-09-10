@@ -1,0 +1,641 @@
+--- /dev/null
++++ b/common/protob/messages-ironwood.proto
+@@ -0,0 +1,40 @@
++syntax = "proto2";
++package hw.trezor.messages.ironwood;
++
++// Local synthetic test protocol, no upstream ID reservation.
++// Required scalar integers are uint32; all tags fit one byte.
++/** @start
++ * @next IronwoodPcztRequest
++ */
++message IronwoodSignPczt {
++    required uint32 total_length = 1; // 1..65536
++}
++/** @next IronwoodPcztAck */
++message IronwoodPcztRequest {
++    required bytes transfer_id = 1; // Exactly 16 bytes
++    required uint32 offset = 2;
++    required uint32 length = 3; // min(1024, remaining)
++}
++/** @next IronwoodPcztRequest
++ * @next IronwoodSignedPczt
++ * @next ButtonRequest
++ */
++message IronwoodPcztAck {
++    required bytes transfer_id = 1;
++    required uint32 offset = 2;
++    required bytes data = 3;
++}
++/** @next IronwoodSignedPcztAck */
++message IronwoodSignedPczt {
++    required bytes transfer_id = 1;
++    required uint32 total_length = 2; // 1..65536, fixed across response
++    required uint32 offset = 3;
++    required bytes data = 4; // Exactly min(1024, remaining)
++}
++/** @next IronwoodSignedPczt
++ * @next Success
++ */
++message IronwoodSignedPcztAck {
++    required bytes transfer_id = 1;
++    required uint32 next_offset = 2;
++}
+--- a/common/protob/messages.proto
++++ b/common/protob/messages.proto
+@@ -407,4 +407,11 @@
+     // Telemetry
+     MessageType_TelemetryGet = 1100 [(bitcoin_only) = true, (wire_in) = true];
+     MessageType_Telemetry = 1101 [(bitcoin_only) = true, (wire_out) = true];
++
++    // Local synthetic Ironwood test protocol: unassigned upstream IDs.
++    MessageType_IronwoodSignPczt = 32000 [(wire_in) = true];
++    MessageType_IronwoodPcztRequest = 32001 [(wire_out) = true];
++    MessageType_IronwoodPcztAck = 32002 [(wire_in) = true];
++    MessageType_IronwoodSignedPczt = 32003 [(wire_out) = true];
++    MessageType_IronwoodSignedPcztAck = 32004 [(wire_in) = true];
+ }
+--- a/core/embed/projects/firmware/Cargo.toml
++++ b/core/embed/projects/firmware/Cargo.toml
+@@ -27,6 +27,9 @@
+ upymod.workspace = true
+ 
+ [features]
++
++# Explicit trusted native test caller; the compile-only configuration stays unrouted.
++ironwood_native_caller = ["ironwood_target_native_compile_only", "upymod/ironwood_native_caller"]
+ 
+ # Opt-in callable synthetic scaffolding for link measurement; trusted caller required.
+ # No boot invocation or wire handler; sign internally approves the matching token.
+--- a/core/embed/upymod/Cargo.toml
++++ b/core/embed/upymod/Cargo.toml
+@@ -20,6 +20,7 @@
+ 
+ # Only for the isolated partial T3W1 native compile proposal.
+ ironwood_target_native_compile_only = []
++ironwood_native_caller = ["ironwood_target_native_compile_only"]
+ 
+ # --------------------------------------------------------------------------
+ # MCU selection - only enable one of these at a time
+--- a/core/embed/upymod/build.rs
++++ b/core/embed/upymod/build.rs
+@@ -129,6 +129,19 @@
+             lib.add_define("MICROPY_GC_SPLIT_HEAP_AUTO", Some("0"));
+             lib.add_source("modironwood_test/modironwood_test.c");
+             lib.add_source("modironwood_test/executor.c");
++        }
++
++        if cfg!(feature = "ironwood_native_caller") {
++            if !cfg!(feature = "frozen")
++                || !cfg!(feature = "universal_fw")
++                || !cfg!(feature = "layout_delizia")
++                || cfg!(feature = "thp")
++            {
++                bail!(
++                    "native Ironwood caller requires frozen universal Delizia firmware without THP"
++                );
++            }
++            lib.add_private_define("IRONWOOD_NATIVE_CALLER", Some("1"));
+         }
+ 
+         if cfg!(feature = "sd_card") {
+@@ -532,6 +545,9 @@
+             .context("Failed to collect protobuf sources")?;
+ 
+         inputs.remove(protob_dir, "messages-bootloader.proto");
++        if !cfg!(feature = "ironwood_native_caller") {
++            inputs.remove(protob_dir, "messages-ironwood.proto");
++        }
+ 
+         if cfg!(not(feature = "thp")) {
+             inputs.remove(protob_dir, "messages-thp.proto");
+@@ -959,6 +975,7 @@
+         let btc_only = py_bool(cfg!(not(feature = "universal_fw")));
+         let button = py_bool(cfg!(feature = "button"));
+         let emulator = py_bool(cfg!(feature = "emulator"));
++        let ironwood_native_caller = py_bool(cfg!(feature = "ironwood_native_caller"));
+         let haptic = py_bool(cfg!(feature = "haptic"));
+         let mcu_attestation = py_bool(cfg!(feature = "mcu_attestation"));
+         let n1w1 = py_bool(cfg!(feature = "n1w1"));
+@@ -981,6 +998,7 @@
+         let mut exprs: Vec<String> = vec![
+             format!(r"s/utils\.BITCOIN_ONLY/{btc_only}/g"),
+             format!(r"s/utils\.EMULATOR/{emulator}/g"),
++            format!(r"s/utils\.IRONWOOD_NATIVE_CALLER/{ironwood_native_caller}/g"),
+             format!(r"s/utils\.USE_BACKLIGHT/{backlight}/g"),
+             format!(r"s/utils\.USE_BLE/{ble}/g"),
+             format!(r"s/utils\.USE_BUTTON/{button}/g"),
+@@ -1278,6 +1296,11 @@
+             files.add(src, "prof/*.py")?;
+         }
+ 
++        if !cfg!(feature = "ironwood_native_caller") {
++            files.remove(src, "apps/zcash/sign_pczt.py");
++            files.remove(src, "apps/zcash/ironwood_review.py");
++        }
++
+         Ok(files)
+     }
+ }
+--- a/core/embed/upymod/modironwood_test/modironwood_test.c
++++ b/core/embed/upymod/modironwood_test/modironwood_test.c
+@@ -1,6 +1,6 @@
+ // Callable synthetic module for link measurement; requires a trusted caller.
+-// sign internally approves the matching token. No boot invocation or wire handler;
+-// this native-only slice supplies no trusted Python route.
++// sign internally approves the matching token. A separate IRONWOOD_NATIVE_CALLER
++// opt-in adds the trusted route; the original compile-only configuration has none.
+ #include "ironwood_test.h"
+ #include "py/objstr.h"
+ #include "py/runtime.h"
+--- a/core/embed/upymod/modtrezorutils/modtrezorutils.c
++++ b/core/embed/upymod/modtrezorutils/modtrezorutils.c
+@@ -865,6 +865,8 @@
+ /// """Internal model code."""
+ /// HOMESCREEN_MAXSIZE: int
+ /// """Maximum size of user-uploaded homescreen in bytes."""
++/// IRONWOOD_NATIVE_CALLER: bool
++/// """Whether this synthetic native build includes the trusted Ironwood caller."""
+ /// EMULATOR: bool
+ /// """Whether the firmware is running in the emulator."""
+ /// BITCOIN_ONLY: bool
+@@ -1097,6 +1099,11 @@
+      MP_ROM_QSTR(MODEL_INTERNAL_NAME_QSTR)},
+     {MP_ROM_QSTR(MP_QSTR_HOMESCREEN_MAXSIZE),
+      MP_ROM_INT(MODEL_HOMESCREEN_MAXSIZE)},
++#ifdef IRONWOOD_NATIVE_CALLER
++    {MP_ROM_QSTR(MP_QSTR_IRONWOOD_NATIVE_CALLER), mp_const_true},
++#else
++    {MP_ROM_QSTR(MP_QSTR_IRONWOOD_NATIVE_CALLER), mp_const_false},
++#endif
+ #ifdef TREZOR_EMULATOR
+     {MP_ROM_QSTR(MP_QSTR_EMULATOR), mp_const_true},
+ #else
+--- a/core/src/apps/workflow_handlers.py
++++ b/core/src/apps/workflow_handlers.py
+@@ -24,6 +24,10 @@
+     """
+     from trezor import utils
+     from trezor.enums import MessageType
++
++    # Native synthetic test flow: resolve its module only for an actual request.
++    if utils.IRONWOOD_NATIVE_CALLER and msg_type == MessageType.IronwoodSignPczt:
++        return "apps.zcash.sign_pczt"
+ 
+     # debug
+     if __debug__ and msg_type == MessageType.LoadDevice:
+--- /dev/null
++++ b/core/src/apps/zcash/ironwood_review.py
+@@ -0,0 +1,84 @@
++"""Trusted review for a validated Ironwood synthetic PCZT."""
++
++
++import ironwood_test
++from trezor.enums import ButtonRequestType
++from trezor.ui.layouts import confirm_action, confirm_properties, confirm_value
++
++
++def _format_amount(zatoshis: int) -> str:
++    # trezor.strings.format_amount strips trailing zeroes; this flow needs eight.
++    return f"{zatoshis // 100000000}.{zatoshis % 100000000:08d} test ZEC"
++
++
++async def review_and_sign(review: dict) -> bytes:
++    """Return signed PCZT bytes only after every trusted layout confirms."""
++    try:
++        await confirm_properties(
++            br_name="ironwood_test_context",
++            title="Synthetic review",
++            subtitle="Synthetic data only",
++            props=(
++                ("Network", review["network"], False),
++                ("Pool", review["pool"], False),
++            ),
++            br_code=ButtonRequestType.Other,
++            verb="Continue",
++        )
++
++        for number, output in enumerate(review["outputs"], 1):
++            kind = {
++                "Payment": "Payment",
++                "InternalChange": "Change",
++            }[output["kind"]]
++            await confirm_properties(
++                br_name="ironwood_test_output",
++                title=f"Test output {number}",
++                props=(
++                    ("Output type", kind, False),
++                    ("Amount", _format_amount(output["value"]), False),
++                ),
++                verb="Continue",
++            )
++            # Use the complete-value layout, with no optional/skip-details intro.
++            await confirm_value(
++                br_name="ironwood_test_receiver",
++                title="Ironwood receiver",
++                subtitle=f"Test output {number}",
++                description=f"{kind}\nRaw receiver bytes (hex)",
++                value=output["receiver"].hex(),
++                is_data=True,
++                chunkify=False,
++                br_code=ButtonRequestType.ConfirmOutput,
++                verb="Continue",
++            )
++
++        await confirm_properties(
++            br_name="ironwood_test_totals",
++            title="Synthetic totals",
++            subtitle=review["network"],
++            props=(
++                ("Total input", _format_amount(review["total_input"]), False),
++                ("Payments", _format_amount(review["payments"]), False),
++                ("Change", _format_amount(review["change"]), False),
++                ("Fee", _format_amount(review["fee"]), False),
++                ("Expires at block", str(review["expiry"]), False),
++            ),
++            br_code=ButtonRequestType.SignTx,
++            verb="Continue",
++        )
++        # These helpers return None on confirmation and raise on cancellation.
++        await confirm_action(
++            br_name="ironwood_test_sign",
++            title="Sign test transaction",
++            action="Hold to sign this test transaction.",
++            description=review["network"] + "\n" + review["pool"] + " synthetic test only.",
++            verb="Hold to sign",
++            verb_cancel="Cancel",
++            hold=True,
++            br_code=ButtonRequestType.SignTx,
++        )
++        return ironwood_test.sign(review["token"])
++    finally:
++        # Layout/sign failures cancel; the outer transport also covers begin failures.
++        ironwood_test.cancel()
+--- /dev/null
++++ b/core/src/apps/zcash/sign_pczt.py
+@@ -0,0 +1,134 @@
++"""Bounded synthetic PCZT workflow for supported test builds."""
++from micropython import const
++
++import ironwood_test
++import usb
++from trezor import loop, utils, workflow
++from trezor.crypto import random
++from trezor.messages import (
++    IronwoodPcztAck,
++    IronwoodPcztRequest,
++    IronwoodSignedPczt,
++    IronwoodSignedPcztAck,
++    Success,
++)
++from trezor.wire import ActionCancelled, DataError, ProcessError, context
++
++from apps.zcash.ironwood_review import review_and_sign
++
++MAX_PCZT_BYTES = const(65536)
++CHUNK_BYTES = const(1024)
++
++
++async def _cancel_after_deadline(owner):
++    await loop.sleep(180000)
++    loop.close(owner)
++
++
++async def _call(message, expected_type):
++    reply = await loop.race(
++        context.with_context(context.get_context(), context.call(message, expected_type)),
++        loop.sleep(5000),
++    )
++    if not expected_type.is_type_of(reply):
++        raise ActionCancelled("PCZT transfer timed out")
++    return reply
++
++
++def _supported_runtime():
++    # Native routing needs a separate opt-in; compile-only images stay closed.
++    if utils.IRONWOOD_NATIVE_CALLER:
++        return (
++            not utils.EMULATOR
++            and utils.INTERNAL_MODEL == "T3T1"
++            and utils.UI_LAYOUT == "DELIZIA"
++            and not utils.USE_THP
++        )
++    return __debug__ and utils.EMULATOR and (
++        (
++            utils.INTERNAL_MODEL == "T3W1"
++            and utils.UI_LAYOUT == "ECKHART"
++            and utils.USE_THP
++        )
++        or (
++            utils.INTERNAL_MODEL == "T3T1"
++            and utils.UI_LAYOUT == "DELIZIA"
++            and not utils.USE_THP
++        )
++    )
++
++
++async def sign_pczt(msg):
++    if not _supported_runtime():
++        raise ProcessError("Unsupported synthetic test build")
++    ctx = context.get_context()
++    if ctx.iface is not usb.iface_wire:
++        raise ProcessError("Primary wire interface required")
++
++    # Do this while executing inside the registered workflow, before any child task.
++    workflow.close_others()
++    # Closing another session unwinds its context wrapper. Restore this session
++    # with the existing helper, in the same registered task, before any I/O.
++    return await context.with_context(ctx, _transfer(msg))
++
++
++async def _transfer(msg):
++    owner = loop.this_task
++    if owner is None:
++        raise ProcessError("Registered workflow required")
++    deadline = _cancel_after_deadline(owner)
++    try:
++        # Keep the UI inside this registered task. Racing the whole workflow would
++        # make its layouts' close_others() close their own waiting parent.
++        loop.schedule(deadline)
++        total = msg.total_length
++        if not 1 <= total <= MAX_PCZT_BYTES:
++            raise DataError("Invalid PCZT length")
++        transfer_id = random.bytes(16)
++        pczt = bytearray(total)
++        offset = 0
++        while offset < total:
++            length = min(CHUNK_BYTES, total - offset)
++            reply = await _call(
++                IronwoodPcztRequest(transfer_id=transfer_id, offset=offset, length=length),
++                IronwoodPcztAck,
++            )
++            if (
++                reply.transfer_id != transfer_id
++                or reply.offset != offset
++                or len(reply.data) != length
++            ):
++                raise DataError("Invalid PCZT chunk")
++            pczt[offset : offset + length] = reply.data
++            offset += length
++            del reply
++
++        review = ironwood_test.begin(pczt)
++        del pczt
++        signed = await review_and_sign(review)
++        del review
++        total = len(signed)
++        if not 1 <= total <= MAX_PCZT_BYTES:
++            raise DataError("Invalid signed PCZT length")
++        offset = 0
++        while offset < total:
++            end = min(offset + CHUNK_BYTES, total)
++            reply = await _call(
++                IronwoodSignedPczt(
++                    transfer_id=transfer_id, total_length=total, offset=offset,
++                    data=signed[offset:end],
++                ),
++                IronwoodSignedPcztAck,
++            )
++            if reply.transfer_id != transfer_id or reply.next_offset != end:
++                raise DataError("Invalid signed PCZT acknowledgement")
++            offset = end
++            del reply
++        return Success(message="Synthetic PCZT signed")
++    finally:
++        try:
++            # The deadline task may be closing us right now; it then exits itself.
++            if deadline is not loop.this_task:
++                loop.close(deadline)
++        finally:
++            ironwood_test.cancel()
+--- a/core/src/trezor/enums/MessageType.py
++++ b/core/src/trezor/enums/MessageType.py
+@@ -305,3 +305,8 @@
+     TronDelegateResourceContract = 2211
+     TronUnDelegateResourceContract = 2212
+     TronWithdrawBalance = 2213
++    IronwoodSignPczt = 32000
++    IronwoodPcztRequest = 32001
++    IronwoodPcztAck = 32002
++    IronwoodSignedPczt = 32003
++    IronwoodSignedPcztAck = 32004
+--- a/core/src/trezor/messages.py
++++ b/core/src/trezor/messages.py
+@@ -4617,6 +4617,92 @@
+         def is_type_of(cls, msg: Any) -> TypeGuard["EvoluIndexManagementResponse"]:
+             return isinstance(msg, cls)
+ 
++    class IronwoodSignPczt(protobuf.MessageType):
++        total_length: "int"
++
++        def __init__(
++            self,
++            *,
++            total_length: "int",
++        ) -> None:
++            pass
++
++        @classmethod
++        def is_type_of(cls, msg: Any) -> TypeGuard["IronwoodSignPczt"]:
++            return isinstance(msg, cls)
++
++    class IronwoodPcztRequest(protobuf.MessageType):
++        transfer_id: "AnyBytes"
++        offset: "int"
++        length: "int"
++
++        def __init__(
++            self,
++            *,
++            transfer_id: "AnyBytes",
++            offset: "int",
++            length: "int",
++        ) -> None:
++            pass
++
++        @classmethod
++        def is_type_of(cls, msg: Any) -> TypeGuard["IronwoodPcztRequest"]:
++            return isinstance(msg, cls)
++
++    class IronwoodPcztAck(protobuf.MessageType):
++        transfer_id: "AnyBytes"
++        offset: "int"
++        data: "AnyBytes"
++
++        def __init__(
++            self,
++            *,
++            transfer_id: "AnyBytes",
++            offset: "int",
++            data: "AnyBytes",
++        ) -> None:
++            pass
++
++        @classmethod
++        def is_type_of(cls, msg: Any) -> TypeGuard["IronwoodPcztAck"]:
++            return isinstance(msg, cls)
++
++    class IronwoodSignedPczt(protobuf.MessageType):
++        transfer_id: "AnyBytes"
++        total_length: "int"
++        offset: "int"
++        data: "AnyBytes"
++
++        def __init__(
++            self,
++            *,
++            transfer_id: "AnyBytes",
++            total_length: "int",
++            offset: "int",
++            data: "AnyBytes",
++        ) -> None:
++            pass
++
++        @classmethod
++        def is_type_of(cls, msg: Any) -> TypeGuard["IronwoodSignedPczt"]:
++            return isinstance(msg, cls)
++
++    class IronwoodSignedPcztAck(protobuf.MessageType):
++        transfer_id: "AnyBytes"
++        next_offset: "int"
++
++        def __init__(
++            self,
++            *,
++            transfer_id: "AnyBytes",
++            next_offset: "int",
++        ) -> None:
++            pass
++
++        @classmethod
++        def is_type_of(cls, msg: Any) -> TypeGuard["IronwoodSignedPcztAck"]:
++            return isinstance(msg, cls)
++
+     class MoneroTransactionSourceEntry(protobuf.MessageType):
+         outputs: "list[MoneroOutputEntry]"
+         real_output: "int | None"
+--- a/core/src/trezor/utils.py
++++ b/core/src/trezor/utils.py
+@@ -5,6 +5,7 @@
+     EMULATOR,
+     HOMESCREEN_MAXSIZE,
+     INTERNAL_MODEL,
++    IRONWOOD_NATIVE_CALLER,
+     MODEL,
+     MODEL_FULL_NAME,
+     MODEL_USB_MANUFACTURER,
+--- a/python/src/trezorlib/messages.py
++++ b/python/src/trezorlib/messages.py
+@@ -839,6 +839,11 @@
+     BenchmarkResult = 9103
+     TelemetryGet = 1100
+     Telemetry = 1101
++    IronwoodSignPczt = 32000
++    IronwoodPcztRequest = 32001
++    IronwoodPcztAck = 32002
++    IronwoodSignedPczt = 32003
++    IronwoodSignedPcztAck = 32004
+ 
+ 
+ class BenchmarkListNames(protobuf.MessageType):
+@@ -6243,6 +6248,100 @@
+         self.rotation_index = rotation_index
+ 
+ 
++class IronwoodSignPczt(protobuf.MessageType):
++    MESSAGE_WIRE_TYPE = 32000
++    FIELDS = {
++        1: protobuf.Field("total_length", "uint32", repeated=False, required=True),
++    }
++
++    def __init__(
++        self,
++        *,
++        total_length: "int",
++    ) -> None:
++        self.total_length = total_length
++
++
++class IronwoodPcztRequest(protobuf.MessageType):
++    MESSAGE_WIRE_TYPE = 32001
++    FIELDS = {
++        1: protobuf.Field("transfer_id", "bytes", repeated=False, required=True),
++        2: protobuf.Field("offset", "uint32", repeated=False, required=True),
++        3: protobuf.Field("length", "uint32", repeated=False, required=True),
++    }
++
++    def __init__(
++        self,
++        *,
++        transfer_id: "bytes",
++        offset: "int",
++        length: "int",
++    ) -> None:
++        self.transfer_id = transfer_id
++        self.offset = offset
++        self.length = length
++
++
++class IronwoodPcztAck(protobuf.MessageType):
++    MESSAGE_WIRE_TYPE = 32002
++    FIELDS = {
++        1: protobuf.Field("transfer_id", "bytes", repeated=False, required=True),
++        2: protobuf.Field("offset", "uint32", repeated=False, required=True),
++        3: protobuf.Field("data", "bytes", repeated=False, required=True),
++    }
++
++    def __init__(
++        self,
++        *,
++        transfer_id: "bytes",
++        offset: "int",
++        data: "bytes",
++    ) -> None:
++        self.transfer_id = transfer_id
++        self.offset = offset
++        self.data = data
++
++
++class IronwoodSignedPczt(protobuf.MessageType):
++    MESSAGE_WIRE_TYPE = 32003
++    FIELDS = {
++        1: protobuf.Field("transfer_id", "bytes", repeated=False, required=True),
++        2: protobuf.Field("total_length", "uint32", repeated=False, required=True),
++        3: protobuf.Field("offset", "uint32", repeated=False, required=True),
++        4: protobuf.Field("data", "bytes", repeated=False, required=True),
++    }
++
++    def __init__(
++        self,
++        *,
++        transfer_id: "bytes",
++        total_length: "int",
++        offset: "int",
++        data: "bytes",
++    ) -> None:
++        self.transfer_id = transfer_id
++        self.total_length = total_length
++        self.offset = offset
++        self.data = data
++
++
++class IronwoodSignedPcztAck(protobuf.MessageType):
++    MESSAGE_WIRE_TYPE = 32004
++    FIELDS = {
++        1: protobuf.Field("transfer_id", "bytes", repeated=False, required=True),
++        2: protobuf.Field("next_offset", "uint32", repeated=False, required=True),
++    }
++
++    def __init__(
++        self,
++        *,
++        transfer_id: "bytes",
++        next_offset: "int",
++    ) -> None:
++        self.transfer_id = transfer_id
++        self.next_offset = next_offset
++
++
+ class MoneroTransactionSourceEntry(protobuf.MessageType):
+     MESSAGE_WIRE_TYPE = None
+     FIELDS = {

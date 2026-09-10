@@ -47,6 +47,14 @@ disables Rust `debug` and omits `debuglink`, `ui_debug` and
 or flashing was performed. Detailed command and artifact evidence is summarized
 in `docs/SAFE5_NATIVE.md` in this repository.
 
+## Native caller candidate
+
+The separate [native-caller proposal](native-caller/README.md) now compiles with
+24,064 bytes of flash headroom and identical RAM reservations. Its 10 tests cover
+216 stubbed caller cases. It is not applied to the retained image above and has
+not executed; Fable review and native runtime evidence remain pending. The patch,
+portable tests and source/artifact hashes are tracked for review.
+
 ## Remaining delivery work
 
 This export removes reliance on ignored native implementation source and bridge

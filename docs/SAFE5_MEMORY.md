@@ -5,9 +5,16 @@ Firmware base `7105338e3c2c1e681940e17780609881ce53126b` plus the reviewed exper
 
 **The synthetic image now fits in flash. Runtime RAM and speed remain the main
 uncertainties.** The linked image uses 1,637.5 KiB of the actual 1,664 KiB firmware
-slot: 26.5 KiB remains, or 1.6%. This is a narrow margin, especially with native
-transport/UI integration and production key handling still to add. We do not yet
-know their net cost. The file's debug information is excluded from these numbers.
+slot: 26.5 KiB remains, or 1.6%. This is a narrow margin, especially with
+production key handling still to add. The
+new synthetic caller's net cost is measured separately below; production costs
+remain unknown. The file's debug information is excluded from these numbers.
+
+A separate [native caller candidate](SAFE5_NATIVE_CALLER.md) now links with
+1,640.5 KiB occupied and 23.5 KiB remaining: 3 KiB more than this retained
+snapshot, with equal RAM reservations. It has not executed and remains
+unadopted pending review and runtime evidence. The figures below continue
+to describe the retained image.
 
 ## RAM: what uses the space
 

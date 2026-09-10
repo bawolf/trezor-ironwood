@@ -18,7 +18,7 @@ without a change, a new failure, or a specific unresolved concern.
 | M2.1c | Typed THP review/hold and host Cancel/fresh retry pass; Opus follow-up delivered, stricter run exposed shutdown SIGBUS; overall acceptance rejected | Implement trusted emulator review and consent | Show every payment/change/fee from the immutable projection, bind physical UI events to its token, test cancellation and replacement; no transport-triggered approval. |
 | M2.1d | Actual signing and ordinary timeout recovery pass; late chunk defect characterized; reconnect unproven | Integrate bounded emulator transport and signing | Fragmentation/size limits, disconnect/replay/failure tests and actual synthetic signed response; no production key-store or physical-device use. |
 | M2.2 | In progress: eleven host-model proofs pass; firmware refinement pending | Prove selected approval/accounting properties | Non-vacuous Lean statements, warning-fatal build, expected axioms only, implementation correspondence documented and reviewed. |
-| M2.3 | Safe 5 native image fits with 27,136 B flash margin; stack/GC, latency and runtime remain open | Assess other Trezor models | Compare actual model layouts and runtime interfaces; use cheap target/link gates before UI porting; prioritize the available Safe 5 for first hardware testing. |
+| M2.3 | Safe 5 caller candidate links with 24,064 B flash margin; native stack/GC, latency and execution remain open | Assess other Trezor models | Compare actual model layouts and runtime interfaces; use cheap target/link gates before UI porting; prioritize the available Safe 5 for first hardware testing. |
 | M3 | Later | Independent review, hardware and release path | Cryptographic/embedded review, device matrix, dedicated hardware tests, recovery/privacy UX and upstream acceptance. |
 | M4 | Delivery requirements established; prototype export incomplete | Prepare maintainable Trezor handoff | Focused upstream patch series, dependency/licenses and reviewed boundaries; clean-checkout reproduction without hidden local inputs; upstream tests/generation/changelog/CI and explicit model evidence. |
 
@@ -100,9 +100,13 @@ The matching host arena diagnostic now passes twelve allocation/lifecycle cases,
 peaking at 112,264 used bytes. Separate upstream verification now passes for all
 twelve saved outputs (68 new and 28 retained signatures), including seven rejecting
 negative controls and preservation of all other decoded fields. Do not rerun the
-passing sweep or output verification without a change or unresolved result. Next
-implement the concrete native trusted caller's cancellation/ownership scope and
-prepare primary-heap largest-free-run, complete stack/arena and latency measurement.
+passing sweep or output verification without a change or unresolved result.
+The isolated native caller now compiles and passes 10 tests / 216 stubbed caller
+subcases, with linked bytecode/descriptors verified. It is not adopted; Fable
+transmission awaits exact-packet approval. Next implement small fixed diagnostic
+records retrievable after cleanup over synthetic USB, then measure largest free
+blocks, complete stack/arena use, cancellation/OOM recovery and MCU latency.
+Do not assume debugger access to the unopened retail Safe 5.
 The pending source reviews still gate response-allocation adoption.
 Finish native memory/latency preparation before requesting an attended
 installation session. The unopened device remains untouched, and flashing

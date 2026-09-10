@@ -1,0 +1,222 @@
+{
+  "date_utc": "2026-09-10",
+  "candidate": {
+    "name": "synthetic native trusted caller",
+    "state": "compiled; not adopted; Fable pending exact-packet approval",
+    "elf_sha256": "962755b3e7f094856b4fbd1f7cbdf872c86ab53bffae8f624b654ce5c18d55fe",
+    "flash_bytes": 1679872,
+    "flash_capacity_bytes": 1703936,
+    "flash_remaining_bytes": 24064,
+    "net_flash_increase_bytes": 3072,
+    "application_ram_reserved_bytes": 526848,
+    "stack_reserved_bytes": 49152,
+    "gc_raw_regions_bytes": [
+      92880,
+      41696
+    ],
+    "ram_reservations_unchanged": true,
+    "runtime_heap_peak_bytes": null,
+    "whole_stack_maximum_bytes": null,
+    "native_executed": false,
+    "source_proposal_accepted": false,
+    "caller_tests_passed": 10,
+    "caller_subtests_passed": 216,
+    "test_scope": "Actual Python caller/review with C/Rust, scheduler, wire, UI and capability stubs; no native GC, cryptography or device execution."
+  },
+  "firmware_base": "7105338e3c2c1e681940e17780609881ce53126b",
+  "retained_elf_sha256": "ab110d7e1709c4e3b28f6042226c489a738b1d5819f42ad546ee9b59d1452c12",
+  "dependency_lock_sha256": "8e738d88069e34816781dca1821ab37f4a82531d2533d8dc54bd499bf4d81da4",
+  "toolchains": {
+    "rust": "nightly-2026-03-16-aarch64-apple-darwin",
+    "arm_gnu": "13.3.Rel1"
+  },
+  "features": [
+    "models/model_t3t1",
+    "universal_fw",
+    "dev_keys",
+    "frozen",
+    "optiga_testing",
+    "disable_animation",
+    "storage_insecure_testing_mode",
+    "dma2d",
+    "hash_processor",
+    "lockable_bootloader",
+    "secret",
+    "secure_aes",
+    "framebuffer",
+    "tamper",
+    "layout_delizia",
+    "display_rgb565",
+    "backlight",
+    "io/backlight_tps61043",
+    "display",
+    "io/display_st7789",
+    "io/display_panel_lx154a2482",
+    "haptic",
+    "sd_card",
+    "touch",
+    "io/touch_ft6x36",
+    "io/touch_panel_lx154a2422cpt23",
+    "mcu_stm32u58",
+    "ironwood_target_native_compile_only",
+    "pyopt",
+    "ironwood_native_caller"
+  ],
+  "build": {
+    "frozen": true,
+    "offline": true,
+    "target": "thumbv8m.main-none-eabihf",
+    "profile": "release",
+    "build_std": [
+      "core",
+      "alloc"
+    ],
+    "jobs": 4,
+    "commands": [
+      {
+        "kind": "standard protobuf generation",
+        "returncode": 0,
+        "seconds": 6.439423458185047,
+        "timed_out": false,
+        "residual_group_killed": false,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "kind": "native firmware build",
+        "returncode": 0,
+        "seconds": 255.82996174995787,
+        "timed_out": false,
+        "residual_group_killed": false,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "be166fb6552a9c38134d4f11ce0a08091dc30defa48a80fc7ff5c827821673b6"
+        }
+      }
+    ],
+    "raw_record_sha256": "5b6b5c70c6241dc17ae424c05e8dc34259c07449917e8e3281d0f354e1a065c8",
+    "prior_failure": "Sandbox denied protoc /dev/stdout before compilation; failed record retained, authorized retry passed."
+  },
+  "artifacts": {
+    "firmware": {
+      "sha256": "962755b3e7f094856b4fbd1f7cbdf872c86ab53bffae8f624b654ce5c18d55fe",
+      "bytes": 18021312
+    },
+    "firmware.map": {
+      "sha256": "30ff37731386016406087339605a7b86b3b47e52c1d4042b7051158cc96377d3",
+      "bytes": 8990797
+    },
+    "firmware.cc.json": {
+      "sha256": "375ce00d91f41f1230d903b91a6cca785da27dbabdd175de4da23910f5c57507",
+      "bytes": 1620777
+    }
+  },
+  "memory": {
+    "flash_categories_bytes": {
+      "headers": 2084,
+      "embedded_kernel": 136192,
+      "padding": 3027,
+      "native_code": 649154,
+      "read_only_data": 614307,
+      "ambiguous_overlap": 179473,
+      "embedded_bootloader": 93849,
+      "initialized_data_flash_image": 1786
+    },
+    "checks": {
+      "flash_reconciles": true,
+      "ram_reconciles": true,
+      "source_and_artifact_hashes_unchanged": true
+    },
+    "raw_report_sha256": "bb8bbc8161f2a74a13ed32864f073767e513993d8f6d66edda60aa2a6ae80a3e",
+    "caveat": "Net image/configuration comparison; module-only causal isolation and runtime peaks are not established."
+  },
+  "artifact_checks": {
+    "raw_run_hash_matches_artifact_record": true,
+    "generation_and_build_records_rc0_no_timeout": true,
+    "artifact_argv_matches_build_record": true,
+    "all_three_artifacts_match_records_and_prepared": true,
+    "all_15_recorded_source_and_generated_inputs_match": true,
+    "current_lock_matches_recorded_before_and_after": true,
+    "all_original_inventory_entries_unchanged": true,
+    "P_retained_and_target_ELFs_match_expected": true,
+    "three_selected_C_units_have_expected_macros": true,
+    "expected_native_features_selected": true,
+    "all_six_bytecode_arrays_match_allocated_ELF_bytes": true,
+    "owner_None_guard_survives_compiled_pyopt": true,
+    "mpy_cross_used_O3": true,
+    "frozen_capability_substituted_True": true,
+    "native_predicate_folded_true": true,
+    "caller_review_dispatcher_registered_in_frozen_table": true,
+    "lazy_path_and_no_session_ironwood_import": true,
+    "all_five_runtime_descriptors_with_expected_ids": true,
+    "all_four_protobuf_blobs_exact_in_ELF": true,
+    "generated_core_and_host_classes_present": true,
+    "generated_enum_values_present": true,
+    "all_hashed_inputs_stable_through_check": true
+  },
+  "artifact_check_record_sha256": "9da77901024c96b4b20e6b502de77a39edfdd737289e2fe39a6ebfe9a67b3e3f",
+  "tests": {
+    "observed": {
+      "tests": 10,
+      "subtests": 216,
+      "failures": 0,
+      "errors": 0
+    },
+    "python": "3.12.8 (v3.12.8:2dc476bcb91, Dec  3 2024, 14:43:19) [Clang 13.0.0 (clang-1300.0.29.30)]",
+    "seconds": 0.40918758301995695,
+    "returncode": 0,
+    "source_hashes": {
+      "sign_pczt.py": "bcac0ee1a869b131c310140df49ed0f3424a8b33780e456ed05c80f578a776d5",
+      "ironwood_review.py": "7c1077ec719016c31e0bb1fb34c8bf02ffeeff4635ef7b73d425b8b5dccd54f9",
+      "test_caller_cleanup.py": "7551ebf75d89bbba8bad24326b5149f9b99c56b062bc1e88df95ed8a637fdf13",
+      "run_tests.py": "cfff249ec4b240c8401d989d482fecc6d5e400422bd3dc9bae3c5b8b7eb76899"
+    },
+    "run_record_sha256": "8cc44d02d3384962a238c1088763939e6b09d396687516e08d30871b4ea6bd95",
+    "export_check_sha256": "0af95120643e3ccf849fede3e3cfcd3f4f92eccfbd732bc92e814b169aa642cf",
+    "logs_sha256": {
+      "stdout": "ea43950d48dca99f09c5024ac4548ba7587d9e9819871f0a80d44a9b31c6bedb",
+      "stderr": "864f1f320af60fd502d2e4cc83b55e796712317db00c853db8718d7ef8c5613e"
+    },
+    "limitations": [
+      "Only sign_pczt.py and ironwood_review.py execute from the selected firmware; utils, workflow, messages, layouts, loop, context, random and ironwood_test are stubs.",
+      "Pending state is a token; input/output are opaque synthetic bytes. No C/Rust/GC allocation, PCZT cryptography or native execution is exercised.",
+      "CPython coroutine-close and injected exceptions exercise caller finally paths; actual MicroPython scheduling/deadlines, UI rendering/hold/cancellation and wire transport are not exercised.",
+      "Capability booleans are stubbed. This does not test native flag export, lazy dispatcher integration, build selection or hardware reachability.",
+      "Outgoing ACK failure follows one recorded signed chunk; lack of a Success return does not imply that no signed bytes were sent.",
+      "No native build, devices, services, Fable review or adoption occurred in this packaging task."
+    ]
+  },
+  "review": {
+    "local_source_integration_and_clarity": "passed within source-only scope",
+    "fable": "rejected before process creation; exact-packet approval pending",
+    "packet_sha256": "3f6c04236ba1ea381369dc19c3f4376db1eb01ed2d7b366824e58d344dc02762",
+    "packet_bytes": 62058,
+    "reserved_allowance_usd": 15,
+    "actual_model": null,
+    "reported_usage_usd": null,
+    "local_source_clarity_record_sha256": "268b739c545b0fd3bcf80f07530f812289e1753a40f974f3354adb2f63ea78e4",
+    "local_source_clarity_bindings_sha256": "50f711b0c4e1991ede919254e0f99bd422292b2db463533ada9a0d9570d3828f",
+    "portable_export_clarity_record_sha256": "dc5c06ac882f097ec2a8fc344a9fc594a23f7498ac94201609426ab91f95d399",
+    "portable_export_clarity_bindings_sha256": "21c2c9532b9d138aafb0b128af0b6555fd5ca04bf8f4140c9f96a323e51ac470",
+    "portable_export_clarity": "passed; inherited timeout-before-record limitation documented"
+  },
+  "remaining": [
+    "native GC roots, largest free block and allocation failure cleanup",
+    "complete native stack/arena peaks and processor latency",
+    "real trusted-screen/hold/cancel/legacy-wire execution",
+    "Fable review and clean-checkout reproduction before adoption"
+  ],
+  "raw_evidence_location": "Task-local work/safe5-native-caller-01; raw artifacts and logs retained outside the public source package.",
+  "measurement_plan": {
+    "state": "source feasibility prepared; instrumentation not implemented or executed",
+    "fixed_records_retrieved_after_cleanup_over_synthetic_usb": true,
+    "debugger_access_required": false,
+    "response_largest_free_run_required_blocks": 4097,
+    "gc_block_bytes": 16,
+    "stack_phase_samples_are_full_peak": false,
+    "source_note": "MEASUREMENT_PLAN.md",
+    "source_note_sha256": "b66de2cc6467818ac4ef2b855b92d7d56969a07a7d4d62c22dfa4544497799ef"
+  }
+}

@@ -61,6 +61,15 @@ decoded PCZT fields and effect digests preserved. Seven negative controls reject
 corruption, missing/swapped signatures and metadata changes. This strengthens the
 host result; native RAM and full device signing acceptance remain unproven.
 
+A separate [native trusted-caller candidate](SAFE5_NATIVE_CALLER.md) now compiles
+and links through the stock lazy dispatcher. It occupies 1,679,872 flash bytes,
+leaving 24,064 bytes (23.5 KiB), with unchanged RAM reservations. Ten tests cover
+216 caller subcases using real Python handlers and stubbed firmware services;
+actual C/GC, screen/hold, scheduler and device behavior remain untested. Exact
+linked-bytecode and descriptor checks pass. The candidate is exported as an
+unadopted patch; independent local clarity review passed and its Fable packet
+awaits exact-payload approval after automatic review rejected transmission.
+
 ## Implemented
 
 - Pinned upstream sources, contribution/threat-model research, local evidence
@@ -100,7 +109,7 @@ host result; native RAM and full device signing acceptance remain unproven.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260910T140904Z-project-7eef57de/report.json`.
+- Project: `work/runs/20260910T172641Z-project-73d811de/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.

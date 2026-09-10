@@ -83,10 +83,13 @@ Process exit alone does not prove allocator or final C cleanup.
 The candidate now has selected decode, validation, signing-reparse and serialization
 subtotals of 32,408/31,504/27,072/11,016 bytes. Prioritize a complete signing peak
 measurement, serializer growth and allocator lifetimes; these subtotals do not
-establish full maxima. Two isolated encoder-envelope tests now pass for the
-proposed smaller response allocation. Complete valid signing-preservation tests
-and the pending adversarial review before adopting it; the review packet still
-awaits exact-packet transmission approval. Local synthetic tests remain authorized.
+establish full maxima. Two encoder tests and a subsequent two-test signing run
+now pass. The latter covers 44 round trips, including 12 new admitted eight-action
+metadata variants with 10,100–10,389-byte signed responses and full-object checks.
+Both test-source and allocation-proof Fable packets await exact-packet transmission
+approval; neither proposal is accepted and the C allocation remains unchanged.
+Complete those reviews before adopting the response reduction, then measure the
+actual native allocation lifetimes. Local synthetic tests remain authorized.
 Finish native memory/latency preparation before requesting an attended
 installation session. The unopened device remains untouched, and flashing
 requires a concrete separate decision.

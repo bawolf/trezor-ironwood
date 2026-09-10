@@ -355,5 +355,314 @@
     ],
     "diagnosis": "First probe had a stale eight-byte PONG on its debug socket; failed before SIGTERM. Fresh probe used separate primary readiness traffic before the first debug socket open.",
     "scope": "Startup homescreen followed by process rc0 only. No allocator/final C cleanup, cancellation, signing, native or device acceptance. Cancellation driver remains unchanged; prior failures are preserved."
+  },
+  "signed_response_tests": {
+    "state": "local diagnostic tests passed; source proposal unaccepted pending Fable",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "signing_operations": 44,
+    "new_size_samples": 12,
+    "new_signatures_in_size_samples": 68,
+    "existing_dummy_signatures_in_size_samples": 28,
+    "minimum_signed_bytes": 10100,
+    "maximum_signed_bytes": 10389,
+    "signed_size_ceiling_bytes": 16384,
+    "cargo_seconds": 69.18723904201761,
+    "native_executed": false,
+    "c_allocation_changed": false,
+    "universal_size_bound_proven": false,
+    "independent_readability_review": "complete; final delta checked",
+    "fable_review": "automatic approval rejected before transmission; exact packet approval pending",
+    "sample_rows": [
+      {
+        "anchor_present": false,
+        "case": "eight_real_ordinary",
+        "fee": 40000,
+        "input_bytes": 9588,
+        "new_signature_count": 8,
+        "new_signature_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "ock_indices": [],
+        "signed_bytes": 10100,
+        "total_input": 800000,
+        "verified_existing_dummy_signatures": 0
+      },
+      {
+        "anchor_present": true,
+        "case": "eight_real_ordinary",
+        "fee": 40000,
+        "input_bytes": 9620,
+        "new_signature_count": 8,
+        "new_signature_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "ock_indices": [],
+        "signed_bytes": 10132,
+        "total_input": 800000,
+        "verified_existing_dummy_signatures": 0
+      },
+      {
+        "anchor_present": false,
+        "case": "eight_real_ordinary",
+        "fee": 40000,
+        "input_bytes": 9620,
+        "new_signature_count": 8,
+        "new_signature_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "ock_indices": [
+          4
+        ],
+        "signed_bytes": 10132,
+        "total_input": 800000,
+        "verified_existing_dummy_signatures": 0
+      },
+      {
+        "anchor_present": true,
+        "case": "eight_real_ordinary",
+        "fee": 40000,
+        "input_bytes": 9652,
+        "new_signature_count": 8,
+        "new_signature_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "ock_indices": [
+          4
+        ],
+        "signed_bytes": 10164,
+        "total_input": 800000,
+        "verified_existing_dummy_signatures": 0
+      },
+      {
+        "anchor_present": false,
+        "case": "eight_real_max_money",
+        "fee": 40000,
+        "input_bytes": 9625,
+        "new_signature_count": 8,
+        "new_signature_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "ock_indices": [],
+        "signed_bytes": 10137,
+        "total_input": 2100000000000000,
+        "verified_existing_dummy_signatures": 0
+      },
+      {
+        "anchor_present": true,
+        "case": "eight_real_max_money",
+        "fee": 40000,
+        "input_bytes": 9657,
+        "new_signature_count": 8,
+        "new_signature_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "ock_indices": [],
+        "signed_bytes": 10169,
+        "total_input": 2100000000000000,
+        "verified_existing_dummy_signatures": 0
+      },
+      {
+        "anchor_present": false,
+        "case": "eight_real_max_money",
+        "fee": 40000,
+        "input_bytes": 9657,
+        "new_signature_count": 8,
+        "new_signature_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "ock_indices": [
+          4
+        ],
+        "signed_bytes": 10169,
+        "total_input": 2100000000000000,
+        "verified_existing_dummy_signatures": 0
+      },
+      {
+        "anchor_present": true,
+        "case": "eight_real_max_money",
+        "fee": 40000,
+        "input_bytes": 9689,
+        "new_signature_count": 8,
+        "new_signature_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "ock_indices": [
+          4
+        ],
+        "signed_bytes": 10201,
+        "total_input": 2100000000000000,
+        "verified_existing_dummy_signatures": 0
+      },
+      {
+        "anchor_present": false,
+        "case": "one_real_seven_dummy",
+        "fee": 40000,
+        "input_bytes": 10037,
+        "new_signature_count": 1,
+        "new_signature_indices": [
+          1
+        ],
+        "ock_indices": [],
+        "signed_bytes": 10101,
+        "total_input": 3640000,
+        "verified_existing_dummy_signatures": 7
+      },
+      {
+        "anchor_present": true,
+        "case": "one_real_seven_dummy",
+        "fee": 40000,
+        "input_bytes": 10069,
+        "new_signature_count": 1,
+        "new_signature_indices": [
+          1
+        ],
+        "ock_indices": [],
+        "signed_bytes": 10133,
+        "total_input": 3640000,
+        "verified_existing_dummy_signatures": 7
+      },
+      {
+        "anchor_present": false,
+        "case": "one_real_seven_dummy",
+        "fee": 40000,
+        "input_bytes": 10293,
+        "new_signature_count": 1,
+        "new_signature_indices": [
+          1
+        ],
+        "ock_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "signed_bytes": 10357,
+        "total_input": 3640000,
+        "verified_existing_dummy_signatures": 7
+      },
+      {
+        "anchor_present": true,
+        "case": "one_real_seven_dummy",
+        "fee": 40000,
+        "input_bytes": 10325,
+        "new_signature_count": 1,
+        "new_signature_indices": [
+          1
+        ],
+        "ock_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "signed_bytes": 10389,
+        "total_input": 3640000,
+        "verified_existing_dummy_signatures": 7
+      }
+    ],
+    "evidence": [
+      {
+        "coordinator_relative_path": "work/safe5-signed-response-tests-01/RESULT.md",
+        "sha256": "8d08ed6619affbc63c42c869fb24f2a36e99304b47bfe3fcb798e336fa0a76a3"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-signed-response-tests-01/cargo-run.json",
+        "sha256": "fd2264bef16180f427941ad47007bcbe867d3b97d5bde501ecf8f77ec9edb4d5"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-signed-response-tests-01/logs/stdout",
+        "sha256": "140af8849d5710704cb0b9fb5bbf2e154f038564a7fb0d4fdb107c10f7595b29"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-signed-response-tests-01/logs/stderr",
+        "sha256": "aedd6828ddcbfff44beca9eca777aa74df6775b54fe77e7b44ddd0bbbc6b0d34"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-signed-response-tests-01/signed-response-tests.patch",
+        "sha256": "36a87b602b659a627254b73ee4463cdcce7d26083ef277bf95bfe66c7adc7c13"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-signed-response-tests-01/parent-check.json",
+        "sha256": "a20d63109408d3a1335fde02fd081189f479ad3020e93ee2a18318aa4a0f0c7b"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-signed-response-tests-01/independent-review.json",
+        "sha256": "f4242b0522aa7f115cddbe156788d1293db8fb6d88719178ac58bb0b4b44772d"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-signed-response-tests-01/post-run-verification.json",
+        "sha256": "8b7c20f0ec66eae8a517bb5b32670ddd7b86bf8bc7080333e1223e5e0a17d2c2"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-signed-response-tests-01/synthetic-artifact-hashes.json",
+        "sha256": "6fb905a2fa885c40dfac33d9acc2841238d4607f6478b570555fd328fa851b58"
+      }
+    ],
+    "limits": "12 admitted synthetic variants; earlier32 regression variants also passed but sizes not sampled. Full object/sig checks do not establish universal bound, native GC/arena/stack peak or target latency."
   }
 }

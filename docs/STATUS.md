@@ -38,9 +38,12 @@ against actual binary frames and edges. Full maxima and native
 execution remain unverified before adoption; the settled memory snapshot stays
 unchanged. A separate source proof proposes a 16 KiB response allocation
 under the existing eight-action profile. Its Fable submission is blocked pending
-exact-packet approval. Both isolated encoder tests passed, including the 16 KiB
-assertions and canonical round-trip; valid signing preservation and native live
-memory remain untested. The allocation change remains unapplied. See the
+exact-packet approval. Both isolated encoder tests passed. A subsequent local
+run passed two signing tests covering 44 round trips; its 12 new eight-action
+samples produced 10,100–10,389-byte responses with full-object preservation and
+independent signature checks. The distinct test-only Fable packet was also blocked
+before transmission. Both source proposals remain unaccepted; the C allocation
+is unchanged and native live memory remains untested. See the
 [follow-up evidence](../experiments/safe5-native/FOLLOWUP_RESULTS.json).
 
 ## Implemented
@@ -82,7 +85,7 @@ memory remain untested. The allocation change remains unapplied. See the
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260910T074716Z-project-a39b612e/report.json`.
+- Project: `work/runs/20260910T121002Z-project-532ff601/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
@@ -277,9 +280,10 @@ No new automation is needed. Keep the machine on and Codex running.
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
   subscription purchased. 43 completed Claude Code review requests report
-  USD 78.60532375 at list prices, held conservatively as USD 78.84. One response-allocation source review
-  has a USD 15 allowance reserved but did not start: automatic approval review
-  requires approval for its exact frozen packet and Fable destination. Actual model identities,
+  USD 78.60532375 at list prices, held conservatively as USD 78.84. Two source
+  reviews (allocation proof and signing tests) have USD 30 total reserved but did
+  not start: automatic approval review requires exact frozen-packet/destination
+  authorization. Neither packet was transmitted; no new model usage occurred. Actual model identities,
   substitutions and failed requests remain recorded separately; completed requests
   are not a count of accepted reviews. The user accepts documented Opus fallbacks.
   Actual subscription billing and Codex dollar usage are not observed here.

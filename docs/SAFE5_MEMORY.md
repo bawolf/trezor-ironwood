@@ -150,8 +150,14 @@ profile. This would remove a 48 KiB allocation request; it is not measured free
 RAM. Two isolated tests of the real upstream encoder now pass: a maximal wire
 envelope fits within 16 KiB, and a V6 logical round-trip preserves canonical bytes.
 Their payloads are encoding placeholders, not cryptographically valid transactions;
-exact output lengths were not printed. The allocation proposal remains unapplied
-pending adversarial review and valid signing-preservation tests.
+exact output lengths were not printed in those encoder tests. A subsequent local
+run passed two signing tests covering 44 round trips. The 12 new eight-action
+variants produced **10,100–10,389-byte signed responses**, checking 68 new and 28
+existing dummy signatures and preserving the entire object except newly added
+real signatures. These include eight real spends totaling MAX_MONEY and mixed
+real/padding spends, with valid OCK/anchor presence variants. The allocation and
+test-source proposals remain unaccepted pending Fable review; neither these samples
+nor the unchanged native layout establish a universal bound or runtime RAM fit.
 
 The parser-boundary candidate has a selected signing-reparse subtotal of **27,072 bytes
 (26.4 KiB)** and a selected v2 serialization subtotal of **11,016 bytes (10.8

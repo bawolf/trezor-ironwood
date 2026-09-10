@@ -700,16 +700,23 @@
     },
     {
       "name": "smaller response allocation",
-      "state": "unapplied; two encoding tests passed",
+      "state": "unapplied; encoder and signed-fixture tests passed; Fable pending",
       "current_request_bytes": 65537,
       "proposed_request_bytes": 16385,
       "request_reduction_bytes": 49152,
       "exact_serialized_lengths_bytes": null,
       "tested_size_ceiling_bytes": 16384,
       "encoder_tests_passed": 2,
-      "full_signing_preservation_tested": false,
+      "full_signing_preservation_tested": true,
       "native_executed": false,
-      "runtime_free_ram_gain_bytes": null
+      "runtime_free_ram_gain_bytes": null,
+      "signing_test_scope": "12 admitted synthetic metadata variants; native execution and universal coverage remain unproven",
+      "signed_tests_passed": 2,
+      "signing_operations": 44,
+      "signed_size_samples": 12,
+      "minimum_tested_signed_bytes": 10100,
+      "maximum_tested_signed_bytes": 10389,
+      "source_proposal_accepted": false
     }
   ]
 }

@@ -3,6 +3,26 @@
 Updated 2026-09-10 UTC.
 Development branch: `codex/verification-and-reuse`.
 
+The first physical target is **Safe 5 T3T1**. Its complete synthetic native image
+now links with **27,136 bytes of flash headroom**, a **48 KiB stack**, and two GC
+reservations of **92,880 and 41,696 bytes**. Host signing and split-GC tests pass;
+Fable5.1 and independent clarity reviews cover the changes. This is static capacity
+and host evidence: full native ABI/stack/heap-lifetime acceptance, Safe 5 trusted
+screens/legacy-wire integration and device execution remain. See
+[the current Safe 5 results](SAFE5_NATIVE.md) and
+[tracked source package](../experiments/safe5-native/README.md).
+
+The [memory breakdown](SAFE5_MEMORY.md) now reconciles every linked flash byte and
+both application RAM regions. The prepared T3T1/Delizia legacy-wire emulator also
+builds offline; all 31,076 copied inputs retain their hashes except the reviewed
+one-file model/transport guard. Standard protobuf generation leaves the copied
+generated files unchanged. Emulator SHA256:
+`b028f7002a402ffc5c8f1a816ac5f1512b611a3d7d8eb27751512bc97332c44b`.
+No Safe5 emulator workflow or physical device has run. Distinct receiver-menu and
+final-hold cancellation drivers are prepared. Fable5.1 identified trace,
+pagination and evidence gaps; isolated corrections are in progress before
+execution. Native runtime integration remains separate from this host emulator.
+
 ## Implemented
 
 - Pinned upstream sources, contribution/threat-model research, local evidence
@@ -42,7 +62,7 @@ Development branch: `codex/verification-and-reuse`.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260909T233616Z-project-7aa38baf/report.json`.
+- Project: `work/runs/20260910T064018Z-project-8a338598/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.
@@ -197,15 +217,21 @@ Safe 5 dedicated to testing. Its [unchanged baseline now builds](SAFE5_BASELINE.
 AUX1 has only 43,668 bytes unoccupied, GC has 240,368 bytes, and flash has
 115,200 bytes remaining. The current 131,104-byte guarded arena cannot fit in
 AUX1. The [Safe 5 native experiment](SAFE5_NATIVE.md) now links with its guarded
-arena in AUX2 and 109,264 bytes of GC capacity. Separate optimized/test configuration
-and computed Sinsemilla generators leave 7,168 bytes of flash headroom. Host
-baseline/candidate comparison passes 8,056 public-output checks, but the computed
-hash is about 16 times slower at the largest host sample. A selected native
-validation call chain still exceeds the 32 KiB stack. These results establish
-capacity and bounded host equivalence, not runtime/device support. The complete
-native patch and synthetic bridge/fixtures are now exported for review; portable
-build/runtime reproduction and trusted Delizia/legacy-wire integration remain.
-Stack/GC layout and faster flash-saving alternatives precede hardware use.
+arena in AUX2. The latest compact-secp and split-GC image has 27,136 bytes of
+flash headroom, a 48 KiB stack, and raw GC regions of 92,880 and 41,696 bytes.
+Host comparison passes 8,056 public-output checks, but computed Sinsemilla is
+about 16 times slower at the largest host sample. The current selected parsing
+path totals 42,016 frame bytes including its C entry, leaving only 7,136 nominal
+bytes before omitted interpreter callers and exception overhead. It is not a
+whole-stack maximum or proof of sufficient margin; reducing the largest parsing
+frames is a current priority.
+Actual ARM C layout and independent interface inspection close the specific
+split-GC state representation question: those C-owned structures do not cross
+the Rust interface. Host GC collection/reuse/failure checks pass, while target
+peak use, contiguous allocations, latency and runtime behavior remain open.
+The complete native patch and synthetic bridge/fixtures are exported for review;
+portable build/runtime reproduction and trusted Delizia/legacy-wire execution
+still precede hardware use.
 The [hardware session plan](HARDWARE_SESSION.md) groups physical actions; no Safe 5
 Ironwood image is ready. The missing host libusb dependency is installed and the
 offline host-input check passes without device enumeration or access.
@@ -230,12 +256,10 @@ No new automation is needed. Keep the machine on and Codex running.
 - GitHub CI remains a template at `ci/project-workflow.yml`; the OAuth credential
   lacks the `workflow` scope. No GitHub Actions run has occurred.
 - The initial budget is USD 300 total. No paid service, cloud runner, API credit or
-  subscription purchased. Thirty-two completed Claude Code review requests reported
-  USD 51.90125825 at list prices; USD 52.09 is reserved for that reported usage.
-  Twenty-three requests identify Fable; that count includes failed requests and is not
-  a count of accepted reviews. Earlier substitutions, budget/provider failures
-  and authentication failures remain recorded. The user accepts documented Opus
-  fallbacks; actual model identities are checked and substitutes are never labeled Fable.
+  subscription purchased. Forty-one completed Claude Code review requests report
+  USD 74.41098575 at list prices, held conservatively as USD 74.64. Actual model identities,
+  substitutions and failed requests remain recorded separately; completed requests
+  are not a count of accepted reviews. The user accepts documented Opus fallbacks.
   Actual subscription billing and Codex dollar usage are not observed here.
   One user-authorized existing Codex reset credit was redeemed at 98% usage;
   two credits remain. No further reset has been authorized.

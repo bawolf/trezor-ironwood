@@ -571,7 +571,7 @@
  # Build options
 --- a/core/embed/projects/firmware/build.rs
 +++ b/core/embed/projects/firmware/build.rs
-@@ -1,7 +1,7 @@
+@@ -1,14 +1,31 @@
  use std::env;
  use std::path::PathBuf;
 
@@ -579,8 +579,15 @@
 +use xbuild::{CLibrary, Result, bail, bail_unsupported};
 
  fn main() -> Result<()> {
-     xbuild::build_and_link("firmware", |lib| {
-@@ -9,6 +9,17 @@
+-    xbuild::build_and_link("firmware", |lib| {
++    // Reuse xbuild's existing binary-type linker selection for this experiment.
++    let binary_type = if cfg!(feature = "ironwood_target_native_compile_only") {
++        "firmware_ironwood"
++    } else {
++        "firmware"
++    };
++    xbuild::build_and_link(binary_type, |lib| {
+         lib.import_lib("io")?;
          lib.import_lib("upymod")?;
 
          lib.add_includes(["."]);
@@ -600,7 +607,7 @@
 
 --- a/core/embed/projects/firmware/main.c
 +++ b/core/embed/projects/firmware/main.c
-@@ -64,6 +64,23 @@
+@@ -64,6 +64,28 @@
 
  #endif
 
@@ -612,6 +619,11 @@
 +    defined(SECURE_MODE) || PRODUCTION
 +#error "synthetic native bridge requires an unprivileged nonproduction T3T1 app"
 +#endif
++#if MICROPY_GC_SPLIT_HEAP != 1 || MICROPY_GC_SPLIT_HEAP_AUTO != 0
++#error "synthetic native bridge requires the static split GC heap"
++#endif
++extern uint8_t _heap_aux1_start;
++extern uint8_t _heap_aux1_end;
 +extern void ironwood_target_arena_init(void);
 +extern void ironwood_target_arena_check_cold(void);
 +// One-time Core lifetime binding; target adapter rejects unsupported contexts.
@@ -624,7 +636,18 @@
  LOG_DECLARE(coreapp_main)
 
  int main_func(uint32_t cmd, void *arg) {
-@@ -150,12 +167,24 @@
+@@ -143,6 +165,10 @@
+   // GC init
+   LOG_INF("Starting GC");
+   gc_init(&_heap_start, &_heap_end);
++#ifdef IRONWOOD_TARGET_NATIVE_COMPILE_ONLY
++  // Register the static AUX1 tail after each GC initialization, before mp_init.
++  gc_add(&_heap_aux1_start, &_heap_aux1_end);
++#endif
+
+   // Interpreter init
+   LOG_INF("Starting interpreter");
+@@ -150,12 +176,24 @@
    mp_obj_list_init(mp_sys_path, 0);
    mp_obj_list_append(mp_sys_path, MP_OBJ_NEW_QSTR(MP_QSTR__dot_frozen));
 
@@ -649,7 +672,7 @@
    mp_deinit();
 
    // Python code shouldn't ever exit, avoid black screen if it does
-@@ -192,6 +221,11 @@
+@@ -192,6 +230,11 @@
    extern uint32_t __stack_chk_guard;
    __stack_chk_guard = random_value;
 
@@ -675,7 +698,7 @@
  # MCU selection - only enable one of these at a time
 --- a/core/embed/upymod/build.rs
 +++ b/core/embed/upymod/build.rs
-@@ -113,6 +113,19 @@
+@@ -113,6 +113,23 @@
              "modtrezorui/modtrezorui.c",
              "modtrezorutils/modtrezorutils.c",
          ]);
@@ -685,10 +708,14 @@
 +                || !cfg!(feature = "mcu_stm32u58")
 +                || cfg!(feature = "emulator")
 +                || cfg!(feature = "app_loading")
++                || !cfg!(feature = "pyopt")
 +            {
-+                bail!("synthetic native integration requires T3T1 without app loading");
++                bail!("synthetic native integration requires T3T1, pyopt, and no app loading");
 +            }
 +            lib.add_private_define("IRONWOOD_TARGET_NATIVE_COMPILE_ONLY", Some("1"));
++            // Public: downstream C and Rust bindings must share the GC state layout.
++            lib.add_define("MICROPY_GC_SPLIT_HEAP", Some("1"));
++            lib.add_define("MICROPY_GC_SPLIT_HEAP_AUTO", Some("0"));
 +            lib.add_source("modironwood_test/modironwood_test.c");
 +            lib.add_source("modironwood_test/executor.c");
 +        }
@@ -2438,3 +2465,116 @@
  name = "zlib-rs"
  version = "0.6.3"
  source = "registry+https://github.com/rust-lang/crates.io-index"
+--- a/core/embed/crypto/build.rs
++++ b/core/embed/crypto/build.rs
+@@ -270,7 +270,8 @@
+         ("USE_SECP256K1_ZKP", None),
+         ("USE_SECP256K1_ZKP_ECDSA", None),
+         ("USE_EXTERNAL_DEFAULT_CALLBACKS", None),
+-        ("ECMULT_GEN_PREC_BITS", Some("2")),
++        ("COMB_BLOCKS", Some("2")),
++        ("COMB_TEETH", Some("5")),
+         ("ECMULT_WINDOW_SIZE", Some("2")),
+         ("ENABLE_MODULE_GENERATOR", None),
+         ("ENABLE_MODULE_RECOVERY", None),
+--- /dev/null
++++ b/core/embed/sys/linker/stm32u58/firmware_ironwood.ld
+@@ -0,0 +1,98 @@
++/* Native T3T1 experiment; derived from stm32u58/firmware.ld. */
++ENTRY(reset_handler)
++
++MEMORY {
++  FLASH  (rx)    : ORIGIN = FIRMWARE_START, LENGTH = FIRMWARE_MAXSIZE
++  AUX1_RAM (rw)  : ORIGIN = AUX1_RAM_START, LENGTH = AUX1_RAM_SIZE
++  AUX2_RAM (rw)  : ORIGIN = AUX2_RAM_START, LENGTH = AUX2_RAM_SIZE
++}
++
++_stack_section_start = ADDR(.stack);
++_stack_section_end = ADDR(.stack) + SIZEOF(.stack);
++_stack_section_size = SIZEOF(.stack);
++
++_data_section_loadaddr = LOADADDR(.data);
++_data_section_start = ADDR(.data);
++_data_section_end = ADDR(.data) + SIZEOF(.data);
++
++_bss_section_start = ADDR(.bss);
++_bss_section_end = ADDR(.bss) + SIZEOF(.bss);
++
++_tls_section_start = ADDR(.tls);
++_tls_section_size = SIZEOF(.tls);
++
++_codelen = SIZEOF(.flash) + SIZEOF(.data);
++
++_heap_start = ADDR(.heap);
++_heap_end = ADDR(.heap) + SIZEOF(.heap);
++
++SECTIONS {
++  .vendorheader : ALIGN(4) {
++    KEEP(*(.vendorheader))
++  } >FLASH AT>FLASH
++
++  .header : ALIGN(4) {
++    KEEP(*(.header));
++    . = ALIGN(CODE_ALIGNMENT);
++  } >FLASH AT>FLASH
++
++  .flash : ALIGN(CODE_ALIGNMENT) {
++    KEEP(*(.kernel));
++    . = ALIGN(COREAPP_ALIGNMENT);
++    KEEP(*(.coreapp_header));
++    . = ALIGN(4);
++    *(.text*);
++    . = ALIGN(4);
++    *(.rodata*);
++    . = ALIGN(4);
++    KEEP(*(.bootloader));
++    *(.bootloader*);
++    . = ALIGN(512);
++  } >FLASH AT>FLASH
++
++  .data : ALIGN(4) {
++    *(.data*);
++    . = ALIGN(512);
++  } >AUX1_RAM AT>FLASH
++
++  /DISCARD/ : {
++    *(.ARM.exidx*);
++  }
++
++  .tls : ALIGN(32) {
++    *(.tls*); /* 32-byte alignment required by MPU */
++    . = ALIGN(32);
++  } > AUX1_RAM
++
++  .bss : ALIGN(4) {
++    *(.bss*);
++    . = ALIGN(4);
++  } >AUX1_RAM
++
++  .no_dma_buffers (NOLOAD): ALIGN(4) {
++    *(.no_dma_buffers*);
++    . = ALIGN(4);
++  } >AUX1_RAM
++
++  /* Core clears AUX1 before startup. Keep this after every other AUX1 section. */
++  .heap_aux1 (NOLOAD): ALIGN(32) {
++    _heap_aux1_start = .;
++    . += 1K; /* Reject a tail too small for the GC area metadata and blocks. */
++    . = ABSOLUTE(ORIGIN(AUX1_RAM) + LENGTH(AUX1_RAM));
++    _heap_aux1_end = .;
++  } >AUX1_RAM
++
++  .stack : ALIGN(8) {
++    . += 48K; /* Overflow causes UsageFault */
++  } >AUX2_RAM
++
++  .buf (NOLOAD): ALIGN(4) {
++    *(.buf*);
++    . = ALIGN(4);
++  } >AUX2_RAM
++
++  .heap : ALIGN(4) {
++    . += 37K; /* this acts as a build time assertion that at least this much memory is available for heap use */
++    . = ABSOLUTE(ORIGIN(AUX2_RAM) + LENGTH(AUX2_RAM)); /* this explicitly sets the end of the heap */
++  } >AUX2_RAM
++}

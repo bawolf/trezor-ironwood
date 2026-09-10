@@ -6,7 +6,7 @@ You will be needed for setup and a compact set of physical approval checks. I wi
 
 ## Preparation before your appointment
 
-- Complete an isolated Safe 5 baseline and integration build, then check its actual RAM, stack and flash placement. The Safe 7 image is engineering evidence, not an image for this device.
+- Safe 5 baseline and synthetic native links are complete, including a 48 KiB stack and split-GC layout. Finish native ABI, full stack and peak object-lifetime validation; static capacity is not runtime fit. See [the measured image](SAFE5_NATIVE.md).
 - Adapt and rehearse the trusted review on Safe 5's Delizia touchscreen and its older wire protocol. Preserve all receiver, value, fee, network and pool information; Safe 7's page count and THP session behavior do not establish Safe 5 behavior.
 - Freeze the reviewed image and its fingerprint, source/dependency identities, synthetic inputs and expected results. Prepare bounded host commands, independent signature verification, and a Safe 5 installation/firmware-restoration card. Verify its bootloader gestures and test deadlines during preparation. The existing emulator launcher is not a hardware test runner.
 - Resolve the applicable failure cases before booking the session, including reliable cleanup and response handling. Record any remaining limitation rather than treating a test-harness success as firmware acceptance.

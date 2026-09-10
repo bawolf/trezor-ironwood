@@ -2,13 +2,15 @@
 
 Initial feasibility can be assessed with a source comparison and a few targeted
 builds, before undertaking a complete port. The source comparison is complete;
-the [unchanged Safe 5 baseline](SAFE5_BASELINE.md) now also compiles and links.
-No additional model has run, and no Safe 5 native signing port is accepted.
+the [Safe 5 native experiment](SAFE5_NATIVE.md) also links with the real signing
+core, 27,136 bytes of flash headroom, 48 KiB stack and two static GC regions.
+No Safe 5 firmware has run, and no native signing port is accepted.
 **Safe 5 is the closest follow-on; newer Safe 3 is the next distinct UI case.**
 The available first physical test device is an unopened Safe 5. Finish inspecting
-the Safe 7 native link and resolve Safe 5 resource placement and flash cost.
-The Safe 5 baseline has only 43,668 bytes of AUX1 tail and 115,200 bytes of flash
-tail; the existing arena cannot transfer to AUX1 unchanged.
+the Safe 7 reference while testing Safe 5 stack/heap lifetimes, MCU latency and
+Delizia/legacy-wire confirmation. The guarded arena now occupies AUX2; the unused
+AUX1 tail supplies a second GC region. These are linked reservations, not free
+memory or measured peak-use results.
 No Safe 7 firmware image is suitable for installation on this unit.
 
 This assessment uses firmware revision
@@ -18,7 +20,7 @@ The findings describe those exact configurations, not all future firmware.
 
 | Device | Additional porting effort: current estimate | Main differences | First feasibility gate |
 | --- | --- | --- | --- |
-| Safe 5, T3T1 | Moderate; best first candidate | Same Rust target as Safe 7 and a touch UI; different RAM placement, smaller flash slot and older wire transport | One isolated link retaining the real core and intended allocator; inspect both RAM regions and complete flash occupancy |
+| Safe 5, T3T1 | Moderate; best first candidate | Same Rust target as Safe 7 and a touch UI; different RAM placement, smaller flash slot and older wire transport | Link/placement gate passed; next prove stack and contiguous heap lifetimes, MCU latency and actual Delizia/legacy-wire review |
 | Safe 3 rev.B, T3B1 | Moderate to high | Same Rust target; more application RAM than Safe 5, but monochrome/button review and older wire transport | A UI-only test of the longest existing review projection using Caesar layouts; preserve every receiver byte/context and physical confirmation |
 | Model T, T2T1 | High and uncertain | Different Rust target, 16 KiB stack, tight primary RAM and split flash | One concrete Cortex-M4 core compilation plus a credible revised memory plan before firmware integration |
 | Safe 3 rev.A, T2B1 | High and uncertain | Shares the Model T resource obstacle, with less separate CCM RAM and button UI | Reuse the Model T target evidence; establish a phase-by-phase memory layout that actually fits |

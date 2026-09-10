@@ -1,0 +1,685 @@
+{
+  "snapshot_utc": "2026-09-10",
+  "source_report_sha256": "6bc517323911497e2df51adb2c027fc591fe5c52226cebe40f42e916c428887b",
+  "inputs": [
+    {
+      "path": "firmware",
+      "bytes": 17996032,
+      "sha256": "ab110d7e1709c4e3b28f6042226c489a738b1d5819f42ad546ee9b59d1452c12"
+    },
+    {
+      "path": "firmware.map",
+      "bytes": 8408641,
+      "sha256": "28d7481aa6c42ae64b4c3dd1702ae3b65729c941d55d083f2172072f195049af"
+    },
+    {
+      "path": "memory.ld",
+      "bytes": 1385,
+      "sha256": "198ae5d9537d10a936bd46cf1a74286441066ed33ce979ff9d30d3f2816fa80e"
+    },
+    {
+      "path": "firmware.cc.json",
+      "bytes": 1590709,
+      "sha256": "46bfd3b5a1f52943090bcd22210bebc624b979ab7f2940cd5f9dc9b60c86c857"
+    },
+    {
+      "path": "run.json",
+      "bytes": 4810,
+      "sha256": "6460be113688a4d5d2e5032538446fefb8a6cec858dc7dc46ad6bb1fdd8f6688"
+    }
+  ],
+  "checks": {
+    "flash_reconciles": true,
+    "ram_reconciles": true,
+    "source_and_artifact_hashes_unchanged": true
+  },
+  "flash_bytes": 1676800,
+  "flash_capacity_bytes": 1703936,
+  "flash_module_groups": [
+    {
+      "name": "Shared or unattributed code and data",
+      "bytes": 488395
+    },
+    {
+      "name": "Python runtime, frozen apps and bindings",
+      "bytes": 432959
+    },
+    {
+      "name": "Trezor Rust UI and services (inferred)",
+      "bytes": 222791
+    },
+    {
+      "name": "Embedded kernel",
+      "bytes": 136192
+    },
+    {
+      "name": "C cryptography",
+      "bytes": 127568
+    },
+    {
+      "name": "Other libraries, platform code and padding",
+      "bytes": 113826
+    },
+    {
+      "name": "Embedded bootloader",
+      "bytes": 93849
+    },
+    {
+      "name": "Approval and transaction types (inferred)",
+      "bytes": 61220
+    }
+  ],
+  "ram": {
+    "application_regions": [
+      {
+        "start": 805306368,
+        "end": 805502464,
+        "bytes": 196096,
+        "name": "AUX1_RAM",
+        "allocations": [
+          {
+            "start": 805306368,
+            "end": 805308416,
+            "bytes": 2048,
+            "section": ".data",
+            "label": "Other static data, control and within-section padding",
+            "evidence": "ELF section residual",
+            "detail_kind": "initialized .data (RAM instance)"
+          },
+          {
+            "start": 805308416,
+            "end": 805308720,
+            "bytes": 304,
+            "section": ".bss",
+            "label": "Other static data, control and within-section padding",
+            "evidence": "ELF section residual",
+            "detail_kind": "NOBITS/static reservation"
+          },
+          {
+            "start": 805308720,
+            "end": 805423920,
+            "bytes": 115200,
+            "section": ".bss",
+            "label": "UI image buffer",
+            "symbols": [
+              "trezor_lib::ui::shape::utils::imagebuf::IMAGE_BUFFER"
+            ],
+            "evidence": "ELF symbol interval"
+          },
+          {
+            "start": 805423920,
+            "end": 805432128,
+            "bytes": 8208,
+            "section": ".bss",
+            "label": "Other static data, control and within-section padding",
+            "evidence": "ELF section residual",
+            "detail_kind": "NOBITS/static reservation"
+          },
+          {
+            "start": 805432128,
+            "end": 805460756,
+            "bytes": 28628,
+            "section": ".no_dma_buffers",
+            "label": "UI bump A",
+            "symbols": [
+              "trezor_lib::ui::shape::display::bumps::run_with_bumps::BUMP_A"
+            ],
+            "evidence": "ELF symbol interval"
+          },
+          {
+            "start": 805460756,
+            "end": 805460768,
+            "bytes": 12,
+            "label": "Inter-section alignment/unallocated gap",
+            "section": null,
+            "evidence": "ELF region residual"
+          },
+          {
+            "start": 805460768,
+            "end": 805502464,
+            "bytes": 41696,
+            "label": "GC secondary raw reservation",
+            "section": ".heap_aux1",
+            "evidence": "ELF section and linker symbols"
+          }
+        ]
+      },
+      {
+        "start": 805531648,
+        "end": 805862400,
+        "bytes": 330752,
+        "name": "AUX2_RAM",
+        "allocations": [
+          {
+            "start": 805531648,
+            "end": 805580800,
+            "bytes": 49152,
+            "label": "Core stack reservation",
+            "section": ".stack",
+            "evidence": "ELF section and linker symbols"
+          },
+          {
+            "start": 805580800,
+            "end": 805711904,
+            "bytes": 131104,
+            "section": ".buf",
+            "label": "Ironwood arena including guards",
+            "symbols": [
+              "firmware::arena::STORAGE"
+            ],
+            "evidence": "ELF symbol interval"
+          },
+          {
+            "start": 805711904,
+            "end": 805769520,
+            "bytes": 57616,
+            "section": ".buf",
+            "label": "UI bump B",
+            "symbols": [
+              "trezor_lib::ui::shape::display::bumps::run_with_bumps::BUMP_B"
+            ],
+            "evidence": "ELF symbol interval"
+          },
+          {
+            "start": 805769520,
+            "end": 805862400,
+            "bytes": 92880,
+            "label": "GC primary raw reservation",
+            "section": ".heap",
+            "evidence": "ELF section and linker symbols"
+          }
+        ]
+      }
+    ],
+    "application_region_bytes": 526848,
+    "other_model_reservations": [
+      {
+        "start": 805502976,
+        "end": 805531648,
+        "bytes": 28672,
+        "name": "MAIN_RAM",
+        "evidence": "model memory definition; outside application ELF allocation accounting"
+      },
+      {
+        "start": 805502720,
+        "end": 805502976,
+        "bytes": 256,
+        "name": "BOOTARGS",
+        "evidence": "model memory definition; outside application ELF allocation accounting"
+      },
+      {
+        "start": 805862400,
+        "end": 805977600,
+        "bytes": 115200,
+        "name": "FB1_RAM",
+        "evidence": "model memory definition; outside application ELF allocation accounting"
+      },
+      {
+        "start": 805977600,
+        "end": 806092800,
+        "bytes": 115200,
+        "name": "FB2_RAM",
+        "evidence": "model memory definition; outside application ELF allocation accounting"
+      }
+    ],
+    "gc_regions": [
+      {
+        "name": "primary",
+        "raw_bytes": 92880,
+        "start": 805769520,
+        "end": 805862400
+      },
+      {
+        "name": "secondary",
+        "raw_bytes": 41696,
+        "start": 805460768,
+        "end": 805502464
+      }
+    ],
+    "gc_raw_total": 134576
+  },
+  "largest_symbols": [
+    {
+      "start": 805580800,
+      "end": 805711904,
+      "bytes": 131104,
+      "section": ".buf",
+      "names": [
+        "firmware::arena::STORAGE"
+      ],
+      "raw_names": [
+        "_RNvNtCs7za3o2UzfF5_8firmware5arena7STORAGE"
+      ],
+      "types": [
+        1
+      ],
+      "name": "firmware::arena::STORAGE",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 805308720,
+      "end": 805423920,
+      "bytes": 115200,
+      "section": ".bss",
+      "names": [
+        "trezor_lib::ui::shape::utils::imagebuf::IMAGE_BUFFER"
+      ],
+      "raw_names": [
+        "_RNvNtNtNtNtCshIQkOc0pWzg_10trezor_lib2ui5shape5utils8imagebuf12IMAGE_BUFFER"
+      ],
+      "types": [
+        1
+      ],
+      "name": "trezor_lib::ui::shape::utils::imagebuf::IMAGE_BUFFER",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 805711904,
+      "end": 805769520,
+      "bytes": 57616,
+      "section": ".buf",
+      "names": [
+        "trezor_lib::ui::shape::display::bumps::run_with_bumps::BUMP_B"
+      ],
+      "raw_names": [
+        "_RNvNvNtNtNtNtCshIQkOc0pWzg_10trezor_lib2ui5shape7display5bumps14run_with_bumps6BUMP_B"
+      ],
+      "types": [
+        1
+      ],
+      "name": "trezor_lib::ui::shape::display::bumps::run_with_bumps::BUMP_B",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 805432128,
+      "end": 805460756,
+      "bytes": 28628,
+      "section": ".no_dma_buffers",
+      "names": [
+        "trezor_lib::ui::shape::display::bumps::run_with_bumps::BUMP_A"
+      ],
+      "raw_names": [
+        "_RNvNvNtNtNtNtCshIQkOc0pWzg_10trezor_lib2ui5shape7display5bumps14run_with_bumps6BUMP_A"
+      ],
+      "types": [
+        1
+      ],
+      "name": "trezor_lib::ui::shape::display::bumps::run_with_bumps::BUMP_A",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 203202684,
+      "end": 203223132,
+      "bytes": 20448,
+      "section": ".flash",
+      "names": [
+        "mp_qstr_frozen_const_pool"
+      ],
+      "raw_names": [
+        "mp_qstr_frozen_const_pool"
+      ],
+      "types": [
+        1
+      ],
+      "name": "mp_qstr_frozen_const_pool",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 202818308,
+      "end": 202833752,
+      "bytes": 15444,
+      "section": ".flash",
+      "names": [
+        "mp_qstr_const_pool"
+      ],
+      "raw_names": [
+        "mp_qstr_const_pool"
+      ],
+      "types": [
+        1
+      ],
+      "name": "mp_qstr_const_pool",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 201831732,
+      "end": 201844712,
+      "bytes": 12980,
+      "section": ".flash",
+      "names": [
+        "<ironwood_approval::Engine<rand_chacha::chacha::ChaCha20Rng>>::begin"
+      ],
+      "raw_names": [
+        "_RNvMs3_CscoB3uoQj3ts_17ironwood_approvalINtB5_6EngineNtNtCsc0EeSlB0i3C_11rand_chacha6chacha11ChaCha20RngE5beginCs40llx0Aae6i_24ironwood_emulator_bridge"
+      ],
+      "types": [
+        2
+      ],
+      "name": "<ironwood_approval::Engine<rand_chacha::chacha::ChaCha20Rng>>::begin",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 202844236,
+      "end": 202855395,
+      "bytes": 11159,
+      "section": ".flash",
+      "names": [
+        "mp_frozen_names"
+      ],
+      "raw_names": [
+        "mp_frozen_names"
+      ],
+      "types": [
+        1
+      ],
+      "name": "mp_frozen_names",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 202696218,
+      "end": 202706176,
+      "bytes": 9958,
+      "section": ".flash",
+      "names": [
+        "trezor_lib::protobuf::defs::MSG_DEFS::ALIGNED"
+      ],
+      "raw_names": [
+        "_RNnNvNvNtNtCshIQkOc0pWzg_10trezor_lib8protobuf4defs8MSG_DEFS7ALIGNED0"
+      ],
+      "types": [
+        1
+      ],
+      "name": "trezor_lib::protobuf::defs::MSG_DEFS::ALIGNED",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 202752560,
+      "end": 202760752,
+      "bytes": 8192,
+      "section": ".flash",
+      "names": [
+        "BIP39_WORDLIST_ENGLISH"
+      ],
+      "raw_names": [
+        "BIP39_WORDLIST_ENGLISH"
+      ],
+      "types": [
+        1
+      ],
+      "name": "BIP39_WORDLIST_ENGLISH",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 202267844,
+      "end": 202275148,
+      "bytes": 7304,
+      "section": ".flash",
+      "names": [
+        "secp256k1_sha256_write"
+      ],
+      "raw_names": [
+        "secp256k1_sha256_write"
+      ],
+      "types": [
+        2
+      ],
+      "name": "secp256k1_sha256_write",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 202977156,
+      "end": 202983121,
+      "bytes": 5965,
+      "section": ".flash",
+      "names": [
+        "fun_data_apps_solana_transaction_instructions_get_instruction"
+      ],
+      "raw_names": [
+        "fun_data_apps_solana_transaction_instructions_get_instruction"
+      ],
+      "types": [
+        1
+      ],
+      "name": "fun_data_apps_solana_transaction_instructions_get_instruction",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 203223132,
+      "end": 203228238,
+      "bytes": 5106,
+      "section": ".flash",
+      "names": [
+        "mp_qstr_frozen_const_lengths"
+      ],
+      "raw_names": [
+        "mp_qstr_frozen_const_lengths"
+      ],
+      "types": [
+        1
+      ],
+      "name": "mp_qstr_frozen_const_lengths",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 203228238,
+      "end": 203233344,
+      "bytes": 5106,
+      "section": ".flash",
+      "names": [
+        "mp_qstr_frozen_const_hashes"
+      ],
+      "raw_names": [
+        "mp_qstr_frozen_const_hashes"
+      ],
+      "types": [
+        1
+      ],
+      "name": "mp_qstr_frozen_const_hashes",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 202342592,
+      "end": 202347196,
+      "bytes": 4604,
+      "section": ".flash",
+      "names": [
+        "mp_execute_bytecode"
+      ],
+      "raw_names": [
+        "mp_execute_bytecode"
+      ],
+      "types": [
+        2
+      ],
+      "name": "mp_execute_bytecode",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 202037552,
+      "end": 202041940,
+      "bytes": 4388,
+      "section": ".flash",
+      "names": [
+        "<trezor_lib::ui::shape::cache::jpeg_cache::JpegCache>::decompress_row"
+      ],
+      "raw_names": [
+        "_RNvMNtNtNtNtCshIQkOc0pWzg_10trezor_lib2ui5shape5cache10jpeg_cacheNtB2_9JpegCache14decompress_row"
+      ],
+      "types": [
+        2
+      ],
+      "name": "<trezor_lib::ui::shape::cache::jpeg_cache::JpegCache>::decompress_row",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 201822464,
+      "end": 201826808,
+      "bytes": 4344,
+      "section": ".flash",
+      "names": [
+        "ironwood_approval::verify_bundle"
+      ],
+      "raw_names": [
+        "_RNvCscoB3uoQj3ts_17ironwood_approval13verify_bundle"
+      ],
+      "types": [
+        2
+      ],
+      "name": "ironwood_approval::verify_bundle",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 201908512,
+      "end": 201912832,
+      "bytes": 4320,
+      "section": ".flash",
+      "names": [
+        "<postcard::de::deserializer::SeqAccess<postcard::de::flavors::Slice> as serde_core::de::SeqAccess>::next_element::<core::option::Option<pczt::orchard::v2::Bundle>>"
+      ],
+      "raw_names": [
+        "_RINvYINtNtNtCs8wSGkmjkPCX_8postcard2de12deserializer9SeqAccessNtNtB8_7flavors5SliceENtNtCs91R0JY4uB1m_10serde_core2de9SeqAccess12next_elementINtNtCskwfTRvU7Yjy_4core6option6OptionNtNtNtCslqyt7LQdh0u_4pczt7orchard2v26BundleEEB2X_"
+      ],
+      "types": [
+        2
+      ],
+      "name": "<postcard::de::deserializer::SeqAccess<postcard::de::flavors::Slice> as serde_core::de::SeqAccess>::next_element::<core::option::Option<pczt::orchard::v2::Bundle>>",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 202120524,
+      "end": 202124708,
+      "bytes": 4184,
+      "section": ".flash",
+      "names": [
+        "trezor_lib::ui::api::firmware_micropython::new_confirm_summary"
+      ],
+      "raw_names": [
+        "_RNvNtNtNtCshIQkOc0pWzg_10trezor_lib2ui3api20firmware_micropython19new_confirm_summary"
+      ],
+      "types": [
+        2
+      ],
+      "name": "trezor_lib::ui::api::firmware_micropython::new_confirm_summary",
+      "alias_or_overlap": "single"
+    },
+    {
+      "start": 201818308,
+      "end": 201822464,
+      "bytes": 4156,
+      "section": ".flash",
+      "names": [
+        "ironwood_approval::effects::sighash"
+      ],
+      "raw_names": [
+        "_RNvNtCscoB3uoQj3ts_17ironwood_approval7effects7sighash"
+      ],
+      "types": [
+        2
+      ],
+      "name": "ironwood_approval::effects::sighash",
+      "alias_or_overlap": "single"
+    }
+  ],
+  "runtime_peaks": null,
+  "limitations": [
+    "LTO physical object ownership is exact but original source-module cost is not; namespace hints are inference and include inlined/shared/generic code.",
+    "Flash .data is the initialization image of one RAM allocation; flash and RAM are distinct resource ledgers, never two RAM allocations.",
+    "GC and stack are reserved capacity, not measured runtime usage; GC raw bytes include collector metadata and are not fully allocatable payload.",
+    "Model framebuffer/kernel reservations are not application ELF sections. Embedded kernel/bootloader are counted as blobs, not decomposed into their internal modules.",
+    "Symbol sizes are not a complete memory partition. Map input section bytes include code/literal pools/within-input padding; only explicit fill is called padding.",
+    "No optimization rating or hypothetical savings for unmeasured modules; no runtime or hardware claim."
+  ],
+  "arena_public_table_subset": {
+    "accounted_bytes": 29804,
+    "requested_bytes": 29802,
+    "evidence": "source and linked call-path derived; five permanent blocks within existing arena; native execution unrun"
+  },
+  "selected_stack_path": {
+    "elf_sha256": "ab110d7e1709c4e3b28f6042226c489a738b1d5819f42ad546ee9b59d1452c12",
+    "frames": [
+      {
+        "address": "0xc0f3d1c",
+        "name": "begin",
+        "bytes": 608,
+        "basis": "C prologue: 6 registers * 4 + 584 locals"
+      },
+      {
+        "address": "0xc07e844",
+        "name": "ironwood_test_begin",
+        "bytes": 1936,
+        "basis": "settled ELF .stack_sizes, Thumb address normalized"
+      },
+      {
+        "address": "0xc07b534",
+        "name": "<ironwood_approval::Engine<rand_chacha::chacha::ChaCha20Rng>>::begin",
+        "bytes": 13984,
+        "basis": "settled ELF .stack_sizes, Thumb address normalized"
+      },
+      {
+        "address": "0xc092e10",
+        "name": "<pczt::orchard::Bundle>::into_parsed_inner",
+        "bytes": 8880,
+        "basis": "settled ELF .stack_sizes, Thumb address normalized"
+      },
+      {
+        "address": "0xc0935ac",
+        "name": "<pczt::orchard::Bundle>::into_parsed_inner::parse_action_inner",
+        "bytes": 8032,
+        "basis": "settled ELF .stack_sizes, Thumb address normalized"
+      },
+      {
+        "address": "0xc0821fc",
+        "name": "<orchard::pczt::Spend>::parse_inner",
+        "bytes": 4352,
+        "basis": "settled ELF .stack_sizes, Thumb address normalized"
+      },
+      {
+        "address": "0xc082a00",
+        "name": "<orchard::keys::KeyAgreementPrivateKey>::derive_inner",
+        "bytes": 1080,
+        "basis": "settled ELF .stack_sizes, Thumb address normalized"
+      },
+      {
+        "address": "0xc096574",
+        "name": "<sinsemilla::CommitDomain>::new",
+        "bytes": 72,
+        "basis": "settled ELF .stack_sizes, Thumb address normalized"
+      },
+      {
+        "address": "0xc086a68",
+        "name": "<pasta_curves::curves::Ep as pasta_curves::arithmetic::curves::CurveExt>::hash_to_curve::{closure#0}",
+        "bytes": 1616,
+        "basis": "settled ELF .stack_sizes, Thumb address normalized"
+      },
+      {
+        "address": "0xc0873b8",
+        "name": "pasta_curves::hashtocurve::map_to_curve_simple_swu::<pasta_curves::fields::fp::Fp, pasta_curves::curves::Ep, pasta_curves::curves::IsoEp>",
+        "bytes": 944,
+        "basis": "settled ELF .stack_sizes, Thumb address normalized"
+      },
+      {
+        "address": "0xc086654",
+        "name": "<pasta_curves::fields::fp::Fp as pasta_curves::arithmetic::fields::SqrtTableHelpers>::pow_by_t_minus1_over2",
+        "bytes": 312,
+        "basis": "settled ELF .stack_sizes, Thumb address normalized"
+      },
+      {
+        "address": "0xc084bee",
+        "name": "<pasta_curves::fields::fp::Fp>::mul",
+        "bytes": 200,
+        "basis": "settled ELF .stack_sizes, Thumb address normalized"
+      }
+    ],
+    "selected_total_including_C_entry_bytes": 42016,
+    "remaining_nominal_49152_bytes": 7136,
+    "missing": [
+      "Actual Python/VM/C caller ancestry above C begin, including interpreter recursion and indirect builtin dispatch.",
+      "Complete resolution of other BLX targets, outlined helpers, allocator/libc descendants and competing branch conditions.",
+      "Other begin phases (decode, clone, verification, reserialization, teardown) fully bounded independently.",
+      "Interrupt/exception stacking and applicable task stack entry use.",
+      "Runtime reachability/witness and high-water observation; no native execution performed."
+    ],
+    "margin_is_not_verified_sufficient": true,
+    "definite_feasible_overflow_established": false
+  }
+}

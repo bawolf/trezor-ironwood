@@ -1,7 +1,7 @@
 # Safe 5 native capacity experiment
 
 Updated 2026-09-10 UTC. The complete synthetic native signing slice now links for
-**Safe 5 T3T1/U585**, with **7,168 bytes of flash headroom** in the measured
+**Safe 5 T3T1/U585**, with **27,136 bytes of flash headroom** in the latest measured
 configuration. No firmware or physical device execution occurred. Stack safety,
 concurrent heap use, latency and trusted Safe 5 transport/UI remain open.
 
@@ -23,6 +23,8 @@ support, release size optimization/LTO and frozen dependencies. The flash slot i
 | Also omit debug-link and optional UI diagnostics | 1,762,816 B | 58,880 B overflow |
 | Compute Sinsemilla S points instead of table lookup | 1,696,768 B | 7,168 B free |
 | Also apply the two reviewed stack inlining attributes | 1,696,768 B | 7,168 B free; stack gate remains |
+| Also select the supported secp256k1 2 KiB signing table | 1,676,288 B | 27,648 B free; stack gate remains |
+| Also reserve 48 KiB stack and use static split GC | 1,676,800 B | 27,136 B free; runtime gates remain |
 
 These are distinct recorded configurations, not one unchanged-test-preset result.
 `pyopt` removes Python debug/logging/test modules and debug protobufs, selects
@@ -94,8 +96,8 @@ For 2,530-bit messages, warmed host means were 554 µs versus 8,705 µs for hash
 555 µs versus 9,156 µs for commit: about **16× slower**. One additional 16-byte
 host allocation was observed per hash invocation, with balanced frees. MCU
 latency, stack high-water, allocation failures and physical leakage remain gates.
-A compressed table and the pinned secp256k1 small-comb configuration are separate
-unaccepted alternatives under investigation; neither is part of this image.
+A compressed Sinsemilla table has passed host comparisons but remains a separate
+unaccepted alternative with no native image measurement.
 
 The later inlining experiment reduces the sign entry's local frame from 8,864 to
 3,424 bytes. It does not close validation's stack gate: a selected five-function
@@ -103,6 +105,72 @@ ordinary-call chain totals **37,184 bytes**, above the 32,768-byte reservation,
 before C/VM callers and further callees. This is a static frame subtotal, not a
 whole-stack bound or observed overflow. Call-path/state and live-frame analysis
 remain necessary. No stack reservation was enlarged to obtain these results.
+
+## Additional flash margin
+
+The latest native build replaces the unused `ECMULT_GEN_PREC_BITS=2` define with
+the pinned upstream 2 KiB configuration, `COMB_BLOCKS=2` and `COMB_TEETH=5`.
+Arithmetic, context layout, blinding, modules and verification window are unchanged.
+The actual image saves **20,480 bytes**, with a single 2,048-byte signing table.
+All six arithmetic/table/Trezor-wrapper compiler commands have matching settings;
+the previous 22,528-byte linked table is retained as a positive control. Forty
+static image/configuration checks pass, with unchanged kernel bytes, 32 KiB stack
+and 109,264-byte GC region. This is a compile/link result, not target execution.
+
+The ordinary upstream host suites pass 96 named cases per run in four runs: both
+table sizes, with and without extra internal VERIFY assertions. These repeated
+case counts do not claim 384 different tests. Host arithmetic and callbacks differ
+from the MCU configuration; target functional, timing and leakage checks remain.
+Fable5.1 and an independent clarity/source reviewer accepted the isolated experiment.
+The shared wrapper change needs broader consumer testing before upstream promotion.
+
+## Larger native stack and split GC
+
+The latest native image reserves **49,152 bytes for stack**, **92,880 raw bytes
+for the primary GC region**, and **41,696 raw bytes for the second GC region**.
+The second region occupies the unused AUX1 tail after every existing reservation,
+including the UI buffers. Metadata consumes part of each region; a single object
+cannot use their summed capacity. The primary region is 16 KiB smaller than in
+the preceding image. Maximum PCZT/response and transaction limits are unchanged.
+
+The four-file patch uses xbuild's existing linker selector and MicroPython's
+existing `gc_add` API. It exports split=1/AUTO=0 consistently, registers the static
+region directly after GC initialization, and retains the ordinary kernel, MPU,
+executor/canary guards, 256-byte PSPLIM margin and 1 KiB Python stack margin.
+Only the existing native experiment selects the derivative linker. The ordinary
+linker is untouched. The native feature now requires pyopt so the existing
+single-area debug memory inspector cannot silently omit the second heap.
+
+The real compile/link passed in 38.88 seconds. **34 static image/configuration
+checks pass**: disjoint slot placement, writable NOBITS secondary heap/arena,
+unchanged kernel, actual 48 KiB Core header, all selected C macro settings, and
+the machine-code order `gc_init` → `gc_add` → `mp_init`. Flash grows by 512 bytes.
+An actual ARM C probe measures the area as 32 bytes and memory state as 564 bytes,
+both aligned to four. A Rust probe fails E0432 because the selected generated
+bindings omit both C-owned structures. An independent audit of the selected
+bindings, 1,715 resolved target source/dependency files, assembly and 126 Rust
+archives finds no changed state representation crossing this interface. The
+requested size comparison therefore has no Rust counterpart; this is not a
+functional ABI failure. The failed probe remains recorded, and no unnecessary
+allowlist or handwritten structure was added. This closes only that specific
+structure-boundary concern, not rooting, general FFI or runtime safety. Exact
+provenance and disposition are in `memory-next/abi-check/ABI_BOUNDARY.md`.
+
+Three host processes using unchanged pinned vendored GC code pass cross-region
+graph, collection/exhaustion/reuse and oversized-contiguous-allocation checks.
+Addresses were checked against both observed regions. The audit now requires
+their combined ranges to equal the independently printed GC total, rejecting
+truncated abbreviated dumps. These are 64-bit Unix tests, with equal libc-backed
+regions and ordinary conservative roots; they establish no MCU stack, DMA,
+firmware reset or maximum-size PCZT/response lifetime result.
+
+Fable5.1 reviewed the full layout and a separate pyopt/host-evidence follow-up;
+independent clarity reviews covered both source revisions. The 48 KiB reservation
+is still a measurement candidate, not a proven complete stack bound. Its source,
+tests, review dispositions and linked evidence are under `memory-next/` in the
+coordinator evidence directory. Two verifier preflights failed on the legitimate
+zero-sized nonallocated TLS section; both remain recorded. Corrected inspection
+checks its zero size and linker symbols explicitly; no firmware changed for it.
 
 ## Evidence and source delivery
 
@@ -118,6 +186,10 @@ is not yet an upstream-ready submission.
 | First computed-S map | `bdeb3148af2f4907a95a69f2286d0c1ffcbf1e0a35d4d038b55146d99a129d44` |
 | Later stack-attribute ELF | `0e3504b2c6beebc6509d88db887ac893730b8cab8640c744d7843f914f1c0667` |
 | Later stack-attribute map | `db79ec47bc17dd156e38c70bf42886f99a20468b5e49acfa7820efc0596989cd` |
+| Latest compact-secp ELF | `ac8acf06e07ccd254b1218e048b652b45fac6369e0782bcfb4f74755ccc31979` |
+| Latest compact-secp map | `92b8be17b8aea37a26ae258c7dc8c724940b6ddec8bd3fae65dfeb7a40a17d64` |
+| Latest split-GC ELF | `ab110d7e1709c4e3b28f6042226c489a738b1d5819f42ad546ee9b59d1452c12` |
+| Latest split-GC map | `28d7481aa6c42ae64b4c3dd1702ae3b65729c941d55d083f2172072f195049af` |
 | Computed-S library source | `d757bc05f440d158de59c806ca35d6530215467376a467a36891398317580793` |
 | Host differential transcript | `3824060fe8b80e0d83af221f4a2756e270cb8bcf5ffe5312373e10f599774ff2` |
 
@@ -128,6 +200,37 @@ has commands, full environment, source/protected hashes, log and frozen artifact
 No private key material or device data was collected. [Review dispositions](reviews/SAFE5_NATIVE.md)
 separate accepted source/capacity evidence from unaccepted runtime behavior.
 
-Next: a viable stack/GC layout and additional flash margin, then the Safe 5 emulator trusted review and
+Next: finish the native layout/stack acceptance checks, then the Safe 5 emulator trusted review and
 legacy-wire flow. Physical tests follow a concrete reviewed image and an attended
 installation decision; the unopened device remains untouched.
+
+## Safe5 emulator build checkpoint
+
+An independent copy of the retained Safe7 transport overlay now compiles the
+T3T1 test emulator with Delizia and legacy wire. This uses the retained host
+allocator/dependencies, not the native 48 KiB/split-GC configuration. Only the
+reviewed exact model/layout/protocol guard changed; all 31,076 copied inputs were
+rehashed after generation/build. The standard protobuf generation preserved
+existing generated files. Compile completed in 209.42 seconds without execution.
+Binary SHA256: `b028f7002a402ffc5c8f1a816ac5f1512b611a3d7d8eb27751512bc97332c44b`.
+Local evidence: `work/safe5-emulator-prep/build-03/` in the coordinator workspace.
+
+The first wrapper attempt could not initialize a nested macOS sandbox. The second
+reached protoc but could not open its inherited stdout descriptor. Both failed
+attempts remain saved. The third uses the explicit offline sandbox with narrowly
+allowed standard-output/error descriptors in addition to its owned directory;
+network and other file writes remain denied. No generator or firmware code was
+changed to bypass those failures. Cancellation/layout exploration is separate.
+
+## Current stack path follow-up
+
+The settled `ab110d7e…` image has a source-feasible parsing/FVK path totaling
+42,016 bytes across twelve nested frames, including the C builtin entry. The
+previous 37,184-byte five-Rust-frame subtotal omitted 4,832 bytes. The largest
+frames are Engine.begin (13,984), bundle parsing (8,880) and action parsing
+(8,032). Its nominal 7,136-byte gap to the 48 KiB reservation must still cover
+interpreter callers, exceptions and other unresolved edges. No definite overflow
+or sufficient margin is established. Cold table initialization, sighash and
+verify_bundle are sequential paths and are not added to this subtotal. Frozen
+source conditions, call addresses and frame metadata are retained in the owned
+`work/safe5-stack-current/` report. No native execution occurred.

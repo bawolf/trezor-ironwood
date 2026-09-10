@@ -76,7 +76,88 @@ This closes the named host regression gate, with the runtime limits below.
 
 32-bit execution, stack/live-frame and GC peaks, allocation failure/recovery, MCU latency and physical
 leakage, trusted Safe 5 consent/legacy-wire integration, and dedicated hardware.
-The computed-S variant has only 7,168 bytes of flash margin and about 16× host
+The first computed-S image had 7,168 bytes of flash margin; the later secp change
+raises that to 27,648 bytes. Computed-S still has about 16× host
 hash slowdown. Treat it as a capacity proof of concept while evaluating faster
 small-table options. No hardware action or upstream communication is authorized
 by this review record.
+
+## Supported secp256k1 compact table
+
+The frozen source review delivered **Fable5.1**, reported $2.5641985 list-price
+usage after provider retries. A separate reviewer checked clarity, xbuild definition
+propagation, source provenance and the saved host tests. Both support this minimal
+isolated compile experiment; neither certifies target runtime or all consumers.
+
+The vendor directory retains the historical `secp256k1-zkp` name, while pinned
+`.gitmodules` explicitly points to bitcoin-core/secp256k1. Its CMake file and all
+177 copied source files match the pinned Git blobs. The obsolete table and
+GENERATOR defines have no reader in that pinned source. This resolves Fable's
+question about a possibly mismatched source packet. Other legacy/crypto Makefiles
+still carry their old PREC_BITS=4 setting; they were not changed or built here.
+
+Fable's assertion that the generated-table selector proves cross-translation-unit
+consistency is too strong: two separately valid configurations could disagree.
+The actual six native compiler commands, exact source hashes, and linked table
+size provide the required evidence instead. Existing table/ABI implementation
+contains no COMB-sized context array, but runtime initialization has not been tested.
+No predicted signing slowdown or leakage improvement is accepted as a measurement.
+
+The native build passed in 52.39 seconds with frozen sources/protected inputs,
+40 static checks and 27,648 bytes of flash margin. Full runtime/MCU timing,
+constant-time behavior and broader model/build-consumer acceptance remain open.
+
+## Native split-GC layout and diagnostic correction
+
+Fable5.1 accepted the full revision-1 layout for an isolated compile experiment;
+its structured reported usage is $5.773228. The independent review found that
+non-pyopt `meminfo` assumes one region. Revision 2 adds only an existing-pyopt
+requirement and a precise rejection message, preserving all original predicates.
+Its separate clarity follow-up closes that finding. The full patch hash is
+`f88e1f33953a7dafe7e888cc5266c467aa993e7698b5f2756752e79cfb3f61e6`.
+Fable's scoped revision-2/host-evidence review reported $2.729076. Narrative
+zero-spend wording is ignored; the ledger uses the structured usage, not an invoice.
+
+The requested caller/GC-state source audit finds only the selected firmware main
+calling `gc_init`; Unix calls belong to another binary. The single-area inspector
+is excluded by pyopt. Selected C commands now confirm split=1/AUTO=0/PYOPT=1;
+generated Rust ABI comparison remains distinct. The final link confirms allocation
+boundaries, headers, actual startup-call order and unchanged kernel. DMA/root
+lifetimes, complete stack bounds and target execution still need evidence.
+
+The follow-up suggested rejecting `memperf` unless its implementation is compatible.
+Inspection resolves that condition: in this pin it only defines a scalar allocation
+counter, increments it on every successful `gc_alloc`, and returns that counter.
+It contains no area-specific pointer/table traversal. No additional rejection or
+configuration option was added. Firmware also has no direct `memperf` feature;
+the normal setting is for the Unix project. This does not claim counter overflow
+or all debug modes are validated for production.
+
+The follow-up alleged an independent-review hash mismatch. The exact frozen packet
+instead labels the original review `7ee854e4…`, matching revision 1; the separately
+saved revision-2 follow-up binds `f88e1f33…`. The allegation is rejected against the
+packet bytes, and both records remain unchanged. Base HEAD denotes the upstream
+pin; per-file hashes explicitly denote the existing modified native working files.
+
+The host range audit had a real generalization risk: a final abbreviated all-free
+dump row could understate an area's range. It now fails unless both inferred ranges
+sum to the independent GC total; the saved transcripts pass this stricter audit.
+No GC test execution was repeated. Graph survival remains conservative-root evidence,
+reuse covers the named cycles, and fresh processes are not an in-process restart.
+The collector is unchanged relative to Trezor's vendored fork, not claimed to be
+an unmodified mainline MicroPython release. The full collector and test scope are
+preserved; no new allocator, limits or arithmetic were introduced.
+
+## Selected split-GC representation boundary
+
+The actual ARM C probe records area 32/alignment 4 and memory state 564/alignment
+4. Including the unchanged selected generated Rust binding fails E0432: neither
+state type exists there. A separate independent interface audit traces the actual
+Cargo fingerprints, generated bindings, target sources, C callbacks, assembly and
+undefined Rust archive symbols. The changed structures are C-owned state; Rust
+receives allocation payload pointers through `gc_alloc`/`gc_free`, not these
+descriptors. No representation crosses the inspected boundary, so adding unused
+bindings or handmade copies to make a comparison pass would be misleading.
+The failed probe and the first comparison-blocker report remain preserved. The
+later `ABI_BOUNDARY.md`/JSON close this narrow question, leaving GC roots,
+finalization/lifetimes, unrelated FFI and complete native stack/runtime open.

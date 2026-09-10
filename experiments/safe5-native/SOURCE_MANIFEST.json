@@ -24,11 +24,11 @@
     },
     {
       "path": "core/embed/projects/firmware/build.rs",
-      "sha256": "db71ff5ca3f95c9003848dbb652fd8debaf6c5f2585bb335091c12282d9d0179"
+      "sha256": "427ff7db5f3352854df1f46101a116e2dcb0a2574a9fb8f46ae802248ebc2069"
     },
     {
       "path": "core/embed/projects/firmware/main.c",
-      "sha256": "22853bc35e522a8443689533592a8c8e45a29015732b80c60ba7dbc056dc64ee"
+      "sha256": "341b270b448df23bc0ecf4358203d8475fc59cd3522b88d04aada1e98dedecbc"
     },
     {
       "path": "core/embed/upymod/Cargo.toml",
@@ -36,7 +36,7 @@
     },
     {
       "path": "core/embed/upymod/build.rs",
-      "sha256": "9dd82b48f037c356e62edb971867134cbf6f1a6cb3c81e4cf0d743da3b374572"
+      "sha256": "493d3dd92511fc529de06a4f1dd6e20f40269ec78c48246bf3b154a38a2f91e5"
     },
     {
       "path": "core/embed/upymod/modironwood_test/ironwood_test.h",
@@ -53,10 +53,18 @@
     {
       "path": "core/embed/Cargo.lock",
       "sha256": "8e738d88069e34816781dca1821ab37f4a82531d2533d8dc54bd499bf4d81da4"
+    },
+    {
+      "path": "core/embed/crypto/build.rs",
+      "sha256": "7e1f3ec3e521288ad7d2908a64437bee79641e34ca035b410adf67d18be997fd"
+    },
+    {
+      "path": "core/embed/sys/linker/stm32u58/firmware_ironwood.ld",
+      "sha256": "545aedfa2dfc94fbe64f485dade381d5b330754cc8f6b6b3f1e9a25cd5d01a00"
     }
   ],
   "applied_lock": "core/embed/Cargo.lock in firmware.patch",
-  "link_elf_sha256": "0e3504b2c6beebc6509d88db887ac893730b8cab8640c744d7843f914f1c0667",
+  "link_elf_sha256": "ab110d7e1709c4e3b28f6042226c489a738b1d5819f42ad546ee9b59d1452c12",
   "hardware_ready": false,
   "claim": "Frozen experimental sources for review; not an upstream-ready product or complete portable harness"
 }

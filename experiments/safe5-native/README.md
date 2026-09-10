@@ -1,9 +1,10 @@
 # Safe 5 native signing experiment
 
-The complete synthetic native slice links on T3T1/U585 with 7,168 bytes of flash
-headroom. It has not run on a device. The 32 KiB stack is insufficient for a
-selected validation call chain, and generator computation is substantially slower
-than a precomputed table. This is a source package for review and continued
+The complete synthetic native slice links on T3T1/U585 with 27,136 bytes of flash
+headroom. It has not run on a device. The reviewed memory layout reserves a 48 KiB
+stack and two GC regions, but the complete stack bound and runtime memory use
+remain unmeasured. Generator computation is slower than a precomputed table.
+This is a source package for review and continued
 experiments, not installable or production firmware.
 
 ## Source layout
@@ -11,7 +12,9 @@ experiments, not installable or production firmware.
 - `firmware.patch` applies to Trezor firmware revision
   `7105338e3c2c1e681940e17780609881ce53126b`. It contains the complete native
   experiment, model-specific guards, AUX2 arena placement, small-processor
-  dependency features and the exact Cargo lockfile.
+  dependency features, the upstream secp256k1 2 KiB comb configuration and the
+  exact Cargo lockfile. A native-only linker derivative gives the stack 48 KiB
+  and assigns the unused AUX1 tail to the existing static split-GC API.
 - `bridge/` contains the actual synthetic Rust bridge and its two test fixtures.
   It uses fixed test keys and deterministic randomness. The native module's sign
   entry internally approves the matching token: its caller is trust-bearing.
@@ -21,7 +24,7 @@ experiments, not installable or production firmware.
   incomplete addition, commitment blinding and the original public table API.
 - `stack-inline.patch` contains the two previously reviewed inlining attributes
   applied to the approval core and pinned PCZT implementation. Function bodies
-  are unchanged. The latest link still needs a larger-stack/resource plan.
+  are unchanged. The larger stack still needs a complete live-frame bound and runtime checks.
 - `SOURCE_MANIFEST.json` identifies the exact firmware sources and measured ELF.
 
 Stage a separate working directory with `firmware/` at the firmware revision,
@@ -37,7 +40,8 @@ The native feature is `ironwood_target_native_compile_only`. Use the unchanged
 Safe 5 test kernel paired with this firmware pin, release optimization, the pinned
 nightly-2026-03-16 toolchain and Arm GNU 13.3.Rel1. The measured configuration
 retains `universal_fw`, model/board/security settings and synthetic test settings;
-it enables `pyopt`, disables Rust `debug` and omits `debuglink`, `ui_debug` and
+it requires `pyopt` (single-heap debug memory diagnostics are unsupported),
+disables Rust `debug` and omits `debuglink`, `ui_debug` and
 `ui_debug_overlay`. It is not the unchanged upstream test preset. Rebuild both
 `core` and `alloc`, and use the frozen lock. No firmware postprocessing, signing
 or flashing was performed. Detailed command and artifact evidence is summarized

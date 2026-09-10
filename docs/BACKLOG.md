@@ -75,10 +75,15 @@ reached context, output, full receiver and Cancel menu, then failed to open the
 confirmation screen. Preserve that incomplete run. Actual geometry showed the original coordinate
 was valid; waiting past the attach animation enabled cancellation in a fresh run.
 Both menu and final-screen cancellation now return ActionCancelled and home;
-shutdown still exits 1 after SIGINT, so complete runtime acceptance remains. In parallel, resolve remaining stack paths beyond the candidate
-31,504/32,408-byte subtotals and review/test the proposed smaller response allocation.
-Finish native memory/latency preparation before requesting an attended installation session. The unopened
-device remains untouched, and flashing requires a concrete separate decision.
+shutdown still exits 1 after SIGINT, so complete runtime acceptance remains.
+The candidate now has selected decode, validation, signing-reparse and serialization
+subtotals of 32,408/31,504/27,072/11,016 bytes. Prioritize a complete signing peak
+measurement, serializer growth and allocator lifetimes; these subtotals do not
+establish full maxima. Review/test the proposed smaller response allocation when
+its exact-packet authorization is resolved.
+Finish native memory/latency preparation before requesting an attended
+installation session. The unopened device remains untouched, and flashing
+requires a concrete separate decision.
 
 Keep the Safe 7 reference and every failed Safe 5 artifact. Safe 7's stricter
 runtime harness exposed shutdown SIGBUS; its earlier false pass is rejected.

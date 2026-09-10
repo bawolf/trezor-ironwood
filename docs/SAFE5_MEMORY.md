@@ -148,3 +148,12 @@ based on a conservative 10,500-byte envelope for the unchanged eight-action
 profile. This would remove a 48 KiB allocation request; it is not measured free
 RAM. The proposal remains unapplied pending adversarial review and meaningful
 serializer/signing tests.
+
+The same candidate now has a selected signing-reparse subtotal of **27,072 bytes
+(26.4 KiB)** and a selected v2 serialization subtotal of **11,016 bytes (10.8
+KiB)**. These are separate phases. A coordinator check matched 17 frames and
+17 call-edge checks against fresh disassembly and the actual ELF metadata. Neither
+is a whole maximum; serialization capacity growth, allocator/drop paths, other
+indirect calls, VM ancestry and interrupts remain unresolved. The next useful
+measurement covers the complete C signing call rather than adding these sibling
+subtotals. No native execution or new implementation change occurred.

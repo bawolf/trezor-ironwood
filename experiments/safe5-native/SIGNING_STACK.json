@@ -1,0 +1,478 @@
+{
+  "status": "bounded_selected_source_feasible_paths_not_whole_maximum",
+  "candidate_elf_sha256": "0481ef96c34419a3538c1420d016f3292ba03d35d3dd0570d203f56a8e8066b0",
+  "selected_signing_reparse": {
+    "frames": [
+      {
+        "address": "0xc0f399c",
+        "name": "sign",
+        "bytes": 48,
+        "basis": "C prologue: push r4/lr (8), sub sp 40"
+      },
+      {
+        "address": "0xc07e978",
+        "name": "ironwood_test_sign",
+        "bytes": 3424,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc0931ec",
+        "name": "<pczt::orchard::Bundle>::into_parsed_inner",
+        "bytes": 8880,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc093988",
+        "name": "<pczt::orchard::Bundle>::into_parsed_inner::parse_action_inner",
+        "bytes": 8032,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc081f90",
+        "name": "<orchard::pczt::Spend>::parse_inner",
+        "bytes": 4352,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc081b80",
+        "name": "<orchard::address::Address>::from_raw_address_bytes",
+        "bytes": 344,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc081bf0",
+        "name": "<orchard::keys::DiversifiedTransmissionKey>::from_bytes",
+        "bytes": 432,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc087664",
+        "name": "<pasta_curves::curves::Ep as group::GroupEncoding>::from_bytes",
+        "bytes": 640,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc086310",
+        "name": "<pasta_curves::fields::fp::Fp as ff::Field>::sqrt",
+        "bytes": 240,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc0863e4",
+        "name": "<pasta_curves::fields::fp::Fp as pasta_curves::arithmetic::fields::SqrtTableHelpers>::pow_by_t_minus1_over2",
+        "bytes": 312,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc08497e",
+        "name": "<pasta_curves::fields::fp::Fp>::mul",
+        "bytes": 200,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc0844fc",
+        "name": "<pasta_curves::fields::fp::Fp>::montgomery_reduce",
+        "bytes": 120,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc084850",
+        "name": "<pasta_curves::fields::fp::Fp>::sub",
+        "bytes": 48,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      }
+    ],
+    "edges": [
+      {
+        "caller": "0xc0f399c",
+        "callee": "0xc07e978",
+        "instruction": "c0f39e6:\tf78a ffc7 \tbl\tc07e978 <ironwood_test_sign>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc07e978",
+        "callee": "0xc0931ec",
+        "instruction": "c07ecb6:\tf014 fa99 \tbl\tc0931ec <_RNvMs9_NtCs2EaeqWk2lLR_4pczt7orchardNtB5_6Bundle17into_parsed_inner>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc0931ec",
+        "callee": "0xc093988",
+        "instruction": "c093626:\tf000 f9af \tbl\tc093988 <_RNvNvMs9_NtCs2EaeqWk2lLR_4pczt7orchardNtB7_6Bundle17into_parsed_inner18parse_action_inner>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc093988",
+        "callee": "0xc081f90",
+        "instruction": "c093b62:\tf7ee fa15 \tbl\tc081f90 <_RNvMs0_NtNtCs5hGI4bmqNff_7orchard4pczt5parseNtB7_5Spend11parse_inner>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc081f90",
+        "callee": "0xc081b80",
+        "instruction": "c082096:\tf7ff fd73 \tbl\tc081b80 <_RNvMNtCs5hGI4bmqNff_7orchard7addressNtB2_7Address22from_raw_address_bytes>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc081b80",
+        "callee": "0xc081bf0",
+        "instruction": "c081b94:\tf000 f82c \tbl\tc081bf0 <_RNvMsr_NtCs5hGI4bmqNff_7orchard4keysNtB5_26DiversifiedTransmissionKey10from_bytes>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc081bf0",
+        "callee": "0xc087664",
+        "instruction": "c081c02:\tf005 fd2f \tbl\tc087664 <_RNvXsa_NtCsbsh2oMsm37O_12pasta_curves6curvesNtB5_2EpNtCsinWvPtJFYTA_5group13GroupEncoding10from_bytes>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc087664",
+        "callee": "0xc086310",
+        "instruction": "c087714:\tf7fe fdfc \tbl\tc086310 <_RNvXsh_NtNtCsbsh2oMsm37O_12pasta_curves6fields2fpNtB5_2FpNtCs4JkJu1hfcRu_2ff5Field4sqrt>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc086310",
+        "callee": "0xc0863e4",
+        "instruction": "c08632a:\tf000 f85b \tbl\tc0863e4 <_RNvXsk_NtNtCsbsh2oMsm37O_12pasta_curves6fields2fpNtB5_2FpNtNtNtB9_10arithmetic6fields16SqrtTableHelpers21pow_by_t_minus1_over2>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc0863e4",
+        "callee": "0xc08497e",
+        "instruction": "0xc086408: blx sl",
+        "kind": "resolved BLX",
+        "resolution": "ldr.w sl at 0xc0863fe; literal 0xc0865d0 = 0x0c08497f"
+      },
+      {
+        "caller": "0xc08497e",
+        "callee": "0xc0844fc",
+        "instruction": "c084d7c:\tf7ff fbbe \tbl\tc0844fc <_RNvMse_NtNtCsbsh2oMsm37O_12pasta_curves6fields2fpNtB5_2Fp17montgomery_reduce>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc0844fc",
+        "callee": "0xc084850",
+        "instruction": "c08482e:\tf000 f80f \tbl\tc084850 <_RNvMse_NtNtCsbsh2oMsm37O_12pasta_curves6fields2fpNtB5_2Fp3sub>",
+        "kind": "BL"
+      }
+    ],
+    "subtotal_bytes": 27072,
+    "nominal_49152_gap": 22080
+  },
+  "selected_v2_serialization": {
+    "frames": [
+      {
+        "address": "0xc0f399c",
+        "name": "sign",
+        "bytes": 48,
+        "basis": "C prologue: push r4/lr (8), sub sp 40"
+      },
+      {
+        "address": "0xc07e978",
+        "name": "ironwood_test_sign",
+        "bytes": 3424,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc090b8c",
+        "name": "<pczt::Pczt>::serialize",
+        "bytes": 7456,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc08fef8",
+        "name": "<&mut postcard::ser::serializer::Serializer<postcard::ser::flavors::ExtendFlavor<alloc::vec::Vec<u8>>> as serde_core::ser::SerializeStruct>::serialize_field::<core::option::Option<pczt::orchard::v2::Bundle>>",
+        "bytes": 40,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc0899bc",
+        "name": "<core::option::Option<[serde_with::Same; 96]> as serde_with::ser::SerializeAs<core::option::Option<[u8; 96]>>>::serialize_as::<&mut postcard::ser::serializer::Serializer<postcard::ser::flavors::ExtendFlavor<alloc::vec::Vec<u8>>>>",
+        "bytes": 24,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      {
+        "address": "0xc089920",
+        "name": "<&mut postcard::ser::serializer::Serializer<postcard::ser::flavors::ExtendFlavor<alloc::vec::Vec<u8>>> as serde_core::ser::Serializer>::serialize_u8",
+        "bytes": 24,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      }
+    ],
+    "edges": [
+      {
+        "caller": "0xc0f399c",
+        "callee": "0xc07e978",
+        "instruction": "c0f39e6:\tf78a ffc7 \tbl\tc07e978 <ironwood_test_sign>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc07e978",
+        "callee": "0xc090b8c",
+        "instruction": "c07f1ac:\tf011 fcee \tbl\tc090b8c <_RNvMCs2EaeqWk2lLR_4pcztNtB2_4Pczt9serialize>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc090b8c",
+        "callee": "0xc08fef8",
+        "instruction": "c091338:\tf7fe fdde \tbl\tc08fef8 <_RINvXs5_NtNtCs8wSGkmjkPCX_8postcard3ser10serializerQINtB6_10SerializerINtNtB8_7flavors12ExtendFlavorINtNtCs70Ayqm6MrhC_5alloc3vec3VechEEENtNtCs91R0JY4uB1m_10serde_core3ser15SerializeStruct15serialize_fieldINtNtCskwfTRvU7Yjy_4core6option6OptionNtNtNtCs2EaeqWk2lLR_4pczt7orchard2v26BundleEEB3Z_>",
+        "kind": "BL",
+        "source_condition": "Second field call is present Ironwood, not absent Orchard."
+      },
+      {
+        "caller": "0xc08fef8",
+        "callee": "0xc0899bc",
+        "instruction": "c08ff92:\tf7f9 fd13 \tbl\tc0899bc <_RINvXs1_NtNtCsivmAZQ0bobs_10serde_with3ser5implsINtNtCskwfTRvU7Yjy_4core6option6OptionANtBa_4Samej60_EINtB8_11SerializeAsIBL_AhB1x_EE12serialize_asQINtNtNtCs8wSGkmjkPCX_8postcard3ser10serializer10SerializerINtNtB2r_7flavors12ExtendFlavorINtNtCs70Ayqm6MrhC_5alloc3vec3VechEEEECs2EaeqWk2lLR_4pczt>",
+        "kind": "BL"
+      },
+      {
+        "caller": "0xc0899bc",
+        "callee": "0xc089920",
+        "kind": "BL then zero-frame tail trampoline",
+        "instruction": "0xc0899d2: bl 0xc0cbf0c; 0xc0cbf10: b.w 0xc089920",
+        "resolution": "Present restored FVK: Option is Some; byte loop continues for 96 bytes. Trampoline has zero frame. serialize_u8 reserves 24 bytes before its capacity-dependent Vec::reserve call."
+      }
+    ],
+    "subtotal_bytes": 11016,
+    "capacity_dependent_descendants_unbounded": true
+  },
+  "sequential_phase_calls": [
+    {
+      "frame": {
+        "address": "0xc092288",
+        "name": "<alloc::vec::Vec<pczt::orchard::Action> as core::clone::Clone>::clone",
+        "bytes": 4968,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      "edge": {
+        "caller": "0xc07e978",
+        "callee": "0xc092288",
+        "instruction": "c07eba8:\tf013 fb6e \tbl\tc092288 <_RNvXsa_NtCs70Ayqm6MrhC_5alloc3vecINtB5_3VecNtNtCs2EaeqWk2lLR_4pczt7orchard6ActionENtNtCskwfTRvU7Yjy_4core5clone5Clone5cloneBJ_>",
+        "kind": "BL"
+      }
+    },
+    {
+      "frame": {
+        "address": "0xc0931ec",
+        "name": "<pczt::orchard::Bundle>::into_parsed_inner",
+        "bytes": 8880,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      "edge": {
+        "caller": "0xc07e978",
+        "callee": "0xc0931ec",
+        "instruction": "c07ecb6:\tf014 fa99 \tbl\tc0931ec <_RNvMs9_NtCs2EaeqWk2lLR_4pczt7orchardNtB5_6Bundle17into_parsed_inner>",
+        "kind": "BL"
+      }
+    },
+    {
+      "frame": {
+        "address": "0xc0780bc",
+        "name": "ironwood_approval::effects::sighash",
+        "bytes": 5592,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      "edge": {
+        "caller": "0xc07e978",
+        "callee": "0xc0780bc",
+        "instruction": "c07ed12:\tf7f9 f9d3 \tbl\tc0780bc <_RNvNtCs8YHAYtVfAFz_17ironwood_approval7effects7sighash>",
+        "kind": "BL"
+      }
+    },
+    {
+      "frame": {
+        "address": "0xc087bbe",
+        "name": "<&pasta_curves::curves::Ep as core::ops::arith::Mul<&pasta_curves::fields::fq::Fq>>::mul",
+        "bytes": 416,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      "edge": {
+        "caller": "0xc07e978",
+        "callee": "0xc087bbe",
+        "instruction": "c07ee98:\tf008 fe91 \tbl\tc087bbe <_RNvXsp_NtCsbsh2oMsm37O_12pasta_curves6curvesRNtB5_2EpINtNtNtCskwfTRvU7Yjy_4core3ops5arith3MulRNtNtNtB7_6fields2fq2FqE3mul>",
+        "kind": "BL"
+      }
+    },
+    {
+      "frame": {
+        "address": "0xc0942b0",
+        "name": "<pczt::orchard::Parsed>::reserialize",
+        "bytes": 3144,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      "edge": {
+        "caller": "0xc07e978",
+        "callee": "0xc0942b0",
+        "instruction": "c07ef88:\tf015 f992 \tbl\tc0942b0 <_RNvMs_NtCs2EaeqWk2lLR_4pczt7orchardNtB4_6Parsed11reserialize>",
+        "kind": "BL"
+      }
+    },
+    {
+      "frame": {
+        "address": "0xc090b8c",
+        "name": "<pczt::Pczt>::serialize",
+        "bytes": 7456,
+        "basis": "current ELF .stack_sizes; selected prologue checked"
+      },
+      "edge": {
+        "caller": "0xc07e978",
+        "callee": "0xc090b8c",
+        "instruction": "c07f1ac:\tf011 fcee \tbl\tc090b8c <_RNvMCs2EaeqWk2lLR_4pcztNtB2_4Pczt9serialize>",
+        "kind": "BL"
+      }
+    }
+  ],
+  "conditions": [
+    "Successful prior begin on the same retained PCZT, matching retained review and token, internal test approval by ironwood_test_sign, writable output and allocation capacity. No installed native trusted-UI or wire-caller integration is established.",
+    "Admitted profile: tx version 6, PCZT v2; present Ironwood actions 1..8, required recipient/FVK, no witness/dummy key, encrypted ciphertext, absent other pools.",
+    "Preverified signing parser skips FVK derivation: bridge movs r3,#1 at 0xc07ecb4 precedes BL into_parsed_inner at 0xc07ecb6.",
+    "Required valid spend recipient reaches Address -> DiversifiedTransmissionKey -> group decode -> warm sqrt -> pow -> mul -> montgomery_reduce -> sub.",
+    "Cold FP table preparation already completed before begin; no initialization subtree or permanent 29804-byte arena allocation added.",
+    "Post-sign serialization chooses v2: cmp tx_version,#6 at 0xc090bb0; beq 0xc090d28 at 0xc090bb4 skips v1 clone path.",
+    "Wire FVK is restored by low_level_signer/mod.rs:49-50,174-190 before serializing Some<[u8;96]>."
+  ],
+  "exclusions": [
+    "No sum of parse, sighash, signing math, reserialize, and final serialize sibling frames.",
+    "No new standalone Engine::sign frame; code is incorporated into ironwood_test_sign.",
+    "No FVK/IVK derivation, present-witness array, dummy-key, plaintext encryption, or populated other-pool branches.",
+    "No action-count multiplication.",
+    "C response uses GC-backed vstr storage; capacity is not C stack."
+  ],
+  "limitations": [
+    "No whole-sign or serialization maximum; these are lower subtotals of source-feasible paths, not executed witness/high-water evidence.",
+    "Missing VM/C ancestry above sign, interpreter depth, interrupt/exception use.",
+    "Other allocator/drop, indirect hashing/signature arithmetic and serializer growth descendants remain incomplete.",
+    "No definite feasible subtotal exceeding 49152 established; margin sufficiency is not established.",
+    "Source relocation and generated MicroPython version-header differences remain control caveats for cross-build causal comparison.",
+    "No build, test, firmware execution, network, or paid review."
+  ],
+  "next_measurement": [
+    "Under parent runtime authorization, measure stack high-water across C sign through return with already-admitted retained PCZT, matching review/token, internal test approval and sealed table. Distinguish preverified parse from sighash/sign math/final serialization.",
+    "First mark spend recipient decompression (selected parse subtotal 27072), and final serialize buffer growth/allocator phase (unbounded descendants). Retain actual VM entry depth and interrupt assumptions; vary admitted action count for heap/growth behavior without multiplying fixed frames."
+  ],
+  "provenance": [
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/artifacts/firmware",
+      "sha256": "0481ef96c34419a3538c1420d016f3292ba03d35d3dd0570d203f56a8e8066b0"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/build-final.json",
+      "sha256": "d3abee8c7f77e1cf260bf19787b51160e06a64661b37246e9323e24ddd69caba"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/actual-spec.json",
+      "sha256": "bef53d0a5ca17d321549a36c396e6df0d01352f7aaa4f4167cb44862e07be791"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/generated-evidence.json",
+      "sha256": "280f06512d8af7464f011e1a891351f6557692e4b3b099437713b21bda13bd01"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/stack-comparison/stack-symbols.json",
+      "sha256": "13d741c364e184bdd5b1e82228a0f87959e0c3c0ca8344361c444a939a51f2a8"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/stack-comparison/disassembly.txt",
+      "sha256": "b6e27dbdc6dd74b1db2e51b0bba868e46453bd3a9086ce9c93c3dfcea3408678"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/stack-comparison/FREEZE.json",
+      "sha256": "cc871fb4055478b1383fc548e01f62975b682f7183263469f576028fa9575072"
+    },
+    {
+      "path": "coordinator/work/safe5-memory-report/elf32.py",
+      "sha256": "362c75077e292b9f8292fd5bcf7082705d8f3307ef27bbdde91af424a537ae8c"
+    },
+    {
+      "path": "coordinator/work/safe5-memory-research/native-sqrt-followup.md",
+      "sha256": "d29392661306061e8cd3cdf2db64c670777f41fee1dc037d62f19017c904f595"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/build-inputs/rust/src/lib.rs",
+      "sha256": "d59a871de49ab20409a728d1524987f54cd03629171c901f74bc1a23044c3dd3"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/build-inputs/crates/approval/src/lib.rs",
+      "sha256": "f711292da1aec457ab9449739e6af6ba38c47016162a12f5ed66ce8ab22f88f4"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/build-inputs/crates/approval/src/wire.rs",
+      "sha256": "5b05163b419f90d861f1ba5432c62ce0a5690bc747d53c4a9a863804b40413ce"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/build-inputs/crates/approval/src/effects.rs",
+      "sha256": "1eed05b5b9c8831577f564d071d46d25873530a96df5890a24b3ee33e870f1ef"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/build-inputs/upstream/librustzcash/pczt/src/roles/low_level_signer/mod.rs",
+      "sha256": "ece5222d7f186669afb88bef74abc52c9d4b5b0fea10396199cc07603923424a"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/build-inputs/upstream/librustzcash/pczt/src/orchard.rs",
+      "sha256": "f51fe28627a4870dbffbb8a3ea7a3f88b9885a7f64a4037314dd64a6eb4acf0d"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/build-inputs/upstream/librustzcash/pczt/src/lib.rs",
+      "sha256": "265cedc702e51cb32ca9fd68705539214be7d0bd924658bb7446cf8be29de9f1"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/firmware/core/embed/upymod/modironwood_test/modironwood_test.c",
+      "sha256": "432a72d8f27208a821f238924bb101a576147af6f8c4c95208858cd66cad343c"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/orchard-0.15.3/src/pczt/parse.rs",
+      "sha256": "6ca42ee6527ffb91aebc9285133d9ecc62ce693f47eb79369cb64d0744f37c2e"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/orchard-0.15.3/src/address.rs",
+      "sha256": "a0c93310d2fd64c0f2b32e0dfdf667e4e02b6f235852eed2ef07108b98012250"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/orchard-0.15.3/src/keys.rs",
+      "sha256": "12d5438e008efe60f84449c17306cfa57518a2841585db811f5e6dd959ccd915"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/pasta_curves-0.5.1/src/curves.rs",
+      "sha256": "2d86c30347e71f7f961b355acc8cc99d0bc51963a09ff58ec358d921a784899e"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/pasta_curves-0.5.1/src/fields/fp.rs",
+      "sha256": "a4732d06942a6297f882bee975cdf30f4d6db4ce796a70b3152a919c9748fe62"
+    },
+    {
+      "path": "coordinator/work/safe5-parse-boundary/build-prep/isolated-run-01/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/pasta_curves-0.5.1/src/arithmetic/fields.rs",
+      "sha256": "067a7bd3ee5864841cb984f7275c43b9494005f58b3426fad234e3e1d2b0a379"
+    }
+  ],
+  "finished_utc": "2026-09-10T07:50:56.184561+00:00",
+  "clarity_correction_utc": "2026-09-10T07:51:44.928181+00:00",
+  "parent_checkpoint": "e696af7",
+  "coordinator_verification": {
+    "elf_sha256": "0481ef96c34419a3538c1420d016f3292ba03d35d3dd0570d203f56a8e8066b0",
+    "trace_sha256": "37da673fb8a3c79aa49b29731fb701807f33ade003eceab3fcf2c7f3d927bb50",
+    "frames_checked": 17,
+    "edges_checked": 17,
+    "signing_reparse_bytes": 27072,
+    "serialization_bytes": 11016,
+    "passed": true,
+    "firmware_executed": false,
+    "limit": "Confirms selected frames and edges, not a whole maximum or runtime witness."
+  },
+  "verification_source_sha256": "137ce33279ca45b6175420f04f8a5f51f8635645fd36638c3feedca223181dce",
+  "visual_checks": {
+    "widths_px": [
+      736,
+      360
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "console_errors": 0,
+    "horizontal_overflow": false,
+    "expanded_candidate_paths": 4,
+    "first_capture_limit": "Phone screenshot clipped below the 1700px viewport; preserved as incomplete visual evidence.",
+    "final_capture": "Full expanded height rechecked and visually inspected; both source snapshots retained.",
+    "checks_sha256": "63bdcd878be113088e8a278c31e5bd7f501c7824cb8d769472771775b27a90e7"
+  }
+}

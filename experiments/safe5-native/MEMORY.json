@@ -692,7 +692,11 @@
       "whole_stack_maximum_bytes": null,
       "native_executed": false,
       "comparison_sha256": "a5c3eba39957cdb59b8d569bff50a4607ab06d3e90e0b93487498455ac4197d6",
-      "caveat": "Selected source-feasible subtotals only; crate relocation and version-header differences prevent helper-only causal isolation."
+      "caveat": "Selected source-feasible subtotals only; crate relocation and version-header differences prevent helper-only causal isolation.",
+      "signing_reparse_path_bytes": 27072,
+      "serialization_path_bytes": 11016,
+      "signing_trace_sha256": "37da673fb8a3c79aa49b29731fb701807f33ade003eceab3fcf2c7f3d927bb50",
+      "remaining_peak_measurement": "Complete C sign call, including serializer capacity growth, allocator/drop paths, VM ancestry and interrupt assumptions."
     }
   ]
 }

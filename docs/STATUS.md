@@ -27,9 +27,11 @@ preserved. No physical-device tests have run; native runtime integration remains
 separate from this host emulator.
 
 A reviewed isolated parser-boundary candidate also compiles for T3T1. Its selected
-semantic and decoding paths total 31,504 and 32,408 frame bytes. Full maxima and
-native execution remain unverified before adoption; the settled memory snapshot
-stays unchanged. A separate source proof proposes a 16 KiB response allocation
+semantic and decoding paths total 31,504 and 32,408 frame bytes. Selected signing
+reparse and serialization subtotals are now 27,072 and 11,016 bytes, checked
+against actual binary frames and edges. Full maxima and native
+execution remain unverified before adoption; the settled memory snapshot stays
+unchanged. A separate source proof proposes a 16 KiB response allocation
 under the existing eight-action profile. Its Fable submission is blocked pending
 exact-packet approval; serializer tests are drafted and the allocation change
 remains unapplied. See the
@@ -74,7 +76,7 @@ remains unapplied. See the
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260910T074155Z-project-9e5a78f1/report.json`.
+- Project: `work/runs/20260910T074716Z-project-a39b612e/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.

@@ -290,3 +290,28 @@ signed response. Both overall results remain failed because requested SIGINT
 shutdown produced KeyboardInterrupt/exit 1. There were no process-group survivors.
 Native sign-entry instrumentation and measured allocator cleanup remain missing.
 The first failed attempt remains in its original directory, unmodified.
+
+## Candidate signing-stack follow-up
+
+The same `0481ef96…` image has a source-feasible signing-reparse chain of
+27,072 bytes, including its 48-byte C entry and 3,424-byte Rust bridge frames.
+The preverified parser skips FVK derivation but still decodes the required spend
+recipient. A separate serialization path totals 11,016 bytes before unresolved
+capacity-dependent allocation descendants. The larger selected begin/decode
+subtotal remains 32,408 bytes; none of these is a whole-program upper bound.
+
+The coordinator independently checked 17 frames and 17 call-edge checks against fresh
+objdump output and the ELF stack-size section. The bridge internally approves a
+matching retained review/token; its API comment does not establish a native
+trusted-UI or wire caller. No implementation was applied or firmware executed.
+The report was corrected to state this actual boundary before freezing it.
+
+Do not add reparse, sighash, signature arithmetic, reserialization and final
+serialization as simultaneous frames: the linked calls are sequential. Next
+measure the complete C sign call, with particular attention to final serializer
+growth, allocator/drop descendants, actual VM depth and interrupt assumptions.
+Neither a complete peak nor sufficient margin is established by these subtotals.
+The [machine-readable audit](../experiments/safe5-native/SIGNING_STACK.json)
+retains frame names, addresses, edges, provenance, limitations and the coordinator
+check. Raw disassembly remains in the coordinator's owned workspace; this is
+evidence, not a complete clean-checkout reproduction package.

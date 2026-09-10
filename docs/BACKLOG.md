@@ -103,9 +103,13 @@ negative controls and preservation of all other decoded fields. Do not rerun the
 passing sweep or output verification without a change or unresolved result.
 The isolated native caller now compiles and passes 10 tests / 216 stubbed caller
 subcases, with linked bytecode/descriptors verified. It is not adopted; Fable
-transmission awaits exact-packet approval. Next implement small fixed diagnostic
-records retrievable after cleanup over synthetic USB, then measure largest free
-blocks, complete stack/arena use, cancellation/OOM recovery and MCU latency.
+transmission awaits exact-packet approval. The fixed GC sampler now has a native
+object compile, eight actual-GC host checks and two rejecting mutation controls;
+it remains unadopted and unintegrated. Next connect its six phase captures under
+the existing executor, preserve records on failure and retrieve them after cleanup
+over bounded synthetic USB. Then measure largest free blocks, complete stack/arena
+use, cancellation/OOM recovery and MCU latency. The sampler Fable packet is the
+fourth pending exact-payload review; do not retry blocked transmissions silently.
 Do not assume debugger access to the unopened retail Safe 5.
 The pending source reviews still gate response-allocation adoption.
 Finish native memory/latency preparation before requesting an attended

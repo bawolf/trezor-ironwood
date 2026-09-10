@@ -1,0 +1,14 @@
+{
+  "/Users/bryantwolf/Documents/Codex/2026-09-07/ca/work/safe5-memory-sampler-01/tests/host-config/genhdr/compressed.data.h": {
+    "original": "/Users/bryantwolf/Documents/Codex/2026-09-07/ca/work/safe5-gc-host/build-04/genhdr/compressed.data.h",
+    "sha256": "ea4f7b9a67486b419679f51587e5e7f9836425182a149ed9cac4b51f9b0a6e95"
+  },
+  "/Users/bryantwolf/Documents/Codex/2026-09-07/ca/work/safe5-memory-sampler-01/tests/host-config/genhdr/qstrdefs.generated.h": {
+    "original": "/Users/bryantwolf/Documents/Codex/2026-09-07/ca/work/safe5-gc-host/build-04/genhdr/qstrdefs.generated.h",
+    "sha256": "82630b0052f076fb34056b329898eba85843a322899b727d154384ea6be6de8f"
+  },
+  "/Users/bryantwolf/Documents/Codex/2026-09-07/ca/work/safe5-memory-sampler-01/tests/host-config/genhdr/root_pointers.h": {
+    "original": "/Users/bryantwolf/Documents/Codex/2026-09-07/ca/work/safe5-gc-host/build-04/genhdr/root_pointers.h",
+    "sha256": "9ad8d7350b42b178da9b1b3da2f0118edf756beb7cd75afb69f3cd72b90f45dd"
+  }
+}

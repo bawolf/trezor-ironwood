@@ -1,0 +1,262 @@
+{
+  "date_utc": "2026-09-10",
+  "state": "unadopted fixed GC sampler; no caller/USB integration or device execution",
+  "base_project_commit": "8f36f72eb5570445f2e299ffacd40b983c734bff",
+  "micropython_commit": "579c7624bd2224c7e038504e4bc3de591a9fbcf9",
+  "gc_source_sha256": "ddb8fe0e6d497488d223dc28994b1bbbd0875ad1cb3c3083fa1650535aa509dc",
+  "source_package_sha256": {
+    "proposal/memory_trace.h": "a26cfea821924afc2aa40b6c6ee14062a09198ac919ba3261c663a52f5b62654",
+    "proposal/memory_trace.c": "bafd0ca1d3fd37a69886719311bbffab274ad72676f961dde4eb965aa3a436b8",
+    "tests/test_memory_trace.c": "b147eabb87509c4175027524d52c658b5150dcdb7939d34f54b62ffa8628a4a6",
+    "tests/run_tests.py": "7c3da32a22a3420d6516aa910dfab73da383397bc885c7776e9d1162f37618e0",
+    "tests/negative_controls.py": "6b55b89375c962f70e1a930afc716a7425ac46ba8533856c88b31006586a8d11",
+    "tests/README.md": "6f0d6e39d02b66f914b8a7657c704a06703f94f164f3a23e3acf5c2a172871e8",
+    "tests/host-config/compile.json": "324e4ce5ea38f245d2ebfdd1b72866eda3254588a71e171e72791cddf8b75045",
+    "tests/host-config/PROVENANCE.json": "999f8262a05bf51ed885a9e3481de1fb5f120533033adab58417a10a6300fb6b",
+    "tests/host-config/LICENSE-MicroPython": "c7273a4675e28b40547b4814bf68da41954632ebbc38b3fff69f22d69850f690",
+    "tests/host-config/genhdr/compressed.data.h": "ea4f7b9a67486b419679f51587e5e7f9836425182a149ed9cac4b51f9b0a6e95",
+    "tests/host-config/genhdr/qstrdefs.generated.h": "82630b0052f076fb34056b329898eba85843a322899b727d154384ea6be6de8f",
+    "tests/host-config/genhdr/root_pointers.h": "9ad8d7350b42b178da9b1b3da2f0118edf756beb7cd75afb69f3cd72b90f45dd"
+  },
+  "host": {
+    "check_groups_passed": 8,
+    "negative_controls_rejected": 2,
+    "observations": {
+      "pointer_bytes": 8,
+      "phase_enum_bytes": 4,
+      "gc_block_bytes": 32,
+      "area_header_bytes": 64,
+      "raw_pool_bytes": [
+        32768,
+        16384
+      ],
+      "usable_pool_bytes": [
+        32384,
+        16128
+      ],
+      "fragmented_used_bytes": 24256,
+      "fragmented_free_bytes": 24256,
+      "fragmented_largest_free_bytes": 32
+    },
+    "configuration": {
+      "split_heap": 1,
+      "auto_split": 0,
+      "finalizers": true,
+      "threads": false,
+      "auto_collection_enabled_during_test": false,
+      "collection_root_provider": "explicit roots; actual gc_collect_start/root/end",
+      "explicit_collections": 2,
+      "sampler_only_undefined_symbol": "gc_info"
+    },
+    "raw_output": "LAYOUT pointer=8 enum=4 block=32 area_header=64 raw=32768+16384 usable=32384+16128\nPASS empty_pools_trailing_run_and_block_to_byte_conversion\nPASS disjoint_pools_failure_preserves_record\nPASS six_phase_bits_and_exact_occupancy\nPASS repeated_phase_overwrites_only_that_record\nPASS invalid_phases_do_not_sample_or_change_validity\nFRAGMENTED used=24256 free=24256 largest=32 rejected_request=64\nPASS fragmentation_sum_free_does_not_supply_one_run\nPASS real_collection_cleanup_and_recovery\nPASS explicit_reset_clears_live_view_without_gc_work\nRESULT checks=8 collections=2 samples=28\n",
+    "source_freeze_record_sha256": "4bdfb16153f1fd880330bddefdc614cc062fe0c72d03acdc318c74f98a5e67d6",
+    "canonical_result_sha256": "06fede4e8c42eb7fe29a866d9be493aef05fcae09336e725aafb47ffef384661",
+    "negative_result_sha256": "dfb06d0c3d46e215b0649def823aa24bf3afca7929292e69ace84cf6012ad85d",
+    "commands": [
+      {
+        "name": "gc",
+        "returncode": 0,
+        "seconds": 2.6268686670809984,
+        "timeout_seconds": 60,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "sampler",
+        "returncode": 0,
+        "seconds": 0.4589629580732435,
+        "timeout_seconds": 60,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "test",
+        "returncode": 0,
+        "seconds": 3.4625240419991314,
+        "timeout_seconds": 60,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "link",
+        "returncode": 0,
+        "seconds": 2.173837374895811,
+        "timeout_seconds": 60,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "sampler-imports",
+        "returncode": 0,
+        "seconds": 0.1337547921575606,
+        "timeout_seconds": 60,
+        "logs_sha256": {
+          "stdout": "c8c911a9c2ccb986cd224455d6cf592e2cf01367545cd6dc944eb4b0eff2550f",
+          "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "test-run",
+        "returncode": 0,
+        "seconds": 0.8086625409778208,
+        "timeout_seconds": 20,
+        "logs_sha256": {
+          "stdout": "28fc7a59af98bd5beb4cbe5722702ba59fbc9868cb1b1782ae56d2491e35a20a",
+          "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "missing-byte-conversion-compile",
+        "returncode": 0,
+        "seconds": 0.266267083119601,
+        "timeout_seconds": 60,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "missing-byte-conversion-link",
+        "returncode": 0,
+        "seconds": 0.38721624994650483,
+        "timeout_seconds": 60,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "missing-byte-conversion-test",
+        "returncode": 1,
+        "seconds": 0.35837150015868247,
+        "timeout_seconds": 60,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "5699f20839dd29a416efbc98395df7044a06b21653589618c518479624fac115"
+        }
+      },
+      {
+        "name": "missing-valid-bit-compile",
+        "returncode": 0,
+        "seconds": 0.23442012490704656,
+        "timeout_seconds": 60,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "missing-valid-bit-link",
+        "returncode": 0,
+        "seconds": 0.08605079096741974,
+        "timeout_seconds": 60,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "missing-valid-bit-test",
+        "returncode": 1,
+        "seconds": 0.3365447090473026,
+        "timeout_seconds": 60,
+        "logs_sha256": {
+          "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "14650c316549139dcd7e16fe149d7944b29d825f59aaae35cc0baec4845891df"
+        }
+      }
+    ],
+    "scope": "macOS/Xcode host test of actual pinned collector and sampler; no native/VM-root/automatic-OOM/caller integration claim"
+  },
+  "native_object": {
+    "scope": "unlinked sampler object using exact selected native C configuration; linked gc_info inspection from prior caller image",
+    "source_sha256": {
+      "memory_trace.c": "bafd0ca1d3fd37a69886719311bbffab274ad72676f961dde4eb965aa3a436b8",
+      "memory_trace.h": "a26cfea821924afc2aa40b6c6ee14062a09198ac919ba3261c663a52f5b62654"
+    },
+    "object_sha256": "8d1c0290ee4252cf902a3a116d95909c24b074a824dd25d5e794065032d7b166",
+    "compile_record_sha256": "c695c8194ce9b3580fe12b9c5b6da3086ebdac8262b363984184e06415afeb3f",
+    "compiler_identity_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+    "compiler_database_sha256": "375ce00d91f41f1230d903b91a6cca785da27dbabdd175de4da23910f5c57507",
+    "dependency_hashes_sha256": "75a60467596e0d695b73877ab639a02607ea0d76b85cca81a5489f5e75aa8d34",
+    "fixed_trace_bss_bytes": 76,
+    "function_text_bytes": {
+      "reset": 56,
+      "capture": 88,
+      "get": 48
+    },
+    "sum_function_text_bytes": 192,
+    "own_frame_bytes": {
+      "reset": 16,
+      "capture": 40,
+      "get": 16
+    },
+    "observed_gc_block_bytes": 16,
+    "existing_gc_info_frame_bytes": 56,
+    "capture_plus_existing_gc_info_normal_subtotal_bytes": 96,
+    "normal_callee_inspection": "gc_info has no calls except nonreturning stack_chk_fail; full firmware callers and interrupts excluded",
+    "heap_allocation_symbols": [],
+    "undefined_symbols": [
+      "__stack_chk_fail",
+      "__stack_chk_guard",
+      "gc_info",
+      "memset"
+    ],
+    "records_integrated_in_firmware": false,
+    "firmware_elf_changed": false,
+    "device_executed": false,
+    "actual_native_heap_peak_bytes": null,
+    "caveat": "76 B is object BSS, not measured heap loss; 192 B is unlinked text, not net flash growth; 96 B combines unlinked capture with existing linked gc_info and is not a full stack bound. Final integration may alter placement and code generation."
+  },
+  "review": {
+    "independent_local": "PASS_SOURCE_CLARITY_AND_RETAINED_EVIDENCE",
+    "checks": {
+      "frozen_sources_and_design_match": true,
+      "seven_copied_gc_config_evidence_files_match_originals": true,
+      "host_result_eight_checks_pass": true,
+      "host_commands_rc0": true,
+      "host_raw_log_hashes_match": true,
+      "host_before_after_current_inputs_match": true,
+      "actual_gc_source_matches_pin": true,
+      "host_dependencies_match_current": true,
+      "host_output_matches_raw_stdout": true,
+      "host_width_difference_explicit": true,
+      "runner_path_bug_resolved": true,
+      "Python_runners_parse": true,
+      "object_evidence_checks_pass": true,
+      "negative_controls_compile_link_then_fail_intended_tests": true,
+      "negative_control_raw_hashes_match": true,
+      "negative_mutant_source_hashes_match": true,
+      "negative_controls_fail_correct_assertions": true,
+      "protected_inventory_unchanged": true,
+      "frozen_code_hashes_equal_native_object_inputs": true
+    },
+    "record_sha256": "8a61282e6e03fedc74c4a9cf644a858cc60ce81c8d27c09f78b731d26db69cea",
+    "readability_note_sha256": "23e083875dd3eedca8aa3b6b7a34851cbaba8ddaf2fe69f7dbc693cf78b6f5db",
+    "fable": "rejected before process creation; exact-packet/destination approval requested",
+    "packet_bytes": 84560,
+    "packet_sha256": "9d5ad54f43175056db4808dd868dbbb4e14827f3652905d9eed7296ce24157cc",
+    "allowance_usd": 15,
+    "reported_model_usage": null,
+    "final_freeze_check_sha256": "3b7ecf0f7af10d284e06230c8c1c438e5bf24036c648db52d46887d092e0aa4d"
+  },
+  "project_check": {
+    "passed": 27,
+    "report": "work/runs/20260910T183425Z-project-838bb27f/report.json",
+    "log_sha256": "39ef64d39604e9f29632de53871122954adbc7b4dd39e1a292dcb720398737e4"
+  },
+  "unchanged_images": {
+    "retained": "ab110d7e1709c4e3b28f6042226c489a738b1d5819f42ad546ee9b59d1452c12",
+    "caller_candidate": "962755b3e7f094856b4fbd1f7cbdf872c86ab53bffae8f624b654ce5c18d55fe"
+  },
+  "next": "Review and connect capture to the native workflow, preserve records through failures, retrieve after cleanup over bounded synthetic USB, then measure actual native resources and recovery.",
+  "raw_evidence": "Task-local work/safe5-memory-sampler-01; all attempts and source snapshots retained."
+}

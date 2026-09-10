@@ -70,6 +70,14 @@ linked-bytecode and descriptor checks pass. The candidate is exported as an
 unadopted patch; independent local clarity review passed and its Fable packet
 awaits exact-payload approval after automatic review rejected transmission.
 
+A separate [fixed heap sampler](SAFE5_MEMORY_SAMPLER.md) now compiles with the
+selected native C configuration: 76 bytes of object BSS and 192 bytes of function
+text. Eight actual-GC host checks and two rejecting mutation controls pass; an
+independent source/clarity/evidence review passes. It has no caller hooks or USB
+endpoint yet. No image was linked or executed, so the existing firmware capacity
+figures remain unchanged. Its Fable transmission was also blocked before process
+creation; a grouped exact-packet approval request covers all four pending reviews.
+
 ## Implemented
 
 - Pinned upstream sources, contribution/threat-model research, local evidence
@@ -109,7 +117,7 @@ awaits exact-payload approval after automatic review rejected transmission.
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260910T172641Z-project-73d811de/report.json`.
+- Project: `work/runs/20260910T183425Z-project-838bb27f/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.

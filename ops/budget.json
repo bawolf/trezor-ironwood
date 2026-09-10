@@ -282,6 +282,12 @@
       "status": "reserved",
       "cents": 1500,
       "note": "Review rejected before process creation: automatic approval review requires exact-packet/destination authorization for the new 62 KB native caller packet. $15 allowance remains reserved; nothing transmitted and no model usage observed. Separate response-related packets remain pending."
+    },
+    {
+      "id": "safe5-memory-sampler-20260910",
+      "status": "reserved",
+      "cents": 1500,
+      "note": "Review rejected before process creation: automatic approval review requires exact-packet/destination approval for the new 84,560-byte GC sampler packet. $15 allowance remains reserved; no transmission or model usage observed. A grouped question requests approval of all four frozen packets."
     }
   ],
   "note": "Existing Codex account usage is not dollar-metered here. Claude Code/Fable review usage is reported separately in review-usage.json; conservative holds count its reported list-price estimate, not an observed billed charge. No additional paid APIs, cloud machines, credits, or subscriptions have been purchased. Paid execution remains disabled until costs can be measured and capped. This ledger is bookkeeping, not a provider billing limit."

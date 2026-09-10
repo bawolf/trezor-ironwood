@@ -812,5 +812,16 @@
     "test_scope": "Actual Python caller/review with C/Rust, scheduler, wire, UI and capability stubs; no native GC, cryptography or device execution.",
     "results": "native-caller/RESULTS.json",
     "results_sha256": "fe8a723cb5c89229b4c008545b0b3837f25d1b719098a3e79ea8b7b8a1db00be"
+  },
+  "memory_sampler": {
+    "state": "unadopted fixed GC sampler; no caller/USB integration or device execution",
+    "results": "memory-sampler/RESULTS.json",
+    "results_sha256": "9c96407cbfa9a42334b6381c717be51929c42568a5cec986366553983c741905",
+    "host_check_groups_passed": 8,
+    "negative_controls_rejected": 2,
+    "object_bss_bytes": 76,
+    "object_function_text_bytes": 192,
+    "new_firmware_image": false,
+    "native_executed": false
   }
 }

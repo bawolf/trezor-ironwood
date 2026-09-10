@@ -55,6 +55,10 @@ The separate [native-caller proposal](native-caller/README.md) now compiles with
 not executed; Fable review and native runtime evidence remain pending. The patch,
 portable tests and source/artifact hashes are tracked for review.
 
+The [fixed heap sampler](memory-sampler/README.md) is a separate unadopted
+diagnostic component with native-object and actual-GC host evidence. It is not
+linked into either image and adds no caller hooks or USB endpoint yet.
+
 ## Remaining delivery work
 
 This export removes reliance on ignored native implementation source and bridge

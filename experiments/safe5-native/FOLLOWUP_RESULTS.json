@@ -195,5 +195,165 @@
         }
       ]
     }
-  ]
+  ],
+  "response_capacity": {
+    "state": "two encoding tests passed; allocation change unapplied",
+    "current_request_bytes": 65537,
+    "proposed_request_bytes": 16385,
+    "request_reduction_bytes": 49152,
+    "source_envelope_bound_bytes": 10500,
+    "tested_size_ceiling_bytes": 16384,
+    "exact_serialized_lengths_bytes": null,
+    "tests_passed": [
+      "v2::tests::safe5_response_structural_max_envelope",
+      "v2::tests::safe5_response_valid_v6_logical_round_trip"
+    ],
+    "tests_failed": 0,
+    "cargo_seconds": 45.99941679206677,
+    "cargo_offline": true,
+    "cargo_locked": true,
+    "cargo_returncode": 0,
+    "test_binary_sha256": "aaaa54ffa4eb19f3aad0aec414da4a7150f3b83e5e4956968602913d9686b708",
+    "production_source_changed": false,
+    "native_executed": false,
+    "full_signing_preservation_tested": false,
+    "adversarial_review": "Exact frozen packet remains pending transmission approval; no Fable call performed.",
+    "limits": "Zero-filled encoding placeholders; no cryptographic admission, signature, heap/arena/stack peak, device or speed evidence. Original sources and native artifacts unchanged.",
+    "launcher_failure": "Optional nested sandbox launcher failed before Cargo; preserved. Exactly one actual Cargo invocation followed under the existing tool sandbox.",
+    "evidence": [
+      {
+        "coordinator_relative_path": "work/safe5-serializer-tests-01/RESULT.md",
+        "sha256": "12d79b128fe2a0b1b0039a97a8bc7011f7648bb5043395e570be7dbac3a15f48"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-serializer-tests-01/result.json",
+        "sha256": "0aa43f5742caf6f91f409c527cab34d94468cb1eaaece1ac5979094ecd1eebcc"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-serializer-tests-01/cargo-run.json",
+        "sha256": "debecd845df54f0b0ab1673b23f3e013f821eed82d4fb69de19783ea9884adf0"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-serializer-tests-01/logs/stdout",
+        "sha256": "75e89768dc660569adc0f95ac40b08b9d4213a6f1bc3be47c99c5eff657676a5"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-serializer-tests-01/logs/stderr",
+        "sha256": "40d2cf3a44a89b7f4e567d12ed40948ab587fa31f9d985da00a96514eb248495"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-serializer-tests-01/parent-check.json",
+        "sha256": "34ce0ea092cec76e1c6c13f8235c19b6d7b4d069de114019ff5e4035357e6bfe"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-serializer-tests-01/evidence/serializer-envelope-tests.patch",
+        "sha256": "0f693ce48b3c9b68d0151f082a7479d4952989a1c167694b1bf1b8e0da6329dd"
+      },
+      {
+        "coordinator_relative_path": "work/safe5-serializer-tests-01/evidence/launcher-failure.json",
+        "sha256": "9abdc882e84d0c3db9875f813b3a41eaaf2fc3a28aa74ca1d122f98a36ab0fbc"
+      }
+    ]
+  },
+  "startup_shutdown_probes": {
+    "binary_sha256": "b028f7002a402ffc5c8f1a816ac5f1512b611a3d7d8eb27751512bc97332c44b",
+    "cases": [
+      {
+        "status": "failed",
+        "boot_ready": false,
+        "sigterm_requested": false,
+        "forced_cleanup": true,
+        "returncode": -9,
+        "group_survived": false,
+        "acceptance_complete": false,
+        "allocator_cleanup_proven": false,
+        "final_c_cleanup_proven": false,
+        "inputs_unchanged": true,
+        "probe": 1,
+        "evidence": [
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-01/probe.py",
+            "sha256": "18ec8d4939f43f66da3d40d45e0f373315f4810d501d63a4ecd584fdd234cba7"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-01/source-checks.json",
+            "sha256": "8cc324bd70ad0dd4d990bee74a0f30b8836b23c7cabc1d9f0571f342c7fdeb36"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-01/run/report.json",
+            "sha256": "67ed1c5f83f4c943c053c8a61136ab79882233e21b283b9d2cb00cb658783f0a"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-01/run/events.jsonl",
+            "sha256": "dff8aff306beae50699cc9513a42b84e5765021bcf387071b7848458387d3aa4"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-01/run/emulator.log",
+            "sha256": "39275120f3f0a86981597374be5790814771338aa34ba19da83d44a165448a85"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-01/run/packets.log",
+            "sha256": "6b69265981526d34d4d03d558eec49c04060c10293e2594808362fec182cc292"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-01/run/hashes-before.json",
+            "sha256": "5b268ac8461f1a2b419e71f4357c8fc9614b54dced6564a32091e628401f3bb2"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-01/run/hashes-after.json",
+            "sha256": "5b268ac8461f1a2b419e71f4357c8fc9614b54dced6564a32091e628401f3bb2"
+          }
+        ]
+      },
+      {
+        "status": "startup_sigterm_exit0",
+        "boot_ready": true,
+        "sigterm_requested": true,
+        "forced_cleanup": false,
+        "returncode": 0,
+        "group_survived": false,
+        "acceptance_complete": false,
+        "allocator_cleanup_proven": false,
+        "final_c_cleanup_proven": false,
+        "inputs_unchanged": true,
+        "probe": 2,
+        "evidence": [
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-02/probe.py",
+            "sha256": "a05db21b5c2e7ce7e290b7fb52257ec56bb2aae6ea14f61e5658760c6c80c1e5"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-02/source-checks.json",
+            "sha256": "4e521a986460b5c8ecfad5f7af2636f0da52f22f574e7303698ec37d91f48916"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-02/run/report.json",
+            "sha256": "4a62498273d9fbb0cd94a13e34b9c4fa1ccdfe9b503c0e67b7e2716ab360cb3e"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-02/run/events.jsonl",
+            "sha256": "4b9541d214cb59bb9525405e40142182e8c6e1ebac5400ddda5086f53f6d558c"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-02/run/emulator.log",
+            "sha256": "aa2b326ebd6b5d347a76671595f6d698db9316d36e9af1d9e4691152f9b71084"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-02/run/packets.log",
+            "sha256": "d8f71b6ba5b16b14b428b7169a38bbd7dbd13207b7c6ca8bdaf3a82b80d3a839"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-02/run/hashes-before.json",
+            "sha256": "cde39c2be114d4ec90ee24b35ef344fcb5aa968e85c2525436f6f7979165945c"
+          },
+          {
+            "coordinator_relative_path": "work/safe5-shutdown-probe-02/run/hashes-after.json",
+            "sha256": "cde39c2be114d4ec90ee24b35ef344fcb5aa968e85c2525436f6f7979165945c"
+          }
+        ]
+      }
+    ],
+    "diagnosis": "First probe had a stale eight-byte PONG on its debug socket; failed before SIGTERM. Fresh probe used separate primary readiness traffic before the first debug socket open.",
+    "scope": "Startup homescreen followed by process rc0 only. No allocator/final C cleanup, cancellation, signing, native or device acceptance. Cancellation driver remains unchanged; prior failures are preserved."
+  }
 }

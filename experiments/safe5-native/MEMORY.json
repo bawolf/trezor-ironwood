@@ -697,6 +697,19 @@
       "serialization_path_bytes": 11016,
       "signing_trace_sha256": "37da673fb8a3c79aa49b29731fb701807f33ade003eceab3fcf2c7f3d927bb50",
       "remaining_peak_measurement": "Complete C sign call, including serializer capacity growth, allocator/drop paths, VM ancestry and interrupt assumptions."
+    },
+    {
+      "name": "smaller response allocation",
+      "state": "unapplied; two encoding tests passed",
+      "current_request_bytes": 65537,
+      "proposed_request_bytes": 16385,
+      "request_reduction_bytes": 49152,
+      "exact_serialized_lengths_bytes": null,
+      "tested_size_ceiling_bytes": 16384,
+      "encoder_tests_passed": 2,
+      "full_signing_preservation_tested": false,
+      "native_executed": false,
+      "runtime_free_ram_gain_bytes": null
     }
   ]
 }

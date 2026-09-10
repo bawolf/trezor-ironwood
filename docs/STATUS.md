@@ -25,6 +25,11 @@ requested interrupt shutdown produced KeyboardInterrupt/exit 1. Neither left a
 process-group survivor. The first navigation failure and all raw evidence remain
 preserved. No physical-device tests have run; native runtime integration remains
 separate from this host emulator.
+A fresh startup-only diagnostic now reaches the Homescreen and exits 0 after
+SIGTERM without forced cleanup or survivors. Its first attempt failed on a stale
+UDP readiness reply and is preserved. The passing probe separates readiness
+traffic from the first debug socket open. This establishes a normal-exit request;
+it does not establish final C/allocator cleanup or change prior cancellation results.
 
 A reviewed isolated parser-boundary candidate also compiles for T3T1. Its selected
 semantic and decoding paths total 31,504 and 32,408 frame bytes. Selected signing
@@ -33,8 +38,9 @@ against actual binary frames and edges. Full maxima and native
 execution remain unverified before adoption; the settled memory snapshot stays
 unchanged. A separate source proof proposes a 16 KiB response allocation
 under the existing eight-action profile. Its Fable submission is blocked pending
-exact-packet approval; serializer tests are drafted and the allocation change
-remains unapplied. See the
+exact-packet approval. Both isolated encoder tests passed, including the 16 KiB
+assertions and canonical round-trip; valid signing preservation and native live
+memory remain untested. The allocation change remains unapplied. See the
 [follow-up evidence](../experiments/safe5-native/FOLLOWUP_RESULTS.json).
 
 ## Implemented

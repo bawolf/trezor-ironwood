@@ -70,7 +70,7 @@ proposal to remove coin support.
 
 ## Optimizations already made
 
-| Recorded change | Actual flash reduction | Main tradeoff |
+| Recorded change | Recorded flash extent change | Main tradeoff |
 |---|---:|---|
 | Python optimization and required Rust debug correction | 34 KiB | Changed test/diagnostic configuration. |
 | Existing small-target Blake2b/Pallas inlining features | 40 KiB | Code sharing; arithmetic bodies unchanged. |
@@ -79,8 +79,9 @@ proposal to remove coin support.
 | Select upstream's 2 KiB secp256k1 signing table | 20 KiB | Target speed still needs measurement. |
 | Add split GC and reserve 48 KiB stack | **Adds 0.5 KiB** | More stack; 40.7 KiB secondary raw heap recovered. |
 
-The initial native configuration exceeded flash by 151.5 KiB. The current one is
-26.5 KiB below it. Total reduction is 178 KiB across these distinct configurations.
+Early overflowing configurations use failed-link map estimates; successful builds
+use their linked ELF extents. The initial native configuration exceeded flash by
+151.5 KiB. The current one is 26.5 KiB below it. Total reduction is 178 KiB across these distinct configurations.
 Host equivalence, approval, signature and collector tests support their stated
 scopes; native execution has not occurred.
 
@@ -146,10 +147,13 @@ The visualization and component totals continue to identify the settled image.
 A second proposal would reduce the C response reservation from 64 KiB to 16 KiB,
 based on a conservative 10,500-byte envelope for the unchanged eight-action
 profile. This would remove a 48 KiB allocation request; it is not measured free
-RAM. The proposal remains unapplied pending adversarial review and meaningful
-serializer/signing tests.
+RAM. Two isolated tests of the real upstream encoder now pass: a maximal wire
+envelope fits within 16 KiB, and a V6 logical round-trip preserves canonical bytes.
+Their payloads are encoding placeholders, not cryptographically valid transactions;
+exact output lengths were not printed. The allocation proposal remains unapplied
+pending adversarial review and valid signing-preservation tests.
 
-The same candidate now has a selected signing-reparse subtotal of **27,072 bytes
+The parser-boundary candidate has a selected signing-reparse subtotal of **27,072 bytes
 (26.4 KiB)** and a selected v2 serialization subtotal of **11,016 bytes (10.8
 KiB)**. These are separate phases. A coordinator check matched 17 frames and
 17 call-edge checks against fresh disassembly and the actual ELF metadata. Neither

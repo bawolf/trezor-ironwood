@@ -76,11 +76,17 @@ confirmation screen. Preserve that incomplete run. Actual geometry showed the or
 was valid; waiting past the attach animation enabled cancellation in a fresh run.
 Both menu and final-screen cancellation now return ActionCancelled and home;
 shutdown still exits 1 after SIGINT, so complete runtime acceptance remains.
+A separate fresh startup probe now confirms SIGTERM exits 0 after an observed
+homescreen, without forced cleanup. Use that convention in a reviewed fresh
+cancellation run; keep the prior failed runs and the first startup PONG failure.
+Process exit alone does not prove allocator or final C cleanup.
 The candidate now has selected decode, validation, signing-reparse and serialization
 subtotals of 32,408/31,504/27,072/11,016 bytes. Prioritize a complete signing peak
 measurement, serializer growth and allocator lifetimes; these subtotals do not
-establish full maxima. Review/test the proposed smaller response allocation when
-its exact-packet authorization is resolved.
+establish full maxima. Two isolated encoder-envelope tests now pass for the
+proposed smaller response allocation. Complete valid signing-preservation tests
+and the pending adversarial review before adopting it; the review packet still
+awaits exact-packet transmission approval. Local synthetic tests remain authorized.
 Finish native memory/latency preparation before requesting an attended
 installation session. The unopened device remains untouched, and flashing
 requires a concrete separate decision.

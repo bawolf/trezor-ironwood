@@ -55,8 +55,11 @@ cancellation and actual allocation-failure cleanup remain integration gates.
 The settled image and both pending response-related Fable packets are unchanged.
 A matching instrumented host probe also completed twelve diagnostic cases: peak
 used arena bytes 112,264 of 131,072, all baselines restored and 64 KiB recovery
-allocations successful. New-output signature verification remains pending; this
-is host allocator evidence, not native RAM or full signing acceptance.
+allocations successful. A separate offline verification of those exact twelve
+saved outputs now passes: 68 new and 28 retained dummy signatures, with all other
+decoded PCZT fields and effect digests preserved. Seven negative controls reject
+corruption, missing/swapped signatures and metadata changes. This strengthens the
+host result; native RAM and full device signing acceptance remain unproven.
 
 ## Implemented
 

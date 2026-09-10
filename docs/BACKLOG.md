@@ -97,9 +97,13 @@ response allocation; do not treat raw heap capacity or small signed outputs as
 runtime fit. The 256-byte successful Vec-growth subtree is now inspected and
 need not be traced again without a binary change.
 The matching host arena diagnostic now passes twelve allocation/lifecycle cases,
-peaking at 112,264 used bytes. Verify its saved new signatures independently next;
-do not rerun that passing sweep without a change or unresolved result. Native
-GC/stack/latency evidence and the real caller remain separate gates.
+peaking at 112,264 used bytes. Separate upstream verification now passes for all
+twelve saved outputs (68 new and 28 retained signatures), including seven rejecting
+negative controls and preservation of all other decoded fields. Do not rerun the
+passing sweep or output verification without a change or unresolved result. Next
+implement the concrete native trusted caller's cancellation/ownership scope and
+prepare primary-heap largest-free-run, complete stack/arena and latency measurement.
+The pending source reviews still gate response-allocation adoption.
 Finish native memory/latency preparation before requesting an attended
 installation session. The unopened device remains untouched, and flashing
 requires a concrete separate decision.

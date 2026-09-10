@@ -711,7 +711,7 @@
     "host_arena_sweep": {
       "cases_completed": 12,
       "seconds": 8.247265124926344,
-      "independent_new_signature_verification": "pending",
+      "independent_new_signature_verification": "passed for all twelve exact saved outputs; separate upstream path",
       "new_signature_counts_reported": 68,
       "minimum_serialized_bytes": 10100,
       "maximum_serialized_bytes": 10389,
@@ -725,7 +725,7 @@
       "sign_to_serialize_net_requested_deltas": [
         -4576
       ],
-      "scope": "host allocator diagnostic; not complete signing acceptance or native/GC evidence",
+      "scope": "host allocator diagnostic with separately verified saved signatures/decoded-field preservation; not native/GC or full device signing acceptance",
       "binary_sha256": "b5ec02090686f918ac64b24d4472cd9882d169602b387c3f6cd465bdacea21d9",
       "lock_sha256": "c2cfb09cde271995b83e8be953f50c3ee3c944d36269519b52573bfcd093b5c5",
       "record_sha256": "7f6546cc760c8eaec28fa128eaa0514fff06ef7a6c910324957ec395e2d3ab2a",
@@ -733,7 +733,59 @@
       "parent_check_sha256": "c39812f98e69b21fcab183d0642db5ad7fe84fb28fe1ccdbcdb75832f0450d41",
       "build_record_sha256": "9aa73d03db14642f34a06e2a8aa65c8289ff359bcec65edf862aa4b8aec87628",
       "native_execution": false,
-      "no_source_adoption": true
+      "no_source_adoption": true,
+      "output_verification": {
+        "date_utc": "2026-09-10",
+        "status": "passed",
+        "tests_passed": 2,
+        "positive_cases": 12,
+        "new_signatures_verified": 68,
+        "retained_dummy_signatures_verified": 28,
+        "final_signatures_verified": 96,
+        "negative_controls_rejected": [
+          "unsigned response: missing real-spend signature at action 1",
+          "corrupt real signature: IronwoodSign(InvalidExternalSignature)",
+          "omitted real signature: missing real-spend signature at action 1",
+          "changed anchor metadata: signed PCZT changed fields other than new real-spend signatures",
+          "changed dummy signature: signed PCZT changed fields other than new real-spend signatures",
+          "dummy corruption on both sides: Custom(\"invalid spend signature\")",
+          "swapped action signatures: IronwoodSign(InvalidExternalSignature)"
+        ],
+        "seconds": 41.15175237483345,
+        "test_harness_seconds": 5.52,
+        "reran_signing_or_memory_sweep": false,
+        "timed_out": false,
+        "residual_group_killed": false,
+        "field_preservation": "all normalized decoded PCZT fields except insertion of originally absent real signatures; effect digests unchanged",
+        "oracle_reuse": "byte-identical verify_pair from retained resource fixture oracle",
+        "verify_pair_sha256": "b3be65351509dbcd2abbaed9e47fb048807804a26ce8425578e71fbfd0da69a8",
+        "wrapper_sha256": "ab590732280c58872387773a9486dc0caa731372b3c3bda30e40dd609021fc97",
+        "test_binary_sha256": "90342bc0afdbeb89ccadeb79888e05d7322e2c0d8bb2ca0449b332f6e6789be9",
+        "run_record_sha256": "da6be115b1ffc27640b62ced4d7cf264164e3527fc5ee3e3f1f1440bd06e5c38",
+        "pair_manifest_sha256": "f3569580054d85f136f08c7eae11026727b4b15b53dbb6fca1a61bd6fec9814a",
+        "log_sha256": {
+          "stdout": "8c3f2bf074ff2316cf39bbea28692b82f77393a7632977faf8dc0a3e5ebebaff",
+          "stderr": "a95d6adacfa9242be875440680ed06ce9d65c25c50e0911eae0888fc0e307e39"
+        },
+        "local_evidence_directory": "work/safe5-output-verification-01 in the coordinating Codex workspace",
+        "local_correctness_and_clarity_review": "passed; separate from required Fable change review",
+        "new_fable_calls": 0,
+        "source_proposal_adopted": false,
+        "limits": [
+          "Both paths share upstream PCZT/Orchard components.",
+          "Synthetic fixed corpus only; no new full admission/consensus/UI/native proof.",
+          "Diagnostic wrapper and machine-local source/cache inputs are not an upstream-ready package.",
+          "Pczt::parse alone does not require complete wire-frame consumption; strict framing is outside this run."
+        ],
+        "parent_verification_sha256": "0260d3569e27a9f7773beaa1a37a7ce6ed828c756ce9f2f613359a49a2cc7c6b",
+        "independent_review_sha256": {
+          "CLARITY.md": "13f30e268b27c606d19552351678e8b2cbccca6d85ecd0b811c2fb6227166c2f",
+          "CORRECTNESS.md": "167ecd85d94e4620bd5d636b49a7f7be0ba13704be86686de7861268e8e71bbb",
+          "FINAL.md": "84c5111b8fa45d693b3c989d775ddf0916a0c9d913c3efac1b794e8e13ccfa01",
+          "RUNNER.md": "cdf241381442d3560327c55768b1006b9d40ebb2ca8788a706b776caaa64ac6f"
+        },
+        "runner_failure_record_limit": "Exceptional setup/signal cleanup errors can leave incomplete failure records; the observed successful run is complete."
+      }
     }
   }
 }

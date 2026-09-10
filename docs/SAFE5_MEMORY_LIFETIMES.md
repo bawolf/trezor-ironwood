@@ -109,5 +109,25 @@ observation that combines PCZT releases with output-vector allocations.
 
 This probe owns a Rust input copy, creates its Engine per request, and uses static
 C staging. It does not measure the persistent native bridge, MicroPython GC,
-processor stack or target latency. The twelve newly emitted outputs still need
-independent signature verification; allocator checks are not full signing acceptance.
+processor stack or target latency.
+
+A subsequent offline verification checked the exact twelve saved outputs without
+rerunning signing or the memory sweep. Both diagnostic tests passed: **all 96
+final signatures verify**, including 68 new and 28 retained dummy signatures,
+through the pinned upstream APIs. Every effect digest and all other decoded
+PCZT fields are preserved. This is normalized object equality, not a claim of
+wire-byte equality outside the signature fields. Seven negative controls reject
+missing, corrupt and swapped signatures, changed anchor metadata, and dummy
+signature corruption even when applied to both sides of the comparison.
+
+The run used a fresh four-job build and completed in 41.15 seconds (5.52 seconds
+inside the test harness), without timeouts or survivors. The coordinator matched
+all twelve result records to the frozen pair manifest, rehashed the inputs/outputs,
+and confirmed the source donor, dependencies and retained native image were
+unchanged. The verification function was copied byte-for-byte from the existing
+resource oracle; a separate local review covers the diagnostic wrapper's
+correctness and clarity. The wrapper is an isolated diagnostic proposal, with no
+new Fable review or implementation adoption. Both verification paths use upstream
+PCZT/Orchard components; this is not an independently implemented cryptographic
+algorithm or proof of native memory fit. Exact identities and command evidence
+are recorded in `FOLLOWUP_RESULTS.json`.

@@ -90,6 +90,16 @@ Both test-source and allocation-proof Fable packets await exact-packet transmiss
 approval; neither proposal is accepted and the C allocation remains unchanged.
 Complete those reviews before adopting the response reduction, then measure the
 actual native allocation lifetimes. Local synthetic tests remain authorized.
+The current GC metadata/ownership audit establishes 90,752/40,704 usable pool
+bytes and a 65,552-byte rounded response allocation. Next close the concrete
+native caller's finally-cancel path and capture largest-free-run/peak use across
+response allocation; do not treat raw heap capacity or small signed outputs as
+runtime fit. The 256-byte successful Vec-growth subtree is now inspected and
+need not be traced again without a binary change.
+The matching host arena diagnostic now passes twelve allocation/lifecycle cases,
+peaking at 112,264 used bytes. Verify its saved new signatures independently next;
+do not rerun that passing sweep without a change or unresolved result. Native
+GC/stack/latency evidence and the real caller remain separate gates.
 Finish native memory/latency preparation before requesting an attended
 installation session. The unopened device remains untouched, and flashing
 requires a concrete separate decision.

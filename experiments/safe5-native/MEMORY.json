@@ -236,7 +236,44 @@
         "end": 805502464
       }
     ],
-    "gc_raw_total": 134576
+    "gc_raw_total": 134576,
+    "gc_usable_pools": {
+      "basis": "pinned gc_setup_area arithmetic with retained actual ARM C layout; not runtime occupancy",
+      "regions": [
+        {
+          "name": "primary_aux2",
+          "start": "0x30071130",
+          "end_exclusive": "0x30087c00",
+          "raw_bytes": 92880,
+          "descriptor_bytes": 0,
+          "allocation_table_bytes": 1418,
+          "finalizer_table_bytes": 709,
+          "gap_bytes": 1,
+          "unused_alignment_bytes": 0,
+          "usable_pool_bytes": 90752,
+          "gc_blocks": 5672
+        },
+        {
+          "name": "secondary_aux1",
+          "start": "0x30025b20",
+          "end_exclusive": "0x3002fe00",
+          "raw_bytes": 41696,
+          "descriptor_bytes": 32,
+          "allocation_table_bytes": 636,
+          "finalizer_table_bytes": 318,
+          "gap_bytes": 1,
+          "unused_alignment_bytes": 5,
+          "usable_pool_bytes": 40704,
+          "gc_blocks": 2544
+        }
+      ],
+      "combined_usable_pool_bytes": 131456,
+      "response_request_bytes": 65537,
+      "response_rounded_gc_bytes": 65552,
+      "primary_pool_minus_response_before_other_live_objects": 25200,
+      "live_occupancy_measured": false,
+      "audit_sha256": "631b4d39e06fbe5431a090c7c5614e3406fb41f6bfe878f8c66a6b4699311b8b"
+    }
   },
   "largest_symbols": [
     {

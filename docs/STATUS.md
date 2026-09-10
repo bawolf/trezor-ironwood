@@ -46,6 +46,18 @@ before transmission. Both source proposals remain unaccepted; the C allocation
 is unchanged and native live memory remains untested. See the
 [follow-up evidence](../experiments/safe5-native/FOLLOWUP_RESULTS.json).
 
+The [memory-lifetime audit](SAFE5_MEMORY_LIFETIMES.md) now accounts for GC
+metadata: 90,752 and 40,704 usable pool bytes. The current response occupies
+65,552 bytes in the primary pool, leaving at most 25,200 before other live
+objects. A separately reviewed exact-ELF analysis closes successful reserve
+growth at 256 stack bytes; complete signing peaks remain unknown. Native caller
+cancellation and actual allocation-failure cleanup remain integration gates.
+The settled image and both pending response-related Fable packets are unchanged.
+A matching instrumented host probe also completed twelve diagnostic cases: peak
+used arena bytes 112,264 of 131,072, all baselines restored and 64 KiB recovery
+allocations successful. New-output signature verification remains pending; this
+is host allocator evidence, not native RAM or full signing acceptance.
+
 ## Implemented
 
 - Pinned upstream sources, contribution/threat-model research, local evidence
@@ -85,7 +97,7 @@ is unchanged and native live memory remains untested. See the
 
 Latest ignored local reports:
 
-- Project: `work/runs/20260910T121002Z-project-532ff601/report.json`.
+- Project: `work/runs/20260910T140904Z-project-7eef57de/report.json`.
 - Fixed arena: `work/arena-probe/v4/verification-01/report.json`.
 - Resources: `work/runs/20260908T080145Z-resources-71a70bee/report.json`.
 - Approval: `work/runs/20260908T064909Z-approval-748cc20f/report.json`.

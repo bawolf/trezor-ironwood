@@ -664,5 +664,76 @@
       }
     ],
     "limits": "12 admitted synthetic variants; earlier32 regression variants also passed but sizes not sampled. Full object/sig checks do not establish universal bound, native GC/arena/stack peak or target latency."
+  },
+  "memory_lifetime_audit": {
+    "date_utc": "2026-09-10",
+    "status": "source and exact-ELF observations; implementation unchanged",
+    "settled_elf_sha256": "ab110d7e1709c4e3b28f6042226c489a738b1d5819f42ad546ee9b59d1452c12",
+    "candidate_elf_sha256": "0481ef96c34419a3538c1420d016f3292ba03d35d3dd0570d203f56a8e8066b0",
+    "gc_usable_pools_bytes": [
+      90752,
+      40704
+    ],
+    "response_rounded_gc_bytes": 65552,
+    "primary_pool_minus_response_before_other_live_objects": 25200,
+    "successful_reserve_growth_subtree_bytes": 256,
+    "growth_phase_bytes": {
+      "existing_buffer_allocate": 256,
+      "existing_buffer_copy": 232,
+      "existing_buffer_deallocate": 232,
+      "first_allocation": 248
+    },
+    "growth_allocation_order": [
+      "allocate new buffer while old remains live",
+      "copy min(old,new) bytes",
+      "free old buffer"
+    ],
+    "native_execution": false,
+    "runtime_peaks_measured": false,
+    "source_proposal_adopted": false,
+    "new_fable_calls": 0,
+    "reports": {
+      "lifetime_facts_sha256": "631b4d39e06fbe5431a090c7c5614e3406fb41f6bfe878f8c66a6b4699311b8b",
+      "growth_trace_sha256": "77c331d7e4c87bf99d5464a7b5dcf8f97d39a593a9aac94d5bc062d65a9bcf22",
+      "growth_report_sha256": "b7a6a8e1ecd067a74175e5bf7e3284a9bbe6ae402f35455b1e54b57934d7d927",
+      "independent_review_sha256": "613d300e801ebdddf87d08c7cf3f34dda745e448f6dd90a86be5027f6ed1a1da",
+      "parent_source_check_sha256": "260188d36b2dc2171133a726a3469e167092358dbf3899a821c221fe30ff78fa",
+      "parent_gc_arithmetic_sha256": "5594297b10de99156705bdb2e4ee76cbe37542239748335ed308873d4c5fa307"
+    },
+    "limits": [
+      "Pool capacity is not boot/review free space and allocations cannot span pools.",
+      "No native trusted caller is installed; finally-cancel remains its explicit obligation.",
+      "256 bytes bounds only successful reserve growth, not the whole serializer, caller, failures or interrupts.",
+      "The 24KiB old/new buffer example is conditional, not a measured capacity sequence.",
+      "Two prior frozen Fable review packets remain untransmitted pending exact approval."
+    ],
+    "local_evidence_directory": "work/safe5-memory-lifetimes-01 in the coordinating Codex workspace",
+    "host_arena_sweep": {
+      "cases_completed": 12,
+      "seconds": 8.247265124926344,
+      "independent_new_signature_verification": "pending",
+      "new_signature_counts_reported": 68,
+      "minimum_serialized_bytes": 10100,
+      "maximum_serialized_bytes": 10389,
+      "maximum_cumulative_peak_requested": 112191,
+      "maximum_cumulative_peak_used": 112264,
+      "baseline_requested": 29802,
+      "baseline_used": 29808,
+      "baseline_blocks": 5,
+      "all_baselines_restored": true,
+      "all_recovered_layout_bytes": 65536,
+      "sign_to_serialize_net_requested_deltas": [
+        -4576
+      ],
+      "scope": "host allocator diagnostic; not complete signing acceptance or native/GC evidence",
+      "binary_sha256": "b5ec02090686f918ac64b24d4472cd9882d169602b387c3f6cd465bdacea21d9",
+      "lock_sha256": "c2cfb09cde271995b83e8be953f50c3ee3c944d36269519b52573bfcd093b5c5",
+      "record_sha256": "7f6546cc760c8eaec28fa128eaa0514fff06ef7a6c910324957ec395e2d3ab2a",
+      "output_manifest_sha256": "6581b63c5915e9f78da3b4c879bfdbde1181a161b1775e753e86b16ac4211354",
+      "parent_check_sha256": "c39812f98e69b21fcab183d0642db5ad7fe84fb28fe1ccdbcdb75832f0450d41",
+      "build_record_sha256": "9aa73d03db14642f34a06e2a8aa65c8289ff359bcec65edf862aa4b8aec87628",
+      "native_execution": false,
+      "no_source_adoption": true
+    }
   }
 }

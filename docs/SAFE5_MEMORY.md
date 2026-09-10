@@ -26,10 +26,13 @@ reservations from the actual linked image, **not measured live peaks or free hea
 | **Total** | **526,848** | **514.5** | All bytes reconciled once. |
 
 The output bridge currently requests **65,537 contiguous bytes even for a small
-signed result**. That leaves 27,343 nominal bytes in the primary region before
-collector metadata and other live objects. The second heap cannot rescue a large
-allocation that is fragmented or too large for the first. Output sizing/lifetimes
-are therefore a higher priority than shaving isolated small functions.
+signed result**, occupying **65,552 bytes after GC block rounding**. Source-derived
+collector metadata leaves **90,752 primary and 40,704 secondary usable pool bytes**.
+The response leaves at most **25,200 primary bytes before other live objects**;
+this is not measured free space. The second heap cannot extend that allocation.
+Output sizing and simultaneous ownership remain a higher priority than shaving
+small functions. The [lifetime audit](SAFE5_MEMORY_LIFETIMES.md) records exact
+metadata, release boundaries and required allocation-failure checks.
 
 The current linked image contains a source-feasible parsing chain totaling
 **42,016 bytes (41.0 KiB)** of simultaneously live frames. This leaves only 7,136
@@ -167,3 +170,13 @@ is a whole maximum; serialization capacity growth, allocator/drop paths, other
 indirect calls, VM ancestry and interrupts remain unresolved. The next useful
 measurement covers the complete C signing call rather than adding these sibling
 subtotals. No native execution or new implementation change occurred.
+
+A fresh source/ELF audit closes the successful byte-vector growth subtree at
+**256 bytes of ordinary stack from the reserve entry**, including allocator
+descendants and native executor/lifetime checks. It does not bound the complete
+serializer or establish a fixture's growth call path. The allocator allocates a
+replacement before freeing its old buffer, so both capacities overlap. Current
+native runtime peak/fragmentation evidence is still absent. The size-optimized
+build excludes Trezor's debug stack estimator; its nonzero-byte watermark would
+also miss untouched or zero-written frame space. The next diagnostic must pair
+stack-pointer observations with static frames. No firmware change was adopted.
